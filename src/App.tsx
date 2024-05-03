@@ -1,35 +1,82 @@
+
+import { Button } from "@radix-ui/themes";
 import { useState } from "react";
 
-import viteLogo from "/vite.svg";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import styles from "./App.module.css";
+import { BlockItem } from "./components/BlockItem/BlockItem";
+import { BlockWrapper } from "./components/BlockWrapper/BlockWrapper";
+import { BlockVariant } from "./constants/blockTypes";
+import type { Block } from "./constants/blockTypes";
+
+const blocks: Block[] = [
+	{
+		id: crypto.randomUUID(),
+		type: BlockVariant.YesNo,
+		question: "Some Question",
+		options: ["Yes", "No"],
+	},
+	{
+		id: crypto.randomUUID(),
+		type: BlockVariant.MultipleChoice,
+		question: "Some Question",
+		options: ["Yes", "No", "Whatever"],
+	},
+	{
+		id: crypto.randomUUID(),
+		type: BlockVariant.YesNo,
+		question: "Some Question",
+		options: ["Yes", "No"],
+	},
+];
 
 function App() {
-	const [count, setCount] = useState(0);
+	const [step, setStep] = useState(0);
+
+	const goToPreviousStep = () => {
+		if (step === 0) {
+			return;
+		}
+
+		setStep((step) => step - 1);
+	};
+
+	const goToNextStep = () => {
+		if (step === blocks.length - 1) {
+			return;
+		}
+
+		setStep((step) => step + 1);
+	};
+
+	const handleSubmit = () => {
+		console.log("submit");
+	};
 
 	return (
-		<>
-			<div>
-				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank" rel="noreferrer">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
+		<main className={styles.main}>
+			{blocks.map((block, index) => {
+				return (
+					<BlockWrapper key={block.id} step={step} index={index}>
+						<BlockItem
+							block={block}
+							stepNumber={index + 1}
+							isLast={index === blocks.length - 1}
+							onSubmitForm={handleSubmit}
+							goToNextStep={goToNextStep}
+						/>
+					</BlockWrapper>
+				);
+			})}
+
+			<div className={styles.navigation}>
+				<Button disabled={step === 0} onClick={goToPreviousStep}>
+					Previous
+				</Button>
+				<Button disabled={step === blocks.length - 1} onClick={goToNextStep}>
+					Next
+				</Button>
 			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button type="submit" onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-		</>
+		</main>
 	);
 }
 

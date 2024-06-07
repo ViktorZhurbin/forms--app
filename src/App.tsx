@@ -1,5 +1,3 @@
-
-import { Button } from "@radix-ui/themes";
 import { useState } from "react";
 
 import styles from "./App.module.css";
@@ -53,7 +51,7 @@ function App() {
 	};
 
 	return (
-		<main className={styles.main}>
+		<main className="container">
 			{blocks.map((block, index) => {
 				return (
 					<BlockWrapper key={block.id} step={step} index={index}>
@@ -69,12 +67,12 @@ function App() {
 			})}
 
 			<div className={styles.navigation}>
-				<Button disabled={step === 0} onClick={goToPreviousStep}>
+				<button disabled={step === 0} onClick={goToPreviousStep}>
 					Previous
-				</Button>
-				<Button disabled={step === blocks.length - 1} onClick={goToNextStep}>
+				</button>
+				<button disabled={step === blocks.length - 1} onClick={goToNextStep}>
 					Next
-				</Button>
+				</button>
 			</div>
 		</main>
 	);

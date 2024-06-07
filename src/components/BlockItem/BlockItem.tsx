@@ -1,4 +1,3 @@
-import { Button, Heading } from "@radix-ui/themes";
 import type { Block } from "../../constants/blockTypes";
 import styles from "./BlockItem.module.css";
 
@@ -30,27 +29,27 @@ export const BlockItem = ({
 
 	return (
 		<div className={styles.wrapper}>
-			<Heading className={styles.header}>
+			<h1 className={styles.header}>
 				{stepNumber}. {block.question}
-			</Heading>
+			</h1>
 
-			<div className={styles.optionWrapper}>
+			<div className={`container ${styles.optionWrapper}`}>
 				{block.options.map((option) => (
-					<Button
+					<button
 						key={option}
-						variant="outline"
+						className="outline"
 						onClick={() => {
 							console.log("click");
 						}}
 					>
 						{option}
-					</Button>
+					</button>
 				))}
 			</div>
 
-			<Button className={styles.submitButton} onClick={onSubmit}>
+			<button className={styles.submitButton} onClick={onSubmit}>
 				{buttonText}
-			</Button>
+			</button>
 		</div>
 	);
 };

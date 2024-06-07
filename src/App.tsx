@@ -51,7 +51,7 @@ function App() {
 	};
 
 	return (
-		<main className="container">
+		<main className={styles.main}>
 			{blocks.map((block, index) => {
 				return (
 					<BlockWrapper key={block.id} step={step} index={index}>

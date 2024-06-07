@@ -3,3 +3,9 @@
 	$semantic-root-element: "#root",
 	$enable-semantic-container: true
 );
+
+html,
+body {
+	max-width: 100vw;
+	overflow-x: hidden;
+}

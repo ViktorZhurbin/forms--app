@@ -33,7 +33,7 @@ export const BlockItem = ({
 				{stepNumber}. {block.question}
 			</h1>
 
-			<div className={`container ${styles.optionWrapper}`}>
+			<div className={styles.optionWrapper}>
 				{block.options.map((option) => (
 					<button
 						key={option}

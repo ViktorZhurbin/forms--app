@@ -8,12 +8,9 @@ type BlockWrapperProps = {
 };
 export const BlockWrapper = ({ step, index, children }: BlockWrapperProps) => {
 	return (
-		<section
-			className={styles.wrapper}
-			style={getBlockWrapperStyles(index, step)}
-		>
+		<div className={styles.wrapper} style={getBlockWrapperStyles(index, step)}>
 			{children}
-		</section>
+		</div>
 	);
 };
 
@@ -23,10 +20,16 @@ function getBlockWrapperStyles(index: number, step: number) {
 			return {};
 
 		case step - 1:
-			return { opacity: 0, transform: `translateY(-100vh)` };
+			return {
+				opacity: 0,
+				transform: `translateY(-100vh)`,
+			};
 
 		case step + 1:
-			return { opacity: 0, transform: `translateY(100vh)` };
+			return {
+				opacity: 0,
+				transform: `translateY(100vh)`,
+			};
 
 		default:
 			return { display: "none" };

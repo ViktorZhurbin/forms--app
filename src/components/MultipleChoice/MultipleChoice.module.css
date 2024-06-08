@@ -44,7 +44,8 @@
 	width: 100%;
 }
 
-.submitButton {
-	margin-top: 16px;
+.submitButton.submitButton {
+	margin-top: var(--pico-spacing);
 	font-weight: bold;
+	width: unset;
 }

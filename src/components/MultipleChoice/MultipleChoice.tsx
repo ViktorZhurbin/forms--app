@@ -35,6 +35,7 @@ export const MultipleChoice = ({
 				<div className={styles.optionWrapper}>
 					{field.options.map((option) => (
 						<button
+							type="button"
 							key={option}
 							className="outline"
 							onClick={() => {
@@ -46,7 +47,11 @@ export const MultipleChoice = ({
 					))}
 				</div>
 
-				<button className={styles.submitButton} onClick={onSubmit}>
+				<button
+					type="submit"
+					className={styles.submitButton}
+					onClick={onSubmit}
+				>
 					{buttonText}
 				</button>
 			</div>

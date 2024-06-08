@@ -1,4 +1,4 @@
-import { FormField, QuestionType } from "../constants/form";
+import { type FormField, QuestionType } from "../constants/form";
 
 export const formFields: FormField[] = [
 	{

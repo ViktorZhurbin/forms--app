@@ -1,4 +1,4 @@
-import { FormField } from "../../constants/form";
+import type { FormField } from "../../constants/form";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { getPositionDataAttribute } from "./helpers/getPositionDataAttribute";
 

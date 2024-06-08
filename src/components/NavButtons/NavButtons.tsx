@@ -17,10 +17,10 @@ export const NavButtons = (props: {
 
 	return (
 		<div className={`${className} ${styles.root}`}>
-			<button disabled={isPrevDisabled} onClick={onClickPrev}>
+			<button type="button" disabled={isPrevDisabled} onClick={onClickPrev}>
 				Previous
 			</button>
-			<button disabled={isNextDisabled} onClick={onClickNext}>
+			<button type="button" disabled={isNextDisabled} onClick={onClickNext}>
 				Next
 			</button>
 		</div>

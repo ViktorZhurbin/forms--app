@@ -1,6 +1,6 @@
 enum QuestionType {
-	YesNo,
-	MultipleChoice,
+	YesNo = 0,
+	MultipleChoice = 1,
 }
 
 type FormField = {

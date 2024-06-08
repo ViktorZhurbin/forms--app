@@ -30,8 +30,8 @@ export const Form = () => {
 	return (
 		<div className={styles.root}>
 			<FormFields
-				formFields={formFields}
 				step={step}
+				formFields={formFields}
 				onSubmit={handleSubmit}
 				goToNextStep={goToNextStep}
 			/>

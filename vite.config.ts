@@ -11,7 +11,11 @@ export default defineConfig(({ command }) => {
 	return mergeConfig(extraConfig, {
 		plugins: [
 			million.vite({ auto: true, telemetry: false }),
-			checker({ typescript: true, enableBuild: true }),
+			checker({
+				typescript: true,
+				enableBuild: true,
+				overlay: { initialIsOpen: "error" },
+			}),
 			reactSwc(),
 		],
 	});

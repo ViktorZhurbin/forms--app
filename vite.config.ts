@@ -37,7 +37,7 @@ function getBuildConfig() {
 			rollupOptions: {
 				output: {
 					manualChunks: {
-						react: ["react", "react-dom"],
+						render: ["react", "react-dom", "million"],
 					},
 				},
 			},

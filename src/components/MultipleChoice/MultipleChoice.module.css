@@ -1,0 +1,50 @@
+.root {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	transition: transform 600ms ease 0s, opacity 300ms ease 0s;
+}
+
+.root[data-position="previous"] {
+	opacity: 0;
+	transform: translateY(-100vh);
+}
+
+.root[data-position="next"] {
+	opacity: 0;
+	transform: translateY(100vh);
+}
+
+.root[data-position="hidden"] {
+	display: none;
+}
+
+.innerWrapper {
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.header {
+	margin-bottom: 32px;
+}
+
+.optionWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 100%;
+}
+
+.submitButton {
+	margin-top: 16px;
+	font-weight: bold;
+}

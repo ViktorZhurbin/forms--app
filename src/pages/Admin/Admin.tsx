@@ -1,5 +1,6 @@
-import { AppShell, Burger, Group } from "@mantine/core";
+import { AppShell, Burger, Card, Group, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { Link } from "wouter";
 
 export const Admin = () => {
 	const [opened, { toggle }] = useDisclosure();
@@ -19,7 +20,13 @@ export const Admin = () => {
 				</Group>
 			</AppShell.Header>
 			<AppShell.Navbar p="md">Navbar</AppShell.Navbar>
-			<AppShell.Main>Main</AppShell.Main>
+
+			<AppShell.Main>
+				<Title size="h2">Forms</Title>
+				<Link href="/forms/1/create">
+					<Card>Dummy form</Card>
+				</Link>
+			</AppShell.Main>
 		</AppShell>
 	);
 };

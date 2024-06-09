@@ -10,7 +10,8 @@
 		"format": "biome check --write ./src"
 	},
 	"dependencies": {
-		"@picocss/pico": "^2.0.6",
+		"@mantine/core": "^7.10.1",
+		"@mantine/hooks": "^7.10.1",
 		"million": "^3.1.11",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1"
@@ -20,7 +21,9 @@
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.7.0",
-		"sass": "^1.77.4",
+		"postcss": "^8.4.38",
+		"postcss-preset-mantine": "^1.15.0",
+		"postcss-simple-vars": "^7.0.1",
 		"typescript": "^5.4.5",
 		"vite": "^5.2.13",
 		"vite-plugin-checker": "^0.6.4"

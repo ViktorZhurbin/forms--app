@@ -38,6 +38,7 @@ function getBuildConfig() {
 				output: {
 					manualChunks: {
 						render: ["react", "react-dom", "million"],
+						mantine: ["@mantine/core", "@mantine/hooks"],
 					},
 				},
 			},

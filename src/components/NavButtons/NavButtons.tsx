@@ -1,3 +1,4 @@
+import { Button } from "@mantine/core";
 import styles from "./NavButtons.module.css";
 
 export const NavButtons = (props: {
@@ -17,12 +18,12 @@ export const NavButtons = (props: {
 
 	return (
 		<div className={`${className} ${styles.root}`}>
-			<button type="button" disabled={isPrevDisabled} onClick={onClickPrev}>
+			<Button variant="subtle" disabled={isPrevDisabled} onClick={onClickPrev}>
 				Previous
-			</button>
-			<button type="button" disabled={isNextDisabled} onClick={onClickNext}>
+			</Button>
+			<Button variant="subtle" disabled={isNextDisabled} onClick={onClickNext}>
 				Next
-			</button>
+			</Button>
 		</div>
 	);
 };

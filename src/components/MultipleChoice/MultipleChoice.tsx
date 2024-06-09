@@ -1,3 +1,4 @@
+import { Button, Title } from "@mantine/core";
 import type { FormField } from "../../constants/form";
 import styles from "./MultipleChoice.module.css";
 
@@ -30,30 +31,29 @@ export const MultipleChoice = ({
 	return (
 		<div className={styles.root} data-position={positionDataAttr}>
 			<div className={styles.innerWrapper}>
-				<h1 className={styles.header}>{field.title}</h1>
+				<Title className={styles.header}>{field.title}</Title>
 
 				<div className={styles.optionWrapper}>
 					{field.options.map((option) => (
-						<button
-							type="button"
+						<Button
 							key={option}
-							className="outline"
+							variant="outline"
 							onClick={() => {
 								console.log("click");
 							}}
 						>
 							{option}
-						</button>
+						</Button>
 					))}
 				</div>
 
-				<button
+				<Button
 					type="submit"
 					className={styles.submitButton}
 					onClick={onSubmit}
 				>
 					{buttonText}
-				</button>
+				</Button>
 			</div>
 		</div>
 	);

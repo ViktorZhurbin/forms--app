@@ -1,31 +1,67 @@
-import { AppShell, Burger, Card, Group, Title } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { Link } from "wouter";
+import { AppShell, Card, Group, ScrollArea, Stack, Text } from "@mantine/core";
+import { IconPlus } from "@tabler/icons-react";
+import { useLocation } from "wouter";
 
 export const Admin = () => {
-	const [opened, { toggle }] = useDisclosure();
+	const [_, setLocation] = useLocation();
 
 	return (
-		// https://mantine.dev/app-shell/?e=AltLayout
-		// https://github.com/mantinedev/mantine/tree/master/apps/mantine.dev/src/app-shell-examples/examples
 		<AppShell
 			header={{ height: 60 }}
-			navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
+			navbar={{
+				width: 200,
+				breakpoint: "xs",
+				collapsed: { desktop: false, mobile: false },
+			}}
 			padding="md"
 		>
 			<AppShell.Header>
 				<Group h="100%" px="md">
-					<Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
 					<div>Logo</div>
 				</Group>
 			</AppShell.Header>
-			<AppShell.Navbar p="md">Navbar</AppShell.Navbar>
+
+			<AppShell.Navbar p="md">
+				<AppShell.Section grow component={ScrollArea}>
+					<Stack gap={6}>
+						<Group gap={6} justify="space-between">
+							<Text c="dimmed">Workspaces</Text>
+							<IconPlus width="1rem" />
+						</Group>
+						<Stack gap={6}>
+							<Card withBorder padding={8} radius="md">
+								<Text size="sm" fw={500}>
+									ws 1
+								</Text>
+							</Card>
+							<Card withBorder padding={8} radius="md">
+								<Text size="sm" fw={500}>
+									workspace 2
+								</Text>
+							</Card>
+						</Stack>
+					</Stack>
+				</AppShell.Section>
+			</AppShell.Navbar>
 
 			<AppShell.Main>
-				<Title size="h2">Forms</Title>
-				<Link href="/forms/1/create">
-					<Card>Dummy form</Card>
-				</Link>
+				<Stack>
+					<Text tt="uppercase" c="dimmed" size="xs" fw={500}>
+						All Forms
+					</Text>
+					<Stack>
+						<Card
+							withBorder
+							padding="lg"
+							radius="md"
+							onClick={() => {
+								setLocation("/forms/1/create");
+							}}
+						>
+							Dummy form
+						</Card>
+					</Stack>
+				</Stack>
 			</AppShell.Main>
 		</AppShell>
 	);

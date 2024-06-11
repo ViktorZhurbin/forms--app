@@ -1,5 +1,23 @@
-import { AppShell, Card, Group, ScrollArea, Stack, Text } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
+import {
+	AppShell,
+	Avatar,
+	Box,
+	Button,
+	Card,
+	Group,
+	Menu,
+	NavLink,
+	Stack,
+	Text,
+	TextInput,
+} from "@mantine/core";
+import {
+	IconBolt,
+	IconPlus,
+	IconSearch,
+	IconSelector,
+	IconSettings,
+} from "@tabler/icons-react";
 import { useLocation } from "wouter";
 
 export const Admin = () => {
@@ -9,7 +27,7 @@ export const Admin = () => {
 		<AppShell
 			header={{ height: 60 }}
 			navbar={{
-				width: 200,
+				width: 300,
 				breakpoint: "xs",
 				collapsed: { desktop: false, mobile: false },
 			}}
@@ -22,40 +40,80 @@ export const Admin = () => {
 			</AppShell.Header>
 
 			<AppShell.Navbar p="md">
-				<AppShell.Section grow component={ScrollArea}>
+				<TextInput
+					value=""
+					mb={12}
+					placeholder="Search"
+					leftSection={<IconSearch />}
+					onChange={() => null}
+				/>
+				<AppShell.Section grow>
 					<Stack gap={6}>
 						<Group gap={6} justify="space-between">
 							<Text c="dimmed">Workspaces</Text>
-							<IconPlus width="1rem" />
+							<IconPlus />
 						</Group>
 						<Stack gap={6}>
-							<Card
-								withBorder
-								padding={8}
-								radius="md"
-								style={{ cursor: "pointer" }}
-							>
-								<Text size="sm" fw={500}>
-									ws 1
-								</Text>
-							</Card>
-							<Card
-								withBorder
-								padding={8}
-								radius="md"
-								style={{ cursor: "pointer" }}
-							>
-								<Text size="sm" fw={500}>
-									workspace 2
-								</Text>
-							</Card>
+							{[
+								"WS 1",
+								"Workspace 2",
+								"Workspace with a Looooooooooooong Name",
+							].map((ws) => (
+								<NavLink key={ws} noWrap label={ws} fw={500} />
+							))}
 						</Stack>
 					</Stack>
 				</AppShell.Section>
+				<Button
+					mb={12}
+					variant="default"
+					leftSection={<IconBolt color="orange" />}
+				>
+					Upgrade
+				</Button>
+				<Menu shadow="md" width={200}>
+					<Menu.Target>
+						<Button
+							size="lg"
+							variant="default"
+							// bg="rgb(243, 244, 246)"
+							rightSection={<IconSelector />}
+							leftSection={<Avatar />}
+						>
+							<Box w="100%" ta="left">
+								<Text size="sm" fw={500}>
+									Kianu Reeves
+								</Text>
+								<Text truncate="end" size="sm" c="dimmed">
+									Kianu Reeves's Workspace
+								</Text>
+							</Box>
+						</Button>
+					</Menu.Target>
+
+					<Menu.Dropdown>
+						<Menu.Item leftSection={<IconSettings />}>Settings</Menu.Item>
+						<Menu.Divider />
+						<Menu.Item>What's new</Menu.Item>
+						<Menu.Divider />
+						<Menu.Item>Log out</Menu.Item>
+					</Menu.Dropdown>
+				</Menu>
 			</AppShell.Navbar>
 
 			<AppShell.Main>
 				<Stack>
+					<Group justify="space-between">
+						<div />
+						<Button
+							leftSection={<IconPlus />}
+							onClick={() => {
+								setLocation("/forms/id/create");
+							}}
+						>
+							Create form
+						</Button>
+					</Group>
 					<Text tt="uppercase" c="dimmed" size="xs" fw={500}>
 						All Forms
 					</Text>
@@ -63,7 +121,6 @@ export const Admin = () => {
 						<Card
 							withBorder
 							padding="lg"
-							radius="md"
 							style={{ cursor: "pointer" }}
 							onClick={() => {
 								setLocation("/forms/1/create");

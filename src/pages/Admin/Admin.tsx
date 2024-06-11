@@ -29,12 +29,22 @@ export const Admin = () => {
 							<IconPlus width="1rem" />
 						</Group>
 						<Stack gap={6}>
-							<Card withBorder padding={8} radius="md">
+							<Card
+								withBorder
+								padding={8}
+								radius="md"
+								style={{ cursor: "pointer" }}
+							>
 								<Text size="sm" fw={500}>
 									ws 1
 								</Text>
 							</Card>
-							<Card withBorder padding={8} radius="md">
+							<Card
+								withBorder
+								padding={8}
+								radius="md"
+								style={{ cursor: "pointer" }}
+							>
 								<Text size="sm" fw={500}>
 									workspace 2
 								</Text>
@@ -54,6 +64,7 @@ export const Admin = () => {
 							withBorder
 							padding="lg"
 							radius="md"
+							style={{ cursor: "pointer" }}
 							onClick={() => {
 								setLocation("/forms/1/create");
 							}}

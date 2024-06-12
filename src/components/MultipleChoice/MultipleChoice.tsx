@@ -1,11 +1,10 @@
 import { Button, Title } from "@mantine/core";
-import type { FormField } from "../../constants/form";
+import type { MultipleChoiceType, YesNoType } from "../../constants/questions";
 import styles from "./MultipleChoice.module.css";
 
 type MultipleChoiceProps = {
-	field: FormField;
+	field: MultipleChoiceType | YesNoType;
 	isLast: boolean;
-	positionDataAttr: string;
 	onSubmitForm: () => void;
 	goToNextStep: () => void;
 };
@@ -13,7 +12,6 @@ type MultipleChoiceProps = {
 export const MultipleChoice = ({
 	field,
 	isLast,
-	positionDataAttr,
 	onSubmitForm,
 	goToNextStep,
 }: MultipleChoiceProps) => {
@@ -29,32 +27,26 @@ export const MultipleChoice = ({
 	}
 
 	return (
-		<div className={styles.root} data-position={positionDataAttr}>
-			<div className={styles.innerWrapper}>
-				<Title className={styles.header}>{field.title}</Title>
+		<div className={styles.wrapper}>
+			<Title className={styles.header}>{field.title}</Title>
 
-				<div className={styles.optionWrapper}>
-					{field.options.map((option) => (
-						<Button
-							key={option}
-							variant="outline"
-							onClick={() => {
-								console.log("click");
-							}}
-						>
-							{option}
-						</Button>
-					))}
-				</div>
-
-				<Button
-					type="submit"
-					className={styles.submitButton}
-					onClick={onSubmit}
-				>
-					{buttonText}
-				</Button>
+			<div className={styles.optionWrapper}>
+				{field.options.map((option) => (
+					<Button
+						key={option}
+						variant="outline"
+						onClick={() => {
+							console.log("click");
+						}}
+					>
+						{option}
+					</Button>
+				))}
 			</div>
+
+			<Button type="submit" className={styles.submitButton} onClick={onSubmit}>
+				{buttonText}
+			</Button>
 		</div>
 	);
 };

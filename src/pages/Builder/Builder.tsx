@@ -3,7 +3,10 @@ import {
 	AppShell,
 	Button,
 	Group,
+	NavLink,
+	Pill,
 	ScrollArea,
+	Stack,
 	Tabs,
 	Text,
 	TextInput,
@@ -11,6 +14,33 @@ import {
 } from "@mantine/core";
 import { IconBan, IconEye, IconHome } from "@tabler/icons-react";
 import { useLocation } from "wouter";
+
+import { MultipleChoice } from "../../components/MultipleChoice/MultipleChoice";
+import { QuestionColorsByGroup } from "../../constants/questionMaps";
+import { type Question, QuestionType } from "../../constants/questions";
+import { formFields } from "../../mocks/formQuestions";
+
+const field = formFields[0];
+
+const getComponentByQuestionType = (question: Question) => {
+	switch (question.type) {
+		case QuestionType.YesNo:
+		case QuestionType.MultipleChoice:
+			return (
+				<MultipleChoice
+					field={question}
+					isLast={false}
+					onSubmitForm={() => null}
+					goToNextStep={() => null}
+				/>
+			);
+
+		// case QuestionType.ShortText:
+
+		default:
+			return false;
+	}
+};
 
 export const Builder = () => {
 	const [_, setLocation] = useLocation();
@@ -72,21 +102,51 @@ export const Builder = () => {
 
 			<AppShell.Navbar p="md">
 				<AppShell.Section grow component={ScrollArea}>
-					<Text c="dimmed">Questions</Text>
-					<Group gap={4}>
-						<Group gap={6}>
-							<IconBan width="1rem" /> <Text size="sm">1</Text>
-						</Group>
-						<Text size="sm">Yes/No</Text>
-					</Group>
+					<Text c="dimmed" size="sm" mb={8} p="0 12px">
+						Questions
+					</Text>
+					<Stack gap={8}>
+						{formFields.map(({ id, group, title }, index) => (
+							<NavLink
+								key={id}
+								p="8px 12px"
+								label={
+									<Group gap={8}>
+										<Pill
+											p="0 6px"
+											radius="md"
+											bg={QuestionColorsByGroup[group]}
+										>
+											<Group wrap="nowrap" gap={8}>
+												<IconBan /> <Text size="sm">{index + 1}</Text>
+											</Group>
+										</Pill>
+										<Text size="sm" c="rgb(25, 25, 25)">
+											{title}
+										</Text>
+									</Group>
+								}
+							/>
+						))}
+					</Stack>
 				</AppShell.Section>
 				<AppShell.Section grow component={ScrollArea}>
-					<Text c="dimmed">Thank you page</Text>
-					<Text size="sm">Page 1</Text>
+					<Text c="dimmed" size="sm" mb={8} p="0 12px">
+						Thank you page
+					</Text>
+					<NavLink p="8px 12px" label="Page 1" />
 				</AppShell.Section>
 			</AppShell.Navbar>
 
-			<AppShell.Main>Placeholder</AppShell.Main>
+			<AppShell.Main
+				style={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
+				{getComponentByQuestionType(field)}
+			</AppShell.Main>
 
 			<AppShell.Aside p="md">
 				<Tabs defaultValue="content" variant="default" radius="md">

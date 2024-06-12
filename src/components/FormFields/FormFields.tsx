@@ -1,27 +1,47 @@
-import type { FormField } from "../../constants/form";
+import { type Question, QuestionType } from "../../constants/questions";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
+import styles from "./FormFields.module.css";
 import { getPositionDataAttribute } from "./helpers/getPositionDataAttribute";
 
 export const FormFields = (props: {
-	formFields: FormField[];
+	formFields: Question[];
 	step: number;
 	onSubmit: () => void;
 	goToNextStep: () => void;
 }) => {
 	const { formFields, step, onSubmit, goToNextStep } = props;
 
+	const getComponentByQuestionType = (question: Question, index: number) => {
+		switch (question.type) {
+			case QuestionType.YesNo:
+			case QuestionType.MultipleChoice:
+				return (
+					<MultipleChoice
+						field={question}
+						isLast={index === formFields.length - 1}
+						onSubmitForm={onSubmit}
+						goToNextStep={goToNextStep}
+					/>
+				);
+
+			// case QuestionType.ShortText:
+
+			default:
+				return false;
+		}
+	};
+
 	return (
 		<>
 			{formFields.map((field, index) => {
 				return (
-					<MultipleChoice
+					<div
 						key={field.id}
-						field={field}
-						isLast={index === formFields.length - 1}
-						positionDataAttr={getPositionDataAttribute(index, step)}
-						onSubmitForm={onSubmit}
-						goToNextStep={goToNextStep}
-					/>
+						className={styles.root}
+						data-position={getPositionDataAttribute(index, step)}
+					>
+						{getComponentByQuestionType(field, index)}
+					</div>
 				);
 			})}
 		</>

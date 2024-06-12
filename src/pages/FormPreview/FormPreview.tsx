@@ -1,11 +1,14 @@
+import { Button } from "@mantine/core";
 import { useState } from "react";
 
 import { FormFields } from "../../components/FormFields/FormFields";
 import { NavButtons } from "../../components/NavButtons/NavButtons";
 import { formFields } from "../../mocks/formQuestions";
-import styles from "./Form.module.css";
 
-export const Form = () => {
+import { IconX } from "@tabler/icons-react";
+import styles from "./FormPreview.module.css";
+
+export const FormPreview = () => {
 	const [step, setStep] = useState(0);
 
 	const isFirstStep = step === 0;
@@ -35,6 +38,17 @@ export const Form = () => {
 				onSubmit={handleSubmit}
 				goToNextStep={goToNextStep}
 			/>
+
+			<Button
+				color="rgb(31, 41, 55)"
+				leftSection={<IconX />}
+				style={{ alignSelf: "end", margin: "12px 16px" }}
+				onClick={() => {
+					history.go(-1);
+				}}
+			>
+				Exit preview
+			</Button>
 
 			<NavButtons
 				className={styles.navigation}

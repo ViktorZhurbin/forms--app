@@ -1,24 +1,20 @@
 import {
+	ActionIcon,
 	AppShell,
-	Breadcrumbs,
+	Button,
 	Group,
 	ScrollArea,
 	Tabs,
 	Text,
+	TextInput,
+	Tooltip,
 } from "@mantine/core";
-import { IconBan } from "@tabler/icons-react";
-import { Link } from "wouter";
-
-const breadcrumbs = [
-	{ title: "My workspace", href: "/" },
-	{ title: "Dummy form", href: "/forms/1/create" },
-].map((item) => (
-	<Link href={item.href} key={item.href}>
-		<Text size="sm">{item.title}</Text>
-	</Link>
-));
+import { IconBan, IconEye, IconHome } from "@tabler/icons-react";
+import { useLocation } from "wouter";
 
 export const Builder = () => {
+	const [_, setLocation] = useLocation();
+
 	return (
 		<AppShell
 			header={{ height: 60 }}
@@ -35,8 +31,42 @@ export const Builder = () => {
 			padding="md"
 		>
 			<AppShell.Header>
-				<Group h="100%" px="md">
-					<Breadcrumbs separator=">">{breadcrumbs}</Breadcrumbs>
+				<Group h="100%" px="md" justify="space-between">
+					<Group>
+						<Tooltip withArrow label="Home">
+							<ActionIcon
+								variant="default"
+								size="lg"
+								onClick={() => {
+									setLocation("/");
+								}}
+							>
+								<IconHome />
+							</ActionIcon>
+						</Tooltip>
+						<TextInput pointer defaultValue="My form" size="sm" />
+					</Group>
+					<Group>
+						<Button
+							variant="default"
+							color="#6b7280"
+							leftSection={
+								<IconEye style={{ width: "1.2rem", height: "1.2rem" }} />
+							}
+							onClick={() => {
+								setLocation("/forms/1/preview");
+							}}
+						>
+							Preview
+						</Button>
+						<Tooltip
+							withArrow
+							arrowSize={6}
+							label="Make your changes visible to the world"
+						>
+							<Button color="rgb(31, 41, 55)">Publish</Button>
+						</Tooltip>
+					</Group>
 				</Group>
 			</AppShell.Header>
 
@@ -60,14 +90,14 @@ export const Builder = () => {
 
 			<AppShell.Aside p="md">
 				<Tabs defaultValue="content" variant="default" radius="md">
-					<Tabs.List>
+					<Tabs.List mb={12}>
 						<Tabs.Tab value="content">Content</Tabs.Tab>
 						<Tabs.Tab value="logic">Logic</Tabs.Tab>
 					</Tabs.List>
 
-					<Tabs.Panel value="content">Gallery tab content</Tabs.Panel>
+					<Tabs.Panel value="content">Placholder</Tabs.Panel>
 
-					<Tabs.Panel value="logic">Logic tab content</Tabs.Panel>
+					<Tabs.Panel value="logic">Another Placholder</Tabs.Panel>
 				</Tabs>
 			</AppShell.Aside>
 		</AppShell>

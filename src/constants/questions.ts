@@ -1,45 +1,45 @@
-enum QuestionType {
+enum QuestionTypes {
 	YesNo = "YesNo",
 	MultipleChoice = "MultipleChoice",
 	ShortText = "ShortText",
 }
 
-enum QuestionGroup {
+enum QuestionGroups {
 	Choice = "Choice",
 	Text = "Text",
 }
 
 type QuestionBaseType = {
 	id: string;
-	type: QuestionType;
-	group: QuestionGroup;
+	type: QuestionTypes;
+	group: QuestionGroups;
 	title: string;
 };
 
 interface YesNoType extends QuestionBaseType {
-	type: QuestionType.YesNo;
-	group: QuestionGroup.Choice;
+	type: QuestionTypes.YesNo;
+	group: QuestionGroups.Choice;
 	options: ["Yes", "No"];
 }
 
 interface MultipleChoiceType extends QuestionBaseType {
-	type: QuestionType.MultipleChoice;
-	group: QuestionGroup.Choice;
+	type: QuestionTypes.MultipleChoice;
+	group: QuestionGroups.Choice;
 	options: string[];
 }
 
 interface ShortTextType extends QuestionBaseType {
-	type: QuestionType.ShortText;
-	group: QuestionGroup.Text;
+	type: QuestionTypes.ShortText;
+	group: QuestionGroups.Text;
 }
 
-type Question = YesNoType | MultipleChoiceType | ShortTextType;
+type QuestionType = YesNoType | MultipleChoiceType | ShortTextType;
 
-export { QuestionType, QuestionGroup };
+export { QuestionTypes, QuestionGroups };
 
 export type {
 	QuestionBaseType,
-	Question,
+	QuestionType,
 	YesNoType,
 	MultipleChoiceType,
 	ShortTextType,

@@ -4,7 +4,6 @@ import {
 	Button,
 	Group,
 	NavLink,
-	Pill,
 	ScrollArea,
 	Stack,
 	Tabs,
@@ -15,35 +14,14 @@ import {
 import { IconBan, IconEye, IconHome } from "@tabler/icons-react";
 import { useLocation } from "wouter";
 
-import { MultipleChoice } from "../../components/MultipleChoice/MultipleChoice";
+import { useState } from "react";
+import { Question } from "../../components/Question/Question";
 import { QuestionColorsByGroup } from "../../constants/questionMaps";
-import { type Question, QuestionType } from "../../constants/questions";
 import { formFields } from "../../mocks/formQuestions";
-
-const field = formFields[0];
-
-const getComponentByQuestionType = (question: Question) => {
-	switch (question.type) {
-		case QuestionType.YesNo:
-		case QuestionType.MultipleChoice:
-			return (
-				<MultipleChoice
-					field={question}
-					isLast={false}
-					onSubmitForm={() => null}
-					goToNextStep={() => null}
-				/>
-			);
-
-		// case QuestionType.ShortText:
-
-		default:
-			return false;
-	}
-};
 
 export const Builder = () => {
 	const [_, setLocation] = useLocation();
+	const [selectedBlockId, setSelectedBlockId] = useState<string>();
 
 	return (
 		<AppShell
@@ -110,18 +88,22 @@ export const Builder = () => {
 							<NavLink
 								key={id}
 								p="8px 12px"
+								onClick={() => {
+									setSelectedBlockId(id);
+								}}
 								label={
 									<Group gap={8}>
-										<Pill
-											p="0 6px"
-											radius="md"
+										<Group
+											style={{ borderRadius: "6px" }}
+											wrap="nowrap"
+											gap={8}
+											align="center"
+											p="4px 6px"
 											bg={QuestionColorsByGroup[group]}
 										>
-											<Group wrap="nowrap" gap={8}>
-												<IconBan /> <Text size="sm">{index + 1}</Text>
-											</Group>
-										</Pill>
-										<Text size="sm" c="rgb(25, 25, 25)">
+											<IconBan /> <Text size="xs">{index + 1}</Text>
+										</Group>
+										<Text size="sm" c="dark.4">
 											{title}
 										</Text>
 									</Group>
@@ -145,7 +127,7 @@ export const Builder = () => {
 					alignItems: "center",
 				}}
 			>
-				{getComponentByQuestionType(field)}
+				{selectedBlockId ? <Question id={selectedBlockId} /> : false}
 			</AppShell.Main>
 
 			<AppShell.Aside p="md">

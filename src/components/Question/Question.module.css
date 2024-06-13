@@ -1,24 +1,27 @@
 .wrapper {
-	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+	flex: 1;
+
+	height: 100%;
+	gap: 24px;
+	padding-inline: 32px;
+
 }
 
-.header {
-	margin-bottom: 32px;
-}
+
 
 .optionWrapper {
-	display: grid;
-	justify-content: start;
+	display: flex;
+	flex-direction: column;
 	gap: 8px;
+	width: 100%;
 }
 
 .submitButton.submitButton {
-	margin-top: 16px;
 	font-weight: bold;
 	width: unset;
 }

@@ -1,15 +1,16 @@
 import { Button } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
-import { useLocation, useParams } from "wouter";
+import { useParams } from "wouter";
+import { navigate } from "wouter/use-browser-location";
 import { FormFields } from "../../components/FormFields/FormFields";
 import { NavButtons } from "../../components/NavButtons/NavButtons";
+import { SearchParams } from "../../constants/location";
 import { formFields } from "../../mocks/formQuestions";
 import styles from "./FormPreview.module.css";
 
 export const FormPreview = () => {
 	const params = useParams();
-	const [_, setLocation] = useLocation();
 
 	const [step, setStep] = useState(0);
 
@@ -33,18 +34,15 @@ export const FormPreview = () => {
 	};
 
 	const handleExist = () => {
-		if (history.length > 1) {
-			history.go(-1);
-
-			return;
-		}
-
 		const formId = params.id;
 
 		if (formId) {
-			setLocation(`/forms/${formId}/create`);
+			const blockId = history.state?.blockId;
+			const search = blockId ? `?${SearchParams.BLOCK_ID}=${blockId}` : "";
+
+			navigate(`/forms/${formId}/create${search}`);
 		} else {
-			setLocation("/");
+			navigate("/");
 		}
 	};
 

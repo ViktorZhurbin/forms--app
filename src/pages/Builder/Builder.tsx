@@ -12,16 +12,36 @@ import {
 	Tooltip,
 } from "@mantine/core";
 import { IconBan, IconEye, IconHome } from "@tabler/icons-react";
-import { useLocation } from "wouter";
-
-import { useState } from "react";
+import { useEffect, useMemo } from "react";
+import { useSearch } from "wouter";
+import { navigate } from "wouter/use-browser-location";
 import { Question } from "../../components/Question/Question";
+import { SearchParams } from "../../constants/location";
 import { QuestionColorsByGroup } from "../../constants/questionMaps";
 import { formFields } from "../../mocks/formQuestions";
 
 export const Builder = () => {
-	const [_, setLocation] = useLocation();
-	const [selectedBlockId, setSelectedBlockId] = useState<string>();
+	const searchParams = useSearch();
+	const selectedBlockId = useMemo(() => {
+		const urlSearchParams = new URLSearchParams(searchParams);
+
+		return urlSearchParams.get(SearchParams.BLOCK_ID);
+	}, [searchParams]);
+
+	useEffect(() => {
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const searchBlockId = urlSearchParams.get(SearchParams.BLOCK_ID);
+		const isValidBlockId = formFields.some(({ id }) => id === searchBlockId);
+
+		if (searchBlockId && isValidBlockId) {
+			return;
+		}
+
+		const defaultBlockId = formFields[0].id;
+
+		urlSearchParams.set(SearchParams.BLOCK_ID, defaultBlockId);
+		navigate(`?${urlSearchParams.toString()}`, { replace: true });
+	}, []);
 
 	return (
 		<AppShell
@@ -46,7 +66,7 @@ export const Builder = () => {
 								variant="default"
 								size="lg"
 								onClick={() => {
-									setLocation("/");
+									navigate("/");
 								}}
 							>
 								<IconHome />
@@ -62,7 +82,9 @@ export const Builder = () => {
 								<IconEye style={{ width: "1.2rem", height: "1.2rem" }} />
 							}
 							onClick={() => {
-								setLocation("/forms/1/preview");
+								navigate("/forms/1/preview", {
+									state: { blockId: selectedBlockId },
+								});
 							}}
 						>
 							Preview
@@ -87,9 +109,15 @@ export const Builder = () => {
 						{formFields.map(({ id, group, title }, index) => (
 							<NavLink
 								key={id}
+								active={id === selectedBlockId}
 								p="8px 12px"
 								onClick={() => {
-									setSelectedBlockId(id);
+									const urlSearchParams = new URLSearchParams(
+										window.location.search,
+									);
+									urlSearchParams.set(SearchParams.BLOCK_ID, id);
+
+									navigate(`?${urlSearchParams.toString()}`);
 								}}
 								label={
 									<Group gap={8}>

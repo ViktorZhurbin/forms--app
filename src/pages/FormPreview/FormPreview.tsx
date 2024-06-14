@@ -1,14 +1,16 @@
 import { Button } from "@mantine/core";
+import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
-
+import { useLocation, useParams } from "wouter";
 import { FormFields } from "../../components/FormFields/FormFields";
 import { NavButtons } from "../../components/NavButtons/NavButtons";
 import { formFields } from "../../mocks/formQuestions";
-
-import { IconX } from "@tabler/icons-react";
 import styles from "./FormPreview.module.css";
 
 export const FormPreview = () => {
+	const params = useParams();
+	const [_, setLocation] = useLocation();
+
 	const [step, setStep] = useState(0);
 
 	const isFirstStep = step === 0;
@@ -30,11 +32,27 @@ export const FormPreview = () => {
 		console.log("submit");
 	};
 
+	const handleExist = () => {
+		if (history.length > 1) {
+			history.go(-1);
+
+			return;
+		}
+
+		const formId = params.id;
+
+		if (formId) {
+			setLocation(`/forms/${formId}/create`);
+		} else {
+			setLocation("/");
+		}
+	};
+
 	return (
 		<div className={styles.root}>
 			<FormFields
 				step={step}
-				formFields={formFields}
+				questions={formFields}
 				onSubmit={handleSubmit}
 				goToNextStep={goToNextStep}
 			/>
@@ -43,9 +61,7 @@ export const FormPreview = () => {
 				color="rgb(31, 41, 55)"
 				leftSection={<IconX />}
 				style={{ alignSelf: "end", margin: "12px 16px" }}
-				onClick={() => {
-					history.go(-1);
-				}}
+				onClick={handleExist}
 			>
 				Exit preview
 			</Button>

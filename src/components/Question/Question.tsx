@@ -1,4 +1,4 @@
-import { Button, Title } from "@mantine/core";
+import { Button, Stack, Title } from "@mantine/core";
 
 import { type QuestionType, QuestionTypes } from "../../constants/questions";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -50,16 +50,24 @@ export const Question = ({
 	}
 
 	return (
-		<div className={styles.wrapper}>
-			<Title className={styles.header}>{question.title}</Title>
+		<div className={styles.root}>
+			<div className={styles.wrapper}>
+				<Title className={styles.header}>{question.title}</Title>
 
-			<div className={styles.optionWrapper}>
-				{getComponentByQuestion(question)}
+				<Stack gap={16} align="flex-start">
+					<div className={styles.optionWrapper}>
+						{getComponentByQuestion(question)}
+					</div>
+
+					<Button
+						type="submit"
+						className={styles.submitButton}
+						onClick={onSubmit}
+					>
+						{buttonText}
+					</Button>
+				</Stack>
 			</div>
-
-			<Button type="submit" className={styles.submitButton} onClick={onSubmit}>
-				{buttonText}
-			</Button>
 		</div>
 	);
 };

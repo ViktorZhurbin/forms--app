@@ -1,18 +1,22 @@
-.wrapper {
+.root {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 
+	padding-inline: 40px;
+}
+
+.wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
 	flex: 1;
 
-	height: 100%;
-	gap: 24px;
-	padding-inline: 32px;
-
+	gap: 32px;
+	max-width: 720px;
+	margin: 0 auto;
 }
-
-
 
 .optionWrapper {
 	display: flex;

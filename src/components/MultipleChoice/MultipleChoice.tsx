@@ -13,6 +13,7 @@ export const MultipleChoice = ({ question }: MultipleChoiceProps) => {
 				// This doesn't need to be a button. Try TextInput
 				<Button
 					key={option}
+					miw={200}
 					variant="outline"
 					onClick={() => {
 						console.log("click");

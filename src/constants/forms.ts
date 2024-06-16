@@ -4,10 +4,10 @@ type FormType = {
 	responseCount: number;
 };
 
-enum FormsLayoutType {
+enum FormsLayout {
 	Grid = "grid",
 	List = "list",
 }
 
-export { FormsLayoutType };
+export { FormsLayout };
 export type { FormType };

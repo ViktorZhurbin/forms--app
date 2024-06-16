@@ -1,15 +1,15 @@
 import { navigate } from "wouter/use-browser-location";
-import { type FormType, FormsLayoutType } from "../../../constants/forms";
-import { mockForms } from "../../../mocks/forms";
+import { type FormType, FormsLayout } from "../../../../constants/forms";
+import { mockForms } from "../../../../mocks/forms";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
 
 type FormsViewProps = {
-	view: FormsLayoutType;
+	view: FormsLayout;
 };
 
 export const FormsView = ({ view }: FormsViewProps) => {
-	const ViewComponent = view === FormsLayoutType.List ? ListView : GridView;
+	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
 
 	return (
 		<ViewComponent

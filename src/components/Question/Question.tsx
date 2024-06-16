@@ -1,4 +1,4 @@
-import { Button, Stack, Title } from "@mantine/core";
+import { Button, Stack } from "@mantine/core";
 import { type QuestionType, QuestionTypes } from "../../constants/questions";
 import { formFields } from "../../mocks/formQuestions";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -19,7 +19,7 @@ const getComponentByQuestion = (question: QuestionType) => {
 			return <MultipleChoice question={question} />;
 
 		case QuestionTypes.ShortText:
-			return <ShortText question={question} />;
+			return <ShortText />;
 
 		default:
 			return false;

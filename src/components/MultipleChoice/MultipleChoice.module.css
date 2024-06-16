@@ -1,24 +1,9 @@
 .wrapper {
-	height: 100%;
-
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
-}
-
-.header {
-	margin-bottom: 32px;
-}
-
-.optionWrapper {
 	display: grid;
-	justify-content: start;
+	align-items: start;
 	gap: 8px;
 }
 
-.submitButton.submitButton {
-	margin-top: 16px;
-	font-weight: bold;
-	width: unset;
+.textInput {
+	min-width: 200px;
 }

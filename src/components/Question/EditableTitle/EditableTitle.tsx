@@ -1,34 +1,44 @@
-import { TextInput } from "@mantine/core";
-import { type KeyboardEventHandler, useRef, useState } from "react";
+import { Textarea } from "@mantine/core";
+import { type KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import styles from "./EditableTitle.module.css";
 
 type EditableTitleProps = {
 	initialValue?: string;
+	readOnly?: boolean;
 };
 
-export const EditableTitle = ({ initialValue = "" }: EditableTitleProps) => {
-	const inputRef = useRef<HTMLInputElement>(null);
+export const EditableTitle = ({
+	readOnly,
+	initialValue = "",
+}: EditableTitleProps) => {
+	const inputRef = useRef<HTMLTextAreaElement>(null);
 
 	const [inputValue, setInputValue] = useState(initialValue);
 
-	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
+	useEffect(() => {
+		setInputValue(initialValue);
+	}, [initialValue]);
+
+	const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
 		if (["Enter", "Escape"].includes(event.key)) {
 			inputRef.current?.blur();
 		}
 	};
 
 	return (
-		<TextInput
+		<Textarea
+			autosize
 			ref={inputRef}
+			readOnly={readOnly}
+			variant="unstyled"
+			value={inputValue}
 			classNames={{
 				input: styles.input,
 			}}
-			value={inputValue}
 			onKeyDown={handleKeyDown}
 			onChange={(event) => {
 				setInputValue(event.currentTarget.value);
 			}}
-			variant="unstyled"
 		/>
 	);
 };

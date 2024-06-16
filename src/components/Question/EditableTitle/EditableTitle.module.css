@@ -2,4 +2,6 @@
   font-size: var(--mantine-h1-font-size);
   line-height: var(--mantine-h1-line-height);
   font-weight: var(--mantine-h1-font-weight);
+
+  overflow: hidden;
 }

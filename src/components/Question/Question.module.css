@@ -1,0 +1,21 @@
+.root {
+  padding: 0 40px;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 720px;
+
+  display: grid;
+  gap: 32px;
+}
+
+.bottomWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.submitButton {
+  font-weight: bold;
+}

@@ -9,7 +9,7 @@ export const formFields: QuestionType[] = [
 		id: crypto.randomUUID(),
 		type: QuestionTypes.MultipleChoice,
 		group: QuestionGroups.Choice,
-		title: "Question 1",
+		title: "Multiple Choices adadadda",
 		options: [
 			"Yes",
 			"No",
@@ -21,7 +21,7 @@ export const formFields: QuestionType[] = [
 		id: crypto.randomUUID(),
 		type: QuestionTypes.YesNo,
 		group: QuestionGroups.Choice,
-		title: "Question 2",
+		title: "Yes/No",
 		options: ["Yes", "No"],
 	},
 	{

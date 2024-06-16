@@ -4,25 +4,23 @@ import { Main } from "./Main/Main";
 import { NavQuestions } from "./Navbar/NavQuestions/NavQuestions";
 import { NavThankYou } from "./Navbar/NavThankYou/NavThankYou";
 
-const sharedProps = {
-	breakpoint: "xs",
-	collapsed: { desktop: false, mobile: false },
-};
-
 export const Builder = () => {
 	return (
 		<AppShell
 			padding="md"
 			header={{ height: 60 }}
-			navbar={{ width: 200, ...sharedProps }}
-			aside={{ width: 200, ...sharedProps }}
+			navbar={{
+				width: 200,
+				breakpoint: "xs",
+				collapsed: { desktop: false, mobile: false },
+			}}
 		>
 			<AppShell.Header>
 				<Header />
 			</AppShell.Header>
 
-			<AppShell.Navbar p="md">
-				<AppShell.Section grow component={ScrollArea}>
+			<AppShell.Navbar p="sm">
+				<AppShell.Section grow component={ScrollArea} scrollbars="y">
 					<NavQuestions />
 				</AppShell.Section>
 

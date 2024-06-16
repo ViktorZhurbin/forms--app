@@ -3,9 +3,20 @@
 }
 
 .labelGroup {
+  display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: nowrap;
+
+  overflow: hidden;
+}
+
+.labelTag {
+  display: flex;
   align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+
   padding: 4px 6px;
   color: black;
   border-radius: 6px;
@@ -17,4 +28,9 @@
 
 .text {
   background-color: var(--mantine-color-blue-2);
+}
+
+.labelTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

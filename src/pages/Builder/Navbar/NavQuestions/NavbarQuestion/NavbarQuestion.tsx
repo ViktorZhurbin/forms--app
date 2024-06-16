@@ -5,14 +5,19 @@ import { SearchParams } from "../../../../../constants/location";
 import type { QuestionBaseType } from "../../../../../constants/questions";
 import { clx } from "../../../../../utils/classNames";
 import { useSelectedBlockId } from "../../../hooks/useSelectedBlockId";
-import styles from "./Question.module.css";
+import styles from "./NavbarQuestion.module.css";
 
-interface QuestionProps
+interface NavbarQuestionProps
 	extends Pick<QuestionBaseType, "id" | "group" | "title"> {
 	order: number;
 }
 
-export const Question = ({ id, group, title, order }: QuestionProps) => {
+export const NavbarQuestion = ({
+	id,
+	group,
+	title,
+	order,
+}: NavbarQuestionProps) => {
 	const selectedBlockId = useSelectedBlockId();
 
 	const handleClick = () => {
@@ -26,30 +31,28 @@ export const Question = ({ id, group, title, order }: QuestionProps) => {
 
 	const isSelected = id === selectedBlockId;
 	return (
-		<>
-			<Button
-				variant={isSelected ? "light" : "subtle"}
-				justify="start"
-				className={styles.button}
-				onClick={handleClick}
-			>
-				{label}
-			</Button>
-		</>
+		<Button
+			variant={isSelected ? "light" : "subtle"}
+			justify="start"
+			className={styles.button}
+			onClick={handleClick}
+		>
+			{label}
+		</Button>
 	);
 };
 
-function Label(props: Pick<QuestionProps, "group" | "order" | "title">) {
+function Label(props: Pick<NavbarQuestionProps, "group" | "order" | "title">) {
 	const { group, order, title } = props;
 
 	return (
-		<Group gap={8}>
-			<Group className={clx(styles.labelGroup, styles[group])}>
+		<div className={styles.labelGroup}>
+			<Group className={clx(styles.labelTag, styles[group])}>
 				<IconBan /> <Text size="xs">{order}</Text>
 			</Group>
-			<Text size="sm" c="dark.4">
+			<Text size="sm" c="dark.4" className={styles.labelTitle}>
 				{title}
 			</Text>
-		</Group>
+		</div>
 	);
 }

@@ -1,26 +1,28 @@
-import { Button } from "@mantine/core";
 import type { MultipleChoiceType, YesNoType } from "../../constants/questions";
+import { EditableButton } from "../EditableButton/EditableButton";
 import styles from "./MultipleChoice.module.css";
 
 type MultipleChoiceProps = {
+	readOnly?: boolean;
 	question: MultipleChoiceType | YesNoType;
 };
 
-export const MultipleChoice = ({ question }: MultipleChoiceProps) => {
+export const MultipleChoice = ({ question, readOnly }: MultipleChoiceProps) => {
 	return (
-		<div className={styles.optionWrapper}>
+		<div className={styles.wrapper}>
 			{question.options.map((option) => (
-				// This doesn't need to be a button. Try TextInput
-				<Button
+				<EditableButton
 					key={option}
-					miw={200}
+					readOnly={readOnly}
 					variant="outline"
+					buttonText={option}
+					classNames={{
+						textInput: styles.textInput,
+					}}
 					onClick={() => {
 						console.log("click");
 					}}
-				>
-					{option}
-				</Button>
+				/>
 			))}
 		</div>
 	);

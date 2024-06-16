@@ -1,22 +1,28 @@
-import { Button, Stack } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { type QuestionType, QuestionTypes } from "../../constants/questions";
 import { formFields } from "../../mocks/formQuestions";
+import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
 import { EditableTitle } from "./EditableTitle/EditableTitle";
+import styles from "./Question.module.css";
 
 interface QuestionProps {
 	id: QuestionType["id"];
 	isLast?: boolean;
+	readOnly?: boolean;
 	onSubmitForm?: () => void;
 	goToNextStep?: () => void;
 }
 
-const getComponentByQuestion = (question: QuestionType) => {
+const getComponentByQuestion = (
+	question: QuestionType,
+	readOnly: QuestionProps["readOnly"],
+) => {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
 		case QuestionTypes.MultipleChoice:
-			return <MultipleChoice question={question} />;
+			return <MultipleChoice readOnly={readOnly} question={question} />;
 
 		case QuestionTypes.ShortText:
 			return <ShortText />;
@@ -29,6 +35,7 @@ const getComponentByQuestion = (question: QuestionType) => {
 export const Question = ({
 	id,
 	isLast,
+	readOnly,
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
@@ -48,27 +55,26 @@ export const Question = ({
 	}
 
 	return (
-		<Stack p="0 40px">
-			<Stack
-				align="start"
-				justify="center"
-				flex={1}
-				gap="32px"
-				maw="720px"
-				m="0 auto"
-			>
-				<EditableTitle initialValue={question.title} />
+		<div className={styles.root}>
+			<div className={styles.wrapper}>
+				<EditableTitle readOnly={readOnly} initialValue={question.title} />
 
-				<Stack gap={16} align="flex-start">
+				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						{getComponentByQuestion(question)}
+						{getComponentByQuestion(question, readOnly)}
 					</Stack>
 
-					<Button fw="bold" w="unset" type="submit" onClick={onSubmit}>
-						{buttonText}
-					</Button>
-				</Stack>
-			</Stack>
-		</Stack>
+					<EditableButton
+						variant="filled"
+						readOnly={readOnly}
+						buttonText={buttonText}
+						classNames={{
+							textInput: styles.submitButton,
+						}}
+						onClick={onSubmit}
+					/>
+				</div>
+			</div>
+		</div>
 	);
 };

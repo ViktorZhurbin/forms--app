@@ -8,7 +8,7 @@ export const NavQuestions = () => {
 			<Text c="dimmed" size="sm" mb={8} p="0 12px">
 				Questions
 			</Text>
-			<Stack gap={8}>
+			<Stack gap={8} px={4}>
 				{formFields.map(({ id, group, title }, index) => (
 					<Question
 						key={id}

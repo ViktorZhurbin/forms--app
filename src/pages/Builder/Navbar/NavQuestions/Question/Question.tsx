@@ -1,4 +1,4 @@
-import { Group, NavLink, Text } from "@mantine/core";
+import { Button, Group, Text } from "@mantine/core";
 import { IconBan } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "../../../../../constants/location";
@@ -23,13 +23,18 @@ export const Question = ({ id, group, title, order }: QuestionProps) => {
 
 	const label = <Label group={group} order={order} title={title} />;
 
+	const isSelected = id === selectedBlockId;
 	return (
-		<NavLink
-			p="8px 12px"
-			label={label}
-			active={id === selectedBlockId}
-			onClick={handleClick}
-		/>
+		<>
+			<Button
+				variant={isSelected ? "light" : "subtle"}
+				justify="start"
+				px="12px"
+				onClick={handleClick}
+			>
+				{label}
+			</Button>
+		</>
 	);
 };
 
@@ -43,6 +48,7 @@ function Label(props: Pick<QuestionProps, "group" | "order" | "title">) {
 				wrap="nowrap"
 				align="center"
 				p="4px 6px"
+				c="black"
 				style={{ borderRadius: "6px" }}
 				bg={QuestionColorsByGroup[group]}
 			>

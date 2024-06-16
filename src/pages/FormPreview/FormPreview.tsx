@@ -56,9 +56,9 @@ export const FormPreview = () => {
 			/>
 
 			<Button
-				color="rgb(31, 41, 55)"
+				color="dark.7"
 				leftSection={<IconX />}
-				style={{ alignSelf: "end", margin: "12px 16px" }}
+				className={styles.exitButton}
 				onClick={handleExist}
 			>
 				Exit preview

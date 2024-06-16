@@ -9,8 +9,8 @@ export const PreviewButton = () => {
 	return (
 		<Button
 			variant="default"
-			color="#6b7280"
-			leftSection={<IconEye style={{ width: "1.2rem", height: "1.2rem" }} />}
+			color="dark.7"
+			leftSection={<IconEye />}
 			onClick={() => {
 				navigate("/forms/1/preview", {
 					state: { blockId: selectedBlockId },

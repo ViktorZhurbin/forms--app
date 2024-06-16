@@ -1,4 +1,4 @@
-import { Center, SegmentedControl } from "@mantine/core";
+import { Group, SegmentedControl } from "@mantine/core";
 import { IconLayoutGrid, IconList } from "@tabler/icons-react";
 import type { FormsLayout } from "../../../../constants/forms";
 
@@ -12,21 +12,11 @@ export const ViewTypeControl = ({ view, setView }: ViewTypeControlProps) => {
 		<SegmentedControl
 			data={[
 				{
-					label: (
-						<Center style={{ gap: 6 }}>
-							<IconLayoutGrid />
-							<span>Grid</span>
-						</Center>
-					),
+					label: <Label title="Grid" icon={<IconLayoutGrid />} />,
 					value: "grid",
 				},
 				{
-					label: (
-						<Center style={{ gap: 6 }}>
-							<IconList />
-							<span>List</span>
-						</Center>
-					),
+					label: <Label title="List" icon={<IconList />} />,
 					value: "list",
 				},
 			]}
@@ -37,3 +27,12 @@ export const ViewTypeControl = ({ view, setView }: ViewTypeControlProps) => {
 		/>
 	);
 };
+
+function Label({ icon, title }: { icon: React.ReactElement; title: string }) {
+	return (
+		<Group wrap="nowrap" gap={6}>
+			{icon}
+			<span>{title}</span>
+		</Group>
+	);
+}

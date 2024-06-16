@@ -1,11 +1,8 @@
 import { Button, Stack, Title } from "@mantine/core";
-
 import { type QuestionType, QuestionTypes } from "../../constants/questions";
+import { formFields } from "../../mocks/formQuestions";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
-
-import { formFields } from "../../mocks/formQuestions";
-import styles from "./Question.module.css";
 
 interface QuestionProps {
 	id: QuestionType["id"];
@@ -50,24 +47,27 @@ export const Question = ({
 	}
 
 	return (
-		<div className={styles.root}>
-			<div className={styles.wrapper}>
-				<Title className={styles.header}>{question.title}</Title>
+		<Stack p="0 40px">
+			<Stack
+				align="start"
+				justify="center"
+				flex={1}
+				gap="32px"
+				maw="720px"
+				m="0 auto"
+			>
+				<Title>{question.title}</Title>
 
 				<Stack gap={16} align="flex-start">
-					<div className={styles.optionWrapper}>
+					<Stack gap={8} w="100%">
 						{getComponentByQuestion(question)}
-					</div>
+					</Stack>
 
-					<Button
-						type="submit"
-						className={styles.submitButton}
-						onClick={onSubmit}
-					>
+					<Button fw="bold" w="unset" type="submit" onClick={onSubmit}>
 						{buttonText}
 					</Button>
 				</Stack>
-			</div>
-		</div>
+			</Stack>
+		</Stack>
 	);
 };

@@ -2,9 +2,10 @@ import { Button, Group, Text } from "@mantine/core";
 import { IconBan } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "../../../../../constants/location";
-import { QuestionColorsByGroup } from "../../../../../constants/questionMaps";
 import type { QuestionBaseType } from "../../../../../constants/questions";
+import { clx } from "../../../../../utils/classNames";
 import { useSelectedBlockId } from "../../../hooks/useSelectedBlockId";
+import styles from "./Question.module.css";
 
 interface QuestionProps
 	extends Pick<QuestionBaseType, "id" | "group" | "title"> {
@@ -29,7 +30,7 @@ export const Question = ({ id, group, title, order }: QuestionProps) => {
 			<Button
 				variant={isSelected ? "light" : "subtle"}
 				justify="start"
-				px="12px"
+				className={styles.button}
 				onClick={handleClick}
 			>
 				{label}
@@ -43,15 +44,7 @@ function Label(props: Pick<QuestionProps, "group" | "order" | "title">) {
 
 	return (
 		<Group gap={8}>
-			<Group
-				gap={8}
-				wrap="nowrap"
-				align="center"
-				p="4px 6px"
-				c="black"
-				style={{ borderRadius: "6px" }}
-				bg={QuestionColorsByGroup[group]}
-			>
+			<Group className={clx(styles.labelGroup, styles[group])}>
 				<IconBan /> <Text size="xs">{order}</Text>
 			</Group>
 			<Text size="sm" c="dark.4">

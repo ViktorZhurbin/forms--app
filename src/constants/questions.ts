@@ -5,8 +5,8 @@ enum QuestionTypes {
 }
 
 enum QuestionGroups {
-	Choice = "Choice",
-	Text = "Text",
+	Choice = "choice",
+	Text = "text",
 }
 
 type QuestionBaseType = {

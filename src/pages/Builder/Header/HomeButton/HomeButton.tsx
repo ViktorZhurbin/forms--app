@@ -1,4 +1,4 @@
-import { Tooltip, ActionIcon } from "@mantine/core";
+import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 

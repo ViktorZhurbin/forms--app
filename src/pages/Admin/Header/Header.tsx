@@ -1,4 +1,4 @@
-import { Group, UnstyledButton, Button } from "@mantine/core";
+import { Button, Group, UnstyledButton } from "@mantine/core";
 import { IconBolt } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 import { AvatarMenu } from "./AvatarMenu/AvatarMenu";

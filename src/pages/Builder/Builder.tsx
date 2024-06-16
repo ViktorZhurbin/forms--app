@@ -1,5 +1,4 @@
 import { AppShell, ScrollArea } from "@mantine/core";
-import { Aside } from "./Aside/Aside";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
 import { NavQuestions } from "./Navbar/NavQuestions/NavQuestions";
@@ -35,10 +34,6 @@ export const Builder = () => {
 			<AppShell.Main display="flex">
 				<Main />
 			</AppShell.Main>
-
-			<AppShell.Aside p="md">
-				<Aside />
-			</AppShell.Aside>
 		</AppShell>
 	);
 };

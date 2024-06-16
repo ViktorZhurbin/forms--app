@@ -3,6 +3,7 @@ import { type QuestionType, QuestionTypes } from "../../constants/questions";
 import { formFields } from "../../mocks/formQuestions";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
+import { EditableTitle } from "./EditableTitle/EditableTitle";
 
 interface QuestionProps {
 	id: QuestionType["id"];
@@ -56,7 +57,7 @@ export const Question = ({
 				maw="720px"
 				m="0 auto"
 			>
-				<Title>{question.title}</Title>
+				<EditableTitle initialValue={question.title} />
 
 				<Stack gap={16} align="flex-start">
 					<Stack gap={8} w="100%">

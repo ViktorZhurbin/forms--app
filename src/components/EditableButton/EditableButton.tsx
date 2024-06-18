@@ -7,7 +7,8 @@ import {
 import styles from "./EditableButton.module.css";
 
 interface EditableButtonProps extends EditableElementProps {
-	onClick?: () => void;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
 	classNames?: {
 		button?: string;
 	};
@@ -16,12 +17,14 @@ interface EditableButtonProps extends EditableElementProps {
 export const EditableButton = ({
 	value,
 	onClick,
+	onKeyDown,
 	isEditable,
 	classNames,
 }: EditableButtonProps) => {
 	return (
 		<Button
 			onClick={onClick}
+			onKeyDown={onKeyDown}
 			tabIndex={isEditable ? -1 : 0}
 			className={clx(
 				styles.button,

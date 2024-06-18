@@ -30,6 +30,7 @@ export const EditableTitle = ({
 			autosize
 			ref={inputRef}
 			readOnly={readOnly}
+			tabIndex={readOnly ? -1 : 0}
 			variant="unstyled"
 			value={inputValue}
 			classNames={{

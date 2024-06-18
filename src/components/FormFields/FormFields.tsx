@@ -1,3 +1,4 @@
+import { FocusTrap } from "@mantine/core";
 import type { QuestionType } from "../../constants/questions";
 import { Question } from "../Question/Question";
 import styles from "./FormFields.module.css";
@@ -14,20 +15,25 @@ export const FormFields = (props: {
 	return (
 		<>
 			{questions.map((question, index) => {
+				const isLast = index === questions.length - 1;
+
 				return (
-					<div
-						key={question.id}
-						className={styles.root}
-						data-position={getPositionDataAttribute(index, step)}
-					>
-						<Question
-							readOnly
-							id={question.id}
-							isLast={index === questions.length - 1}
-							onSubmitForm={onSubmit}
-							goToNextStep={goToNextStep}
-						/>
-					</div>
+					<FocusTrap key={question.id} active={!isLast && step === index}>
+						<FocusTrap.InitialFocus />
+						<div
+							key={question.id}
+							className={styles.root}
+							data-position={getPositionDataAttribute(index, step)}
+						>
+							<Question
+								readOnly
+								id={question.id}
+								isLast={isLast}
+								onSubmitForm={onSubmit}
+								goToNextStep={goToNextStep}
+							/>
+						</div>
+					</FocusTrap>
 				);
 			})}
 		</>

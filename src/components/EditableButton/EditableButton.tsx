@@ -1,44 +1,35 @@
-import { Textarea } from "@mantine/core";
-import { useState } from "react";
-import type { ChangeEventHandler } from "react";
+import { Button } from "@mantine/core";
 import { clx } from "../../utils/classNames";
+import {
+	EditableElement,
+	type EditableElementProps,
+} from "../EditableElement/EditableElement";
 import styles from "./EditableButton.module.css";
-import { variantsMap } from "./constants";
-import type { EditableButtonProps } from "./types";
+
+interface EditableButtonProps extends EditableElementProps {
+	onClick?: () => void;
+	classNames?: {
+		button?: string;
+	};
+}
 
 export const EditableButton = ({
-	variant = "outline",
-	readOnly,
-	buttonText,
-	classNames,
+	value,
 	onClick,
+	isEditable,
+	classNames,
 }: EditableButtonProps) => {
-	const [value, setValue] = useState(buttonText);
-
-	const handleClickButton = () => {
-		if (readOnly) {
-			onClick?.();
-		}
-	};
-
-	const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-		setValue(event.currentTarget.value);
-	};
-
-	const { inputVariant } = variantsMap[variant];
-
 	return (
-		<Textarea
-			autosize
-			pointer={readOnly}
-			readOnly={readOnly}
-			value={value}
-			variant={inputVariant}
-			classNames={{
-				input: clx(styles.textInput, styles[variant], classNames?.textInput),
-			}}
-			onChange={handleChange}
-			onClick={handleClickButton}
-		/>
+		<Button
+			onClick={onClick}
+			tabIndex={isEditable ? -1 : 0}
+			className={clx(
+				styles.button,
+				isEditable ? styles.editable : null,
+				classNames?.button,
+			)}
+		>
+			<EditableElement value={value} isEditable={isEditable} />
+		</Button>
 	);
 };

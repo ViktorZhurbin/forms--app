@@ -18,4 +18,5 @@
 
 .submitButton {
   font-weight: bold;
+  width: max-content;
 }

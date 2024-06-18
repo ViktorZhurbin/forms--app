@@ -65,13 +65,12 @@ export const Question = ({
 					</Stack>
 
 					<EditableButton
-						variant="filled"
-						readOnly={readOnly}
-						buttonText={buttonText}
-						classNames={{
-							textInput: styles.submitButton,
-						}}
 						onClick={onSubmit}
+						value={buttonText}
+						isEditable={!readOnly}
+						classNames={{
+							button: styles.submitButton,
+						}}
 					/>
 				</div>
 			</div>

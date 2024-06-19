@@ -28,6 +28,7 @@
 		"postcss-simple-vars": "^7.0.1",
 		"typescript": "^5.4.5",
 		"vite": "^5.3.1",
-		"vite-plugin-checker": "^0.6.4"
+		"vite-plugin-checker": "^0.6.4",
+		"wrangler": "^3.61.0"
 	}
 }

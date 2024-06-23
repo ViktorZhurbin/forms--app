@@ -2,11 +2,11 @@ import {
 	QuestionGroups,
 	type QuestionType,
 	QuestionTypes,
-} from "../constants/questions";
+} from "~/constants/questions";
 
 export const formFields: QuestionType[] = [
 	{
-		id: crypto.randomUUID(),
+		id: "1",
 		type: QuestionTypes.MultipleChoice,
 		group: QuestionGroups.Choice,
 		title: "Multiple Choices adadadda",
@@ -18,20 +18,20 @@ export const formFields: QuestionType[] = [
 		],
 	},
 	{
-		id: crypto.randomUUID(),
+		id: "2",
 		type: QuestionTypes.YesNo,
 		group: QuestionGroups.Choice,
 		title: "Yes/No",
 		options: ["Yes", "No"],
 	},
 	{
-		id: crypto.randomUUID(),
+		id: "3",
 		type: QuestionTypes.ShortText,
 		group: QuestionGroups.Text,
 		title: "Short text",
 	},
 	{
-		id: crypto.randomUUID(),
+		id: "4",
 		type: QuestionTypes.YesNo,
 		group: QuestionGroups.Choice,
 		title: "Question 4",

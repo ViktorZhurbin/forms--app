@@ -1,7 +1,7 @@
 import { Textarea } from "@mantine/core";
 import { useState } from "react";
 import type { ChangeEventHandler } from "react";
-import { clx } from "../../utils/classNames";
+import { clx } from "~/utils/classNames";
 import styles from "./EditableButtonOld.module.css";
 import { variantsMap } from "./constants";
 import type { EditableButtonOldProps } from "./types";

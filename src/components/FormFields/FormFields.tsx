@@ -1,5 +1,5 @@
 import { FocusTrap } from "@mantine/core";
-import type { QuestionType } from "../../constants/questions";
+import type { QuestionType } from "~/constants/questions";
 import { Question } from "../Question/Question";
 import styles from "./FormFields.module.css";
 import { getPositionDataAttribute } from "./helpers/getPositionDataAttribute";

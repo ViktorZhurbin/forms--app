@@ -1,4 +1,4 @@
-import type { FormType } from "../constants/forms";
+import type { FormType } from "~/constants/forms";
 
 export const mockForms: FormType[] = [
 	{ id: "1", name: "Form 1", responseCount: 0 },

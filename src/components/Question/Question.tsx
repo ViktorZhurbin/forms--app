@@ -1,6 +1,6 @@
 import { Stack } from "@mantine/core";
-import { type QuestionType, QuestionTypes } from "../../constants/questions";
-import { formFields } from "../../mocks/formQuestions";
+import { type QuestionType, QuestionTypes } from "~/constants/questions";
+import { formFields } from "~/mocks/formQuestions";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
@@ -8,7 +8,7 @@ import { EditableTitle } from "./EditableTitle/EditableTitle";
 import styles from "./Question.module.css";
 
 interface QuestionProps {
-	id: QuestionType["id"];
+	id: QuestionType["id"] | null;
 	isLast?: boolean;
 	readOnly?: boolean;
 	onSubmitForm?: () => void;
@@ -39,7 +39,8 @@ export const Question = ({
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
-	const question = formFields.find((question) => question.id === id);
+	const question =
+		formFields.find((question) => question.id === id) ?? formFields?.[0];
 
 	if (!question) return null;
 

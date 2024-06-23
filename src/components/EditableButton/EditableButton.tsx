@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import { clx } from "../../utils/classNames";
+import { clx } from "~/utils/classNames";
 import {
 	EditableElement,
 	type EditableElementProps,

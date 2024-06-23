@@ -1,4 +1,4 @@
-import type { MultipleChoiceType, YesNoType } from "../../constants/questions";
+import type { MultipleChoiceType, YesNoType } from "~/constants/questions";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
 

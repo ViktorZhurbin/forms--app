@@ -1,23 +1,19 @@
 import { Textarea } from "@mantine/core";
-import { type KeyboardEventHandler, useEffect, useRef, useState } from "react";
+import { type KeyboardEventHandler, useRef } from "react";
 import styles from "./EditableTitle.module.css";
 
 type EditableTitleProps = {
 	initialValue?: string;
 	readOnly?: boolean;
+	onChange?: (value: string) => void;
 };
 
 export const EditableTitle = ({
 	readOnly,
+	onChange,
 	initialValue = "",
 }: EditableTitleProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
-
-	const [inputValue, setInputValue] = useState(initialValue);
-
-	useEffect(() => {
-		setInputValue(initialValue);
-	}, [initialValue]);
 
 	const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
 		if (["Enter", "Escape"].includes(event.key)) {
@@ -32,13 +28,15 @@ export const EditableTitle = ({
 			readOnly={readOnly}
 			tabIndex={readOnly ? -1 : 0}
 			variant="unstyled"
-			value={inputValue}
+			value={initialValue}
 			classNames={{
 				input: styles.input,
 			}}
 			onKeyDown={handleKeyDown}
 			onChange={(event) => {
-				setInputValue(event.currentTarget.value);
+				const newValue = event.currentTarget.value;
+
+				onChange?.(newValue);
 			}}
 		/>
 	);

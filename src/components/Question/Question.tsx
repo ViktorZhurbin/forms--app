@@ -1,5 +1,5 @@
 import { Stack } from "@mantine/core";
-import { useTable } from "tinybase/ui-react";
+import { useSetCellCallback, useTable } from "tinybase/ui-react";
 import { useParams } from "wouter";
 import { type QuestionType, QuestionTypes } from "~/constants/questions";
 import type { OptionType } from "~/mocks/options";
@@ -58,6 +58,13 @@ export const Question = ({
 		(option) => option.questionId === question.id,
 	) ?? []) as unknown as OptionType[];
 
+	const onChangeTitle = useSetCellCallback(
+		"questions",
+		question?.id,
+		"title",
+		(value: string) => value,
+	);
+
 	if (!question) return null;
 
 	let buttonText: string;
@@ -74,7 +81,11 @@ export const Question = ({
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
-				<EditableTitle readOnly={readOnly} initialValue={question.title} />
+				<EditableTitle
+					readOnly={readOnly}
+					initialValue={question.title}
+					onChange={onChangeTitle}
+				/>
 
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">

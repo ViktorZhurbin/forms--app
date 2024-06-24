@@ -12,23 +12,24 @@ export const useStore = () => {
 			questions: QUESTION_SCHEMA,
 			options: OPTION_SCHEMA,
 		}),
-	).setTables({
-		forms: mockForms,
-		questions: mockQuestions,
-		options: mockOptions,
-	});
+	);
+	// .setTables({
+	// 	forms: mockForms,
+	// 	questions: mockQuestions,
+	// 	options: mockOptions,
+	// });
 
 	useCreatePersister(
 		store,
 		(store) => createLocalPersister(store, "forms"),
 		[],
 		async (persister) => {
-			// await persister.startAutoLoad({
-			// 	forms: mockForms,
-			// 	questions: mockQuestions,
-			// 	options: mockOptions,
-			// });
-			await persister.save();
+			await persister.startAutoLoad({
+				forms: mockForms,
+				questions: mockQuestions,
+				options: mockOptions,
+			});
+			await persister.startAutoSave();
 		},
 	);
 

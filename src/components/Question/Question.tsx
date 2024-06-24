@@ -1,8 +1,8 @@
 import { Stack } from "@mantine/core";
 import { useSetCellCallback, useTable } from "tinybase/ui-react";
-import { useParams } from "wouter";
 import { type QuestionType, QuestionTypes } from "~/constants/questions";
 import type { OptionType } from "~/mocks/options";
+import { useFormQuestions } from "~/mocks/questions/hooks/useFormQuestions";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
@@ -42,12 +42,7 @@ export const Question = ({
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
-	const formId = useParams()?.id;
-
-	const allQuestions = useTable("questions");
-	const formQuestions = Object.values(allQuestions).filter(
-		(question) => question.formId === formId,
-	) as unknown as QuestionType[];
+	const formQuestions = useFormQuestions();
 
 	const question =
 		formQuestions.find((question) => question.id === id) ?? formQuestions?.[0];

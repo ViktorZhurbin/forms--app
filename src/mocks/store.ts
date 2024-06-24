@@ -3,7 +3,7 @@ import { createLocalPersister } from "tinybase/persisters/persister-browser";
 import { useCreatePersister, useCreateStore } from "tinybase/ui-react";
 import { FORMS_SCHEMA, mockForms } from "./forms";
 import { OPTION_SCHEMA, mockOptions } from "./options";
-import { QUESTION_SCHEMA, mockQuestions } from "./questions";
+import { QUESTION_SCHEMA, mockQuestions } from "./questions/questions";
 
 export const useStore = () => {
 	const store = useCreateStore(() =>

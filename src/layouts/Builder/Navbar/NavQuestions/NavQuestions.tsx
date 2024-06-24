@@ -11,7 +11,6 @@ export const NavQuestions = () => {
 	const formId = useParams()?.id;
 
 	const allQuestions = useTable("questions");
-	// console.log(allQuestions);
 	const questions = Object.values(allQuestions).filter(
 		(question) => question.formId === formId,
 	) as unknown as QuestionType[];

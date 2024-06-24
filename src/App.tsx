@@ -1,15 +1,27 @@
+import { ModalsProvider } from "@mantine/modals";
+import { Provider } from "tinybase/ui-react";
 import { Route, Switch } from "wouter";
+import { ThemeProvider } from "./contexts/ThemeProvider/ThemeProvider";
 import { Admin } from "./layouts/Admin/Admin";
-import { Form } from "./layouts/Form/Form";
+import { Builder } from "./layouts/Builder/Builder";
+import { useStore } from "./mocks/store";
 
 export const App = () => {
-	return (
-		<Switch>
-			<Route path="/" component={Admin} />
-			<Route path="/forms/:id" component={Form} />
+	const store = useStore();
 
-			{/* Default route in a switch */}
-			<Route>404: No such page!</Route>
-		</Switch>
+	return (
+		<ThemeProvider>
+			<Provider store={store}>
+				<ModalsProvider>
+					<Switch>
+						<Route path="/" component={Admin} />
+						<Route path="/forms/:id" component={Builder} />
+
+						{/* Default route in a switch */}
+						<Route>404: No such page!</Route>
+					</Switch>
+				</ModalsProvider>
+			</Provider>
+		</ThemeProvider>
 	);
 };

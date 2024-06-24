@@ -10,7 +10,7 @@ export const ListView = ({ forms, getHref }: FormViewProps) => {
 					size="md"
 					variant="default"
 					justify="start"
-					component="a"
+					component="a" // todo: use wouter
 					href={getHref(id)}
 				>
 					<Text>{name}</Text>

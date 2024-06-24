@@ -4,12 +4,12 @@ import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "~/constants/location";
 import type { QuestionBaseType } from "~/constants/questions";
 import { clx } from "~/utils/classNames";
-import { useSelectedBlockId } from "../../../hooks/useSelectedBlockId";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
 	extends Pick<QuestionBaseType, "id" | "group" | "title"> {
 	order: number;
+	isSelected: boolean;
 }
 
 export const NavbarQuestion = ({
@@ -17,17 +17,14 @@ export const NavbarQuestion = ({
 	group,
 	title,
 	order,
+	isSelected,
 }: NavbarQuestionProps) => {
-	const selectedBlockId = useSelectedBlockId();
-
 	const handleSelect = () => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(SearchParams.BLOCK_ID, id);
 
 		navigate(url);
 	};
-
-	const isSelected = id === selectedBlockId;
 
 	return (
 		<Button

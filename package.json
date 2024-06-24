@@ -17,6 +17,7 @@
     "million": "^3.1.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "tinybase": "^4.8.15",
     "wouter": "^3.2.0"
   },
   "devDependencies": {

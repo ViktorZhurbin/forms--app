@@ -7,25 +7,21 @@ import {
 export const formFields: QuestionType[] = [
 	{
 		id: "1",
+		formId: "1",
 		type: QuestionTypes.MultipleChoice,
 		group: QuestionGroups.Choice,
 		title: "Multiple Choices adadadda",
-		options: [
-			"Yes",
-			"No",
-			"Whatever",
-			"WhateverWhateverWhateverWhateverWhateverWhatever WhateverWhateverWhateverWhatever WhateverWhateverWhatever WhateverWhateverWhatever",
-		],
 	},
 	{
 		id: "2",
 		type: QuestionTypes.YesNo,
 		group: QuestionGroups.Choice,
 		title: "Yes/No",
-		options: ["Yes", "No"],
+		formId: "1",
 	},
 	{
 		id: "3",
+		formId: "1",
 		type: QuestionTypes.ShortText,
 		group: QuestionGroups.Text,
 		title: "Short text",
@@ -35,6 +31,6 @@ export const formFields: QuestionType[] = [
 		type: QuestionTypes.YesNo,
 		group: QuestionGroups.Choice,
 		title: "Question 4",
-		options: ["Yes", "No"],
+		formId: "1",
 	},
 ];

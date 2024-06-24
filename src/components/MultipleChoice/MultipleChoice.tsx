@@ -1,21 +1,21 @@
-import type { MultipleChoiceType, YesNoType } from "~/constants/questions";
+import type { OptionType } from "~/mocks/options";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
 
 type MultipleChoiceProps = {
 	readOnly?: boolean;
-	question: MultipleChoiceType | YesNoType;
+	options: OptionType[];
 };
 
-export const MultipleChoice = ({ question, readOnly }: MultipleChoiceProps) => {
+export const MultipleChoice = ({ options, readOnly }: MultipleChoiceProps) => {
 	return (
 		<div className={styles.wrapper}>
-			{question.options.map((option) => (
+			{options.map(({ id, text }) => (
 				<EditableButtonOld
-					key={option}
+					key={id}
 					readOnly={readOnly}
 					variant="outline"
-					buttonText={option}
+					buttonText={text}
 					classNames={{
 						textInput: styles.textInput,
 					}}

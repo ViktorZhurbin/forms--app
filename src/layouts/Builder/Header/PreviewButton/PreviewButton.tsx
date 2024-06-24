@@ -1,7 +1,7 @@
 import { Button } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { IconEye } from "@tabler/icons-react";
-import { Preview } from "~/layouts/Form/Preview/Preview";
+import { Preview } from "~/layouts/Builder/Preview/Preview";
 
 export const PreviewButton = () => {
 	const onClickPreview = () => {

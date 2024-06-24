@@ -1,3 +1,5 @@
+import type { FormType } from "./forms";
+
 enum QuestionTypes {
 	YesNo = "YesNo",
 	MultipleChoice = "MultipleChoice",
@@ -11,6 +13,7 @@ enum QuestionGroups {
 
 type QuestionBaseType = {
 	id: string;
+	formId: FormType["id"];
 	type: QuestionTypes;
 	group: QuestionGroups;
 	title: string;
@@ -19,13 +22,11 @@ type QuestionBaseType = {
 interface YesNoType extends QuestionBaseType {
 	type: QuestionTypes.YesNo;
 	group: QuestionGroups.Choice;
-	options: ["Yes", "No"];
 }
 
 interface MultipleChoiceType extends QuestionBaseType {
 	type: QuestionTypes.MultipleChoice;
 	group: QuestionGroups.Choice;
-	options: string[];
 }
 
 interface ShortTextType extends QuestionBaseType {

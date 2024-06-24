@@ -3,6 +3,9 @@
 	"organizeImports": {
 		"enabled": true
 	},
+	"files": {
+		"ignore": ["schema/**/*"]
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {

@@ -12,7 +12,7 @@ export const GridView = ({ forms, getHref }: FormViewProps) => {
 					justify="start"
 					w={200}
 					h={100}
-					component="a"
+					component="a" // todo: use wouter
 					href={getHref(id)}
 				>
 					<Stack gap={4} align="start">

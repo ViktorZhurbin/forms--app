@@ -1,37 +1,36 @@
 {
-  "name": "my-forms",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "format": "biome check --write ./src"
-  },
-  "dependencies": {
-    "@mantine/core": "^7.10.1",
-    "@mantine/hooks": "^7.10.1",
-    "@mantine/modals": "^7.10.2",
-    "@tabler/icons-react": "^3.5.0",
-    "million": "^3.1.11",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tinybase": "^4.8.15",
-    "wouter": "^3.2.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "1.8.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.7.0",
-    "postcss": "^8.4.38",
-    "postcss-preset-mantine": "^1.15.0",
-    "postcss-simple-vars": "^7.0.1",
-    "typescript": "^5.4.5",
-    "vite": "^5.3.1",
-    "vite-plugin-checker": "^0.6.4",
-    "vite-tsconfig-paths": "^4.3.2",
-    "wrangler": "^3.61.0"
-  }
+	"name": "my-forms",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"format": "biome check --write ./src"
+	},
+	"dependencies": {
+		"@mantine/core": "^7.10.1",
+		"@mantine/hooks": "^7.10.1",
+		"@tabler/icons-react": "^3.5.0",
+		"million": "^3.1.11",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"tinybase": "^4.8.15",
+		"wouter": "^3.2.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.8.0",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"@vitejs/plugin-react-swc": "^3.7.0",
+		"postcss": "^8.4.38",
+		"postcss-preset-mantine": "^1.15.0",
+		"postcss-simple-vars": "^7.0.1",
+		"typescript": "^5.4.5",
+		"vite": "^5.3.1",
+		"vite-plugin-checker": "^0.6.4",
+		"vite-tsconfig-paths": "^4.3.2",
+		"wrangler": "^3.61.0"
+	}
 }

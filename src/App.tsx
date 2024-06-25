@@ -1,4 +1,3 @@
-import { ModalsProvider } from "@mantine/modals";
 import { Provider } from "tinybase/ui-react";
 import { Route, Switch } from "wouter";
 import { ThemeProvider } from "./contexts/ThemeProvider/ThemeProvider";
@@ -12,15 +11,13 @@ export const App = () => {
 	return (
 		<ThemeProvider>
 			<Provider store={store}>
-				<ModalsProvider>
-					<Switch>
-						<Route path="/" component={Admin} />
-						<Route path="/forms/:id" component={Builder} />
+				<Switch>
+					<Route path="/" component={Admin} />
+					<Route path="/forms/:id" component={Builder} />
 
-						{/* Default route in a switch */}
-						<Route>404: No such page!</Route>
-					</Switch>
-				</ModalsProvider>
+					{/* Default route in a switch */}
+					<Route>404: No such page!</Route>
+				</Switch>
 			</Provider>
 		</ThemeProvider>
 	);

@@ -1,7 +1,7 @@
+import { useSetCellCallback } from "tinybase/ui-react";
 import type { OptionType } from "~/mocks/options";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
-import { useSetCellCallback } from "tinybase/ui-react";
 
 type MultipleChoiceProps = {
 	readOnly?: boolean;

@@ -1,3 +1,27 @@
+[data-mantine-color-scheme="light"] {
+  .button {
+    color: var(--mantine-color-gray-7);
+
+    &[data-active="true"] {
+      color: var(--mantine-color-blue-8);
+      background-color: var(--mantine-color-blue-0);
+      border-left-color: var(--mantine-color-blue-5);
+    }
+  }
+}
+
+[data-mantine-color-scheme="dark"] {
+  .button {
+    color: var(--mantine-color-dark-1);
+
+    &[data-active="true"] {
+      color: var(--mantine-color-blue-1);
+      background-color: rgba(24, 100, 171, .45);
+      border-left-color: var(--mantine-color-blue-5);
+    }
+  }
+}
+
 .button {
   padding-inline: 12px;
   position: relative;
@@ -34,7 +58,6 @@
 .labelTitle {
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--mantine-color-text);
 }
 
 .button:not(:hover) .removeButton {

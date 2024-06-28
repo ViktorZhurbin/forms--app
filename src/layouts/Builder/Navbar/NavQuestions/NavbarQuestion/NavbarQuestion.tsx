@@ -31,6 +31,7 @@ export const NavbarQuestion = ({
 	return (
 		<Button
 			variant={isSelected ? "light" : "subtle"}
+			data-active={isSelected}
 			justify="start"
 			className={styles.button}
 			onClick={handleSelect}

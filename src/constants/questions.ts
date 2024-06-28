@@ -31,12 +31,10 @@ type OptionType = {
 
 interface YesNoType extends ChoiceType {
 	type: QuestionTypes.YesNo;
-	group: QuestionGroups.Choice;
 }
 
 interface MultipleChoiceType extends ChoiceType {
 	type: QuestionTypes.MultipleChoice;
-	group: QuestionGroups.Choice;
 }
 
 interface ShortTextType extends QuestionBaseType {

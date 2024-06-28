@@ -6,7 +6,7 @@ import type { QuestionType } from "~/models/questions/questions";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
-import { EditableTitle } from "./EditableTitle/EditableTitle";
+import { EditableText } from "./EditableText/EditableText";
 import styles from "./Question.module.css";
 
 interface QuestionProps {
@@ -85,7 +85,8 @@ export const Question = ({
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
-				<EditableTitle
+				<EditableText
+					variant="h1"
 					readOnly={readOnly}
 					initialValue={question.title}
 					onChange={onChangeTitle}

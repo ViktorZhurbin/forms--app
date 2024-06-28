@@ -1,18 +1,21 @@
 import { Textarea } from "@mantine/core";
 import { type KeyboardEventHandler, useRef } from "react";
-import styles from "./EditableTitle.module.css";
+import { clx } from "~/utils/classNames";
+import styles from "./EditableText.module.css";
 
-type EditableTitleProps = {
+type EditableTextProps = {
 	initialValue?: string;
+	variant?: "h1" | "body";
 	readOnly?: boolean;
 	onChange?: (value: string) => void;
 };
 
-export const EditableTitle = ({
+export const EditableText = ({
+	variant = "body",
 	readOnly,
 	onChange,
 	initialValue = "",
-}: EditableTitleProps) => {
+}: EditableTextProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
 
 	const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
@@ -30,7 +33,7 @@ export const EditableTitle = ({
 			variant="unstyled"
 			value={initialValue}
 			classNames={{
-				input: styles.input,
+				input: clx(styles.input, styles[variant]),
 			}}
 			onKeyDown={handleKeyDown}
 			onChange={(event) => {

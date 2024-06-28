@@ -36,7 +36,6 @@ export const Preview = ({ onClose }: PreviewProps) => {
 		<div className={styles.root}>
 			<FormFields
 				step={step}
-				questions={formFields}
 				onSubmit={handleSubmit}
 				goToNextStep={goToNextStep}
 			/>

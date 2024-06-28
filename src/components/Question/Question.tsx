@@ -1,8 +1,6 @@
 import { Stack } from "@mantine/core";
-import { useSetCellCallback, useTable } from "tinybase/ui-react";
 import { type QuestionType, QuestionTypes } from "~/constants/questions";
-import type { OptionType } from "~/mocks/options";
-import { useFormQuestions } from "~/mocks/questions/hooks/useFormQuestions";
+import { db } from "~/models/db";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
@@ -19,13 +17,12 @@ interface QuestionProps {
 
 const getComponentByQuestion = (
 	question: QuestionType,
-	options: OptionType[],
 	readOnly: QuestionProps["readOnly"],
 ) => {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
 		case QuestionTypes.MultipleChoice:
-			return <MultipleChoice readOnly={readOnly} options={options} />;
+			return <MultipleChoice readOnly={readOnly} options={question.options} />;
 
 		case QuestionTypes.ShortText:
 			return <ShortText />;
@@ -42,23 +39,23 @@ export const Question = ({
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
-	const formQuestions = useFormQuestions();
+	if (!id) return null;
 
-	const question =
-		formQuestions.find((question) => question.id === id) ?? formQuestions?.[0];
+	const { isLoading, error, data } = db.useQuery({
+		questions: {
+			$: { where: { id } },
+		},
+	});
 
-	const allOptions = useTable("options");
+	if (isLoading) {
+		return <div>Fetching data...</div>;
+	}
 
-	const options = (Object.values(allOptions).filter(
-		(option) => option.questionId === question.id,
-	) ?? []) as unknown as OptionType[];
+	if (error) {
+		return <div>Error fetching data: {error.message}</div>;
+	}
 
-	const onChangeTitle = useSetCellCallback(
-		"questions",
-		question?.id,
-		"title",
-		(value: string) => value,
-	);
+	const question = data.questions[0];
 
 	if (!question) return null;
 
@@ -73,6 +70,8 @@ export const Question = ({
 		onSubmit = goToNextStep;
 	}
 
+	const onChangeTitle = (value: string) => value;
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
@@ -84,7 +83,7 @@ export const Question = ({
 
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						{getComponentByQuestion(question, options, readOnly)}
+						{getComponentByQuestion(question, readOnly)}
 					</Stack>
 
 					<EditableButton

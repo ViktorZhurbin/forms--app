@@ -1,6 +1,6 @@
-import { useTable } from "tinybase/ui-react";
-import { type FormType, FormsLayout } from "~/constants/forms";
+import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
+import { db } from "~/models/db";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
 
@@ -9,10 +9,17 @@ type FormsViewProps = {
 };
 
 export const FormsView = ({ view }: FormsViewProps) => {
-	const formsTable = useTable("forms");
-	const forms = Object.values(formsTable) as FormType[];
+	const { isLoading, error, data } = db.useQuery({ forms: {} });
+
+	if (isLoading) {
+		return <div>Fetching data...</div>;
+	}
+
+	if (error) {
+		return <div>Error fetching data: {error.message}</div>;
+	}
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
 
-	return <ViewComponent forms={forms} getHref={Routes.getFormPath} />;
+	return <ViewComponent forms={data.forms} getHref={Routes.getFormPath} />;
 };

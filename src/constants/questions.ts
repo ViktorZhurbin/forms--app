@@ -19,12 +19,22 @@ type QuestionBaseType = {
 	title: string;
 };
 
-interface YesNoType extends QuestionBaseType {
+interface ChoiceType extends QuestionBaseType {
+	group: QuestionGroups.Choice;
+	options: OptionType[];
+}
+
+type OptionType = {
+	id: string;
+	text: string;
+};
+
+interface YesNoType extends ChoiceType {
 	type: QuestionTypes.YesNo;
 	group: QuestionGroups.Choice;
 }
 
-interface MultipleChoiceType extends QuestionBaseType {
+interface MultipleChoiceType extends ChoiceType {
 	type: QuestionTypes.MultipleChoice;
 	group: QuestionGroups.Choice;
 }
@@ -42,6 +52,7 @@ export type {
 	QuestionBaseType,
 	QuestionType,
 	YesNoType,
+	ChoiceType,
 	MultipleChoiceType,
 	ShortTextType,
 };

@@ -1,16 +1,15 @@
-import { useSetCellCallback } from "tinybase/ui-react";
-import type { OptionType } from "~/mocks/options";
+import type { ChoiceType } from "~/constants/questions";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
 
 type MultipleChoiceProps = {
 	readOnly?: boolean;
-	options: OptionType[];
+	options: ChoiceType["options"];
 };
 
 export const MultipleChoice = ({ options, readOnly }: MultipleChoiceProps) => {
-	const onChangeText = (id: string) =>
-		useSetCellCallback("options", id, "text", (value: string) => value);
+	const onChangeText = (id: string) => undefined;
+	// useSetCellCallback("options", id, "text", (value: string) => value);
 
 	return (
 		<div className={styles.wrapper}>

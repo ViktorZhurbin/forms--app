@@ -1,10 +1,6 @@
-import {
-	QuestionGroups,
-	type QuestionType,
-	QuestionTypes,
-} from "~/constants/questions";
+import { QuestionGroups, QuestionTypes } from "~/constants/questions";
 
-export const formFields: QuestionType[] = [
+export const formFields = [
 	{
 		id: "1",
 		formId: "1",

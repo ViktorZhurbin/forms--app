@@ -1,21 +1,28 @@
 import { Text } from "@mantine/core";
-import { useTable } from "tinybase/ui-react";
-import { StoreInspector } from "tinybase/ui-react-dom";
 import { useParams } from "wouter";
-import type { QuestionType } from "~/constants/questions";
+import { db } from "~/models/db";
 import { useSelectedBlockId } from "../../hooks/useSelectedBlockId";
 import styles from "./NavQuestions.module.css";
 import { NavbarQuestion } from "./NavbarQuestion/NavbarQuestion";
 
 export const NavQuestions = () => {
-	const formId = useParams()?.id;
+	const formId = useParams()?.id ?? "440f17cc-35ba-4ed2-8a0e-46ffa8b0e3d5";
 
-	const allQuestions = useTable("questions");
-	const questions = Object.values(allQuestions).filter(
-		(question) => question.formId === formId,
-	) as unknown as QuestionType[];
+	const { isLoading, error, data } = db.useQuery({
+		questions: {
+			$: { where: { formId } },
+		},
+	});
 
-	const selectedBlockId = useSelectedBlockId(questions[0]?.id);
+	const selectedBlockId = useSelectedBlockId(data?.questions[0]?.id);
+
+	if (isLoading) {
+		return <div>Fetching data...</div>;
+	}
+
+	if (error) {
+		return <div>Error fetching data: {error.message}</div>;
+	}
 
 	return (
 		<>
@@ -23,7 +30,7 @@ export const NavQuestions = () => {
 				Questions
 			</Text>
 			<div className={styles.questionsList}>
-				{questions.map(({ id, group, title }, index) => (
+				{data.questions.map(({ id, group, title }, index) => (
 					<NavbarQuestion
 						key={id}
 						id={id}
@@ -34,7 +41,6 @@ export const NavQuestions = () => {
 					/>
 				))}
 			</div>
-			<StoreInspector />
 		</>
 	);
 };

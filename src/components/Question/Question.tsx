@@ -24,7 +24,13 @@ const getComponentByQuestion = (
 	switch (question.type) {
 		case QuestionTypes.YesNo:
 		case QuestionTypes.MultipleChoice:
-			return <MultipleChoice readOnly={readOnly} options={question.options} />;
+			return (
+				<MultipleChoice
+					readOnly={readOnly}
+					questionId={question.id}
+					options={question.options}
+				/>
+			);
 
 		case QuestionTypes.ShortText:
 			return <ShortText />;

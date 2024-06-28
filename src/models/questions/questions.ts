@@ -41,4 +41,5 @@ export type {
 	ChoiceType,
 	MultipleChoiceType,
 	ShortTextType,
+	OptionType,
 };

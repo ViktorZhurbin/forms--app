@@ -1,5 +1,4 @@
 import { Textarea } from "@mantine/core";
-import type { ChangeEventHandler } from "react";
 import { clx } from "~/utils/classNames";
 import styles from "./EditableButtonOld.module.css";
 import { variantsMap } from "./constants";
@@ -19,10 +18,6 @@ export const EditableButtonOld = ({
 		}
 	};
 
-	const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-		onChange?.(event.currentTarget.value);
-	};
-
 	const { inputVariant } = variantsMap[variant];
 
 	return (
@@ -35,7 +30,9 @@ export const EditableButtonOld = ({
 			classNames={{
 				input: clx(styles.textInput, styles[variant], classNames?.textInput),
 			}}
-			onChange={handleChange}
+			onChange={(event) => {
+				onChange?.(event.currentTarget.value);
+			}}
 			onClick={handleClickButton}
 		/>
 	);

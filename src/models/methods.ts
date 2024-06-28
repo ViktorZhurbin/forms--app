@@ -2,7 +2,11 @@ import { id, tx } from "@instantdb/react";
 import { QuestionTypes } from "~/constants/questions";
 import { db } from "./db";
 import type { FormType } from "./forms/forms";
-import type { QuestionType } from "./questions/questions";
+import type {
+	ChoiceType,
+	OptionType,
+	QuestionType,
+} from "./questions/questions";
 
 export function createForm(form: Omit<FormType, "id">) {
 	db.transact(tx.forms[id()].update(form));
@@ -49,4 +53,23 @@ export function updateQuestion(
 	const { id, ...update } = payload;
 
 	db.transact(tx.questions[id].update(update));
+}
+
+export function updateChoiceOption(
+	payload: Partial<OptionType> &
+		Pick<OptionType, "id"> & {
+			questionId: ChoiceType["id"];
+			options: ChoiceType["options"];
+		},
+) {
+	const { id, questionId, options, ...update } = payload;
+	const newOptions = options.map((option) => {
+		if (option.id === id) {
+			return { ...option, ...update };
+		}
+
+		return option;
+	});
+
+	db.transact(tx.questions[questionId].update({ options: newOptions }));
 }

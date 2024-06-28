@@ -12,6 +12,9 @@
 			"recommended": true,
 			"correctness": {
 				"noUnusedImports": "warn"
+			},
+			"style": {
+				"useImportType": "warn"
 			}
 		}
 	}

@@ -47,6 +47,12 @@ export function createQuestion(question: Omit<QuestionType, "id">) {
 	}
 }
 
+export function updateForm(payload: Partial<FormType> & Pick<FormType, "id">) {
+	const { id, ...update } = payload;
+
+	db.transact(tx.forms[id].update(update));
+}
+
 export function updateQuestion(
 	payload: Partial<QuestionType> & Pick<QuestionType, "id">,
 ) {

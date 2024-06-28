@@ -15,9 +15,11 @@ export const Main = () => {
 				<CreateFormButton />
 			</Group>
 
-			<Text tt="uppercase" c="dimmed" size="xs" fw={500}>
-				Your Forms
-			</Text>
+			<Group gap={8}>
+				<Text tt="uppercase" c="dimmed" size="xs" fw={500}>
+					Your Forms
+				</Text>
+			</Group>
 			<FormsView view={view} />
 		</Stack>
 	);

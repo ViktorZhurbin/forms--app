@@ -1,14 +1,19 @@
 import { Button } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
-import { Routes } from "~/constants/location";
+import { createForm } from "~/models/methods";
+
+const createDummyForm = () => {
+	const getRandomInt = () => Math.floor(Math.random() * 50) + 1;
+
+	createForm({
+		name: `Form ${getRandomInt()}`,
+		responseCount: getRandomInt(),
+	});
+};
 
 export const CreateFormButton = () => {
 	return (
-		<Button
-			component="a"
-			leftSection={<IconPlus />}
-			href={`${Routes.getFormPath("id")}`}
-		>
+		<Button leftSection={<IconPlus />} onClick={createDummyForm}>
 			Create form
 		</Button>
 	);

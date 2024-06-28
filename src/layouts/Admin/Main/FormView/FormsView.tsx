@@ -1,6 +1,10 @@
+import { tx } from "@instantdb/react";
+import { ActionIcon } from "@mantine/core";
+import { IconTrash } from "@tabler/icons-react";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
 import { db } from "~/models/db";
+import type { FormType } from "~/models/forms/forms";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
 
@@ -21,5 +25,26 @@ export const FormsView = ({ view }: FormsViewProps) => {
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
 
-	return <ViewComponent forms={data.forms} getHref={Routes.getFormPath} />;
+	const getDeleteButton = (id: FormType["id"]) => {
+		return (
+			<ActionIcon
+				variant="default"
+				onClick={(event) => {
+					event.preventDefault();
+
+					db.transact([tx.forms[id].delete()]);
+				}}
+			>
+				<IconTrash />
+			</ActionIcon>
+		);
+	};
+
+	return (
+		<ViewComponent
+			forms={data.forms}
+			getHref={Routes.getFormPath}
+			getDeleteButton={getDeleteButton}
+		/>
+	);
 };

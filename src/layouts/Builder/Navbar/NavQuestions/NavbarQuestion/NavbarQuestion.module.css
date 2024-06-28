@@ -33,4 +33,5 @@
 .labelTitle {
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--mantine-color-text);
 }

@@ -46,7 +46,7 @@ function Label(props: Pick<NavbarQuestionProps, "group" | "order" | "title">) {
 			<Group className={clx(styles.labelTag, styles[group])}>
 				<IconBan /> <Text size="xs">{order}</Text>
 			</Group>
-			<Text size="sm" c="dark.4" className={styles.labelTitle}>
+			<Text size="sm" className={styles.labelTitle}>
 				{title}
 			</Text>
 		</div>

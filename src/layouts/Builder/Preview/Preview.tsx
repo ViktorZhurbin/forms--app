@@ -42,7 +42,7 @@ export const Preview = ({ onClose }: PreviewProps) => {
 			/>
 
 			<Button
-				color="dark.7"
+				color="rgb(31, 41, 55)"
 				leftSection={<IconX />}
 				className={styles.exitButton}
 				onClick={onClose}

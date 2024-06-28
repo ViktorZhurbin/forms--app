@@ -1,4 +1,4 @@
-import { ActionIcon, Group, Text } from "@mantine/core";
+import { ActionIcon, Group, Stack, Text } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { useParams } from "wouter";
 import { QuestionColorsByGroup } from "~/constants/questionMaps";
@@ -45,8 +45,8 @@ export const NavQuestions = () => {
 	}
 
 	return (
-		<>
-			<Group justify="space-between">
+		<Stack gap={8}>
+			<Group justify="space-between" gap={8}>
 				<Text c="dimmed" size="sm" mb={8} p="0 12px">
 					Questions
 				</Text>
@@ -79,6 +79,6 @@ export const NavQuestions = () => {
 					/>
 				))}
 			</div>
-		</>
+		</Stack>
 	);
 };

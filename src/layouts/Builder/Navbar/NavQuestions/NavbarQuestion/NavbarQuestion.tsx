@@ -1,7 +1,9 @@
-import { Button, Group, Text } from "@mantine/core";
+import { tx } from "@instantdb/react";
+import { Button, CloseButton, Group, Text } from "@mantine/core";
 import { IconBan } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "~/constants/location";
+import { db } from "~/models/db";
 import type { QuestionBaseType } from "~/models/questions/questions";
 import { clx } from "~/utils/classNames";
 import styles from "./NavbarQuestion.module.css";
@@ -33,13 +35,15 @@ export const NavbarQuestion = ({
 			className={styles.button}
 			onClick={handleSelect}
 		>
-			<Label group={group} order={order} title={title} />
+			<Label id={id} group={group} order={order} title={title} />
 		</Button>
 	);
 };
 
-function Label(props: Pick<NavbarQuestionProps, "group" | "order" | "title">) {
-	const { group, order, title } = props;
+function Label(
+	props: Pick<NavbarQuestionProps, "id" | "group" | "order" | "title">,
+) {
+	const { id, group, order, title } = props;
 
 	return (
 		<div className={styles.labelGroup}>
@@ -49,6 +53,14 @@ function Label(props: Pick<NavbarQuestionProps, "group" | "order" | "title">) {
 			<Text size="sm" className={styles.labelTitle}>
 				{title}
 			</Text>
+			<CloseButton
+				className={styles.removeButton}
+				onClick={(event) => {
+					event.preventDefault();
+
+					db.transact([tx.forms[id].delete()]);
+				}}
+			/>
 		</div>
 	);
 }

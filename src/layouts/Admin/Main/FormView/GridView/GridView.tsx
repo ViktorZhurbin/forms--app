@@ -1,4 +1,5 @@
 import { Button, Group, Stack, Text } from "@mantine/core";
+import { Link } from "wouter";
 import type { FormViewProps } from "../types";
 
 export const GridView = ({
@@ -16,7 +17,7 @@ export const GridView = ({
 					justify="start"
 					w={200}
 					h={100}
-					component="a" // todo: use wouter
+					component={Link}
 					href={getHref(id)}
 				>
 					<Stack gap={4} align="start">

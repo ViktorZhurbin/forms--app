@@ -1,4 +1,5 @@
 import { Button, Group, Stack, Text } from "@mantine/core";
+import { Link } from "wouter";
 import type { FormViewProps } from "../types";
 
 export const ListView = ({
@@ -14,7 +15,7 @@ export const ListView = ({
 					size="md"
 					variant="default"
 					justify="start"
-					component="a" // todo: use wouter
+					component={Link}
 					href={getHref(id)}
 				>
 					<Group gap={24}>

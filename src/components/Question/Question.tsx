@@ -1,6 +1,7 @@
 import { Stack } from "@mantine/core";
 import { QuestionTypes } from "~/constants/questions";
 import { db } from "~/models/db";
+import { updateQuestion } from "~/models/methods";
 import type { QuestionType } from "~/models/questions/questions";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -71,7 +72,9 @@ export const Question = ({
 		onSubmit = goToNextStep;
 	}
 
-	const onChangeTitle = (value: string) => value;
+	const onChangeTitle = (title: string) => {
+		updateQuestion({ id, title });
+	};
 
 	return (
 		<div className={styles.root}>

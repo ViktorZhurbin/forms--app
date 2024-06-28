@@ -43,6 +43,10 @@ export function createQuestion(question: Omit<QuestionType, "id">) {
 	}
 }
 
-export function updateQuestion(question: QuestionType) {
-	db.transact(tx.questions[question.id].update({ title: !question.title }));
+export function updateQuestion(
+	payload: Partial<QuestionType> & Pick<QuestionType, "id">,
+) {
+	const { id, ...update } = payload;
+
+	db.transact(tx.questions[id].update(update));
 }

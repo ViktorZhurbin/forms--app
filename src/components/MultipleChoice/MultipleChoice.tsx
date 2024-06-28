@@ -1,4 +1,4 @@
-import type { ChoiceType } from "~/constants/questions";
+import type { ChoiceType } from "~/models/questions/questions";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
 
@@ -8,7 +8,9 @@ type MultipleChoiceProps = {
 };
 
 export const MultipleChoice = ({ options, readOnly }: MultipleChoiceProps) => {
-	const onChangeText = (id: string) => undefined;
+	const onChangeText = (id: string) => () => {
+		console.log(id);
+	};
 	// useSetCellCallback("options", id, "text", (value: string) => value);
 
 	return (

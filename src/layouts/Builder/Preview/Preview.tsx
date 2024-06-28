@@ -1,9 +1,10 @@
 import { Button } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
+import { useParams } from "wouter";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { formFields } from "~/mocks/formQuestions";
+import { db } from "~/models/db";
 import styles from "./Preview.module.css";
 
 type PreviewProps = {
@@ -12,9 +13,24 @@ type PreviewProps = {
 
 export const Preview = ({ onClose }: PreviewProps) => {
 	const [step, setStep] = useState(0);
+	const formId = useParams()?.id ?? "440f17cc-35ba-4ed2-8a0e-46ffa8b0e3d5";
+
+	const { isLoading, error, data } = db.useQuery({
+		questions: {
+			$: { where: { formId } },
+		},
+	});
+
+	if (isLoading) {
+		return <div>Fetching data...</div>;
+	}
+
+	if (error) {
+		return <div>Error fetching data: {error.message}</div>;
+	}
 
 	const isFirstStep = step === 0;
-	const isLastStep = step === formFields.length - 1;
+	const isLastStep = step === data.questions.length - 1;
 
 	const goToPreviousStep = () => {
 		if (isFirstStep) return;
@@ -36,6 +52,7 @@ export const Preview = ({ onClose }: PreviewProps) => {
 		<div className={styles.root}>
 			<FormFields
 				step={step}
+				questions={data.questions}
 				onSubmit={handleSubmit}
 				goToNextStep={goToNextStep}
 			/>

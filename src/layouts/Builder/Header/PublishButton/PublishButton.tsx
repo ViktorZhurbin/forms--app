@@ -1,6 +1,6 @@
 import { Button, Tooltip } from "@mantine/core";
 import { QuestionGroups, QuestionTypes } from "~/constants/questions";
-import { createForm, createQuestion } from "~/models/methods";
+import { /* createForm, */ createQuestion } from "~/models/methods";
 
 const fn = () =>
 	createQuestion({
@@ -10,7 +10,7 @@ const fn = () =>
 		title: "ShortText",
 	});
 
-const fn2 = () => createForm({ name: "Form 2", responseCount: 10 });
+// const fn2 = () => createForm({ name: "Form 2", responseCount: 10 });
 
 export const PublishButton = () => {
 	return (

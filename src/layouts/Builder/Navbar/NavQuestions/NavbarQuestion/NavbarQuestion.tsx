@@ -2,7 +2,7 @@ import { Button, Group, Text } from "@mantine/core";
 import { IconBan } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "~/constants/location";
-import type { QuestionBaseType } from "~/constants/questions";
+import type { QuestionBaseType } from "~/models/questions/questions";
 import { clx } from "~/utils/classNames";
 import styles from "./NavbarQuestion.module.css";
 

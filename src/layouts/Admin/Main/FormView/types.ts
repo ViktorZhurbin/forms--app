@@ -1,4 +1,4 @@
-import type { FormType } from "~/constants/forms";
+import type { FormType } from "~/models/forms/forms";
 
 type FormViewProps = {
 	forms: FormType[];

@@ -1,5 +1,6 @@
 import { Button, Group, UnstyledButton } from "@mantine/core";
 import { IconBolt } from "@tabler/icons-react";
+import { ColorSchemeToggle } from "~/components/ColorSchemeToggle/ColorSchemeToggle";
 import { AvatarMenu } from "./AvatarMenu/AvatarMenu";
 
 export const Header = () => {
@@ -9,6 +10,7 @@ export const Header = () => {
 				Logo
 			</UnstyledButton>
 			<Group align="center" gap={8}>
+				<ColorSchemeToggle />
 				<Button
 					disabled
 					variant="default"

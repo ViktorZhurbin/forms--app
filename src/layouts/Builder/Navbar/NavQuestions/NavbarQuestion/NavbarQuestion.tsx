@@ -55,6 +55,7 @@ function Label(
 				{title}
 			</Text>
 			<CloseButton
+				component="div"
 				className={styles.removeButton}
 				onClick={(event) => {
 					event.preventDefault();

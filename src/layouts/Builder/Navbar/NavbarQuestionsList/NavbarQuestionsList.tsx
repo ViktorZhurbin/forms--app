@@ -12,7 +12,7 @@ export const NavbarQuestionsList = ({ formId }: { formId: string }) => {
 		},
 	});
 
-	const selectedBlockId = useSelectedBlockId(data?.questions[0]?.id);
+	const selectedBlockId = useSelectedBlockId(data?.questions?.[0].id);
 
 	if (error) {
 		return <FetchError message={error.message} />;
@@ -27,7 +27,7 @@ export const NavbarQuestionsList = ({ formId }: { formId: string }) => {
 						order={index + 1}
 						group={group}
 						title={title}
-						isSelected={selectedBlockId ? id === selectedBlockId : index === 0}
+						isSelected={Boolean(selectedBlockId) && id === selectedBlockId}
 					/>
 				</SkeletonWrapper>
 			))}

@@ -43,8 +43,9 @@ function getBuildConfig() {
 			rollupOptions: {
 				output: {
 					manualChunks: {
-						render: ["react", "react-dom", "million"],
-						mantine: ["@mantine/core", "@mantine/hooks"],
+						render: ["react", "react-dom"],
+						uiLibs: ["@mantine/core", "@mantine/hooks", "@tabler/icons-react"],
+						instant: ["@instantdb/react"],
 					},
 				},
 			},

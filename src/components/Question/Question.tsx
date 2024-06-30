@@ -9,6 +9,7 @@ import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
 import { EditableText } from "./EditableText/EditableText";
 import styles from "./Question.module.css";
+import { FetchLoading } from "../FetchLoading/FetchLoading";
 
 interface QuestionProps {
 	id: QuestionType["id"] | null;
@@ -57,7 +58,7 @@ export const Question = ({
 	});
 
 	if (isLoading) {
-		return <div>Fetching data...</div>;
+		return <FetchLoading />;
 	}
 
 	if (error) {

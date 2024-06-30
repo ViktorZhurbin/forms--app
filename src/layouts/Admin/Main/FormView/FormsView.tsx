@@ -8,6 +8,7 @@ import { db } from "~/models/db";
 import type { FormType } from "~/models/forms/forms";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
+import { FetchLoading } from "~/components/FetchLoading/FetchLoading";
 
 type FormsViewProps = {
 	view: FormsLayout;
@@ -17,7 +18,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 	const { isLoading, error, data } = db.useQuery({ forms: {} });
 
 	if (isLoading) {
-		return <div>Fetching data...</div>;
+		return <FetchLoading />;
 	}
 
 	if (error) {

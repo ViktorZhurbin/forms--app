@@ -2,11 +2,12 @@ import { Button } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import { useParams } from "wouter";
+import { FetchError } from "~/components/FetchError/FetchError";
+import { FetchLoading } from "~/components/FetchLoading/FetchLoading";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
 import { db } from "~/models/db";
 import styles from "./Preview.module.css";
-import { FetchError } from "~/components/FetchError/FetchError";
 
 type PreviewProps = {
 	onClose: () => void;
@@ -23,7 +24,7 @@ export const Preview = ({ onClose }: PreviewProps) => {
 	});
 
 	if (isLoading) {
-		return <div>Fetching data...</div>;
+		return <FetchLoading />;
 	}
 
 	if (error) {

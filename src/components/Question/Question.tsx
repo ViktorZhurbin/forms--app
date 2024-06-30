@@ -11,7 +11,7 @@ import { EditableText } from "./EditableText/EditableText";
 import styles from "./Question.module.css";
 
 interface QuestionProps {
-	id: QuestionType["id"] | null;
+	id: QuestionType["id"];
 	isLast?: boolean;
 	readOnly?: boolean;
 	onSubmitForm?: () => void;
@@ -48,8 +48,6 @@ export const Question = ({
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
-	if (!id) return null;
-
 	const { isLoading, error, data } = db.useQuery({
 		questions: {
 			$: { where: { id } },

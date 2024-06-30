@@ -8,7 +8,8 @@ import styles from "./NavbarQuestionsList.module.css";
 export const NavbarQuestionsList = ({ formId }: { formId: string }) => {
 	const { isLoading, error, data } = useFormQuestions(formId);
 
-	const selectedBlockId = useSelectedBlockId(data?.questions?.[0].id);
+	const firstQuestion = data?.questions?.[0];
+	const selectedBlockId = useSelectedBlockId(firstQuestion?.id);
 
 	if (error) {
 		return <FetchError message={error.message} />;

@@ -1,6 +1,5 @@
-import { Skeleton } from "@mantine/core";
-import React from "react";
 import { FetchError } from "~/components/FetchError/FetchError";
+import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { db } from "~/models/db";
 import { useSelectedBlockId } from "../../hooks/useSelectedBlockId";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
@@ -15,27 +14,23 @@ export const NavbarQuestionsList = ({ formId }: { formId: string }) => {
 
 	const selectedBlockId = useSelectedBlockId(data?.questions[0]?.id);
 
-	const QuestionWrapper = isLoading ? Skeleton : React.Fragment;
+	if (error) {
+		return <FetchError message={error.message} />;
+	}
 
 	return (
 		<div className={styles.questionsList}>
-			{error ? (
-				<FetchError message={error.message} />
-			) : (
-				data?.questions?.map(({ id, group, title }, index) => (
-					<QuestionWrapper key={id} visible={isLoading}>
-						<NavbarQuestion
-							id={id}
-							order={index + 1}
-							group={group}
-							title={title}
-							isSelected={
-								selectedBlockId ? id === selectedBlockId : index === 0
-							}
-						/>
-					</QuestionWrapper>
-				))
-			)}
+			{data?.questions.map(({ id, group, title }, index) => (
+				<SkeletonWrapper key={id} visible={isLoading}>
+					<NavbarQuestion
+						id={id}
+						order={index + 1}
+						group={group}
+						title={title}
+						isSelected={selectedBlockId ? id === selectedBlockId : index === 0}
+					/>
+				</SkeletonWrapper>
+			))}
 		</div>
 	);
 };

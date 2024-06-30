@@ -1,7 +1,8 @@
 import { tx } from "@instantdb/react";
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
-import { FetchState } from "~/components/FetchState/FetchState";
+import { FetchError } from "~/components/FetchError/FetchError";
+import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
 import { db } from "~/models/db";
@@ -16,8 +17,8 @@ type FormsViewProps = {
 export const FormsView = ({ view }: FormsViewProps) => {
 	const { isLoading, error, data } = db.useQuery({ forms: {} });
 
-	if (!data) {
-		return <FetchState isLoading={isLoading} error={error} />;
+	if (error) {
+		return <FetchError message={error.message} />;
 	}
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
@@ -37,11 +38,19 @@ export const FormsView = ({ view }: FormsViewProps) => {
 		);
 	};
 
+	const Wrapper = view === FormsLayout.List ? Stack : Group;
+
 	return (
-		<ViewComponent
-			forms={data.forms}
-			getHref={Routes.getFormPath}
-			getDeleteButton={getDeleteButton}
-		/>
+		<Wrapper gap={8}>
+			{data?.forms.map((form) => (
+				<SkeletonWrapper key={form.id} visible={isLoading}>
+					<ViewComponent
+						{...form}
+						getHref={Routes.getFormPath}
+						getDeleteButton={getDeleteButton}
+					/>
+				</SkeletonWrapper>
+			))}
+		</Wrapper>
 	);
 };

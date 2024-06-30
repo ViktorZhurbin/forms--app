@@ -1,4 +1,3 @@
-import { useParams } from "wouter";
 import { ColorSchemeToggle } from "~/components/ColorSchemeToggle/ColorSchemeToggle";
 import { EditableText } from "~/components/Question/EditableText/EditableText";
 import { db } from "~/models/db";
@@ -8,9 +7,7 @@ import { HomeButton } from "./HomeButton/HomeButton";
 import { PreviewButton } from "./PreviewButton/PreviewButton";
 import { PublishButton } from "./PublishButton/PublishButton";
 
-export const Header = () => {
-	const formId = useParams()?.id ?? "440f17cc-35ba-4ed2-8a0e-46ffa8b0e3d5";
-
+export const Header = ({ formId }: { formId: string }) => {
 	const { data } = db.useQuery({
 		forms: {
 			$: { where: { id: formId } },

@@ -35,7 +35,7 @@ export const Builder = () => {
 			}}
 		>
 			<AppShell.Header>
-				<Header />
+				<Header formId={formId} />
 			</AppShell.Header>
 
 			<AppShell.Navbar p="sm">
@@ -49,7 +49,7 @@ export const Builder = () => {
 			</AppShell.Navbar>
 
 			<AppShell.Main display="flex">
-				<Main />
+				<Main formId={formId} />
 			</AppShell.Main>
 		</AppShell>
 	);

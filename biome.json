@@ -11,7 +11,8 @@
 		"rules": {
 			"recommended": true,
 			"correctness": {
-				"noUnusedImports": "warn"
+				"noUnusedImports": "warn",
+				"useHookAtTopLevel": "error"
 			},
 			"style": {
 				"useImportType": "warn"

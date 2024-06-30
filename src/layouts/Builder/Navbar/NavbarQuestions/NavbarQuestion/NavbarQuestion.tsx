@@ -3,7 +3,7 @@ import { Button, CloseButton, Group, Text } from "@mantine/core";
 import { IconBan } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "~/constants/location";
-import { db } from "~/models/db";
+import { dbTransact } from "~/models/db";
 import type { QuestionBaseType } from "~/models/questions/questions";
 import { clx } from "~/utils/classNames";
 import styles from "./NavbarQuestion.module.css";
@@ -60,7 +60,7 @@ function Label(
 				onClick={(event) => {
 					event.preventDefault();
 
-					db.transact([tx.forms[id].delete()]);
+					dbTransact([tx.forms[id].delete()]);
 				}}
 			/>
 		</div>

@@ -1,7 +1,5 @@
-import { AppShell, LoadingOverlay, ScrollArea } from "@mantine/core";
+import { AppShell, ScrollArea } from "@mantine/core";
 import { useParams } from "wouter";
-import { FetchError } from "~/components/FetchError/FetchError";
-import { useFormQuestions } from "~/hooks/queries/useFormQuestions";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
 import { NavThankYou } from "./Navbar/NavThankYou/NavThankYou";
@@ -13,17 +11,6 @@ export const Builder = () => {
 	if (!formId) {
 		return 404;
 	}
-
-	const { isLoading, error } = useFormQuestions(formId);
-
-	if (isLoading) {
-		return <LoadingOverlay />;
-	}
-
-	if (error) {
-		return <FetchError message={error.message} />;
-	}
-
 	return (
 		<AppShell
 			padding="md"

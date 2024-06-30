@@ -10,6 +10,8 @@ type Schema = {
 	questions: QuestionType;
 };
 
-const db = init<Schema>({ appId: APP_ID });
+const { useQuery: useDbQuery, transact: dbTransact } = init<Schema>({
+	appId: APP_ID,
+});
 
-export { db };
+export { useDbQuery, dbTransact };

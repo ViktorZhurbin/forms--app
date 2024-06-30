@@ -1,7 +1,7 @@
-import { db } from "~/models/db";
+import { useDbQuery } from "~/models/db";
 
 export const useFormQuestions = (formId: string) => {
-	return db.useQuery({
+	return useDbQuery({
 		questions: {
 			$: { where: { formId } },
 		},

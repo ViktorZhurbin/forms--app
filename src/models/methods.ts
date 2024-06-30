@@ -1,6 +1,6 @@
 import { id, tx } from "@instantdb/react";
 import { QuestionTypes } from "~/constants/questions";
-import { db } from "./db";
+import { dbTransact } from "./db";
 import type { FormType } from "./forms/forms";
 import type {
 	ChoiceType,
@@ -9,7 +9,7 @@ import type {
 } from "./questions/questions";
 
 export function createForm(form: Omit<FormType, "id">) {
-	db.transact(tx.forms[id()].update(form));
+	dbTransact(tx.forms[id()].update(form));
 }
 
 export function createQuestion(question: Omit<QuestionType, "id">) {
@@ -18,7 +18,7 @@ export function createQuestion(question: Omit<QuestionType, "id">) {
 
 	switch (question.type) {
 		case QuestionTypes.YesNo:
-			db.transact(
+			dbTransact(
 				item.update({
 					...question,
 					options: [
@@ -30,7 +30,7 @@ export function createQuestion(question: Omit<QuestionType, "id">) {
 			break;
 
 		case QuestionTypes.MultipleChoice:
-			db.transact(
+			dbTransact(
 				item.update({
 					...question,
 					options: [
@@ -42,7 +42,7 @@ export function createQuestion(question: Omit<QuestionType, "id">) {
 			break;
 
 		case QuestionTypes.ShortText:
-			db.transact(item.update(question));
+			dbTransact(item.update(question));
 			break;
 	}
 }
@@ -50,7 +50,7 @@ export function createQuestion(question: Omit<QuestionType, "id">) {
 export function updateForm(payload: Partial<FormType> & Pick<FormType, "id">) {
 	const { id, ...update } = payload;
 
-	db.transact(tx.forms[id].update(update));
+	dbTransact(tx.forms[id].update(update));
 }
 
 export function updateQuestion(
@@ -58,7 +58,7 @@ export function updateQuestion(
 ) {
 	const { id, ...update } = payload;
 
-	db.transact(tx.questions[id].update(update));
+	dbTransact(tx.questions[id].update(update));
 }
 
 export function updateChoiceOption(
@@ -77,5 +77,5 @@ export function updateChoiceOption(
 		return option;
 	});
 
-	db.transact(tx.questions[questionId].update({ options: newOptions }));
+	dbTransact(tx.questions[questionId].update({ options: newOptions }));
 }

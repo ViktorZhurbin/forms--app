@@ -1,9 +1,9 @@
-import type { db } from "~/models/db";
+import type { useDbQuery } from "~/models/db";
 import { FetchError } from "../FetchError/FetchError";
 import { FetchLoading } from "../FetchLoading/FetchLoading";
 
 type FetchStateProps = Pick<
-	ReturnType<typeof db.useQuery>,
+	ReturnType<typeof useDbQuery>,
 	"error" | "isLoading"
 >;
 

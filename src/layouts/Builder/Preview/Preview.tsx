@@ -1,26 +1,21 @@
 import { Button } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
-import { useParams } from "wouter";
 import { FetchState } from "~/components/FetchState/FetchState";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { db } from "~/models/db";
+import { useFormQuestions } from "~/hooks/queries/useFormQuestions";
 import styles from "./Preview.module.css";
 
 type PreviewProps = {
+	formId: string;
 	onClose: () => void;
 };
 
-export const Preview = ({ onClose }: PreviewProps) => {
+export const Preview = ({ formId, onClose }: PreviewProps) => {
 	const [step, setStep] = useState(0);
-	const formId = useParams()?.id ?? "440f17cc-35ba-4ed2-8a0e-46ffa8b0e3d5";
 
-	const { isLoading, error, data } = db.useQuery({
-		questions: {
-			$: { where: { formId } },
-		},
-	});
+	const { isLoading, error, data } = useFormQuestions(formId);
 
 	const isFirstStep = step === 0;
 	const isLastStep =

@@ -27,8 +27,8 @@ export const FormFields = (props: {
 						>
 							<Question
 								readOnly
-								id={question.id}
 								isLast={isLast}
+								question={question}
 								onSubmitForm={onSubmit}
 								goToNextStep={goToNextStep}
 							/>

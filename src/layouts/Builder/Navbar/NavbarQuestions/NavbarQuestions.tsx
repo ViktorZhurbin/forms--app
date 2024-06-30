@@ -7,23 +7,29 @@ import { createQuestion } from "~/models/methods";
 import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";
 
 export const NavbarQuestions = () => {
-	const formId = useParams()?.id ?? "440f17cc-35ba-4ed2-8a0e-46ffa8b0e3d5";
+	const formId = useParams()?.id;
 
-	const createDummyTextQuestion = () =>
+	const createDummyTextQuestion = () => {
+		if (!formId) return;
+
 		createQuestion({
 			formId,
 			title: "ShortText",
 			type: QuestionTypes.ShortText,
 			group: QuestionGroups.Text,
 		});
+	};
 
-	const createDummyChoiceQuestion = () =>
+	const createDummyChoiceQuestion = () => {
+		if (!formId) return;
+
 		createQuestion({
 			formId,
 			title: "Multiple Choice",
 			type: QuestionTypes.MultipleChoice,
 			group: QuestionGroups.Choice,
 		});
+	};
 
 	return (
 		<Stack gap={8}>
@@ -49,7 +55,7 @@ export const NavbarQuestions = () => {
 				</Group>
 			</Group>
 
-			<NavbarQuestionsList formId={formId} />
+			{!!formId && <NavbarQuestionsList formId={formId} />}
 		</Stack>
 	);
 };

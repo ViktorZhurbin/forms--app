@@ -23,8 +23,6 @@ export const Question = ({
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
-	if (!question) return null;
-
 	let buttonText: string;
 	let onSubmit: (() => void) | undefined;
 
@@ -72,10 +70,7 @@ export const Question = ({
 function QuestionComponent({
 	question,
 	readOnly,
-}: {
-	question: QuestionType;
-	readOnly: QuestionProps["readOnly"];
-}) {
+}: Pick<QuestionProps, "readOnly" | "question">) {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
 		case QuestionTypes.MultipleChoice:

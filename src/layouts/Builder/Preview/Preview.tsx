@@ -5,14 +5,15 @@ import { FetchState } from "~/components/FetchState/FetchState";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
 import { useFormQuestions } from "~/hooks/queries/useFormQuestions";
+import { useFormId } from "../hooks/useFormId";
 import styles from "./Preview.module.css";
 
 type PreviewProps = {
-	formId: string;
 	onClose: () => void;
 };
 
-export const Preview = ({ formId, onClose }: PreviewProps) => {
+export const Preview = ({ onClose }: PreviewProps) => {
+	const formId = useFormId();
 	const [step, setStep] = useState(0);
 
 	const { isLoading, error, data } = useFormQuestions(formId);

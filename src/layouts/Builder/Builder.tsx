@@ -1,16 +1,10 @@
 import { AppShell, ScrollArea } from "@mantine/core";
-import { useParams } from "wouter";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
 import { NavThankYou } from "./Navbar/NavThankYou/NavThankYou";
 import { NavbarQuestions } from "./Navbar/NavbarQuestions/NavbarQuestions";
 
 export const Builder = () => {
-	const formId = useParams()?.id;
-
-	if (!formId) {
-		return 404;
-	}
 	return (
 		<AppShell
 			padding="md"
@@ -22,7 +16,7 @@ export const Builder = () => {
 			}}
 		>
 			<AppShell.Header>
-				<Header formId={formId} />
+				<Header />
 			</AppShell.Header>
 
 			<AppShell.Navbar p="sm">
@@ -36,7 +30,7 @@ export const Builder = () => {
 			</AppShell.Navbar>
 
 			<AppShell.Main display="flex">
-				<Main formId={formId} />
+				<Main />
 			</AppShell.Main>
 		</AppShell>
 	);

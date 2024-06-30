@@ -1,11 +1,11 @@
 import { Button, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
-import { useParams } from "wouter";
 import { Preview } from "~/layouts/Builder/Preview/Preview";
+import { useFormId } from "../../hooks/useFormId";
 
 export const PreviewButton = () => {
-	const formId = useParams()?.id;
+	const formId = useFormId();
 
 	const [opened, { open, close }] = useDisclosure(false);
 
@@ -29,7 +29,7 @@ export const PreviewButton = () => {
 					transitionProps={{ transition: "fade-down" }}
 					onClose={close}
 				>
-					<Preview formId={formId} onClose={close} />
+					<Preview onClose={close} />
 				</Modal>
 			)}
 		</>

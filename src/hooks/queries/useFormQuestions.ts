@@ -14,7 +14,7 @@ export const useFormQuestion = ({
 }: { formId: string; questionId?: string }) => {
 	const { data } = useFormQuestions(formId);
 
-	if (!questionId || !data) return null;
+	if (!questionId || !data) return;
 
 	return data.questions.find((question) => question.id === questionId);
 };

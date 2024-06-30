@@ -1,17 +1,15 @@
 import { ActionIcon, Group, Stack, Text } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
-import { useParams } from "wouter";
 import { QuestionColorsByGroup } from "~/constants/questionMaps";
 import { QuestionGroups, QuestionTypes } from "~/constants/questions";
 import { createQuestion } from "~/models/methods";
+import { useFormId } from "../../hooks/useFormId";
 import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";
 
 export const NavbarQuestions = () => {
-	const formId = useParams()?.id;
+	const formId = useFormId();
 
 	const createDummyTextQuestion = () => {
-		if (!formId) return;
-
 		createQuestion({
 			formId,
 			title: "ShortText",
@@ -21,8 +19,6 @@ export const NavbarQuestions = () => {
 	};
 
 	const createDummyChoiceQuestion = () => {
-		if (!formId) return;
-
 		createQuestion({
 			formId,
 			title: "Multiple Choice",

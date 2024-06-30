@@ -2,12 +2,15 @@ import { ColorSchemeToggle } from "~/components/ColorSchemeToggle/ColorSchemeTog
 import { EditableText } from "~/components/Question/EditableText/EditableText";
 import { useDbQuery } from "~/models/db";
 import { updateForm } from "~/models/methods";
+import { useFormId } from "../hooks/useFormId";
 import styles from "./Header.module.css";
 import { HomeButton } from "./HomeButton/HomeButton";
 import { PreviewButton } from "./PreviewButton/PreviewButton";
 import { PublishButton } from "./PublishButton/PublishButton";
 
-export const Header = ({ formId }: { formId: string }) => {
+export const Header = () => {
+	const formId = useFormId();
+
 	const { data } = useDbQuery({
 		forms: {
 			$: { where: { id: formId } },

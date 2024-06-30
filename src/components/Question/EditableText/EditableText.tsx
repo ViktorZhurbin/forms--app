@@ -7,12 +7,14 @@ type EditableTextProps = {
 	initialValue?: string;
 	variant?: "h1" | "body";
 	readOnly?: boolean;
+	onFocus?: () => void;
 	onChange?: (value: string) => void;
 };
 
 export const EditableText = ({
 	variant = "body",
 	readOnly,
+	onFocus,
 	onChange,
 	initialValue = "",
 }: EditableTextProps) => {
@@ -35,6 +37,7 @@ export const EditableText = ({
 			classNames={{
 				input: clx(styles.input, styles[variant]),
 			}}
+			onFocus={onFocus}
 			onKeyDown={handleKeyDown}
 			onChange={(event) => {
 				const newValue = event.currentTarget.value;

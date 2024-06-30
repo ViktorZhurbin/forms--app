@@ -1,14 +1,13 @@
 import { tx } from "@instantdb/react";
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
-import { FetchError } from "~/components/FetchError/FetchError";
+import { FetchState } from "~/components/FetchState/FetchState";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
 import { db } from "~/models/db";
 import type { FormType } from "~/models/forms/forms";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
-import { FetchLoading } from "~/components/FetchLoading/FetchLoading";
 
 type FormsViewProps = {
 	view: FormsLayout;
@@ -17,12 +16,8 @@ type FormsViewProps = {
 export const FormsView = ({ view }: FormsViewProps) => {
 	const { isLoading, error, data } = db.useQuery({ forms: {} });
 
-	if (isLoading) {
-		return <FetchLoading />;
-	}
-
-	if (error) {
-		return <FetchError message={error.message} />;
+	if (!data) {
+		return <FetchState isLoading={isLoading} error={error} />;
 	}
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;

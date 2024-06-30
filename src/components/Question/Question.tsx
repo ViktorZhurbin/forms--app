@@ -4,12 +4,11 @@ import { db } from "~/models/db";
 import { updateQuestion } from "~/models/methods";
 import type { QuestionType } from "~/models/questions/questions";
 import { EditableButton } from "../EditableButton/EditableButton";
-import { FetchError } from "../FetchError/FetchError";
+import { FetchState } from "../FetchState/FetchState";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
 import { EditableText } from "./EditableText/EditableText";
 import styles from "./Question.module.css";
-import { FetchLoading } from "../FetchLoading/FetchLoading";
 
 interface QuestionProps {
 	id: QuestionType["id"] | null;
@@ -57,12 +56,8 @@ export const Question = ({
 		},
 	});
 
-	if (isLoading) {
-		return <FetchLoading />;
-	}
-
-	if (error) {
-		return <FetchError message={error.message} />;
+	if (!data) {
+		return <FetchState isLoading={isLoading} error={error} />;
 	}
 
 	const question = data.questions[0];

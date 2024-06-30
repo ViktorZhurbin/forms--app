@@ -1,3 +1,3 @@
 export const FetchLoading = () => {
-	return <FetchLoading />;
+	return <div>Fetching data...</div>;
 };

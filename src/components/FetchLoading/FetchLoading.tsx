@@ -1,3 +1,9 @@
+import { Center, Loader } from "@mantine/core";
+
 export const FetchLoading = () => {
-	return <div>Fetching data...</div>;
+	return (
+		<Center flex={1}>
+			<Loader />
+		</Center>
+	);
 };

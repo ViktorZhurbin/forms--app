@@ -9,7 +9,7 @@ export const Admin = () => {
 				<Header />
 			</AppShell.Header>
 
-			<AppShell.Main>
+			<AppShell.Main display="flex">
 				<Main />
 			</AppShell.Main>
 		</AppShell>

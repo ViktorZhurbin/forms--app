@@ -1,8 +1,8 @@
 import { AppShell, ScrollArea } from "@mantine/core";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
-import { NavQuestions } from "./Navbar/NavQuestions/NavQuestions";
 import { NavThankYou } from "./Navbar/NavThankYou/NavThankYou";
+import { NavbarQuestions } from "./Navbar/NavbarQuestions/NavbarQuestions";
 
 export const Builder = () => {
 	return (
@@ -21,7 +21,7 @@ export const Builder = () => {
 
 			<AppShell.Navbar p="sm">
 				<AppShell.Section grow component={ScrollArea} scrollbars="y">
-					<NavQuestions />
+					<NavbarQuestions />
 				</AppShell.Section>
 
 				<AppShell.Section grow component={ScrollArea}>

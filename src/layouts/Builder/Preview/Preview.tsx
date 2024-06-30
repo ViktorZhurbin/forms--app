@@ -2,11 +2,11 @@ import { Button } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import { useParams } from "wouter";
+import { FetchState } from "~/components/FetchState/FetchState";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
 import { db } from "~/models/db";
 import styles from "./Preview.module.css";
-import { FetchState } from "~/components/FetchState/FetchState";
 
 type PreviewProps = {
 	onClose: () => void;
@@ -22,12 +22,9 @@ export const Preview = ({ onClose }: PreviewProps) => {
 		},
 	});
 
-	if (!data) {
-		return <FetchState isLoading={isLoading} error={error} />;
-	}
-
 	const isFirstStep = step === 0;
-	const isLastStep = step === data.questions.length - 1;
+	const isLastStep =
+		step === (data?.questions.length && data?.questions?.length - 1);
 
 	const goToPreviousStep = () => {
 		if (isFirstStep) return;
@@ -47,12 +44,16 @@ export const Preview = ({ onClose }: PreviewProps) => {
 
 	return (
 		<div className={styles.root}>
-			<FormFields
-				step={step}
-				questions={data.questions}
-				onSubmit={handleSubmit}
-				goToNextStep={goToNextStep}
-			/>
+			{data ? (
+				<FormFields
+					step={step}
+					questions={data.questions}
+					onSubmit={handleSubmit}
+					goToNextStep={goToNextStep}
+				/>
+			) : (
+				<FetchState isLoading={isLoading} error={error} />
+			)}
 
 			<Button
 				color="rgb(31, 41, 55)"

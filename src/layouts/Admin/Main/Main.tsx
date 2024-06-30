@@ -9,7 +9,7 @@ export const Main = () => {
 	const [view, setView] = useState<FormsLayout>(FormsLayout.Grid);
 
 	return (
-		<Stack>
+		<Stack flex={1}>
 			<Group justify="space-between" align="center">
 				<ViewTypeControl view={view} setView={setView} />
 				<CreateFormButton />

@@ -1,16 +1,12 @@
 import { ActionIcon, Group, Stack, Text } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { useParams } from "wouter";
-import { FetchState } from "~/components/FetchState/FetchState";
 import { QuestionColorsByGroup } from "~/constants/questionMaps";
 import { QuestionGroups, QuestionTypes } from "~/constants/questions";
-import { db } from "~/models/db";
 import { createQuestion } from "~/models/methods";
-import { useSelectedBlockId } from "../../hooks/useSelectedBlockId";
-import styles from "./NavQuestions.module.css";
-import { NavbarQuestion } from "./NavbarQuestion/NavbarQuestion";
+import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";
 
-export const NavQuestions = () => {
+export const NavbarQuestions = () => {
 	const formId = useParams()?.id ?? "440f17cc-35ba-4ed2-8a0e-46ffa8b0e3d5";
 
 	const createDummyTextQuestion = () =>
@@ -28,14 +24,6 @@ export const NavQuestions = () => {
 			type: QuestionTypes.MultipleChoice,
 			group: QuestionGroups.Choice,
 		});
-
-	const { isLoading, error, data } = db.useQuery({
-		questions: {
-			$: { where: { formId } },
-		},
-	});
-
-	const selectedBlockId = useSelectedBlockId(data?.questions[0]?.id);
 
 	return (
 		<Stack gap={8}>
@@ -60,24 +48,8 @@ export const NavQuestions = () => {
 					</ActionIcon>
 				</Group>
 			</Group>
-			<div className={styles.questionsList}>
-				{data ? (
-					data.questions.map(({ id, group, title }, index) => (
-						<NavbarQuestion
-							key={id}
-							id={id}
-							order={index + 1}
-							group={group}
-							title={title}
-							isSelected={
-								selectedBlockId ? id === selectedBlockId : index === 0
-							}
-						/>
-					))
-				) : (
-					<FetchState isLoading={isLoading} error={error} />
-				)}
-			</div>
+
+			<NavbarQuestionsList formId={formId} />
 		</Stack>
 	);
 };

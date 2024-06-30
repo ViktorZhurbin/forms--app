@@ -5,8 +5,9 @@ import type { FormViewProps } from "../types";
 export const GridView = ({
 	id,
 	name,
-	responseCount,
 	getHref,
+	className,
+	responsesText,
 	getDeleteButton,
 }: FormViewProps) => {
 	return (
@@ -17,6 +18,7 @@ export const GridView = ({
 			justify="start"
 			w={200}
 			h={100}
+			className={className}
 			component={Link}
 			href={getHref(id)}
 		>
@@ -27,7 +29,7 @@ export const GridView = ({
 					</Text>
 					{getDeleteButton(id)}
 				</Group>
-				<Text size="sm">{responseCount} responses</Text>
+				<Text size="sm">{responsesText}</Text>
 			</Stack>
 		</Button>
 	);

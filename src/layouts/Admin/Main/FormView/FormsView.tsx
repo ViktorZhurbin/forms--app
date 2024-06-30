@@ -7,6 +7,8 @@ import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
 import { dbTransact, useDbQuery } from "~/models/db";
 import type { FormType } from "~/models/forms/forms";
+import { pluralize } from "~/utils/grammar";
+import styles from "./FormsView.module.css";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
 
@@ -27,6 +29,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 		return (
 			<ActionIcon
 				variant="default"
+				className={styles.delete}
 				onClick={(event) => {
 					event.preventDefault();
 
@@ -45,7 +48,13 @@ export const FormsView = ({ view }: FormsViewProps) => {
 			{data?.forms.map((form) => (
 				<SkeletonWrapper key={form.id} visible={isLoading}>
 					<ViewComponent
-						{...form}
+						id={form.id}
+						name={form.name}
+						className={styles.formItem}
+						responsesText={pluralize({
+							singular: "response",
+							count: form.responseCount,
+						})}
 						getHref={Routes.getFormPath}
 						getDeleteButton={getDeleteButton}
 					/>

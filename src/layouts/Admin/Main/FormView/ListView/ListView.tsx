@@ -6,6 +6,8 @@ export const ListView = ({
 	id,
 	name,
 	getHref,
+	className,
+	responsesText,
 	getDeleteButton,
 }: FormViewProps) => {
 	return (
@@ -14,11 +16,13 @@ export const ListView = ({
 			size="md"
 			variant="default"
 			justify="start"
+			className={className}
 			component={Link}
 			href={getHref(id)}
 		>
 			<Group gap={24}>
 				<Text>{name}</Text>
+				<Text size="sm">{responsesText}</Text>
 				{getDeleteButton(id)}
 			</Group>
 		</Button>

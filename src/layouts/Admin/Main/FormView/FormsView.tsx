@@ -1,6 +1,7 @@
 import { tx } from "@instantdb/react";
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
+import { FetchError } from "~/components/FetchError/FetchError";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
 import { db } from "~/models/db";
@@ -20,7 +21,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 	}
 
 	if (error) {
-		return <div>Error fetching data: {error.message}</div>;
+		return <FetchError message={error.message} />;
 	}
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;

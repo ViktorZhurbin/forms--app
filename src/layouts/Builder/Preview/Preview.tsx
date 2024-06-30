@@ -6,6 +6,7 @@ import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
 import { db } from "~/models/db";
 import styles from "./Preview.module.css";
+import { FetchError } from "~/components/FetchError/FetchError";
 
 type PreviewProps = {
 	onClose: () => void;
@@ -26,7 +27,7 @@ export const Preview = ({ onClose }: PreviewProps) => {
 	}
 
 	if (error) {
-		return <div>Error fetching data: {error.message}</div>;
+		return <FetchError message={error.message} />;
 	}
 
 	const isFirstStep = step === 0;

@@ -8,6 +8,7 @@ import { createQuestion } from "~/models/methods";
 import { useSelectedBlockId } from "../../hooks/useSelectedBlockId";
 import styles from "./NavQuestions.module.css";
 import { NavbarQuestion } from "./NavbarQuestion/NavbarQuestion";
+import { FetchError } from "~/components/FetchError/FetchError";
 
 export const NavQuestions = () => {
 	const formId = useParams()?.id ?? "440f17cc-35ba-4ed2-8a0e-46ffa8b0e3d5";
@@ -41,7 +42,7 @@ export const NavQuestions = () => {
 	}
 
 	if (error) {
-		return <div>Error fetching data: {error.message}</div>;
+		return <FetchError message={error.message} />;
 	}
 
 	return (

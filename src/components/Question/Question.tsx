@@ -4,6 +4,7 @@ import { db } from "~/models/db";
 import { updateQuestion } from "~/models/methods";
 import type { QuestionType } from "~/models/questions/questions";
 import { EditableButton } from "../EditableButton/EditableButton";
+import { FetchError } from "../FetchError/FetchError";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
 import { EditableText } from "./EditableText/EditableText";
@@ -60,7 +61,7 @@ export const Question = ({
 	}
 
 	if (error) {
-		return <div>Error fetching data: {error.message}</div>;
+		return <FetchError message={error.message} />;
 	}
 
 	const question = data.questions[0];

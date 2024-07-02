@@ -1,10 +1,10 @@
-import { Button, Modal } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
-import { Preview } from "~/layouts/Builder/Preview/Preview";
+import { PreviewModal } from "../../modals/PreviewModal/PreviewModal";
 
 export const PreviewButton = () => {
-	const [opened, { open, close }] = useDisclosure(false);
+	const [isModalOpen, modalActions] = useDisclosure(false);
 
 	return (
 		<>
@@ -12,21 +12,12 @@ export const PreviewButton = () => {
 				variant="default"
 				color="dark.7"
 				leftSection={<IconEye />}
-				onClick={open}
+				onClick={modalActions.open}
 			>
 				Preview
 			</Button>
 
-			<Modal
-				fullScreen
-				padding={0}
-				opened={opened}
-				withCloseButton={false}
-				transitionProps={{ transition: "fade-down" }}
-				onClose={close}
-			>
-				<Preview onClose={close} />
-			</Modal>
+			<PreviewModal isOpen={isModalOpen} onClose={modalActions.close} />
 		</>
 	);
 };

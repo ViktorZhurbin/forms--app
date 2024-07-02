@@ -1,12 +1,8 @@
 import { Modal } from "@mantine/core";
+import type { ModalProps } from "../types";
 import { PreviewModalContent } from "./PreviewModalContent/PreviewModalContent";
 
-type PreviewModalProps = {
-	isOpen: boolean;
-	onClose: () => void;
-};
-
-export const PreviewModal = ({ isOpen, onClose }: PreviewModalProps) => {
+export const PreviewModal = ({ isOpen, onClose }: ModalProps) => {
 	return (
 		<Modal
 			fullScreen

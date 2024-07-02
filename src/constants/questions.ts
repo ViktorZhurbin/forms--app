@@ -5,8 +5,8 @@ enum QuestionTypes {
 }
 
 enum QuestionGroups {
-	Choice = "choice",
-	Text = "text",
+	Choice = "Choice",
+	Text = "Text",
 }
 
 export { QuestionTypes, QuestionGroups };

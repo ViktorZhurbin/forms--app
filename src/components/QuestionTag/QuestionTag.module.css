@@ -6,13 +6,6 @@
 
 	padding: 4px 6px;
 	color: black;
+	background-color: var(--bg-color);
 	border-radius: 6px;
-}
-
-.choice {
-	background-color: var(--mantine-color-grape-2);
-}
-
-.text {
-	background-color: var(--mantine-color-blue-2);
 }

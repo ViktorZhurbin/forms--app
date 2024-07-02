@@ -17,13 +17,14 @@ export const NavbarQuestionsList = ({ formId }: { formId: string }) => {
 
 	return (
 		<div className={styles.questionsList}>
-			{data?.questions.map(({ id, group, title }, index) => (
+			{data?.questions.map(({ id, type, group, title }, index) => (
 				<SkeletonWrapper key={id} visible={isLoading}>
 					<NavbarQuestion
 						id={id}
-						order={index + 1}
+						type={type}
 						group={group}
 						title={title}
+						order={index + 1}
 						isSelected={Boolean(selectedBlockId) && id === selectedBlockId}
 					/>
 				</SkeletonWrapper>

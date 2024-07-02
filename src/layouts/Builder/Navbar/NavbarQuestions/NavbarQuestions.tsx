@@ -1,6 +1,6 @@
 import { ActionIcon, Group, Stack, Text } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
-import { QuestionColorsByGroup } from "~/constants/questionMaps";
+import { QuestionGroupsMap } from "~/constants/questionMaps";
 import { QuestionGroups, QuestionTypes } from "~/constants/questions";
 import { createQuestion } from "~/models/methods";
 import { useFormId } from "../../hooks/useFormId";
@@ -36,14 +36,14 @@ export const NavbarQuestions = () => {
 				<Group gap={8}>
 					<ActionIcon
 						c="black"
-						bg={QuestionColorsByGroup.choice}
+						bg={QuestionGroupsMap.Choice.bgColor}
 						onClick={createDummyChoiceQuestion}
 					>
 						<IconPlus />
 					</ActionIcon>
 					<ActionIcon
 						c="black"
-						bg={QuestionColorsByGroup.text}
+						bg={QuestionGroupsMap.Text.bgColor}
 						onClick={createDummyTextQuestion}
 					>
 						<IconPlus />

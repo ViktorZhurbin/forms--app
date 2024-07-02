@@ -1,8 +1,9 @@
-import { Center } from "@mantine/core";
 import { Question } from "~/components/Question/Question";
 import { useFormQuestion } from "~/hooks/queries/useFormQuestions";
 import { useFormId } from "../hooks/useFormId";
 import { useSelectedBlockId } from "../hooks/useSelectedBlockId";
+import { AddBlockButton } from "./AddBlockButton/AddBlockButton";
+import styles from "./Main.module.css";
 
 export const Main = () => {
 	const formId = useFormId();
@@ -12,8 +13,12 @@ export const Main = () => {
 	if (!question) return null;
 
 	return (
-		<Center flex={1}>
-			<Question question={question} />
-		</Center>
+		<div className={styles.root}>
+			<AddBlockButton tooltip="Add block above" />
+			<div className={styles.questionWrapper}>
+				<Question question={question} />
+			</div>
+			<AddBlockButton tooltip="Add block below" />
+		</div>
 	);
 };

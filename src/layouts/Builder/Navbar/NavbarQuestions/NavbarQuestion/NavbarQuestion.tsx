@@ -8,13 +8,14 @@ import type { QuestionBaseType } from "~/models/questions/questions";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
-	extends Pick<QuestionBaseType, "id" | "group" | "title"> {
+	extends Pick<QuestionBaseType, "id" | "type" | "group" | "title"> {
 	order: number;
 	isSelected: boolean;
 }
 
 export const NavbarQuestion = ({
 	id,
+	type,
 	group,
 	title,
 	order,
@@ -35,31 +36,21 @@ export const NavbarQuestion = ({
 			className={styles.button}
 			onClick={handleSelect}
 		>
-			<Label id={id} group={group} order={order} title={title} />
+			<div className={styles.labelGroup}>
+				<QuestionTag type={type} group={group} text={order} />
+				<Text size="sm" className={styles.labelTitle}>
+					{title}
+				</Text>
+				<CloseButton
+					component="div"
+					className={styles.removeButton}
+					onClick={(event) => {
+						event.preventDefault();
+
+						dbTransact([tx.forms[id].delete()]);
+					}}
+				/>
+			</div>
 		</Button>
 	);
 };
-
-function Label(
-	props: Pick<NavbarQuestionProps, "id" | "group" | "order" | "title">,
-) {
-	const { id, group, order, title } = props;
-
-	return (
-		<div className={styles.labelGroup}>
-			<QuestionTag group={group} text={order} />
-			<Text size="sm" className={styles.labelTitle}>
-				{title}
-			</Text>
-			<CloseButton
-				component="div"
-				className={styles.removeButton}
-				onClick={(event) => {
-					event.preventDefault();
-
-					dbTransact([tx.forms[id].delete()]);
-				}}
-			/>
-		</div>
-	);
-}

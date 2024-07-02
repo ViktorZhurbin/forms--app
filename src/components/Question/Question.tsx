@@ -1,6 +1,6 @@
 import { Stack } from "@mantine/core";
 import { QuestionTypes } from "~/constants/questions";
-import { updateQuestion } from "~/models/methods";
+import { updateQuestion } from "~/models/questions/methods";
 import type { QuestionType } from "~/models/questions/questions";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -44,6 +44,7 @@ export const Question = ({
 				<EditableText
 					variant="h1"
 					readOnly={readOnly}
+					placeholder="Your question here..."
 					initialValue={question.title}
 					onChange={onChangeTitle}
 				/>

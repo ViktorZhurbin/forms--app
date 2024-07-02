@@ -5,6 +5,7 @@ import styles from "./EditableText.module.css";
 
 type EditableTextProps = {
 	initialValue?: string;
+	placeholder?: string;
 	variant?: "h1" | "body";
 	readOnly?: boolean;
 	onFocus?: () => void;
@@ -16,6 +17,7 @@ export const EditableText = ({
 	readOnly,
 	onFocus,
 	onChange,
+	placeholder,
 	initialValue = "",
 }: EditableTextProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -34,6 +36,7 @@ export const EditableText = ({
 			tabIndex={readOnly ? -1 : 0}
 			variant="unstyled"
 			value={initialValue}
+			placeholder={placeholder}
 			classNames={{
 				input: clx(styles.input, styles[variant]),
 			}}

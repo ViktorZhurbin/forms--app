@@ -1,7 +1,7 @@
 import { ColorSchemeToggle } from "~/components/ColorSchemeToggle/ColorSchemeToggle";
 import { EditableText } from "~/components/Question/EditableText/EditableText";
 import { useDbQuery } from "~/models/db";
-import { updateForm } from "~/models/methods";
+import { updateForm } from "~/models/forms/methods";
 import { useFormId } from "../hooks/useFormId";
 import styles from "./Header.module.css";
 import { HomeButton } from "./HomeButton/HomeButton";

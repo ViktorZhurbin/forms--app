@@ -5,7 +5,7 @@ import { AddBlockModalContent } from "./AddBlockModalContent/AddBlockModalConten
 export const AddBlockModal = ({ isOpen, onClose }: ModalProps) => {
 	return (
 		<Modal title="Select block" opened={isOpen} onClose={onClose}>
-			<AddBlockModalContent />
+			<AddBlockModalContent onClose={onClose} />
 		</Modal>
 	);
 };

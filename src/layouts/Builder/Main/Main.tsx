@@ -1,8 +1,8 @@
 import { Question } from "~/components/Question/Question";
 import { useFormQuestion } from "~/hooks/queries/useFormQuestions";
+import { AddBlockButton } from "../components/AddBlockButton/AddBlockButton";
 import { useFormId } from "../hooks/useFormId";
 import { useSelectedBlockId } from "../hooks/useSelectedBlockId";
-import { AddBlockButton } from "./AddBlockButton/AddBlockButton";
 import styles from "./Main.module.css";
 
 export const Main = () => {

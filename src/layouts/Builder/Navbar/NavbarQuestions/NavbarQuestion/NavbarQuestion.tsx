@@ -17,7 +17,7 @@ export const NavbarQuestion = ({
 	id,
 	type,
 	group,
-	title,
+	title = "...",
 	order,
 	isSelected,
 }: NavbarQuestionProps) => {

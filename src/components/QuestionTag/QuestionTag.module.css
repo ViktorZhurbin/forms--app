@@ -1,0 +1,18 @@
+.root {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: nowrap;
+
+	padding: 4px 6px;
+	color: black;
+	border-radius: 6px;
+}
+
+.choice {
+	background-color: var(--mantine-color-grape-2);
+}
+
+.text {
+	background-color: var(--mantine-color-blue-2);
+}

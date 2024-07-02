@@ -1,11 +1,10 @@
 import { tx } from "@instantdb/react";
-import { Button, CloseButton, Group, Text } from "@mantine/core";
-import { IconBan } from "@tabler/icons-react";
+import { Button, CloseButton, Text } from "@mantine/core";
 import { navigate } from "wouter/use-browser-location";
+import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { SearchParams } from "~/constants/location";
 import { dbTransact } from "~/models/db";
 import type { QuestionBaseType } from "~/models/questions/questions";
-import { clx } from "~/utils/classNames";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
@@ -48,9 +47,7 @@ function Label(
 
 	return (
 		<div className={styles.labelGroup}>
-			<Group className={clx(styles.labelTag, styles[group])}>
-				<IconBan /> <Text size="xs">{order}</Text>
-			</Group>
+			<QuestionTag group={group} text={order} />
 			<Text size="sm" className={styles.labelTitle}>
 				{title}
 			</Text>

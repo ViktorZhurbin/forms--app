@@ -51,7 +51,7 @@ export const NavbarQuestions = () => {
 				</Group>
 			</Group>
 
-			{!!formId && <NavbarQuestionsList formId={formId} />}
+			<NavbarQuestionsList formId={formId} />
 		</Stack>
 	);
 };

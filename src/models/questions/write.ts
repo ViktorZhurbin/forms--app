@@ -2,12 +2,12 @@ import { id, tx } from "@instantdb/react";
 import { QuestionTypesMap } from "~/constants/questionMaps";
 import { QuestionTypes } from "~/constants/questions";
 import { dbTransact } from "../db";
-import type { ChoiceType, OptionType, QuestionType } from "./questions";
+import type { TOption, TQuestion, TQuestionChoice } from "./schema";
 
 const createQuestion = async ({
 	formId,
 	type,
-}: Pick<QuestionType, "formId" | "type">) => {
+}: Pick<TQuestion, "formId" | "type">) => {
 	const questionId = id();
 	const dbQuestion = tx.questions[questionId];
 
@@ -45,7 +45,7 @@ const createQuestion = async ({
 };
 
 const updateQuestion = (
-	payload: Partial<QuestionType> & Pick<QuestionType, "id">,
+	payload: Partial<TQuestion> & Pick<TQuestion, "id">,
 ) => {
 	const { id, ...update } = payload;
 
@@ -53,10 +53,10 @@ const updateQuestion = (
 };
 
 const updateChoiceOption = (payload: {
-	id: OptionType["id"];
-	questionId: ChoiceType["id"];
-	allOptions: ChoiceType["options"];
-	update: Partial<Omit<OptionType, "id">>;
+	id: TOption["id"];
+	questionId: TQuestionChoice["id"];
+	allOptions: TQuestionChoice["options"];
+	update: Partial<Omit<TOption, "id">>;
 }) => {
 	const { id, questionId, allOptions, update } = payload;
 

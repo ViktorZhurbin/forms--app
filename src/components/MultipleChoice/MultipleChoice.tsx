@@ -1,12 +1,12 @@
-import type { ChoiceType, QuestionType } from "~/models/questions/questions";
+import type { TQuestion, TQuestionChoice } from "~/models/questions/schema";
 import { updateChoiceOption } from "~/models/questions/write";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
 
 type MultipleChoiceProps = {
-	questionId: QuestionType["id"];
+	questionId: TQuestion["id"];
 	readOnly?: boolean;
-	options: ChoiceType["options"];
+	options: TQuestionChoice["options"];
 };
 
 export const MultipleChoice = ({

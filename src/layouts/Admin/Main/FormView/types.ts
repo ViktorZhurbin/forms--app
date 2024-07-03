@@ -1,10 +1,10 @@
-import type { FormType } from "~/models/forms/forms";
+import type { TForm } from "~/models/forms/forms";
 
-interface FormViewProps extends Pick<FormType, "id" | "name"> {
+interface FormViewProps extends Pick<TForm, "id" | "name"> {
 	className: string;
 	responsesText: string;
-	getHref: (id: FormType["id"]) => string;
-	getDeleteButton: (id: FormType["id"]) => JSX.Element;
+	getHref: (id: TForm["id"]) => string;
+	getDeleteButton: (id: TForm["id"]) => JSX.Element;
 }
 
 export type { FormViewProps };

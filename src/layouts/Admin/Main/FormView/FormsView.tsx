@@ -6,7 +6,7 @@ import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
 import { dbTransact, useDbQuery } from "~/models/db";
-import type { FormType } from "~/models/forms/forms";
+import type { TForm } from "~/models/forms/forms";
 import { pluralize } from "~/utils/grammar";
 import styles from "./FormsView.module.css";
 import { GridView } from "./GridView/GridView";
@@ -25,7 +25,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
 
-	const getDeleteButton = (id: FormType["id"]) => {
+	const getDeleteButton = (id: TForm["id"]) => {
 		return (
 			<ActionIcon
 				variant="default"

@@ -1,7 +1,7 @@
 import { useDbQuery } from "../db";
-import type { FormType } from "./forms";
+import type { TForm } from "./forms";
 
-const useFormQuery = (formId: FormType["id"]) => {
+const useFormQuery = (formId: TForm["id"]) => {
 	return useDbQuery({
 		forms: {
 			$: { where: { id: formId } },
@@ -9,7 +9,7 @@ const useFormQuery = (formId: FormType["id"]) => {
 	});
 };
 
-const useForm = (formId: FormType["id"]) => {
+const useForm = (formId: TForm["id"]) => {
 	const { data } = useFormQuery(formId);
 
 	return data?.forms[0];

@@ -1,10 +1,10 @@
-import type { QuestionType } from "../questions/questions";
+import type { TQuestion } from "../questions/schema";
 
-type FormType = {
+type TForm = {
 	id: string;
 	name: string;
 	responseCount: number;
-	orderedQuestionIds: QuestionType["id"][];
+	orderedQuestionIds: TQuestion["id"][];
 };
 
-export type { FormType };
+export type { TForm };

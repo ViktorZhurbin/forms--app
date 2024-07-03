@@ -1,6 +1,6 @@
 import { Stack } from "@mantine/core";
 import { QuestionTypes } from "~/constants/questions";
-import type { QuestionType } from "~/models/questions/questions";
+import type { TQuestion } from "~/models/questions/schema";
 import { updateQuestion } from "~/models/questions/write";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -9,7 +9,7 @@ import { EditableText } from "./EditableText/EditableText";
 import styles from "./Question.module.css";
 
 interface QuestionProps {
-	question: QuestionType;
+	question: TQuestion;
 	isLast?: boolean;
 	readOnly?: boolean;
 	onSubmitForm?: () => void;

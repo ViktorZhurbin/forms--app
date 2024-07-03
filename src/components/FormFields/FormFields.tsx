@@ -1,12 +1,12 @@
 import { FocusTrap } from "@mantine/core";
-import type { QuestionType } from "~/models/questions/questions";
+import type { TQuestion } from "~/models/questions/schema";
 import { Question } from "../Question/Question";
 import styles from "./FormFields.module.css";
 import { getPositionDataAttribute } from "./helpers/getPositionDataAttribute";
 
 export const FormFields = (props: {
 	step: number;
-	questions: QuestionType[];
+	questions: TQuestion[];
 	onSubmit: () => void;
 	goToNextStep: () => void;
 }) => {

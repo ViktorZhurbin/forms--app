@@ -1,6 +1,6 @@
 import { id, tx } from "@instantdb/react";
 import { dbTransact } from "../../db";
-import type { FormType } from "../forms";
+import type { TForm } from "../forms";
 import { getDummyFormTitle } from "./helpers";
 
 const createForm = async () => {
@@ -16,15 +16,13 @@ const createForm = async () => {
 	return formId;
 };
 
-const updateForm = async (
-	payload: Partial<FormType> & Pick<FormType, "id">,
-) => {
+const updateForm = async (payload: Partial<TForm> & Pick<TForm, "id">) => {
 	const { id, ...update } = payload;
 
 	await dbTransact(tx.forms[id].update(update));
 };
 
-const deleteForm = async (id: FormType["id"]) => {
+const deleteForm = async (id: TForm["id"]) => {
 	dbTransact([tx.forms[id].delete()]);
 };
 

@@ -4,11 +4,11 @@ import { navigate } from "wouter/use-browser-location";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { SearchParams } from "~/constants/location";
 import { dbTransact } from "~/models/db";
-import type { QuestionBaseType } from "~/models/questions/questions";
+import type { TQuestionBase } from "~/models/questions/schema";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
-	extends Pick<QuestionBaseType, "id" | "type" | "group" | "title"> {
+	extends Pick<TQuestionBase, "id" | "type" | "group" | "title"> {
 	order: number;
 	isSelected: boolean;
 }

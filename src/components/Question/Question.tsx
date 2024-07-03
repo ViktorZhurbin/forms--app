@@ -1,7 +1,7 @@
 import { Stack } from "@mantine/core";
 import { QuestionTypes } from "~/constants/questions";
-import { updateQuestion } from "~/models/questions/methods";
 import type { QuestionType } from "~/models/questions/questions";
+import { updateQuestion } from "~/models/questions/write";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";

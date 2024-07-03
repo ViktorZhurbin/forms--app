@@ -1,6 +1,6 @@
 import type { FormType } from "~/models/forms/forms";
 
-interface FormViewProps extends Omit<FormType, "responseCount"> {
+interface FormViewProps extends Pick<FormType, "id" | "name"> {
 	className: string;
 	responsesText: string;
 	getHref: (id: FormType["id"]) => string;

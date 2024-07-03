@@ -1,28 +1,26 @@
 .formItem {
-  position: relative;
+	position: relative;
 
-  &:not(:hover) {
-    .delete {
-      display: none;
-    }
-  }
+	&:not(:hover) {
+		.delete {
+			display: none;
+		}
+	}
 
-  &:hover {
-    .delete {
-      background-color: inherit;
+	&:hover {
+		.delete {
+			background-color: inherit;
 
-      &:hover {
-        background-color: var(--mantine-color-gray-light-hover);
-      }
-    }
-  }
+			&:hover {
+				background-color: var(--mantine-color-gray-light-hover);
+			}
+		}
+	}
 }
 
 .delete {
-  border: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-
-
+	border: none;
+	position: absolute;
+	right: 0;
+	top: 0;
 }

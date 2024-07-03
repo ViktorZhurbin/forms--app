@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { useFormQuestions } from "~/hooks/queries/useFormQuestions";
+import { useFormQuestions } from "~/models/questions/read";
 import { useFormId } from "../../../hooks/useFormId";
 import styles from "./PreviewModalContent.module.css";
 

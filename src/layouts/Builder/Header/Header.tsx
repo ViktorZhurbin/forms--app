@@ -1,7 +1,7 @@
 import { ColorSchemeToggle } from "~/components/ColorSchemeToggle/ColorSchemeToggle";
 import { EditableText } from "~/components/Question/EditableText/EditableText";
-import { useDbQuery } from "~/models/db";
-import { updateForm } from "~/models/forms/methods";
+import { useForm } from "~/models/forms/read";
+import { updateForm } from "~/models/forms/write";
 import { useFormId } from "../hooks/useFormId";
 import styles from "./Header.module.css";
 import { HomeButton } from "./HomeButton/HomeButton";
@@ -11,11 +11,7 @@ import { PublishButton } from "./PublishButton/PublishButton";
 export const Header = () => {
 	const formId = useFormId();
 
-	const { data } = useDbQuery({
-		forms: {
-			$: { where: { id: formId } },
-		},
-	});
+	const { data } = useForm(formId);
 
 	const onChangeTitle = (name: string) => {
 		updateForm({ id: formId, name });
@@ -26,7 +22,7 @@ export const Header = () => {
 			<div className={styles.wrapper}>
 				<HomeButton />
 				<EditableText
-					initialValue={data?.forms[0].name}
+					initialValue={data?.forms[0]?.name}
 					onChange={onChangeTitle}
 				/>
 			</div>

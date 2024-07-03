@@ -6,7 +6,7 @@ import {
 	type QuestionTypesMapItem,
 } from "~/constants/questionMaps";
 import { useFormId } from "~/layouts/Builder/hooks/useFormId";
-import { createQuestion } from "~/models/questions/methods";
+import { createQuestion } from "~/models/questions/write";
 import styles from "./AddBlockModalContent.module.css";
 
 interface QuestionTypeItemProps

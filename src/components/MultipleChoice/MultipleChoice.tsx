@@ -1,5 +1,5 @@
-import { updateChoiceOption } from "~/models/questions/methods";
 import type { ChoiceType, QuestionType } from "~/models/questions/questions";
+import { updateChoiceOption } from "~/models/questions/write";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
 

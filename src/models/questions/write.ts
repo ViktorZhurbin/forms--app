@@ -54,9 +54,9 @@ const updateQuestion = (
 
 const updateChoiceOption = (payload: {
 	id: OptionType["id"];
-	update: Partial<Omit<OptionType, "id">>;
 	questionId: ChoiceType["id"];
 	allOptions: ChoiceType["options"];
+	update: Partial<Omit<OptionType, "id">>;
 }) => {
 	const { id, questionId, allOptions, update } = payload;
 

@@ -1,6 +1,6 @@
 import { FetchError } from "~/components/FetchError/FetchError";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
-import { useFormQuestions } from "~/hooks/queries/useFormQuestions";
+import { useFormQuestions } from "~/models/questions/read";
 import { useSelectedBlockId } from "../../hooks/useSelectedBlockId";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
 import styles from "./NavbarQuestionsList.module.css";

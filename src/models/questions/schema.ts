@@ -1,5 +1,5 @@
 import type { QuestionGroups, QuestionTypes } from "~/constants/questions";
-import type { TForm } from "../forms/forms";
+import type { TForm } from "../forms/schema";
 
 type TQuestionBase = {
 	id: string;

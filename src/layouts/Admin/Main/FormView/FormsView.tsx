@@ -6,7 +6,7 @@ import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
 import { dbTransact, useDbQuery } from "~/models/db";
-import type { TForm } from "~/models/forms/forms";
+import type { TForm } from "~/models/forms/schema";
 import { pluralize } from "~/utils/grammar";
 import styles from "./FormsView.module.css";
 import { GridView } from "./GridView/GridView";

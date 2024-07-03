@@ -1,5 +1,5 @@
 import { init } from "@instantdb/react";
-import type { TForm } from "./forms/forms";
+import type { TForm } from "./forms/schema";
 import type { TQuestion } from "./questions/schema";
 
 // ID for app: Forms

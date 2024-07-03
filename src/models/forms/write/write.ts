@@ -1,6 +1,6 @@
 import { id, tx } from "@instantdb/react";
 import { dbTransact } from "../../db";
-import type { TForm } from "../forms";
+import type { TForm } from "../schema";
 import { getDummyFormTitle } from "./helpers";
 
 const createForm = async () => {

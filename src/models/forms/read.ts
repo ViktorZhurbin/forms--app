@@ -1,5 +1,5 @@
 import { useDbQuery } from "../db";
-import type { TForm } from "./forms";
+import type { TForm } from "./schema";
 
 const useFormQuery = (formId: TForm["id"]) => {
 	return useDbQuery({

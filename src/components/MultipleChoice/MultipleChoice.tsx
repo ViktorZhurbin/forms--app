@@ -18,7 +18,12 @@ export const MultipleChoice = ({
 		<div className={styles.wrapper}>
 			{options.map(({ id, text }) => {
 				const onChange = (text: string) => {
-					updateChoiceOption({ options, questionId, id, text });
+					updateChoiceOption({
+						id,
+						questionId,
+						update: { text },
+						allOptions: options,
+					});
 				};
 
 				return (

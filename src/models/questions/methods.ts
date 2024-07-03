@@ -52,15 +52,15 @@ const updateQuestion = (
 	dbTransact(tx.questions[id].update(update));
 };
 
-const updateChoiceOption = (
-	payload: Partial<OptionType> &
-		Pick<OptionType, "id"> & {
-			questionId: ChoiceType["id"];
-			options: ChoiceType["options"];
-		},
-) => {
-	const { id, questionId, options, ...update } = payload;
-	const newOptions = options.map((option) => {
+const updateChoiceOption = (payload: {
+	id: OptionType["id"];
+	update: Partial<Omit<OptionType, "id">>;
+	questionId: ChoiceType["id"];
+	allOptions: ChoiceType["options"];
+}) => {
+	const { id, questionId, allOptions, update } = payload;
+
+	const newOptions = allOptions.map((option) => {
 		if (option.id === id) {
 			return { ...option, ...update };
 		}

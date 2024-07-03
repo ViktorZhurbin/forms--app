@@ -1,12 +1,12 @@
 import { FetchError } from "~/components/FetchError/FetchError";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
-import { useFormQuestions } from "~/models/questions/read";
+import { useOrderedQuestionsQuery } from "~/models/questions/read";
 import { useSelectedBlockId } from "../../hooks/useSelectedBlockId";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
 import styles from "./NavbarQuestionsList.module.css";
 
 export const NavbarQuestionsList = ({ formId }: { formId: string }) => {
-	const { isLoading, error, data } = useFormQuestions(formId);
+	const { isLoading, error, data } = useOrderedQuestionsQuery(formId);
 
 	const firstQuestion = data?.questions?.[0];
 	const selectedBlockId = useSelectedBlockId(firstQuestion?.id);

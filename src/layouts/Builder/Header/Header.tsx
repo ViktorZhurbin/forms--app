@@ -11,7 +11,7 @@ import { PublishButton } from "./PublishButton/PublishButton";
 export const Header = () => {
 	const formId = useFormId();
 
-	const { data } = useForm(formId);
+	const form = useForm(formId);
 
 	const onChangeTitle = (name: string) => {
 		updateForm({ id: formId, name });
@@ -21,10 +21,7 @@ export const Header = () => {
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
 				<HomeButton />
-				<EditableText
-					initialValue={data?.forms[0]?.name}
-					onChange={onChangeTitle}
-				/>
+				<EditableText initialValue={form?.name} onChange={onChangeTitle} />
 			</div>
 			<div className={styles.wrapper}>
 				<ColorSchemeToggle />

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { useFormQuestions } from "~/models/questions/read";
+import { useOrderedQuestionsQuery } from "~/models/questions/read";
 import { useFormId } from "../../../hooks/useFormId";
 import styles from "./PreviewModalContent.module.css";
 
@@ -16,7 +16,7 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 	const formId = useFormId();
 	const [step, setStep] = useState(0);
 
-	const { isLoading, error, data } = useFormQuestions(formId);
+	const { isLoading, error, data } = useOrderedQuestionsQuery(formId);
 
 	const isFirstStep = step === 0;
 	const isLastStep =

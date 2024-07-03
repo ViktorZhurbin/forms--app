@@ -8,7 +8,7 @@ const createForm = async () => {
 	const form = {
 		name: getDummyFormTitle(),
 		responseCount: 0,
-		orderedQuestions: [],
+		orderedQuestionIds: [],
 	};
 
 	await dbTransact(tx.forms[id()].update(form));

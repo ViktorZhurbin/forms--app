@@ -4,7 +4,7 @@ type FormType = {
 	id: string;
 	name: string;
 	responseCount: number;
-	orderedQuestions: QuestionType["id"][];
+	orderedQuestionIds: QuestionType["id"][];
 };
 
 export type { FormType };

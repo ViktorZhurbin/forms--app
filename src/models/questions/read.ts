@@ -1,5 +1,4 @@
 import { useDbQuery } from "~/models/db";
-import { useForm } from "../forms/read";
 
 const useQuestionsQuery = (formId: string) => {
 	return useDbQuery({
@@ -10,24 +9,17 @@ const useQuestionsQuery = (formId: string) => {
 };
 
 export const useOrderedQuestionsQuery = (formId: string) => {
-	const form = useForm(formId);
-	const questionsQuery = useQuestionsQuery(formId);
+	const query = useQuestionsQuery(formId);
 
-	if (!questionsQuery.data || !form) {
-		return questionsQuery;
-	}
+	query.data?.questions.sort((a, b) => a.order - b.order);
 
-	const sortedData = { ...questionsQuery.data };
+	return query;
+};
 
-	sortedData.questions = form.orderedQuestionIds.flatMap((id) => {
-		const question = sortedData.questions.find(
-			(question) => question.id === id,
-		);
+export const useOrderedQuestions = ({ formId }: { formId: string }) => {
+	const { data } = useOrderedQuestionsQuery(formId);
 
-		return question ?? [];
-	});
-
-	return { ...questionsQuery, data: sortedData };
+	return data?.questions ?? [];
 };
 
 export const useQuestion = ({

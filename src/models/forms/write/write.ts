@@ -22,8 +22,16 @@ const updateForm = async (payload: Partial<TForm> & Pick<TForm, "id">) => {
 	await dbTransact(tx.forms[id].update(update));
 };
 
+const updateFormOrderedQuestionIds = async (
+	payload: Pick<TForm, "id" | "orderedQuestionIds">,
+) => {
+	const { id, orderedQuestionIds } = payload;
+
+	await dbTransact(tx.forms[id].update({ orderedQuestionIds }));
+};
+
 const deleteForm = async (id: TForm["id"]) => {
 	dbTransact([tx.forms[id].delete()]);
 };
 
-export { createForm, updateForm, deleteForm };
+export { createForm, updateForm, updateFormOrderedQuestionIds, deleteForm };

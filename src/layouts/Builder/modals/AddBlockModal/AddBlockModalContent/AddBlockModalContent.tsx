@@ -1,52 +1,18 @@
-import { Button, Text, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import type { CSSProperties } from "react";
-import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
-import {
-	QuestionGroupsMap,
-	type QuestionTypesMapItem,
-} from "~/constants/questionMaps";
+import { QuestionGroupsMap } from "~/constants/questionMaps";
 import { useFormId } from "~/layouts/Builder/hooks/useFormId";
-import { createQuestion } from "~/models/questions/write";
+import { AddBlockModalQuestionItem } from "../AddBlockModalQuestionItem/AddBlockModalQuestionItem";
 import styles from "./AddBlockModalContent.module.css";
 
-interface QuestionTypeItemProps
-	extends Pick<AddBlockModalContentProps, "onClose"> {
-	formId: string;
-	item: QuestionTypesMapItem;
-}
-
-const QuestionTypeItem = ({ formId, item, onClose }: QuestionTypeItemProps) => {
-	const handleClick = async () => {
-		await createQuestion({ formId, type: item.type });
-
-		onClose();
-	};
-
-	const classnames = {
-		root: styles.buttonRoot,
-		label: styles.buttonLabel,
-	};
-
-	return (
-		<Button
-			key={item.type}
-			variant="subtle"
-			justify="start"
-			classNames={classnames}
-			onClick={handleClick}
-		>
-			<QuestionTag type={item.type} group={item.group} />
-			<Text size="sm">{item.name}</Text>
-		</Button>
-	);
-};
-
 type AddBlockModalContentProps = {
+	insertBefore?: boolean;
 	onClose: () => void;
 };
 
 export const AddBlockModalContent = ({
 	onClose,
+	insertBefore,
 }: AddBlockModalContentProps) => {
 	const formId = useFormId();
 
@@ -63,11 +29,12 @@ export const AddBlockModalContent = ({
 						</Title>
 						<div className={styles.typesList}>
 							{types.map((item) => (
-								<QuestionTypeItem
+								<AddBlockModalQuestionItem
 									key={item.type}
 									item={item}
 									formId={formId}
 									onClose={onClose}
+									insertBefore={insertBefore}
 								/>
 							))}
 						</div>

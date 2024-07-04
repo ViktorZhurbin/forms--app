@@ -14,7 +14,7 @@ export const Main = () => {
 
 	return (
 		<div className={styles.root}>
-			<AddBlockButton tooltip="Add block above" />
+			<AddBlockButton insertBefore tooltip="Add block above" />
 			<div className={styles.questionWrapper}>
 				<Question question={question} />
 			</div>

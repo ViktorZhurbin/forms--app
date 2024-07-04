@@ -1,40 +1,42 @@
-import { tx } from "@instantdb/react";
 import { Button, CloseButton, Text } from "@mantine/core";
-import { navigate } from "wouter/use-browser-location";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
-import { SearchParams } from "~/constants/location";
-import { dbTransact } from "~/models/db";
-import type { TQuestionBase } from "~/models/questions/schema";
+import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
+import type { TQuestion } from "~/models/questions/schema";
+import { deleteQuestion } from "~/models/questions/write";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
-	extends Pick<TQuestionBase, "id" | "type" | "group" | "title"> {
+	extends Pick<TQuestion, "id" | "type" | "group" | "title"> {
 	order: number;
 	isSelected: boolean;
+	prevId: TQuestion["id"] | null;
 }
 
 export const NavbarQuestion = ({
+	title = "...",
 	id,
 	type,
 	group,
-	title = "...",
 	order,
+	prevId,
 	isSelected,
 }: NavbarQuestionProps) => {
-	const handleSelect = () => {
-		const url = new URL(window.location.href);
-		url.searchParams.set(SearchParams.BLOCK_ID, id);
+	const handleDelete = async () => {
+		await deleteQuestion(id);
 
-		navigate(url);
+		if (prevId) {
+			navigateToQuestion(prevId);
+		}
 	};
-
 	return (
 		<Button
 			variant={isSelected ? "light" : "subtle"}
 			data-active={isSelected}
 			justify="start"
 			className={styles.button}
-			onClick={handleSelect}
+			onClick={() => {
+				navigateToQuestion(id);
+			}}
 		>
 			<div className={styles.labelGroup}>
 				<QuestionTag type={type} group={group} text={order} />
@@ -44,10 +46,10 @@ export const NavbarQuestion = ({
 				<CloseButton
 					component="div"
 					className={styles.removeButton}
-					onClick={(event) => {
+					onClick={async (event) => {
 						event.preventDefault();
 
-						dbTransact([tx.forms[id].delete()]);
+						handleDelete();
 					}}
 				/>
 			</div>

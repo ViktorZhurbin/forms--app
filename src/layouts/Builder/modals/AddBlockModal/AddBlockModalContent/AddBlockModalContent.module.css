@@ -17,23 +17,3 @@
 	align-items: flex-start;
 	gap: 4px;
 }
-
-.buttonRoot {
-	--offset-left: 8px;
-
-	min-width: 100%;
-
-	padding: 6px 12px;
-	padding-left: var(--offset-left);
-	margin-left: calc(var(--offset-left) * -1);
-}
-
-.buttonLabel {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-
-	gap: 8px;
-
-	color: var(--mantine-color-text);
-}

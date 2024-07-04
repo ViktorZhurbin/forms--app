@@ -3,7 +3,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { AddBlockModal } from "../../modals/AddBlockModal/AddBlockModal";
 
-export const AddBlockButton = ({ tooltip }: { tooltip: string }) => {
+export const AddBlockButton = ({
+	tooltip,
+	insertBefore,
+}: { tooltip: string; insertBefore?: boolean }) => {
 	const [isModalOpen, modalActions] = useDisclosure(false);
 
 	return (
@@ -14,7 +17,11 @@ export const AddBlockButton = ({ tooltip }: { tooltip: string }) => {
 				</ActionIcon>
 			</Tooltip>
 
-			<AddBlockModal isOpen={isModalOpen} onClose={modalActions.close} />
+			<AddBlockModal
+				insertBefore={insertBefore}
+				isOpen={isModalOpen}
+				onClose={modalActions.close}
+			/>
 		</>
 	);
 };

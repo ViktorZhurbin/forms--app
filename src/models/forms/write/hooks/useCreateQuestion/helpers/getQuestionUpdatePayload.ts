@@ -1,17 +1,13 @@
 import { id } from "@instantdb/react";
 import { QuestionTypesMap } from "~/constants/questionMaps";
 import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion } from "../../../schema";
+import type { TQuestion } from "../../../../schema/questions";
 
-export const getQuestionUpdatePayload = ({
-	formId,
-	type,
-	order,
-}: Pick<TQuestion, "formId" | "type" | "order">) => {
+export const getQuestionUpdatePayload = ({ type }: Pick<TQuestion, "type">) => {
 	const updateBase = {
-		formId,
 		type,
-		order,
+		title: "",
+		id: id(),
 		group: QuestionTypesMap[type].group,
 	};
 
@@ -39,5 +35,5 @@ export const getQuestionUpdatePayload = ({
 			break;
 	}
 
-	return { ...updateBase, ...update };
+	return { ...updateBase, ...update } as TQuestion;
 };

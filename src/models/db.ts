@@ -1,13 +1,11 @@
 import { init } from "@instantdb/react";
-import type { TForm } from "./forms/schema";
-import type { TQuestion } from "./questions/schema";
+import type { TForm } from "./forms/schema/forms";
 
-// ID for app: Forms
-const APP_ID = "c0eca2bb-1fdc-4b6f-99a3-247f7f4aa1a4";
+// ID for app: Forms 2
+const APP_ID = "f6d4525a-81b7-4431-96cb-82f659c07ea5";
 
 type Schema = {
 	forms: TForm;
-	questions: TQuestion;
 };
 
 const { useQuery: useDbQuery, transact: dbTransact } = init<Schema>({

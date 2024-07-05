@@ -1,7 +1,7 @@
 import { Stack } from "@mantine/core";
 import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion } from "~/models/questions/schema";
-import { updateQuestion } from "~/models/questions/write";
+import type { TQuestion } from "~/models/forms/schema/questions";
+import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
@@ -34,8 +34,13 @@ export const Question = ({
 		onSubmit = goToNextStep;
 	}
 
+	const { updateQuestion } = useUpdateQuestion();
+
 	const onChangeTitle = (title: string) => {
-		updateQuestion({ id: question.id, title });
+		updateQuestion({
+			id: question.id,
+			payload: { title },
+		});
 	};
 
 	return (

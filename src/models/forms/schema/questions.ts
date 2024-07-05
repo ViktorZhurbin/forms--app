@@ -1,13 +1,10 @@
 import type { QuestionGroups, QuestionTypes } from "~/constants/questions";
-import type { TForm } from "../forms/schema";
 
 type TQuestionBase = {
 	id: string;
-	formId: TForm["id"];
 	type: QuestionTypes;
 	group: QuestionGroups;
 	title: string;
-	order: number;
 };
 
 interface TQuestionChoice extends TQuestionBase {

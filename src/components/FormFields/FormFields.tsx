@@ -1,5 +1,5 @@
 import { FocusTrap } from "@mantine/core";
-import type { TQuestion } from "~/models/questions/schema";
+import type { TQuestion } from "~/models/forms/schema/questions";
 import { Question } from "../Question/Question";
 import styles from "./FormFields.module.css";
 import { getPositionDataAttribute } from "./helpers/getPositionDataAttribute";

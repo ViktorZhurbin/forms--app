@@ -1,8 +1,8 @@
 import { Button, CloseButton, Text } from "@mantine/core";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
-import type { TQuestion } from "~/models/questions/schema";
-import { deleteQuestion } from "~/models/questions/write";
+import type { TQuestion } from "~/models/forms/schema/questions";
+import { useDeleteQuestion } from "~/models/forms/write/hooks/useDeleteQuestion";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
@@ -13,7 +13,7 @@ interface NavbarQuestionProps
 }
 
 export const NavbarQuestion = ({
-	title = "...",
+	title,
 	id,
 	type,
 	group,
@@ -21,6 +21,8 @@ export const NavbarQuestion = ({
 	prevId,
 	isSelected,
 }: NavbarQuestionProps) => {
+	const { deleteQuestion } = useDeleteQuestion();
+
 	const handleDelete = async () => {
 		await deleteQuestion(id);
 
@@ -41,7 +43,7 @@ export const NavbarQuestion = ({
 			<div className={styles.labelGroup}>
 				<QuestionTag type={type} group={group} text={order} />
 				<Text size="sm" className={styles.labelTitle}>
-					{title}
+					{title || "..."}
 				</Text>
 				<CloseButton
 					component="div"

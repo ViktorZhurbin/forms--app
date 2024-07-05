@@ -20,6 +20,7 @@ export const Main = () => {
 					Your Forms
 				</Text>
 			</Group>
+
 			<FormsView view={view} />
 		</Stack>
 	);

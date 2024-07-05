@@ -1,5 +1,8 @@
-import type { TQuestion, TQuestionChoice } from "~/models/questions/schema";
-import { updateChoiceOption } from "~/models/questions/write";
+import type {
+	TQuestion,
+	TQuestionChoice,
+} from "~/models/forms/schema/questions";
+import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
 import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
 import styles from "./MultipleChoice.module.css";
 
@@ -14,15 +17,18 @@ export const MultipleChoice = ({
 	options,
 	readOnly,
 }: MultipleChoiceProps) => {
+	const { updateQuestion } = useUpdateQuestion();
+
 	return (
 		<div className={styles.wrapper}>
-			{options.map(({ id, text }) => {
+			{options.map(({ id, text }, index) => {
 				const onChange = (text: string) => {
-					updateChoiceOption({
-						id,
-						questionId,
-						update: { text },
-						allOptions: options,
+					const newOptions = [...options];
+					newOptions[index].text = text;
+
+					updateQuestion({
+						id: questionId,
+						payload: { options: newOptions },
 					});
 				};
 

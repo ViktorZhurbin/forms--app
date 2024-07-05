@@ -2,11 +2,10 @@ import { Button, Text } from "@mantine/core";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import type { QuestionTypesMapItem } from "~/constants/questionMaps";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
-import { useCreateQuestion } from "~/models/questions/write/useCreateQuestion";
+import { useCreateQuestion } from "~/models/forms/write/hooks/useCreateQuestion";
 import styles from "./AddBlockModalQuestionItem.module.css";
 
 interface AddBlockModalQuestionItemProps {
-	formId: string;
 	insertBefore?: boolean;
 	item: QuestionTypesMapItem;
 	onClose: () => void;
@@ -14,18 +13,16 @@ interface AddBlockModalQuestionItemProps {
 
 export const AddBlockModalQuestionItem = ({
 	item,
-	formId,
 	onClose,
 	insertBefore,
 }: AddBlockModalQuestionItemProps) => {
-	const { createQuestion, questionId } = useCreateQuestion({
-		formId,
-		insertBefore,
-		type: item.type,
-	});
+	const { createQuestion } = useCreateQuestion();
 
 	const handleClick = async () => {
-		await createQuestion();
+		const questionId = await createQuestion({
+			insertBefore,
+			type: item.type,
+		});
 
 		navigateToQuestion(questionId);
 		onClose();

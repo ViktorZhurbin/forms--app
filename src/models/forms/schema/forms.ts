@@ -1,10 +1,10 @@
-import type { TQuestion } from "../questions/schema";
+import type { TQuestion } from "./questions";
 
 type TForm = {
 	id: string;
 	name: string;
 	responseCount: number;
-	orderedQuestionIds: TQuestion["id"][];
+	questions: TQuestion[];
 };
 
 export type { TForm };

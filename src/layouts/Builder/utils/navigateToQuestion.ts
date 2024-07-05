@@ -1,6 +1,6 @@
 import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "~/constants/location";
-import type { TQuestion } from "~/models/questions/schema";
+import type { TQuestion } from "~/models/forms/schema/questions";
 
 export const navigateToQuestion = (id: TQuestion["id"]) => {
 	const url = new URL(window.location.href);

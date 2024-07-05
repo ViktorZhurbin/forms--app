@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
 import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { useOrderedQuestionsQuery } from "~/models/questions/read";
+import { useFormQuery } from "~/models/forms/read";
 import { useFormId } from "../../../hooks/useFormId";
 import styles from "./PreviewModalContent.module.css";
 
@@ -16,11 +16,12 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 	const formId = useFormId();
 	const [step, setStep] = useState(0);
 
-	const { isLoading, error, data } = useOrderedQuestionsQuery(formId);
+	const { isLoading, error, data } = useFormQuery(formId);
+	const form = data?.forms[0];
 
 	const isFirstStep = step === 0;
 	const isLastStep =
-		step === (data?.questions.length && data?.questions?.length - 1);
+		step === (form?.questions.length && form?.questions?.length - 1);
 
 	const goToPreviousStep = () => {
 		if (isFirstStep) return;
@@ -40,10 +41,10 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 
 	return (
 		<div className={styles.root}>
-			{data ? (
+			{form ? (
 				<FormFields
 					step={step}
-					questions={data.questions}
+					questions={form.questions}
 					onSubmit={handleSubmit}
 					goToNextStep={goToNextStep}
 				/>

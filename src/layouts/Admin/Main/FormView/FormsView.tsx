@@ -1,12 +1,12 @@
-import { tx } from "@instantdb/react";
 import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { FetchError } from "~/components/FetchError/FetchError";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/location";
-import { dbTransact, useDbQuery } from "~/models/db";
-import type { TForm } from "~/models/forms/schema";
+import { useAllForms } from "~/models/forms/read";
+import type { TForm } from "~/models/forms/schema/forms";
+import { deleteForm } from "~/models/forms/write";
 import { pluralize } from "~/utils/grammar";
 import styles from "./FormsView.module.css";
 import { GridView } from "./GridView/GridView";
@@ -17,7 +17,7 @@ type FormsViewProps = {
 };
 
 export const FormsView = ({ view }: FormsViewProps) => {
-	const { isLoading, error, data } = useDbQuery({ forms: {} });
+	const { isLoading, error, data } = useAllForms();
 
 	if (error) {
 		return <FetchError message={error.message} />;
@@ -33,7 +33,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 				onClick={(event) => {
 					event.preventDefault();
 
-					dbTransact([tx.forms[id].delete()]);
+					deleteForm(id);
 				}}
 			>
 				<IconTrash />

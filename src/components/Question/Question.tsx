@@ -11,7 +11,7 @@ import styles from "./Question.module.css";
 interface QuestionProps {
 	question: TQuestion;
 	isLast?: boolean;
-	readOnly?: boolean;
+	editMode?: boolean;
 	onSubmitForm?: () => void;
 	goToNextStep?: () => void;
 }
@@ -19,7 +19,7 @@ interface QuestionProps {
 export const Question = ({
 	isLast,
 	question,
-	readOnly,
+	editMode,
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
@@ -48,7 +48,7 @@ export const Question = ({
 			<div className={styles.wrapper}>
 				<EditableText
 					variant="h1"
-					readOnly={readOnly}
+					readOnly={!editMode}
 					placeholder="Your question here..."
 					initialValue={question.title}
 					onChange={onChangeTitle}
@@ -56,13 +56,13 @@ export const Question = ({
 
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						<QuestionComponent question={question} readOnly={readOnly} />
+						<QuestionComponent question={question} editMode={editMode} />
 					</Stack>
 
 					<EditableButton
 						onClick={onSubmit}
 						value={buttonText}
-						isEditable={!readOnly}
+						isEditable={Boolean(editMode)}
 						classNames={{
 							button: styles.submitButton,
 						}}
@@ -75,21 +75,27 @@ export const Question = ({
 
 function QuestionComponent({
 	question,
-	readOnly,
-}: Pick<QuestionProps, "readOnly" | "question">) {
+	editMode,
+}: Pick<QuestionProps, "editMode" | "question">) {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
 		case QuestionTypes.MultipleChoice:
 			return (
 				<MultipleChoice
-					readOnly={readOnly}
+					editMode={editMode}
 					questionId={question.id}
 					options={question.options}
 				/>
 			);
 
 		case QuestionTypes.ShortText:
-			return <ShortText />;
+			return (
+				<ShortText
+					editMode={editMode}
+					questionId={question.id}
+					placeholder={question.textPlaceholder}
+				/>
+			);
 
 		default:
 			return false;

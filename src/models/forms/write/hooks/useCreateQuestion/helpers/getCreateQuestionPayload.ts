@@ -1,9 +1,13 @@
 import { id } from "@instantdb/react";
 import { QuestionTypesMap } from "~/constants/questionMaps";
 import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion } from "../../../../schema/questions";
+import type {
+	TQuestion,
+	TQuestionChoice,
+	TQuestionShortText,
+} from "../../../../schema/questions";
 
-export const getQuestionUpdatePayload = ({ type }: Pick<TQuestion, "type">) => {
+export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 	const updateBase = {
 		type,
 		title: "",
@@ -20,7 +24,7 @@ export const getQuestionUpdatePayload = ({ type }: Pick<TQuestion, "type">) => {
 					{ id: id(), text: "Yes" },
 					{ id: id(), text: "No" },
 				],
-			};
+			} as Pick<TQuestionChoice, "options">;
 
 			break;
 
@@ -30,7 +34,14 @@ export const getQuestionUpdatePayload = ({ type }: Pick<TQuestion, "type">) => {
 					{ id: id(), text: "Option 1" },
 					{ id: id(), text: "Option 2" },
 				],
-			};
+			} as Pick<TQuestionChoice, "options">;
+
+			break;
+
+		case QuestionTypes.ShortText:
+			update = {
+				textPlaceholder: "Your answer here...",
+			} as Pick<TQuestionShortText, "textPlaceholder">;
 
 			break;
 	}

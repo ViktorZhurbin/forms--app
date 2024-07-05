@@ -8,14 +8,14 @@ import styles from "./MultipleChoice.module.css";
 
 type MultipleChoiceProps = {
 	questionId: TQuestion["id"];
-	readOnly?: boolean;
+	editMode?: boolean;
 	options: TQuestionChoice["options"];
 };
 
 export const MultipleChoice = ({
 	questionId,
 	options,
-	readOnly,
+	editMode,
 }: MultipleChoiceProps) => {
 	const { updateQuestion } = useUpdateQuestion();
 
@@ -36,7 +36,7 @@ export const MultipleChoice = ({
 				return (
 					<EditableButtonOld
 						key={id}
-						readOnly={readOnly}
+						readOnly={!editMode}
 						variant="outline"
 						buttonText={text}
 						classNames={{

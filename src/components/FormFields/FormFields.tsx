@@ -26,7 +26,6 @@ export const FormFields = (props: {
 							data-position={getPositionDataAttribute(index, step)}
 						>
 							<Question
-								readOnly
 								isLast={isLast}
 								question={question}
 								onSubmitForm={onSubmit}

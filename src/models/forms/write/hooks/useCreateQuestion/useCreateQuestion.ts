@@ -4,7 +4,7 @@ import { useFormId } from "~/layouts/Builder/hooks/useFormId";
 import { useSelectedBlockId } from "~/layouts/Builder/hooks/useSelectedBlockId";
 import { useForm } from "~/models/forms/read";
 import { updateForm } from "../../write";
-import { getQuestionUpdatePayload } from "./helpers/getQuestionUpdatePayload";
+import { getCreateQuestionPayload } from "./helpers/getCreateQuestionPayload";
 
 type CreateQuestionParams = {
 	type: QuestionTypes;
@@ -33,7 +33,7 @@ export const useCreateQuestion = () => {
 				newBlockOrder = selectedBlockOrder + 1;
 			}
 
-			const newQuestion = getQuestionUpdatePayload({ type });
+			const newQuestion = getCreateQuestionPayload({ type });
 			const newQuestions = form?.questions.toSpliced(
 				newBlockOrder,
 				0,

@@ -28,6 +28,7 @@ interface TQuestionMultipleChoice extends TQuestionChoice {
 interface TQuestionShortText extends TQuestionBase {
 	type: QuestionTypes.ShortText;
 	group: QuestionGroups.Text;
+	textPlaceholder: string;
 }
 
 type TQuestion = TQuestionYesNo | TQuestionMultipleChoice | TQuestionShortText;

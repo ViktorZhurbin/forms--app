@@ -12,7 +12,7 @@ export const Main = () => {
 		<div className={styles.root}>
 			<AddBlockButton insertBefore tooltip="Add block above" />
 			<div className={styles.questionWrapper}>
-				<Question question={question} />
+				<Question editMode question={question} />
 			</div>
 			<AddBlockButton tooltip="Add block below" />
 		</div>

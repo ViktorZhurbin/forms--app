@@ -1,9 +1,9 @@
-import { tx } from "@instantdb/react";
+import { useCallback } from "react";
 import type { QuestionTypes } from "~/constants/questions";
 import { useFormId } from "~/layouts/Builder/hooks/useFormId";
 import { useSelectedBlockId } from "~/layouts/Builder/hooks/useSelectedBlockId";
-import { dbTransact } from "~/models/db";
 import { useForm } from "~/models/forms/read";
+import { updateForm } from "../../write";
 import { getQuestionUpdatePayload } from "./helpers/getQuestionUpdatePayload";
 
 type CreateQuestionParams = {
@@ -20,32 +20,32 @@ export const useCreateQuestion = () => {
 		({ id }) => id === selectedBlockId,
 	);
 
-	const createQuestion = async ({
-		type,
-		insertBefore,
-	}: CreateQuestionParams) => {
-		let newBlockOrder: number;
+	const createQuestion = useCallback(
+		async ({ type, insertBefore }: CreateQuestionParams) => {
+			let newBlockOrder: number;
 
-		// TODO: unit test this
-		if (typeof selectedBlockOrder !== "number") {
-			newBlockOrder = 0;
-		} else if (insertBefore) {
-			newBlockOrder = selectedBlockOrder;
-		} else {
-			newBlockOrder = selectedBlockOrder + 1;
-		}
+			// TODO: unit test this
+			if (typeof selectedBlockOrder !== "number") {
+				newBlockOrder = 0;
+			} else if (insertBefore) {
+				newBlockOrder = selectedBlockOrder;
+			} else {
+				newBlockOrder = selectedBlockOrder + 1;
+			}
 
-		const newQuestion = getQuestionUpdatePayload({ type });
-		const newQuestions = form?.questions.toSpliced(
-			newBlockOrder,
-			0,
-			newQuestion,
-		);
+			const newQuestion = getQuestionUpdatePayload({ type });
+			const newQuestions = form?.questions.toSpliced(
+				newBlockOrder,
+				0,
+				newQuestion,
+			);
 
-		await dbTransact(tx.forms[formId].update({ questions: newQuestions }));
+			await updateForm({ id: formId, questions: newQuestions });
 
-		return newQuestion.id;
-	};
+			return newQuestion.id;
+		},
+		[formId, form?.questions, selectedBlockOrder],
+	);
 
 	return { createQuestion };
 };

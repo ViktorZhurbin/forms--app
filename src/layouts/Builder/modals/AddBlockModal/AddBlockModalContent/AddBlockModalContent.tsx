@@ -1,17 +1,16 @@
 import { Title } from "@mantine/core";
 import type { CSSProperties } from "react";
 import { QuestionGroupsMap } from "~/constants/questionMaps";
+import type { QuestionTypes } from "~/constants/questions";
 import { AddBlockModalQuestionItem } from "../AddBlockModalQuestionItem/AddBlockModalQuestionItem";
 import styles from "./AddBlockModalContent.module.css";
 
 type AddBlockModalContentProps = {
-	insertBefore?: boolean;
-	onClose: () => void;
+	onAddBlock: (type: QuestionTypes) => void;
 };
 
 export const AddBlockModalContent = ({
-	onClose,
-	insertBefore,
+	onAddBlock,
 }: AddBlockModalContentProps) => {
 	const groups = Object.values(QuestionGroupsMap);
 	const wrapperStyles = { "--groups-count": groups.length } as CSSProperties;
@@ -29,8 +28,7 @@ export const AddBlockModalContent = ({
 								<AddBlockModalQuestionItem
 									key={item.type}
 									item={item}
-									onClose={onClose}
-									insertBefore={insertBefore}
+									onAddBlock={onAddBlock}
 								/>
 							))}
 						</div>

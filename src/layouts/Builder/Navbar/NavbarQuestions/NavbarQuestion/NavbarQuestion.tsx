@@ -2,14 +2,13 @@ import { Button, CloseButton, Text } from "@mantine/core";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import type { TQuestion } from "~/models/forms/schema/questions";
-import { useDeleteQuestion } from "~/models/forms/write/hooks/useDeleteQuestion";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
 	extends Pick<TQuestion, "id" | "type" | "group" | "title"> {
 	order: number;
 	isSelected: boolean;
-	prevId: TQuestion["id"] | null;
+	onDelete: () => void;
 }
 
 export const NavbarQuestion = ({
@@ -18,18 +17,9 @@ export const NavbarQuestion = ({
 	type,
 	group,
 	order,
-	prevId,
 	isSelected,
+	onDelete,
 }: NavbarQuestionProps) => {
-	const { deleteQuestion } = useDeleteQuestion();
-
-	const handleDelete = async () => {
-		await deleteQuestion(id);
-
-		if (prevId) {
-			navigateToQuestion(prevId);
-		}
-	};
 	return (
 		<Button
 			variant={isSelected ? "light" : "subtle"}
@@ -51,7 +41,7 @@ export const NavbarQuestion = ({
 					onClick={async (event) => {
 						event.preventDefault();
 
-						handleDelete();
+						onDelete();
 					}}
 				/>
 			</div>

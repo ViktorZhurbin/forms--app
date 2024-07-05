@@ -1,31 +1,20 @@
 import { Button, Text } from "@mantine/core";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import type { QuestionTypesMapItem } from "~/constants/questionMaps";
-import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
-import { useCreateQuestion } from "~/models/forms/write/hooks/useCreateQuestion";
+import type { QuestionTypes } from "~/constants/questions";
 import styles from "./AddBlockModalQuestionItem.module.css";
 
 interface AddBlockModalQuestionItemProps {
-	insertBefore?: boolean;
 	item: QuestionTypesMapItem;
-	onClose: () => void;
+	onAddBlock: (type: QuestionTypes) => void;
 }
 
 export const AddBlockModalQuestionItem = ({
 	item,
-	onClose,
-	insertBefore,
+	onAddBlock,
 }: AddBlockModalQuestionItemProps) => {
-	const { createQuestion } = useCreateQuestion();
-
-	const handleClick = async () => {
-		const questionId = await createQuestion({
-			insertBefore,
-			type: item.type,
-		});
-
-		navigateToQuestion(questionId);
-		onClose();
+	const handleClick = () => {
+		onAddBlock(item.type);
 	};
 
 	const classNames = {

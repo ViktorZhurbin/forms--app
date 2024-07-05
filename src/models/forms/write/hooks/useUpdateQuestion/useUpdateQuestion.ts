@@ -1,8 +1,8 @@
-import { tx } from "@instantdb/react";
+import { useCallback } from "react";
 import { useFormId } from "~/layouts/Builder/hooks/useFormId";
-import { dbTransact } from "~/models/db";
 import { useForm } from "~/models/forms/read";
 import type { TQuestion } from "../../../schema/questions";
+import { updateForm } from "../../write";
 
 type UpdateQuestionParams = {
 	id: TQuestion["id"];
@@ -13,17 +13,20 @@ export const useUpdateQuestion = () => {
 	const formId = useFormId();
 	const form = useForm(formId);
 
-	const updateQuestion = async ({ id, payload }: UpdateQuestionParams) => {
-		const newQuestions = form?.questions.map((question) => {
-			if (question.id === id) {
-				return { ...question, ...payload };
-			}
+	const updateQuestion = useCallback(
+		async ({ id, payload }: UpdateQuestionParams) => {
+			const newQuestions = form?.questions.map((question) => {
+				if (question.id === id) {
+					return { ...question, ...payload } as TQuestion;
+				}
 
-			return question;
-		});
+				return question;
+			});
 
-		await dbTransact(tx.forms[formId].update({ questions: newQuestions }));
-	};
+			await updateForm({ id: formId, questions: newQuestions });
+		},
+		[formId, form?.questions],
+	);
 
 	return { updateQuestion };
 };

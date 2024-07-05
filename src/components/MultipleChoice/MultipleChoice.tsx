@@ -21,10 +21,11 @@ export const MultipleChoice = ({
 
 	return (
 		<div className={styles.wrapper}>
-			{options.map(({ id, text }, index) => {
+			{options.map(({ id, text }, _, options) => {
 				const onChange = (text: string) => {
-					const newOptions = [...options];
-					newOptions[index].text = text;
+					const newOptions = options.map((option) =>
+						option.id === id ? { ...option, text } : option,
+					);
 
 					updateQuestion({
 						id: questionId,

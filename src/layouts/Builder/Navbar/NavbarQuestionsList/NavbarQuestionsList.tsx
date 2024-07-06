@@ -9,10 +9,7 @@ import {
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core";
-import {
-	restrictToFirstScrollableAncestor,
-	restrictToVerticalAxis,
-} from "@dnd-kit/modifiers";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
 	SortableContext,
 	arrayMove,
@@ -58,6 +55,10 @@ export const NavbarQuestionsList = ({
 		const activeItem = questions.find((question) => question.id === activId);
 
 		setActiveItem(activeItem ?? null);
+
+		// setTimeout(() => {
+		// 	debugger;
+		// }, 1000);
 	};
 
 	const handleDragEnd = (event: DragEndEvent) => {
@@ -88,7 +89,7 @@ export const NavbarQuestionsList = ({
 					onDragStart={handleDragStart}
 					modifiers={[
 						restrictToVerticalAxis,
-						restrictToFirstScrollableAncestor,
+						// restrictToFirstScrollableAncestor,
 					]}
 				>
 					<SortableContext items={items} strategy={verticalListSortingStrategy}>
@@ -104,13 +105,13 @@ export const NavbarQuestionsList = ({
 							};
 
 							return (
-								// <SkeletonWrapper key={id} visible={activeItem?.id === id}>
 								<NavbarQuestion
 									id={id}
 									key={id}
 									type={type}
 									group={group}
 									title={title}
+									isGhost={activeItem?.id === id}
 									order={index + 1}
 									onDelete={handleDelete}
 									isSelected={
@@ -120,14 +121,20 @@ export const NavbarQuestionsList = ({
 								// </SkeletonWrapper>
 							);
 						})}
+
 						{createPortal(
 							<DragOverlay>
 								{activeItem ? (
 									<NavbarQuestion
+										isDragged
 										id={activeItem.id}
 										type={activeItem.type}
 										group={activeItem.group}
 										title={activeItem.title}
+										isSelected={
+											Boolean(selectedBlockId) &&
+											activeItem.id === selectedBlockId
+										}
 									/>
 								) : null}
 							</DragOverlay>,

@@ -5,12 +5,15 @@ import { IconGripVertical } from "@tabler/icons-react";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import type { TQuestion } from "~/models/forms/schema/questions";
+import { clx } from "~/utils/classNames";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
 	extends Pick<TQuestion, "id" | "type" | "group" | "title"> {
 	order?: number;
 	isSelected?: boolean;
+	isDragged?: boolean;
+	isGhost?: boolean;
 	onDelete?: () => void;
 }
 
@@ -20,6 +23,8 @@ export const NavbarQuestion = ({
 	group,
 	title,
 	order,
+	isGhost,
+	isDragged,
 	isSelected,
 	onDelete,
 }: NavbarQuestionProps) => {
@@ -40,39 +45,47 @@ export const NavbarQuestion = ({
 			variant={isSelected ? "light" : "subtle"}
 			justify="start"
 			classNames={{
+				root: clx(
+					styles.button,
+					isGhost && styles.isGhost,
+					isDragged && styles.isDragged,
+				),
 				inner: styles.buttonInner,
 				label: styles.buttonLabel,
 			}}
 			data-active={isSelected}
-			className={styles.button}
 			onClick={() => {
 				navigateToQuestion(id);
 			}}
 		>
-			<div className={styles.labelGroup}>
-				<QuestionTag type={type} group={group} text={order} />
-				<Text size="sm" className={styles.labelTitle}>
-					{title || "..."}
-				</Text>
-			</div>
-			<div className={styles.actions}>
-				<CloseButton
-					{...listeners}
-					size="sm"
-					component="div"
-					className={styles.dragHandle}
-					icon={<IconGripVertical />}
-				/>
-				<CloseButton
-					size="sm"
-					component="div"
-					onClick={async (event) => {
-						event.preventDefault();
+			{isGhost ? null : (
+				<>
+					<div className={styles.labelGroup}>
+						<QuestionTag type={type} group={group} text={order} />
+						<Text size="sm" className={styles.labelTitle}>
+							{title || "..."}
+						</Text>
+					</div>
+					<div className={styles.actions}>
+						<CloseButton
+							{...listeners}
+							size="sm"
+							component="div"
+							className={styles.dragHandle}
+							icon={<IconGripVertical />}
+						/>
+						<CloseButton
+							size="sm"
+							component="div"
+							onClick={async (event) => {
+								event.preventDefault();
 
-						onDelete?.();
-					}}
-				/>
-			</div>
+								onDelete?.();
+							}}
+						/>
+					</div>
+				</>
+			)}
 		</Button>
 	);
 };

@@ -17,9 +17,14 @@
 	.button {
 		color: var(--mantine-color-gray-7);
 
-		&[data-active="true"] {
+		&[data-active="true"],
+		&.isDragged,
+		&.isGhost {
 			color: var(--mantine-color-blue-8);
 			background-color: var(--mantine-color-blue-0);
+		}
+
+		&[data-active="true"]:not(&.isGhost) {
 			border-left-color: var(--mantine-color-blue-5);
 		}
 	}
@@ -29,9 +34,14 @@
 	.button {
 		color: var(--mantine-color-dark-1);
 
-		&[data-active="true"] {
+		&[data-active="true"],
+		&.isDragged,
+		&.isGhost {
 			color: var(--mantine-color-blue-1);
 			background-color: rgba(24, 100, 171, 0.45);
+		}
+
+		&[data-active="true"]:not(&.isGhost) {
 			border-left-color: var(--mantine-color-blue-5);
 		}
 	}

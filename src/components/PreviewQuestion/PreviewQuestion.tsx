@@ -5,7 +5,7 @@ import { Question } from "../Question/Question";
 import styles from "./PreviewQuestion.module.css";
 // import { getPositionDataAttribute } from "./helpers/getPositionDataAttribute";
 
-type PreviewQuestionProps = {
+export type PreviewQuestionProps = {
 	index: number;
 	isLast: boolean;
 	question: TQuestion;

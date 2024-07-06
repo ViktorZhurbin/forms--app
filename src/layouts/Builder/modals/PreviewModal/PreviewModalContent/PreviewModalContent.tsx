@@ -1,11 +1,10 @@
 import { Button, Progress } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useRef, useState } from "react";
-import { FetchState } from "~/components/FetchState/FetchState";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { PreviewQuestion } from "~/components/PreviewQuestion/PreviewQuestion";
 import { useFormQuery } from "~/models/forms/read";
 import { useFormId } from "../../../hooks/useFormId";
+import { PreviewModalQuestions } from "../PreviewModalQuestions/PreviewModalQuestions";
 import styles from "./PreviewModalContent.module.css";
 
 type PreviewProps = {
@@ -18,8 +17,8 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-	const { isLoading, error, data } = useFormQuery(formId);
-	const form = data?.forms[0];
+	const formsQuery = useFormQuery(formId);
+	const form = formsQuery.data?.forms[0];
 
 	const isFirstStep = step === 0;
 	const isLastStep = step === (form && form?.questions?.length - 1);
@@ -70,26 +69,12 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 				</Button>
 			</div>
 
-			{form ? (
-				form.questions.map((question, index) => {
-					const isLast = index === form.questions.length - 1;
-
-					return (
-						<PreviewQuestion
-							key={question.id}
-							index={index}
-							isLast={isLast}
-							setStep={setStep}
-							containerRef={scrollContainerRef}
-							question={question}
-							onSubmit={handleSubmit}
-							goToNextStep={goToNextStep}
-						/>
-					);
-				})
-			) : (
-				<FetchState isLoading={isLoading} error={error} />
-			)}
+			<PreviewModalQuestions
+				setStep={setStep}
+				containerRef={scrollContainerRef}
+				onSubmit={handleSubmit}
+				goToNextStep={goToNextStep}
+			/>
 
 			<NavButtons
 				className={styles.navigation}

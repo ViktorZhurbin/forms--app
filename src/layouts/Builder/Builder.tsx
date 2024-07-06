@@ -10,7 +10,7 @@ export const Builder = () => {
 			padding="md"
 			header={{ height: 60 }}
 			navbar={{
-				width: 200,
+				width: 234,
 				breakpoint: 0,
 				collapsed: { desktop: false, mobile: false },
 			}}

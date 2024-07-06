@@ -1,14 +1,15 @@
 .button {
-	--padding-inline: 12px;
+	--padding-left: 12px;
 
-	padding-inline: var(--padding-inline);
+	padding-inline: var(--padding-left) 8px;
 	position: relative;
+	display: flex;
 
 	&[data-active="true"] {
 		--border-left-width: 4px;
 
 		border-left-width: var(--border-left-width);
-		padding-left: calc(var(--padding-inline) - var(--border-left-width));
+		padding-left: calc(var(--padding-left) - var(--border-left-width));
 	}
 }
 
@@ -36,6 +37,17 @@
 	}
 }
 
+.buttonInner {
+	flex-grow: 1;
+	width: 100%;
+}
+
+.buttonLabel {
+	flex: 1;
+	justify-content: space-between;
+	gap: 8px;
+}
+
 .labelGroup {
 	display: flex;
 	align-items: center;
@@ -50,11 +62,21 @@
 	text-overflow: ellipsis;
 }
 
-.button:not(:hover) .removeButton {
+.button:not(:hover) .actions {
 	display: none;
 }
 
-.removeButton {
-	position: absolute;
-	right: 0;
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	margin-right: -4px;
+}
+
+.dragHandle {
+	cursor: grab;
+
+	&:active {
+		cursor: grabbing;
+	}
 }

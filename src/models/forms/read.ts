@@ -18,20 +18,20 @@ const useFormQuery = (formId: TForm["id"]) => {
 const useCurrentFormQuery = () => {
 	const formId = useFormId();
 
-	const query = useFormQuery(formId);
-
-	return { ...query, data: query.data?.forms[0] };
+	return useFormQuery(formId);
 };
 
 const useCurrentForm = () => {
 	const { data } = useCurrentFormQuery();
 
-	return data;
+	return data?.forms?.[0];
 };
 
 const useCurrentQuestion = () => {
-	const form = useCurrentForm();
+	const { data } = useCurrentFormQuery();
 	const selectedBlockId = useSelectedBlockId();
+
+	const form = data?.forms?.[0];
 
 	const index =
 		form?.questions.findIndex((question) => question.id === selectedBlockId) ??

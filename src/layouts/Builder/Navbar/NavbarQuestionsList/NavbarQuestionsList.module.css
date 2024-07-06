@@ -1,4 +1,5 @@
 .questionsList {
-  display: grid;
-  gap: 4px;
+	display: grid;
+	gap: 4px;
+	padding: 4px;
 }

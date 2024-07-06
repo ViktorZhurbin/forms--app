@@ -1,0 +1,18 @@
+.root {
+	width: 100%;
+	min-height: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	scroll-snap-align: center;
+	scroll-snap-stop: always;
+	scroll-behavior: smooth;
+
+	transition: transform 600ms ease 0s, opacity 300ms ease 0s;
+}
+
+.root[data-position="hidden"] {
+	display: none;
+}

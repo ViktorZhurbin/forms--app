@@ -1,22 +1,44 @@
-.root {
+.container {
 	position: relative;
-	overflow: hidden;
+
 	display: flex;
 	flex-direction: column;
 
-	width: 100%;
 	height: 100dvh;
-	max-height: 100dvh;
+	overflow: auto;
+
+	scroll-behavior: smooth;
+	scroll-snap-type: y mandatory;
+
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	-webkit-overflow-scrolling: touch;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
+.exitButton,
 .navigation {
 	position: fixed;
-	bottom: 10px;
-	right: 10px;
+
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+
+	padding-block: var(--mantine-spacing-xs);
+	padding-inline: var(--mantine-spacing-md);
+	background-color: var(--mantine-color-body);
 }
 
 .exitButton {
-	position: fixed;
-	top: 12px;
-	right: 16px;
+	top: 0;
+	right: 0;
+	z-index: 2;
+}
+
+.navigation {
+	bottom: 0;
+	right: 0;
 }

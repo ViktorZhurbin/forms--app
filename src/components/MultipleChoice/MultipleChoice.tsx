@@ -10,14 +10,12 @@ type MultipleChoiceProps = {
 	questionId: TQuestion["id"];
 	editMode?: boolean;
 	options: TQuestionChoice["options"];
-	onFocus?: () => void;
 };
 
 export const MultipleChoice = ({
 	questionId,
 	options,
 	editMode,
-	onFocus,
 }: MultipleChoiceProps) => {
 	const { updateQuestion } = useUpdateQuestion();
 
@@ -41,7 +39,6 @@ export const MultipleChoice = ({
 						readOnly={!editMode}
 						variant="outline"
 						buttonText={text}
-						onFocus={onFocus}
 						classNames={{
 							textInput: styles.textInput,
 						}}

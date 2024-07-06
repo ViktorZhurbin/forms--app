@@ -15,7 +15,6 @@ interface QuestionProps {
 	editMode?: boolean;
 	onSubmitForm?: () => void;
 	goToNextStep?: () => void;
-	onFocusElement?: () => void;
 }
 
 export const Question = ({
@@ -25,7 +24,6 @@ export const Question = ({
 	editMode,
 	onSubmitForm,
 	goToNextStep,
-	onFocusElement,
 }: QuestionProps) => {
 	let buttonText: string;
 	let onSubmit: (() => void) | undefined;
@@ -60,11 +58,7 @@ export const Question = ({
 				/>
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						<QuestionComponent
-							question={question}
-							editMode={editMode}
-							onFocus={onFocusElement}
-						/>
+						<QuestionComponent question={question} editMode={editMode} />
 					</Stack>
 
 					<EditableButton
@@ -74,7 +68,6 @@ export const Question = ({
 						classNames={{
 							button: styles.submitButton,
 						}}
-						onFocus={onFocusElement}
 					/>
 				</div>
 			</div>
@@ -82,21 +75,15 @@ export const Question = ({
 	);
 };
 
-type QuestionComponentProps = Pick<QuestionProps, "editMode" | "question"> & {
-	onFocus?: () => void;
-};
-
 function QuestionComponent({
 	question,
 	editMode,
-	onFocus,
-}: QuestionComponentProps) {
+}: Pick<QuestionProps, "editMode" | "question">) {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
 		case QuestionTypes.MultipleChoice:
 			return (
 				<MultipleChoice
-					onFocus={onFocus}
 					editMode={editMode}
 					questionId={question.id}
 					options={question.options}
@@ -106,7 +93,6 @@ function QuestionComponent({
 		case QuestionTypes.ShortText:
 			return (
 				<ShortText
-					onFocus={onFocus}
 					editMode={editMode}
 					questionId={question.id}
 					placeholder={question.textPlaceholder}

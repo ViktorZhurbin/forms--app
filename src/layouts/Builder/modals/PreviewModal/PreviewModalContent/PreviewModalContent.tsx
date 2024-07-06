@@ -1,9 +1,9 @@
 import { Button } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
-import { FormFields } from "~/components/FormFields/FormFields";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
+import { PreviewQuestion } from "~/components/PreviewQuestion/PreviewQuestion";
 import { useFormQuery } from "~/models/forms/read";
 import { useFormId } from "../../../hooks/useFormId";
 import styles from "./PreviewModalContent.module.css";
@@ -16,23 +16,32 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 	const formId = useFormId();
 	const [step, setStep] = useState(0);
 
+	const scrollContainerRef = useRef<HTMLDivElement>(null);
+
 	const { isLoading, error, data } = useFormQuery(formId);
 	const form = data?.forms[0];
 
 	const isFirstStep = step === 0;
-	const isLastStep =
-		step === (form?.questions.length && form?.questions?.length - 1);
+	const isLastStep = step === (form && form?.questions?.length - 1);
+
+	const scrollToStep = (step: number) => {
+		const container = scrollContainerRef.current;
+
+		// container may still be rendering
+		// setTimeout to wait for when it's ready to scroll
+		setTimeout(() => {
+			const target = container?.querySelectorAll("[data-step]")?.[step];
+
+			target?.scrollIntoView({ block: "center", behavior: "smooth" });
+		});
+	};
 
 	const goToPreviousStep = () => {
-		if (isFirstStep) return;
-
-		setStep((step) => step - 1);
+		scrollToStep(step - 1);
 	};
 
 	const goToNextStep = () => {
-		if (isLastStep) return;
-
-		setStep((step) => step + 1);
+		scrollToStep(step + 1);
 	};
 
 	const handleSubmit = () => {
@@ -40,26 +49,37 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 	};
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.container} ref={scrollContainerRef}>
+			<div className={styles.exitButton}>
+				<Button
+					color="rgb(31, 41, 55)"
+					leftSection={<IconX />}
+					onClick={onClose}
+				>
+					Exit preview
+				</Button>
+			</div>
+
 			{form ? (
-				<FormFields
-					step={step}
-					questions={form.questions}
-					onSubmit={handleSubmit}
-					goToNextStep={goToNextStep}
-				/>
+				form.questions.map((question, index) => {
+					const isLast = index === form.questions.length - 1;
+
+					return (
+						<PreviewQuestion
+							key={question.id}
+							index={index}
+							isLast={isLast}
+							setStep={setStep}
+							containerRef={scrollContainerRef}
+							question={question}
+							onSubmit={handleSubmit}
+							goToNextStep={goToNextStep}
+						/>
+					);
+				})
 			) : (
 				<FetchState isLoading={isLoading} error={error} />
 			)}
-
-			<Button
-				color="rgb(31, 41, 55)"
-				leftSection={<IconX />}
-				className={styles.exitButton}
-				onClick={onClose}
-			>
-				Exit preview
-			</Button>
 
 			<NavButtons
 				className={styles.navigation}

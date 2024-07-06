@@ -1,6 +1,8 @@
 import {
 	DndContext,
 	type DragEndEvent,
+	DragOverlay,
+	type DragStartEvent,
 	KeyboardSensor,
 	PointerSensor,
 	closestCenter,
@@ -19,8 +21,10 @@ import {
 } from "@dnd-kit/sortable";
 import { ScrollArea } from "@mantine/core";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import type { TForm } from "~/models/forms/schema/forms";
+import type { TQuestion } from "~/models/forms/schema/questions";
 import { updateForm } from "~/models/forms/write";
 import { useDeleteQuestion } from "~/models/forms/write/hooks/useDeleteQuestion";
 import { useFormId } from "../../hooks/useFormId";
@@ -39,6 +43,7 @@ export const NavbarQuestionsList = ({
 
 	const { deleteQuestion } = useDeleteQuestion();
 
+	const [activeItem, setActiveItem] = useState<TQuestion | null>(null);
 	const [items, setItems] = useState(questions.map((question) => question.id));
 
 	const sensors = useSensors(
@@ -47,6 +52,13 @@ export const NavbarQuestionsList = ({
 			coordinateGetter: sortableKeyboardCoordinates,
 		}),
 	);
+
+	const handleDragStart = (event: DragStartEvent) => {
+		const activId = event.active.id as string;
+		const activeItem = questions.find((question) => question.id === activId);
+
+		setActiveItem(activeItem ?? null);
+	};
 
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
@@ -58,6 +70,7 @@ export const NavbarQuestionsList = ({
 
 				const newQuestions = arrayMove(questions, oldIndex, newIndex);
 
+				setActiveItem(null);
 				updateForm({ id: formId, questions: newQuestions });
 
 				return newQuestions.map((question) => question.id);
@@ -72,6 +85,7 @@ export const NavbarQuestionsList = ({
 					sensors={sensors}
 					collisionDetection={closestCenter}
 					onDragEnd={handleDragEnd}
+					onDragStart={handleDragStart}
 					modifiers={[
 						restrictToVerticalAxis,
 						restrictToFirstScrollableAncestor,
@@ -106,6 +120,19 @@ export const NavbarQuestionsList = ({
 								// </SkeletonWrapper>
 							);
 						})}
+						{createPortal(
+							<DragOverlay>
+								{activeItem ? (
+									<NavbarQuestion
+										id={activeItem.id}
+										type={activeItem.type}
+										group={activeItem.group}
+										title={activeItem.title}
+									/>
+								) : null}
+							</DragOverlay>,
+							document.body,
+						)}
 					</SortableContext>
 				</DndContext>
 			</div>

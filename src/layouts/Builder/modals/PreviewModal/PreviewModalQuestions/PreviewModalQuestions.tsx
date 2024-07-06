@@ -1,30 +1,23 @@
-import { FetchState } from "~/components/FetchState/FetchState";
 import {
 	PreviewQuestion,
 	type PreviewQuestionProps,
 } from "~/components/PreviewQuestion/PreviewQuestion";
-import { useFormId } from "~/layouts/Builder/hooks/useFormId";
-import { useFormQuery } from "~/models/forms/read";
+import type { TForm } from "~/models/forms/schema/forms";
 
 type PreviewModalQuestionsProps = Pick<
 	PreviewQuestionProps,
 	"setStep" | "containerRef" | "onSubmit" | "goToNextStep"
->;
+> & {
+	form: TForm;
+};
 
 export const PreviewModalQuestions = ({
+	form,
 	setStep,
 	containerRef,
 	onSubmit,
 	goToNextStep,
 }: PreviewModalQuestionsProps) => {
-	const formId = useFormId();
-	const { isLoading, error, data } = useFormQuery(formId);
-	const form = data?.forms[0];
-
-	if (!form) {
-		return <FetchState isLoading={isLoading} error={error} />;
-	}
-
 	return (
 		<>
 			{form.questions.map((question, index) => {

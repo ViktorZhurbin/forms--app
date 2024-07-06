@@ -1,6 +1,6 @@
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { EditableText } from "~/components/Question/EditableText/EditableText";
-import { useForm } from "~/models/forms/read";
+import { useCurrentForm } from "~/models/forms/read";
 import { updateForm } from "~/models/forms/write";
 import { useFormId } from "../hooks/useFormId";
 import styles from "./Header.module.css";
@@ -10,8 +10,7 @@ import { PublishButton } from "./PublishButton/PublishButton";
 
 export const Header = () => {
 	const formId = useFormId();
-
-	const form = useForm(formId);
+	const form = useCurrentForm();
 
 	const onChangeTitle = (name: string) => {
 		updateForm({ id: formId, name });

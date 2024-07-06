@@ -15,16 +15,18 @@ const useFormQuery = (formId: TForm["id"]) => {
 	});
 };
 
-const useForm = (formId: TForm["id"]) => {
-	const { data } = useFormQuery(formId);
+const useCurrentFormQuery = () => {
+	const formId = useFormId();
 
-	return data?.forms[0];
+	const query = useFormQuery(formId);
+
+	return { ...query, data: query.data?.forms[0] };
 };
 
 const useCurrentForm = () => {
-	const formId = useFormId();
+	const { data } = useCurrentFormQuery();
 
-	return useForm(formId);
+	return data;
 };
 
 const useCurrentQuestion = () => {
@@ -41,10 +43,4 @@ const useCurrentQuestion = () => {
 	return { question, order };
 };
 
-export {
-	useAllForms,
-	useForm,
-	useFormQuery,
-	useCurrentForm,
-	useCurrentQuestion,
-};
+export { useAllForms, useCurrentFormQuery, useCurrentForm, useCurrentQuestion };

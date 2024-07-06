@@ -1,9 +1,9 @@
 import { Button, Progress } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useRef, useState } from "react";
+import { FetchState } from "~/components/FetchState/FetchState";
 import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { useFormQuery } from "~/models/forms/read";
-import { useFormId } from "../../../hooks/useFormId";
+import { useCurrentFormQuery } from "~/models/forms/read";
 import { PreviewModalQuestions } from "../PreviewModalQuestions/PreviewModalQuestions";
 import styles from "./PreviewModalContent.module.css";
 
@@ -12,16 +12,13 @@ type PreviewProps = {
 };
 
 export const PreviewModalContent = ({ onClose }: PreviewProps) => {
-	const formId = useFormId();
 	const [step, setStep] = useState(0);
+	const { isLoading, error, data } = useCurrentFormQuery();
 
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-	const formsQuery = useFormQuery(formId);
-	const form = formsQuery.data?.forms[0];
-
 	const isFirstStep = step === 0;
-	const isLastStep = step === (form && form?.questions?.length - 1);
+	const isLastStep = step === (data && data?.questions?.length - 1);
 
 	const scrollToStep = (step: number) => {
 		const container = scrollContainerRef.current;
@@ -49,12 +46,12 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 
 	return (
 		<div className={styles.container} ref={scrollContainerRef}>
-			{form?.questions && (
+			{data?.questions && (
 				<Progress
 					size="sm"
 					radius={0}
 					className={styles.progress}
-					value={(100 / form.questions.length) * (step + 1)}
+					value={(100 / data.questions.length) * (step + 1)}
 					transitionDuration={500}
 				/>
 			)}
@@ -69,12 +66,17 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 				</Button>
 			</div>
 
-			<PreviewModalQuestions
-				setStep={setStep}
-				containerRef={scrollContainerRef}
-				onSubmit={handleSubmit}
-				goToNextStep={goToNextStep}
-			/>
+			{!data ? (
+				<FetchState isLoading={isLoading} error={error} />
+			) : (
+				<PreviewModalQuestions
+					form={data}
+					setStep={setStep}
+					containerRef={scrollContainerRef}
+					onSubmit={handleSubmit}
+					goToNextStep={goToNextStep}
+				/>
+			)}
 
 			<NavButtons
 				className={styles.navigation}

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import type { QuestionTypes } from "~/constants/questions";
 import { useFormId } from "~/layouts/Builder/hooks/useFormId";
 import { useSelectedBlockId } from "~/layouts/Builder/hooks/useSelectedBlockId";
-import { useForm } from "~/models/forms/read";
+import { useCurrentForm } from "~/models/forms/read";
 import { updateForm } from "../../write";
 import { getCreateQuestionPayload } from "./helpers/getCreateQuestionPayload";
 
@@ -14,7 +14,7 @@ type CreateQuestionParams = {
 export const useCreateQuestion = () => {
 	const formId = useFormId();
 	const selectedBlockId = useSelectedBlockId();
-	const form = useForm(formId);
+	const form = useCurrentForm();
 
 	const selectedBlockOrder = form?.questions.findIndex(
 		({ id }) => id === selectedBlockId,

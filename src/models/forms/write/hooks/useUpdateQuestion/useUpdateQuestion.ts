@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useFormId } from "~/layouts/Builder/hooks/useFormId";
-import { useForm } from "~/models/forms/read";
+import { useCurrentForm } from "~/models/forms/read";
 import type { TQuestion } from "../../../schema/questions";
 import { updateForm } from "../../write";
 
@@ -11,7 +11,7 @@ type UpdateQuestionParams = {
 
 export const useUpdateQuestion = () => {
 	const formId = useFormId();
-	const form = useForm(formId);
+	const form = useCurrentForm();
 
 	const updateQuestion = useCallback(
 		async ({ id, payload }: UpdateQuestionParams) => {

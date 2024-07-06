@@ -5,7 +5,7 @@ import {
 } from "@mantine/core";
 import { IconMoon, IconSun } from "@tabler/icons-react";
 
-export const ColorSchemeToggle = () => {
+export const DarkModeToggle = () => {
 	const { setColorScheme } = useMantineColorScheme();
 
 	const computedColorScheme = useComputedColorScheme("light");
@@ -15,7 +15,7 @@ export const ColorSchemeToggle = () => {
 	};
 
 	return (
-		<ActionIcon variant="default" onClick={toggleColorScheme}>
+		<ActionIcon size="lg" variant="default" onClick={toggleColorScheme}>
 			{computedColorScheme === "dark" ? <IconSun /> : <IconMoon />}
 		</ActionIcon>
 	);

@@ -1,4 +1,4 @@
-import { ColorSchemeToggle } from "~/components/ColorSchemeToggle/ColorSchemeToggle";
+import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { EditableText } from "~/components/Question/EditableText/EditableText";
 import { useForm } from "~/models/forms/read";
 import { updateForm } from "~/models/forms/write";
@@ -24,9 +24,9 @@ export const Header = () => {
 				<EditableText initialValue={form?.name} onChange={onChangeTitle} />
 			</div>
 			<div className={styles.wrapper}>
-				<ColorSchemeToggle />
 				<PreviewButton />
 				<PublishButton />
+				<DarkModeToggle />
 			</div>
 		</div>
 	);

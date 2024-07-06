@@ -1,13 +1,13 @@
 .root,
 .wrapper {
-  display: flex;
-  align-items: center;
-  gap: var(--mantine-spacing-sm);
-  flex-wrap: nowrap;
+	display: flex;
+	align-items: center;
+	gap: calc(var(--mantine-spacing-md) / 2);
+	flex-wrap: nowrap;
 }
 
 .root {
-  height: 100%;
-  padding-inline: var(--mantine-spacing-md);
-  justify-content: space-between;
+	height: 100%;
+	padding-inline: var(--mantine-spacing-md);
+	justify-content: space-between;
 }

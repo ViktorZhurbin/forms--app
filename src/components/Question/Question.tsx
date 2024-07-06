@@ -1,4 +1,5 @@
-import { Stack } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
+import { IconArrowRight } from "@tabler/icons-react";
 import { QuestionTypes } from "~/constants/questions";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
@@ -48,14 +49,18 @@ export const Question = ({
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
-				{order}.
-				<EditableText
-					variant="h1"
-					readOnly={!editMode}
-					placeholder="Your question here..."
-					initialValue={question.title || "..."}
-					onChange={onChangeTitle}
-				/>
+				<div className={styles.titleWrapper}>
+					<div className={styles.order}>
+						<Text>{order}</Text> <IconArrowRight />
+					</div>
+					<EditableText
+						variant="h1"
+						readOnly={!editMode}
+						placeholder="Your question here..."
+						initialValue={question.title || "..."}
+						onChange={onChangeTitle}
+					/>
+				</div>
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
 						<QuestionComponent question={question} editMode={editMode} />

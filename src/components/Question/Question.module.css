@@ -1,22 +1,40 @@
 .root {
-  padding: 0 40px;
+	padding: 0 40px;
 }
 
 .wrapper {
-  margin: 0 auto;
-  max-width: 720px;
+	margin: 0 auto;
+	max-width: 720px;
 
-  display: grid;
-  gap: 32px;
+	display: grid;
+	gap: 32px;
+}
+
+.titleWrapper {
+	position: relative;
+
+	.order {
+		position: absolute;
+		transform: translate(-110%, 65%);
+		display: flex;
+		gap: 2px;
+		flex-wrap: nowrap;
+		align-items: center;
+
+		svg {
+			width: 12px;
+			height: 12px;
+		}
+	}
 }
 
 .bottomWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 }
 
 .submitButton {
-  font-weight: bold;
-  width: max-content;
+	font-weight: bold;
+	width: max-content;
 }

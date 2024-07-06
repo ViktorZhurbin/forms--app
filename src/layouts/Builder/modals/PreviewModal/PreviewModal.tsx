@@ -9,6 +9,7 @@ export const PreviewModal = ({ isOpen, onClose }: ModalProps) => {
 			padding={0}
 			opened={isOpen}
 			withCloseButton={false}
+			withOverlay={false}
 			transitionProps={{ transition: "fade-down" }}
 			onClose={onClose}
 		>

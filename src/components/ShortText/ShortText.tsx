@@ -8,12 +8,14 @@ type ShortTextProps = {
 	placeholder?: string;
 	editMode?: boolean;
 	questionId: TQuestion["id"];
+	onFocus?: () => void;
 };
 
 export const ShortText = ({
 	editMode,
 	questionId,
 	placeholder,
+	onFocus,
 }: ShortTextProps) => {
 	const { updateQuestion } = useUpdateQuestion();
 
@@ -31,6 +33,7 @@ export const ShortText = ({
 			w="100%"
 			placeholder={placeholder}
 			value={editMode ? placeholder : "TODO :)"}
+			onFocus={onFocus}
 			onChange={onChange}
 			classNames={{ input: editMode ? styles.editModeInput : "" }}
 		/>

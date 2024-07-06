@@ -18,7 +18,18 @@ export const NavButtons = (props: {
 
 	return (
 		<div className={`${className} ${styles.root}`}>
-			<Button variant="subtle" disabled={isPrevDisabled} onClick={onClickPrev}>
+			<Button
+				variant="subtle"
+				disabled={isPrevDisabled}
+				onClick={onClickPrev}
+				onKeyDown={(event) => {
+					// stop tabbing to next element on the last form element
+					if (event.key === "Tab" && !event.shiftKey && isNextDisabled) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+				}}
+			>
 				Previous
 			</Button>
 			<Button variant="subtle" disabled={isNextDisabled} onClick={onClickNext}>

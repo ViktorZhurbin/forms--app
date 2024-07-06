@@ -11,6 +11,7 @@ export const EditableButtonOld = ({
 	classNames,
 	onClick,
 	onChange,
+	onFocus,
 }: EditableButtonOldProps) => {
 	const handleClickButton = () => {
 		if (readOnly) {
@@ -30,6 +31,7 @@ export const EditableButtonOld = ({
 			classNames={{
 				input: clx(styles.textInput, styles[variant], classNames?.textInput),
 			}}
+			onFocus={onFocus}
 			onChange={(event) => {
 				onChange?.(event.currentTarget.value);
 			}}

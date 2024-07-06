@@ -6,6 +6,7 @@ type EditableButtonOldProps = {
 	classNames?: Record<"textInput", string>;
 	variant?: EditableButtonVariant;
 	onClick?: () => void;
+	onFocus?: () => void;
 	onChange?: (value: string) => void;
 };
 

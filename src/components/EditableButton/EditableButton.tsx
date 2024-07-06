@@ -19,9 +19,11 @@ export const EditableButton = ({
 	onKeyDown,
 	isEditable,
 	classNames,
+	onFocus,
 }: EditableButtonProps) => {
 	return (
 		<Button
+			onFocus={onFocus}
 			onClick={onClick}
 			onKeyDown={onKeyDown}
 			tabIndex={isEditable ? -1 : 0}

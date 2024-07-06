@@ -28,11 +28,11 @@ export const ShortText = ({
 
 	return (
 		<TextInput
-			classNames={{ input: styles.editModeInput }}
 			w="100%"
 			placeholder={placeholder}
+			value={editMode ? placeholder : "TODO :)"}
 			onChange={onChange}
-			value={editMode ? placeholder : ""}
+			classNames={{ input: editMode ? styles.editModeInput : "" }}
 		/>
 	);
 };

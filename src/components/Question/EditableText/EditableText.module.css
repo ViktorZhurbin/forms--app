@@ -1,16 +1,22 @@
-.input {
-  overflow: hidden;
-  padding-inline: 4px;
-  border-radius: 0;
+.readOnly {
+	cursor: default;
+}
 
-  &:focus,
-  &:focus-visible {
-    border-bottom: 1px solid var(--mantine-primary-color-filled);
-  }
+.input {
+	overflow: hidden;
+	padding-inline: 4px;
+	border-radius: 0;
+
+	&:not(.readOnly) {
+		&:focus,
+		&:focus-visible {
+			border-bottom: 1px solid var(--mantine-primary-color-filled);
+		}
+	}
 }
 
 .h1 {
-  font-size: var(--mantine-h1-font-size);
-  line-height: var(--mantine-h1-line-height);
-  font-weight: var(--mantine-h1-font-weight);
+	font-size: var(--mantine-h1-font-size);
+	line-height: var(--mantine-h1-line-height);
+	font-weight: var(--mantine-h1-font-weight);
 }

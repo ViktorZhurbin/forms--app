@@ -38,7 +38,7 @@ export const EditableText = ({
 			value={initialValue}
 			placeholder={placeholder}
 			classNames={{
-				input: clx(styles.input, styles[variant]),
+				input: clx(styles.input, styles[variant], readOnly && styles.readOnly),
 			}}
 			onFocus={onFocus}
 			onKeyDown={handleKeyDown}

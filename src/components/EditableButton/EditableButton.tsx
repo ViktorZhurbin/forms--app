@@ -1,4 +1,5 @@
 import { Button } from "@mantine/core";
+import type { HTMLButtonProps } from "~/types/dom";
 import { clx } from "~/utils/classNames";
 import {
 	EditableElement,
@@ -6,9 +7,7 @@ import {
 } from "../EditableElement/EditableElement";
 import styles from "./EditableButton.module.css";
 
-interface EditableButtonProps extends EditableElementProps {
-	onClick?: React.MouseEventHandler<HTMLButtonElement>;
-	onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
+interface EditableButtonProps extends EditableElementProps, HTMLButtonProps {
 	classNames?: {
 		button?: string;
 	};

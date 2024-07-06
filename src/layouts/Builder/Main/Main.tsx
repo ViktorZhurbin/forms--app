@@ -4,15 +4,15 @@ import { AddBlockButton } from "../components/AddBlockButton/AddBlockButton";
 import styles from "./Main.module.css";
 
 export const Main = () => {
-	const question = useCurrentQuestion();
+	const { question, order } = useCurrentQuestion();
 
-	if (!question) return null;
+	if (!question || order === null) return null;
 
 	return (
 		<div className={styles.root}>
 			<AddBlockButton insertBefore tooltip="Add block above" />
 			<div className={styles.questionWrapper}>
-				<Question editMode question={question} />
+				<Question editMode question={question} order={order} />
 			</div>
 			<AddBlockButton tooltip="Add block below" />
 		</div>

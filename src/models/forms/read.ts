@@ -31,7 +31,14 @@ const useCurrentQuestion = () => {
 	const form = useCurrentForm();
 	const selectedBlockId = useSelectedBlockId();
 
-	return form?.questions.find((question) => question.id === selectedBlockId);
+	const index =
+		form?.questions.findIndex((question) => question.id === selectedBlockId) ??
+		null;
+
+	const question = index !== null && form?.questions[index];
+	const order = index && index + 1;
+
+	return { question, order };
 };
 
 export {

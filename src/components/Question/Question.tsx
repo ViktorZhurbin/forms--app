@@ -10,6 +10,7 @@ import styles from "./Question.module.css";
 
 interface QuestionProps {
 	question: TQuestion;
+	order: number;
 	isLast?: boolean;
 	editMode?: boolean;
 	onSubmitForm?: () => void;
@@ -17,6 +18,7 @@ interface QuestionProps {
 }
 
 export const Question = ({
+	order,
 	isLast,
 	question,
 	editMode,
@@ -46,11 +48,12 @@ export const Question = ({
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
+				{order}.
 				<EditableText
 					variant="h1"
 					readOnly={!editMode}
 					placeholder="Your question here..."
-					initialValue={question.title}
+					initialValue={question.title || "..."}
 					onChange={onChangeTitle}
 				/>
 

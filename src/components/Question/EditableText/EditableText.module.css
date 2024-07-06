@@ -1,16 +1,20 @@
-.readOnly {
-	cursor: default;
-}
-
 .input {
 	overflow: hidden;
 	padding-inline: 4px;
-	border-radius: 0;
+	cursor: default;
 
 	&:not(.readOnly) {
+		cursor: pointer;
+
+		&:hover,
 		&:focus,
 		&:focus-visible {
-			border-bottom: 1px solid var(--mantine-primary-color-filled);
+			background-color: var(--mantine-color-default-hover);
+		}
+
+		&:focus,
+		&:focus-visible {
+			border: 1px solid var(--mantine-primary-color-filled);
 		}
 	}
 }

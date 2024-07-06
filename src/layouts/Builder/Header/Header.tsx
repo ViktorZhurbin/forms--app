@@ -21,7 +21,11 @@ export const Header = () => {
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
 				<HomeButton />
-				<EditableText initialValue={form?.name} onChange={onChangeTitle} />
+				<EditableText
+					tooltip="Rename"
+					initialValue={form?.name}
+					onChange={onChangeTitle}
+				/>
 			</div>
 			<div className={styles.wrapper}>
 				<PreviewButton />

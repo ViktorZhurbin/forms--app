@@ -1,10 +1,11 @@
-import { Textarea } from "@mantine/core";
+import { Textarea, Tooltip } from "@mantine/core";
 import { type KeyboardEventHandler, useRef } from "react";
 import { clx } from "~/utils/classNames";
 import styles from "./EditableText.module.css";
 
 type EditableTextProps = {
 	initialValue?: string;
+	tooltip?: string;
 	placeholder?: string;
 	variant?: "h1" | "body";
 	readOnly?: boolean;
@@ -14,6 +15,7 @@ type EditableTextProps = {
 
 export const EditableText = ({
 	variant = "body",
+	tooltip,
 	readOnly,
 	onFocus,
 	onChange,
@@ -29,24 +31,30 @@ export const EditableText = ({
 	};
 
 	return (
-		<Textarea
-			autosize
-			ref={inputRef}
-			readOnly={readOnly}
-			tabIndex={readOnly ? -1 : 0}
-			variant="unstyled"
-			value={initialValue}
-			placeholder={placeholder}
-			classNames={{
-				input: clx(styles.input, styles[variant], readOnly && styles.readOnly),
-			}}
-			onFocus={onFocus}
-			onKeyDown={handleKeyDown}
-			onChange={(event) => {
-				const newValue = event.currentTarget.value;
+		<Tooltip withArrow label={tooltip} disabled={!tooltip}>
+			<Textarea
+				autosize
+				ref={inputRef}
+				readOnly={readOnly}
+				tabIndex={readOnly ? -1 : 0}
+				variant="unstyled"
+				value={initialValue}
+				placeholder={placeholder}
+				classNames={{
+					input: clx(
+						styles.input,
+						styles[variant],
+						readOnly && styles.readOnly,
+					),
+				}}
+				onFocus={onFocus}
+				onKeyDown={handleKeyDown}
+				onChange={(event) => {
+					const newValue = event.currentTarget.value;
 
-				onChange?.(newValue);
-			}}
-		/>
+					onChange?.(newValue);
+				}}
+			/>
+		</Tooltip>
 	);
 };

@@ -1,4 +1,5 @@
-import { Button } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import styles from "./NavButtons.module.css";
 
 export const NavButtons = (props: {
@@ -18,8 +19,8 @@ export const NavButtons = (props: {
 
 	return (
 		<div className={`${className} ${styles.root}`}>
-			<Button
-				variant="subtle"
+			<ActionIcon
+				size="lg"
 				disabled={isPrevDisabled}
 				onClick={onClickPrev}
 				onKeyDown={(event) => {
@@ -30,11 +31,12 @@ export const NavButtons = (props: {
 					}
 				}}
 			>
-				Previous
-			</Button>
-			<Button variant="subtle" disabled={isNextDisabled} onClick={onClickNext}>
-				Next
-			</Button>
+				<IconChevronUp />
+			</ActionIcon>
+
+			<ActionIcon size="lg" disabled={isNextDisabled} onClick={onClickNext}>
+				<IconChevronDown />
+			</ActionIcon>
 		</div>
 	);
 };

@@ -19,6 +19,20 @@
 	}
 }
 
+.progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 3;
+}
+
+.exitButton {
+	top: 0;
+	right: 0;
+	z-index: 2;
+}
+
 .exitButton,
 .navigation {
 	position: fixed;
@@ -30,12 +44,6 @@
 	padding-block: var(--mantine-spacing-xs);
 	padding-inline: var(--mantine-spacing-md);
 	background-color: var(--mantine-color-body);
-}
-
-.exitButton {
-	top: 0;
-	right: 0;
-	z-index: 2;
 }
 
 .navigation {

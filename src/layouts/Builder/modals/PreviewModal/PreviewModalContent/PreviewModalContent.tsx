@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+import { Button, Progress } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useRef, useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
@@ -50,6 +50,16 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 
 	return (
 		<div className={styles.container} ref={scrollContainerRef}>
+			{form?.questions && (
+				<Progress
+					size="sm"
+					radius={0}
+					className={styles.progress}
+					value={(100 / form.questions.length) * (step + 1)}
+					transitionDuration={500}
+				/>
+			)}
+
 			<div className={styles.exitButton}>
 				<Button
 					color="rgb(31, 41, 55)"

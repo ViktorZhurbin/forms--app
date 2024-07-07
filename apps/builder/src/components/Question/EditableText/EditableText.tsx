@@ -1,6 +1,6 @@
+import { clx } from "@forms/shared/utils/classNames";
 import { Textarea, Tooltip } from "@mantine/core";
 import { type KeyboardEventHandler, useRef } from "react";
-import { clx } from "~/utils/classNames";
 import styles from "./EditableText.module.css";
 
 type EditableTextProps = {

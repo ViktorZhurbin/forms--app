@@ -1,6 +1,6 @@
+import { clx } from "@forms/shared/utils/classNames";
 import { Button } from "@mantine/core";
 import type { HTMLButtonProps } from "~/types/dom";
-import { clx } from "~/utils/classNames";
 import {
 	EditableElement,
 	type EditableElementProps,

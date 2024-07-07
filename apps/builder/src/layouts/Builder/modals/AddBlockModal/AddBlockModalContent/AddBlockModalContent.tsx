@@ -1,7 +1,7 @@
+import { QuestionGroupsMap } from "@forms/shared/constants/questionMaps";
+import type { QuestionTypes } from "@forms/shared/constants/questions";
 import { Title } from "@mantine/core";
 import type { CSSProperties } from "react";
-import { QuestionGroupsMap } from "~/constants/questionMaps";
-import type { QuestionTypes } from "~/constants/questions";
 import { AddBlockModalQuestionItem } from "../AddBlockModalQuestionItem/AddBlockModalQuestionItem";
 import styles from "./AddBlockModalContent.module.css";
 

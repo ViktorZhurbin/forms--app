@@ -1,5 +1,5 @@
+import { clx } from "@forms/shared/utils/classNames";
 import { Textarea } from "@mantine/core";
-import { clx } from "~/utils/classNames";
 import styles from "./EditableButtonOld.module.css";
 import { variantsMap } from "./constants";
 import type { EditableButtonOldProps } from "./types";

@@ -1,5 +1,5 @@
+import type { QuestionTypes } from "@forms/shared/constants/questions";
 import { useCallback } from "react";
-import type { QuestionTypes } from "~/constants/questions";
 import { useFormId } from "~/layouts/Builder/hooks/useFormId";
 import { useSelectedBlockId } from "~/layouts/Builder/hooks/useSelectedBlockId";
 import { useCurrentForm } from "~/models/forms/read";

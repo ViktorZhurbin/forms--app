@@ -1,11 +1,11 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { clx } from "@forms/shared/utils/classNames";
 import { Button, CloseButton, Text } from "@mantine/core";
 import { IconGripVertical } from "@tabler/icons-react";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import type { TQuestion } from "~/models/forms/schema/questions";
-import { clx } from "~/utils/classNames";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps

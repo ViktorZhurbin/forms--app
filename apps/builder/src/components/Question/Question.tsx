@@ -1,6 +1,6 @@
+import { QuestionTypes } from "@forms/shared/constants/questions";
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
-import { QuestionTypes } from "~/constants/questions";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
 import { EditableButton } from "../EditableButton/EditableButton";

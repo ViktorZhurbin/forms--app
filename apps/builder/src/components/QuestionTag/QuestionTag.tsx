@@ -1,6 +1,12 @@
+import {
+	QuestionGroupsMap,
+	QuestionTypesMap,
+} from "@forms/shared/constants/questionMaps";
+import type {
+	QuestionGroups,
+	QuestionTypes,
+} from "@forms/shared/constants/questions";
 import { Group, Text } from "@mantine/core";
-import { QuestionGroupsMap, QuestionTypesMap } from "~/constants/questionMaps";
-import type { QuestionGroups, QuestionTypes } from "~/constants/questions";
 import styles from "./QuestionTag.module.css";
 
 type QuestionTagProps = {

@@ -1,7 +1,7 @@
+import { Routes } from "@forms/shared/constants/location";
 import { Button } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
-import { Routes } from "~/constants/location";
 import { createForm } from "~/models/forms/write/write";
 
 export const CreateFormButton = () => {

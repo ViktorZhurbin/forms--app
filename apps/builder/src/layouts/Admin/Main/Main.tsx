@@ -1,6 +1,6 @@
+import { FormsLayout } from "@forms/shared/constants/forms";
 import { Group, Stack, Text } from "@mantine/core";
 import { useState } from "react";
-import { FormsLayout } from "~/constants/forms";
 import { CreateFormButton } from "./CreateFormButton/CreateFormButton";
 import { FormsView } from "./FormView/FormsView";
 import { ViewTypeControl } from "./ViewTypeControl/ViewTypeControl";

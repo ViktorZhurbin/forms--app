@@ -1,8 +1,8 @@
+import type { QuestionTypes } from "@forms/shared/constants/questions";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { useCallback } from "react";
-import type { QuestionTypes } from "~/constants/questions";
 import { useCreateQuestion } from "~/models/forms/write/hooks/useCreateQuestion";
 import { AddBlockModal } from "../../modals/AddBlockModal/AddBlockModal";
 import { navigateToQuestion } from "../../utils/navigateToQuestion";

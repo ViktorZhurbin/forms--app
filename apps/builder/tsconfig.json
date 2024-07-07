@@ -38,9 +38,6 @@
 		"../../libs/src/**/*.ts",
 		"../../libs/src/**/*.tsx"
 	],
-	"references": [
-		{ "path": "./tsconfig.node.json" },
-		{ "path": "../../libs/shared/tsconfig.json" }
-	],
+	"references": [{ "path": "../../libs/shared/tsconfig.json" }],
 	"extends": "../../tsconfig.base.json"
 }

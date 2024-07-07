@@ -1,5 +1,5 @@
-import { QuestionTypesMap } from "@forms/shared/constants/questionMaps";
-import { QuestionTypes } from "@forms/shared/constants/questions";
+import { QuestionTypesMap } from "@/shared/constants/questionMaps";
+import { QuestionTypes } from "@/shared/constants/questions";
 import { id } from "@instantdb/react";
 import type {
 	TQuestion,

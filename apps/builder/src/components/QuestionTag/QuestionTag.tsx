@@ -1,11 +1,11 @@
 import {
 	QuestionGroupsMap,
 	QuestionTypesMap,
-} from "@forms/shared/constants/questionMaps";
+} from "@/shared/constants/questionMaps";
 import type {
 	QuestionGroups,
 	QuestionTypes,
-} from "@forms/shared/constants/questions";
+} from "@/shared/constants/questions";
 import { Group, Text } from "@mantine/core";
 import styles from "./QuestionTag.module.css";
 

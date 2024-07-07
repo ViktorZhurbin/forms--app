@@ -1,4 +1,4 @@
-import { SearchParams } from "@forms/shared/constants/location";
+import { SearchParams } from "@/shared/constants/location";
 import { navigate } from "wouter/use-browser-location";
 import type { TQuestion } from "~/models/forms/schema/questions";
 

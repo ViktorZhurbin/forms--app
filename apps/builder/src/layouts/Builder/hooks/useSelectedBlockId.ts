@@ -1,4 +1,4 @@
-import { SearchParams } from "@forms/shared/constants/location";
+import { SearchParams } from "@/shared/constants/location";
 import { useEffect, useState } from "react";
 import { useSearch } from "wouter";
 import { navigate } from "wouter/use-browser-location";

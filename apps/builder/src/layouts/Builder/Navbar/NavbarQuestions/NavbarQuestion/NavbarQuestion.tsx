@@ -1,6 +1,6 @@
+import { clx } from "@/shared/utils/classNames";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { clx } from "@forms/shared/utils/classNames";
 import { Button, CloseButton, Text } from "@mantine/core";
 import { IconGripVertical } from "@tabler/icons-react";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";

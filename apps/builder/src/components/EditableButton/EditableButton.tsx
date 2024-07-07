@@ -1,4 +1,4 @@
-import { clx } from "@forms/shared/utils/classNames";
+import { clx } from "@/shared/utils/classNames";
 import { Button } from "@mantine/core";
 import type { HTMLButtonProps } from "~/types/dom";
 import {

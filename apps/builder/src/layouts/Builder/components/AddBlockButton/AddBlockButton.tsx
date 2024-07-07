@@ -1,4 +1,4 @@
-import type { QuestionTypes } from "@forms/shared/constants/questions";
+import type { QuestionTypes } from "@/shared/constants/questions";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";

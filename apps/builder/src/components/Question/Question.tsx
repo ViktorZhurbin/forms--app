@@ -1,4 +1,4 @@
-import { QuestionTypes } from "@forms/shared/constants/questions";
+import { QuestionTypes } from "@/shared/constants/questions";
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import type { TQuestion } from "~/models/forms/schema/questions";

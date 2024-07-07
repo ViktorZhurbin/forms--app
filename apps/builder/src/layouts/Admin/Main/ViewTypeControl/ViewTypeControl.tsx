@@ -1,4 +1,4 @@
-import type { FormsLayout } from "@forms/shared/constants/forms";
+import type { FormsLayout } from "@/shared/constants/forms";
 import { Group, SegmentedControl } from "@mantine/core";
 import { IconLayoutGrid, IconList } from "@tabler/icons-react";
 

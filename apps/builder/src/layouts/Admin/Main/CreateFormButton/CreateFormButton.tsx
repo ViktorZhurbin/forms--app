@@ -1,4 +1,4 @@
-import { Routes } from "@forms/shared/constants/location";
+import { Routes } from "@/shared/constants/location";
 import { Button } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";

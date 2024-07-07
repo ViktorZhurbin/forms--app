@@ -1,6 +1,6 @@
-import { FormsLayout } from "@forms/shared/constants/forms";
-import { Routes } from "@forms/shared/constants/location";
-import { pluralize } from "@forms/shared/utils/grammar";
+import { FormsLayout } from "@/shared/constants/forms";
+import { Routes } from "@/shared/constants/location";
+import { pluralize } from "@/shared/utils/grammar";
 import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { FetchError } from "~/components/FetchError/FetchError";

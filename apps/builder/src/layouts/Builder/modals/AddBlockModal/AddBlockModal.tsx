@@ -1,4 +1,4 @@
-import type { QuestionTypes } from "@forms/shared/constants/questions";
+import type { QuestionTypes } from "@/shared/constants/questions";
 import { Modal } from "@mantine/core";
 import type { ModalProps } from "../types";
 import { AddBlockModalContent } from "./AddBlockModalContent/AddBlockModalContent";

@@ -7,11 +7,11 @@
 		"verbatimModuleSyntax": true,
 
 		/* Bundler mode */
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
 		"moduleResolution": "bundler",
-		// "allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		// "noEmit": true,
 		"jsx": "react-jsx",
 
 		/* Linting */
@@ -21,13 +21,6 @@
 		"noFallthroughCasesInSwitch": true,
 
 		"rootDir": ".",
-		"composite": true,
-
-		"baseUrl": ".",
-		"paths": {
-			"~builder/*": ["apps/builder/src/*"],
-			"@forms/shared/*": ["libs/shared/src/*"]
-		}
-	},
-	"references": [{ "path": "../../libs/shared/tsconfig.json" }]
+		"composite": true
+	}
 }

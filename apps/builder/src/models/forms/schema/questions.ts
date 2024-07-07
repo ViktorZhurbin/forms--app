@@ -1,7 +1,7 @@
 import type {
 	QuestionGroups,
 	QuestionTypes,
-} from "@forms/shared/constants/questions";
+} from "@/shared/constants/questions";
 
 type TQuestionBase = {
 	id: string;

@@ -13,6 +13,17 @@ export default defineConfig({
 		},
 	},
 	plugins: [pluginReact(), pluginTypeCheck()],
+
+	performance: {
+		chunkSplit: {
+			strategy: "split-by-experience",
+			// forceSplitting: {
+			// 	"lib-ui": /node_modules[\\/](@mantine[\\/]*|@tabler\/*)/,
+			// 	"lib-instant": /node_modules[\\/]@instantdb\/*/,
+			// },
+		},
+	},
+
 	tools: {
 		rspack(config, { appendPlugins }) {
 			// Only register the plugin when RSDOCTOR is true, as the plugin will increase the build time.

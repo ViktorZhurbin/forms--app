@@ -4,12 +4,17 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"preview": "vite preview",
+		"dev": "rsbuild dev --open --port 5173",
+		"build": "rsbuild build",
+		"preview": "rsbuild preview",
+		"bundle-analyzer": "BUNDLE_ANALYZE=true bun run build",
+		"rsdoctor": "RSDOCTOR=true bun run build",
+		"dev:vite": "vite",
+		"build:vite": "vite build",
+		"preview:vite": "vite preview",
 		"format": "biome check --write ./src",
 		"prepare": "husky",
-		"bundle-analyzer": "bunx vite-bundle-visualizer",
+		"bundle-analyzer:vite": "bunx vite-bundle-visualizer",
 		"deps-check": "npx depcruise src --include-only '^src'"
 	},
 	"dependencies": {
@@ -27,6 +32,10 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
+		"@rsbuild/core": "^1.0.0-alpha.5",
+		"@rsbuild/plugin-react": "^1.0.0-alpha.5",
+		"@rsbuild/plugin-type-check": "^1.0.0-alpha.5",
+		"@rsdoctor/rspack-plugin": "^0.3.7",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.7.0",

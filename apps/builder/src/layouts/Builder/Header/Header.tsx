@@ -1,8 +1,8 @@
-import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
-import { EditableText } from "~/components/Question/EditableText/EditableText";
-import { useCurrentForm } from "~/models/forms/read";
-import { updateForm } from "~/models/forms/write";
-import { useFormId } from "../hooks/useFormId";
+import { useCurrentForm } from "@/shared/models/forms/read";
+import { updateForm } from "@/shared/models/forms/write";
+import { DarkModeToggle } from "@forms/shared/src/components/DarkModeToggle/DarkModeToggle";
+import { EditableText } from "@forms/shared/src/components/Question/EditableText/EditableText";
+import { useFormId } from "@forms/shared/src/hooks/useFormId";
 import styles from "./Header.module.css";
 import { HomeButton } from "./HomeButton/HomeButton";
 import { PreviewButton } from "./PreviewButton/PreviewButton";

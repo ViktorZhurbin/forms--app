@@ -1,3 +1,8 @@
+// import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
+import type { TForm } from "@/shared/models/forms/schema/forms";
+import type { TQuestion } from "@/shared/models/forms/schema/questions";
+import { updateForm } from "@/shared/models/forms/write";
+import { useDeleteQuestion } from "@/shared/models/forms/write/hooks/useDeleteQuestion";
 import {
 	DndContext,
 	type DragEndEvent,
@@ -16,16 +21,11 @@ import {
 	sortableKeyboardCoordinates,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { useFormId } from "@forms/shared/src/hooks/useFormId";
+import { useSelectedBlockId } from "@forms/shared/src/hooks/useSelectedBlockId";
 import { ScrollArea } from "@mantine/core";
 import { useState } from "react";
 import { createPortal } from "react-dom";
-// import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
-import type { TForm } from "~/models/forms/schema/forms";
-import type { TQuestion } from "~/models/forms/schema/questions";
-import { updateForm } from "~/models/forms/write";
-import { useDeleteQuestion } from "~/models/forms/write/hooks/useDeleteQuestion";
-import { useFormId } from "../../hooks/useFormId";
-import { useSelectedBlockId } from "../../hooks/useSelectedBlockId";
 import { navigateToQuestion } from "../../utils/navigateToQuestion";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
 import styles from "./NavbarQuestionsList.module.css";

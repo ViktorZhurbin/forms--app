@@ -1,9 +1,9 @@
+import { useCurrentFormQuery } from "@/shared/models/forms/read";
+import { FetchState } from "@forms/shared/src/components/FetchState/FetchState";
+import { NavButtons } from "@forms/shared/src/components/NavButtons/NavButtons";
 import { Button, Progress } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useRef, useState } from "react";
-import { FetchState } from "~/components/FetchState/FetchState";
-import { NavButtons } from "~/components/NavButtons/NavButtons";
-import { useCurrentFormQuery } from "~/models/forms/read";
 import { PreviewModalQuestions } from "../PreviewModalQuestions/PreviewModalQuestions";
 import styles from "./PreviewModalContent.module.css";
 

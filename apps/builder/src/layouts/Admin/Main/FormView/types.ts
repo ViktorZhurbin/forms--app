@@ -1,4 +1,4 @@
-import type { TForm } from "~/models/forms/schema/forms";
+import type { TForm } from "@/shared/models/forms/schema/forms";
 
 interface FormViewProps extends Pick<TForm, "id" | "name"> {
 	className: string;

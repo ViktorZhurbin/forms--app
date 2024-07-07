@@ -1,13 +1,13 @@
 import { FormsLayout } from "@/shared/constants/forms";
 import { Routes } from "@/shared/constants/location";
+import { useAllForms } from "@/shared/models/forms/read";
+import type { TForm } from "@/shared/models/forms/schema/forms";
+import { deleteForm } from "@/shared/models/forms/write";
 import { pluralize } from "@/shared/utils/grammar";
+import { FetchError } from "@forms/shared/src/components/FetchError/FetchError";
+import { SkeletonWrapper } from "@forms/shared/src/components/SkeletonWrapper/SkeletonWrapper";
 import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
-import { FetchError } from "~/components/FetchError/FetchError";
-import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
-import { useAllForms } from "~/models/forms/read";
-import type { TForm } from "~/models/forms/schema/forms";
-import { deleteForm } from "~/models/forms/write";
 import styles from "./FormsView.module.css";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";

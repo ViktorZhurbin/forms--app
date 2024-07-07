@@ -1,5 +1,5 @@
-import { Question } from "~/components/Question/Question";
-import { useCurrentQuestion } from "~/models/forms/read";
+import { useCurrentQuestion } from "@/shared/models/forms/read";
+import { Question } from "@forms/shared/src/components/Question/Question";
 import { AddBlockButton } from "../components/AddBlockButton/AddBlockButton";
 import styles from "./Main.module.css";
 

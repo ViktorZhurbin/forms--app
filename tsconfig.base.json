@@ -7,8 +7,6 @@
 		"verbatimModuleSyntax": true,
 
 		/* Bundler mode */
-		"noEmit": true,
-		"allowImportingTsExtensions": true,
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		"isolatedModules": true,

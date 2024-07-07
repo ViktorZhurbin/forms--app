@@ -4,10 +4,12 @@
 	padding-inline: var(--padding-left) 8px;
 	position: relative;
 	display: flex;
+	border: unset;
 
 	&[data-active="true"] {
 		--border-left-width: 4px;
 
+		border-left-style: solid;
 		border-left-width: var(--border-left-width);
 		padding-left: calc(var(--padding-left) - var(--border-left-width));
 	}
@@ -80,7 +82,7 @@
 	display: flex;
 	align-items: center;
 	gap: 2px;
-	margin-right: -4px;
+	/* margin-right: -4px; */
 }
 
 .dragHandle {

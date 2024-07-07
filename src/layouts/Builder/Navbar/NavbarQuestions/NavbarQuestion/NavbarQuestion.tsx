@@ -44,6 +44,7 @@ export const NavbarQuestion = ({
 			{...attributes}
 			variant={isSelected ? "light" : "subtle"}
 			justify="start"
+			size="md"
 			classNames={{
 				root: clx(
 					styles.button,

@@ -4,7 +4,8 @@
 		"enabled": true
 	},
 	"files": {
-		"ignore": ["schema/**/*"]
+		"include": ["apps/**/src/**/*", "libs/**/src/**/*"],
+		"ignoreUnknown": true
 	},
 	"linter": {
 		"enabled": true,

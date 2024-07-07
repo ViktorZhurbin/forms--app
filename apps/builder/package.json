@@ -1,7 +1,6 @@
 {
-	"name": "my-forms",
-	"private": true,
-	"version": "0.0.0",
+	"name": "@forms/builder",
+	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "rsbuild dev --open --port 5173",
@@ -9,8 +8,6 @@
 		"preview": "rsbuild preview",
 		"bundle-analyzer": "BUNDLE_ANALYZE=true bun run build",
 		"rsdoctor": "RSDOCTOR=true bun run build",
-		"format": "biome check --write ./src",
-		"prepare": "husky",
 		"deps-check": "npx depcruise src --include-only '^src'"
 	},
 	"dependencies": {

@@ -1,0 +1,46 @@
+{
+	"compilerOptions": {
+		"useDefineForClassFields": true,
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"verbatimModuleSyntax": true,
+
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+
+		// Enables finding symbol references in VS Code.
+		"composite": true,
+		// "declaration": true,
+
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["src/*"],
+			"@forms/shared/*": ["../../libs/shared/src/*"]
+		}
+	},
+
+	// Enables finding symbol references in VS Code.
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"../../libs/src/**/*.ts",
+		"../../libs/src/**/*.tsx"
+	],
+	"references": [
+		{ "path": "./tsconfig.node.json" },
+		{ "path": "../../libs/shared/tsconfig.json" }
+	],
+	"extends": "../../tsconfig.base.json"
+}

@@ -1,3 +1,4 @@
+import { pluralize } from "@forms/shared/utils/grammar";
 import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { FetchError } from "~/components/FetchError/FetchError";
@@ -7,7 +8,6 @@ import { Routes } from "~/constants/location";
 import { useAllForms } from "~/models/forms/read";
 import type { TForm } from "~/models/forms/schema/forms";
 import { deleteForm } from "~/models/forms/write";
-import { pluralize } from "~/utils/grammar";
 import styles from "./FormsView.module.css";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";

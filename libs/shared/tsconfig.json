@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"allowJs": true,
+		"esModuleInterop": false,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"composite": true, // Enables finding symbol references in VS Code.
+		"declaration": true // Enables finding symbol references in VS Code.
+	},
+	"include": ["**/*.ts", "**/*.tsx"], // Enables finding symbol references in VS Code.
+	"extends": "../../tsconfig.base.json"
+}

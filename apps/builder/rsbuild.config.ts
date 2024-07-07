@@ -1,5 +1,6 @@
 import { defineConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginSourceBuild } from "@rsbuild/plugin-source-build";
 import { pluginTypeCheck } from "@rsbuild/plugin-type-check";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 
@@ -12,7 +13,7 @@ export default defineConfig({
 			index: "./src/main.tsx",
 		},
 	},
-	plugins: [pluginReact(), pluginTypeCheck()],
+	plugins: [pluginReact(), pluginTypeCheck(), pluginSourceBuild()],
 
 	performance: {
 		chunkSplit: {

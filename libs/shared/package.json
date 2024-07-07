@@ -1,0 +1,4 @@
+{
+	"name": "@forms/shared",
+	"source": "./src/**/*"
+}

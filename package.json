@@ -7,10 +7,16 @@
 	"scripts": {
 		"prepare": "husky",
 		"format": "biome check --write",
-		"builder:build": "bun run --filter @forms/builder build",
-		"builder:build2": "npm run build --workspace=@forms/builder",
-		"builder:dev": "bun run --filter @forms/builder dev",
-		"builder:dev2": "npm run dev --workspace=@forms/builder"
+
+		"builder:dev": "npm run dev --workspace=@forms/builder",
+		"builder:build": "npm run build --workspace=@forms/builder",
+		"builder:rsdoctor": "npm run rsdoctor --workspace=@forms/builder",
+		"builder:bundle-analyzer": "npm run bundle-analyzer --workspace=@forms/builder",
+
+		"form:dev": "npm run dev --workspace=@forms/form",
+		"form:build": "npm run build --workspace=@forms/form",
+		"form:rsdoctor": "npm run rsdoctor --workspace=@forms/form",
+		"form:bundle-analyzer": "npm run bundle-analyzer --workspace=@forms/form"
 	},
 	"dependencies": {
 		"@forms/shared": "workspace:*",

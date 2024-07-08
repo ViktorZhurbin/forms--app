@@ -7,7 +7,7 @@ import styles from "./Form.module.css";
 import { FormQuestions } from "./FormQuestions/FormQuestions";
 
 type FormProps = {
-	exitButton: React.ReactElement;
+	exitButton?: React.ReactElement;
 };
 
 export const Form = ({ exitButton }: FormProps) => {

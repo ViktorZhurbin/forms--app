@@ -1,8 +1,8 @@
-import type { TForm } from "@/shared/models/forms/schema/forms";
 import {
 	PreviewQuestion,
 	type PreviewQuestionProps,
-} from "@forms/shared/src/components/PreviewQuestion/PreviewQuestion";
+} from "@/shared/components/PreviewQuestion/PreviewQuestion";
+import type { TForm } from "@/shared/models/forms/schema/forms";
 
 type PreviewModalQuestionsProps = Pick<
 	PreviewQuestionProps,

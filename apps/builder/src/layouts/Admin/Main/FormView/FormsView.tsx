@@ -1,11 +1,11 @@
+import { FetchError } from "@/shared/components/FetchError/FetchError";
+import { SkeletonWrapper } from "@/shared/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "@/shared/constants/forms";
 import { Routes } from "@/shared/constants/location";
 import { useAllForms } from "@/shared/models/forms/read";
 import type { TForm } from "@/shared/models/forms/schema/forms";
 import { deleteForm } from "@/shared/models/forms/write";
 import { pluralize } from "@/shared/utils/grammar";
-import { FetchError } from "@forms/shared/src/components/FetchError/FetchError";
-import { SkeletonWrapper } from "@forms/shared/src/components/SkeletonWrapper/SkeletonWrapper";
 import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import styles from "./FormsView.module.css";

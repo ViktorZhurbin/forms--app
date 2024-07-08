@@ -1,3 +1,5 @@
+import { useFormId } from "@/shared/hooks/useFormId";
+import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import type { TForm } from "@/shared/models/forms/schema/forms";
 import type { TQuestion } from "@/shared/models/forms/schema/questions";
@@ -21,8 +23,6 @@ import {
 	sortableKeyboardCoordinates,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useFormId } from "@forms/shared/src/hooks/useFormId";
-import { useSelectedBlockId } from "@forms/shared/src/hooks/useSelectedBlockId";
 import { ScrollArea } from "@mantine/core";
 import { useState } from "react";
 import { createPortal } from "react-dom";

@@ -1,6 +1,6 @@
+import { FetchError } from "@/shared/components/FetchError/FetchError";
+import { FetchLoading } from "@/shared/components/FetchLoading/FetchLoading";
 import { useCurrentFormQuery } from "@/shared/models/forms/read";
-import { FetchError } from "@forms/shared/src/components/FetchError/FetchError";
-import { FetchLoading } from "@forms/shared/src/components/FetchLoading/FetchLoading";
 import { Group, Stack, Text } from "@mantine/core";
 import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";

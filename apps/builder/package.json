@@ -6,8 +6,8 @@
 		"dev": "rsbuild dev --open --port 5173",
 		"build": "rsbuild build",
 		"preview": "rsbuild preview",
-		"bundle-analyzer": "BUNDLE_ANALYZE=true bun run build",
-		"rsdoctor": "RSDOCTOR=true bun run build",
-		"deps-check": "bunx depcruise src --include-only '^src'"
+		"bundle-analyzer": "BUNDLE_ANALYZE=true pnpm run build",
+		"rsdoctor": "RSDOCTOR=true pnpm run build",
+		"deps-check": "pnpx depcruise src --include-only '^src'"
 	}
 }

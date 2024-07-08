@@ -3,26 +3,31 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
-	"workspaces": ["apps/*", "libs/*"],
+	"workspaces": [
+		"apps/*",
+		"libs/*"
+	],
 	"scripts": {
 		"prepare": "husky",
 		"format": "biome check --write",
+		"build:all": "pnpm --filter './apps/**' --filter=!./apps/_template run build",
 
-		"builder:dev": "npm run dev --workspace=@forms/builder",
-		"builder:build": "npm run build --workspace=@forms/builder",
-		"builder:rsdoctor": "npm run rsdoctor --workspace=@forms/builder",
-		"builder:bundle-analyzer": "npm run bundle-analyzer --workspace=@forms/builder",
+		"builder:dev": "pnpm --filter @forms/builder run dev",
+		"builder:build": "pnpm --filter @forms/builder run build",
+		"builder:rsdoctor": "pnpm --filter @forms/builder run rsdoctor",
+		"builder:bundle-analyzer": "pnpm --filter @forms/builder run bundle-analyzer",
 
-		"form:dev": "npm run dev --workspace=@forms/form",
-		"form:build": "npm run build --workspace=@forms/form",
-		"form:rsdoctor": "npm run rsdoctor --workspace=@forms/form",
-		"form:bundle-analyzer": "npm run bundle-analyzer --workspace=@forms/form"
+		"form:dev": "pnpm --filter @forms/form run dev",
+		"form:build": "pnpm --filter @forms/form run build",
+		"form:rsdoctor": "pnpm --filter @forms/form run rsdoctor",
+		"form:bundle-analyzer": "pnpm --filter @forms/form run bundle-analyzer"
 	},
 	"dependencies": {
-		"@forms/shared": "workspace:*",
 		"@dnd-kit/core": "^6.1.0",
 		"@dnd-kit/modifiers": "^7.0.0",
 		"@dnd-kit/sortable": "^8.0.0",
+		"@dnd-kit/utilities": "^3.2.2",
+		"@forms/shared": "workspace:*",
 		"@instantdb/react": "^0.10.27",
 		"@mantine/core": "^7.11.0",
 		"@mantine/hooks": "^7.11.0",
@@ -47,6 +52,5 @@
 		"postcss-preset-mantine": "^1.15.0",
 		"postcss-simple-vars": "^7.0.1",
 		"typescript": "^5.5.2"
-	},
-	"trustedDependencies": ["@biomejs/biome"]
+	}
 }

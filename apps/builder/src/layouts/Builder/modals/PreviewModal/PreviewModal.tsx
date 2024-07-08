@@ -1,6 +1,7 @@
-import { Modal } from "@mantine/core";
+import { Form } from "@/shared/layouts/Form/Form";
+import { Button, Modal } from "@mantine/core";
+import { IconX } from "@tabler/icons-react";
 import type { ModalProps } from "../types";
-import { PreviewModalContent } from "./PreviewModalContent/PreviewModalContent";
 
 export const PreviewModal = ({ isOpen, onClose }: ModalProps) => {
 	return (
@@ -13,7 +14,17 @@ export const PreviewModal = ({ isOpen, onClose }: ModalProps) => {
 			transitionProps={{ transition: "fade-down" }}
 			onClose={onClose}
 		>
-			<PreviewModalContent onClose={onClose} />
+			<Form
+				exitButton={
+					<Button
+						color="rgb(31, 41, 55)"
+						leftSection={<IconX />}
+						onClick={onClose}
+					>
+						Exit preview
+					</Button>
+				}
+			/>
 		</Modal>
 	);
 };

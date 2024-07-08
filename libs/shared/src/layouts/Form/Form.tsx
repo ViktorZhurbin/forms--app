@@ -1,17 +1,16 @@
-import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { NavButtons } from "@/shared/components/NavButtons/NavButtons";
-import { useCurrentFormQuery } from "@/shared/models/forms/read";
-import { Button, Progress } from "@mantine/core";
-import { IconX } from "@tabler/icons-react";
+import { Progress } from "@mantine/core";
 import { useRef, useState } from "react";
-import { PreviewModalQuestions } from "../PreviewModalQuestions/PreviewModalQuestions";
-import styles from "./PreviewModalContent.module.css";
+import { FetchState } from "~/components/FetchState/FetchState";
+import { NavButtons } from "~/components/NavButtons/NavButtons";
+import { useCurrentFormQuery } from "~/models/forms/read";
+import styles from "./Form.module.css";
+import { FormQuestions } from "./FormQuestions/FormQuestions";
 
-type PreviewProps = {
-	onClose: () => void;
+type FormProps = {
+	exitButton: React.ReactElement;
 };
 
-export const PreviewModalContent = ({ onClose }: PreviewProps) => {
+export const Form = ({ exitButton }: FormProps) => {
 	const [step, setStep] = useState(0);
 	const { isLoading, error, data } = useCurrentFormQuery();
 
@@ -57,21 +56,13 @@ export const PreviewModalContent = ({ onClose }: PreviewProps) => {
 				/>
 			)}
 
-			<div className={styles.exitButton}>
-				<Button
-					color="rgb(31, 41, 55)"
-					leftSection={<IconX />}
-					onClick={onClose}
-				>
-					Exit preview
-				</Button>
-			</div>
+			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
 
 			{!form ? (
 				<FetchState isLoading={isLoading} error={error} />
 			) : (
-				<PreviewModalQuestions
-					form={form}
+				<FormQuestions
+					questions={form.questions}
 					setStep={setStep}
 					containerRef={scrollContainerRef}
 					onSubmit={handleSubmit}

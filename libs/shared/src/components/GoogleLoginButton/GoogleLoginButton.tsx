@@ -1,6 +1,6 @@
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useState } from "react";
-import { dbAuth } from "~/models/db";
+import { db } from "~/models/db";
 
 // e.g. 89602129-cuf0j.apps.googleusercontent.com
 const GOOGLE_CLIENT_ID =
@@ -9,7 +9,9 @@ const GOOGLE_CLIENT_ID =
 // Use the google client name in the Instant dashboard auth tab
 const GOOGLE_CLIENT_NAME = "google-forms-dev";
 
-export const GoogleLoginButton = () => {
+export const GoogleLoginButton = ({
+	onSuccess,
+}: { onSuccess?: () => void }) => {
 	const [nonce] = useState(crypto.randomUUID());
 
 	return (
@@ -20,13 +22,16 @@ export const GoogleLoginButton = () => {
 				onSuccess={({ credential }) => {
 					if (!credential) return;
 
-					dbAuth
+					db.auth
 						.signInWithIdToken({
 							clientName: GOOGLE_CLIENT_NAME,
 							idToken: credential,
 							// Make sure this is the same nonce you passed as a prop
 							// to the GoogleLogin button
 							nonce,
+						})
+						.then(() => {
+							onSuccess?.();
 						})
 						.catch((err) => {
 							alert(`Uh oh: ${err.body?.message}`);

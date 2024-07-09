@@ -5,6 +5,7 @@ const SearchParams = {
 
 const Routes = {
 	ROOT: "/",
+	LOGIN: "login",
 	FORM: "form/:id",
 	getFormPath: (formId: string) => `form/${formId}`,
 };

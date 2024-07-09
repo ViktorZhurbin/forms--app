@@ -1,4 +1,4 @@
-import { init } from "@instantdb/react";
+import { type InstantReactWeb, init } from "@instantdb/react";
 import type { TForm } from "./forms/schema/forms";
 
 // ID for app: Forms 2
@@ -8,12 +8,14 @@ type Schema = {
 	forms: TForm;
 };
 
-const {
-	useQuery: useDbQuery,
-	transact: dbTransact,
-	auth: dbAuth,
-} = init<Schema>({
+type Db = InstantReactWeb<Schema>;
+
+const db: Db = init<Schema>({
 	appId: APP_ID,
 });
 
-export { useDbQuery, dbTransact, dbAuth };
+const useDbQuery: Db["useQuery"] = db.useQuery;
+const dbTransact: Db["transact"] = db.transact;
+const useDbAuth = db.useAuth;
+
+export { db, useDbQuery, dbTransact, useDbAuth };

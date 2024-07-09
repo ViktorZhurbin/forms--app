@@ -1,6 +1,6 @@
-import { Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
+import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
 import { PreviewModal } from "../../modals/PreviewModal/PreviewModal";
 
 export const PreviewButton = () => {
@@ -8,14 +8,11 @@ export const PreviewButton = () => {
 
 	return (
 		<>
-			<Button
-				variant="default"
-				color="dark.7"
-				leftSection={<IconEye />}
+			<HeaderIconButton
+				tooltip="Preview"
+				icon={<IconEye />}
 				onClick={modalActions.open}
-			>
-				Preview
-			</Button>
+			/>
 
 			<PreviewModal isOpen={isModalOpen} onClose={modalActions.close} />
 		</>

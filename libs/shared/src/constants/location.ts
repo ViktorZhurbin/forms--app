@@ -5,7 +5,8 @@ const SearchParams = {
 
 const Routes = {
 	ROOT: "/",
-	getFormPath: (formId: string) => `forms/${formId}`,
+	FORM: "form/:id",
+	getFormPath: (formId: string) => `form/${formId}`,
 };
 
 export { SearchParams, Routes };

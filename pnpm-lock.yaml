@@ -24,7 +24,7 @@ importers:
         specifier: workspace:*
         version: link:libs/shared
       '@instantdb/react':
-        specifier: ^0.10.27
+        specifier: ^0.10.29
         version: 0.10.29(react@18.3.1)
       '@mantine/core':
         specifier: ^7.11.0
@@ -66,6 +66,9 @@ importers:
       '@rsdoctor/rspack-plugin':
         specifier: ^0.3.7
         version: 0.3.7(@rspack/core@1.0.0-alpha.2(@swc/helpers@0.5.11))
+      '@types/node':
+        specifier: ^20.14.10
+        version: 20.14.10
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -88,7 +91,7 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1(postcss@8.4.39)
       typescript:
-        specifier: ^5.5.2
+        specifier: ^5.5.3
         version: 5.5.3
 
   apps/_template: {}

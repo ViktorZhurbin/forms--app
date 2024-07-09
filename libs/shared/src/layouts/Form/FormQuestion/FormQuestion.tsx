@@ -1,29 +1,28 @@
 import { useIntersection } from "@mantine/hooks";
 import { type RefObject, useEffect } from "react";
+import { Question } from "~/components/Question/Question";
 import type { TQuestion } from "~/models/forms/schema/questions";
-import { Question } from "../Question/Question";
-import styles from "./PreviewQuestion.module.css";
-// import { getPositionDataAttribute } from "./helpers/getPositionDataAttribute";
+import styles from "./FormQuestion.module.css";
 
-export type PreviewQuestionProps = {
+export type FormQuestionProps = {
 	index: number;
 	isLast: boolean;
 	question: TQuestion;
 	containerRef: RefObject<HTMLDivElement>;
 	onSubmit: () => void;
-	setStep: (step: number) => void;
 	goToNextStep: () => void;
+	setCurrentStep: (step: number) => void;
 };
 
-export const PreviewQuestion = ({
+export const FormQuestion = ({
 	index,
 	containerRef,
 	isLast,
 	question,
 	onSubmit,
-	setStep,
 	goToNextStep,
-}: PreviewQuestionProps) => {
+	setCurrentStep,
+}: FormQuestionProps) => {
 	const { ref, entry } = useIntersection({
 		root: containerRef.current,
 		threshold: 1,
@@ -31,17 +30,12 @@ export const PreviewQuestion = ({
 
 	useEffect(() => {
 		if (entry?.isIntersecting) {
-			setStep(index);
+			setCurrentStep(index);
 		}
 	});
 
 	return (
-		<div
-			ref={ref}
-			className={styles.root}
-			data-step={index}
-			// data-position={getPositionDataAttribute(index, currentStep)}
-		>
+		<div ref={ref} className={styles.root} data-step={index}>
 			<Question
 				order={index + 1}
 				isLast={isLast}

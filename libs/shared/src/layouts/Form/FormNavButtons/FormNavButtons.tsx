@@ -1,14 +1,16 @@
 import { ActionIcon } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
-import styles from "./NavButtons.module.css";
+import styles from "./FormNavButtons.module.css";
 
-export const NavButtons = (props: {
+type FormNavButtonsProps = {
 	className: string;
 	isPrevDisabled: boolean;
 	isNextDisabled: boolean;
 	onClickPrev: () => void;
 	onClickNext: () => void;
-}) => {
+};
+
+export const FormNavButtons = (props: FormNavButtonsProps) => {
 	const {
 		className,
 		isPrevDisabled,

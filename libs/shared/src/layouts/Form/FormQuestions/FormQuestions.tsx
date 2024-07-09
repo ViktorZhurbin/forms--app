@@ -1,19 +1,19 @@
-import {
-	PreviewQuestion,
-	type PreviewQuestionProps,
-} from "~/components/PreviewQuestion/PreviewQuestion";
 import type { TForm } from "~/models/forms/schema/forms";
+import {
+	FormQuestion,
+	type FormQuestionProps,
+} from "../FormQuestion/FormQuestion";
 
 type PreviewModalQuestionsProps = Pick<
-	PreviewQuestionProps,
-	"setStep" | "containerRef" | "onSubmit" | "goToNextStep"
+	FormQuestionProps,
+	"setCurrentStep" | "containerRef" | "onSubmit" | "goToNextStep"
 > & {
 	questions: TForm["questions"];
 };
 
 export const FormQuestions = ({
 	questions,
-	setStep,
+	setCurrentStep,
 	containerRef,
 	onSubmit,
 	goToNextStep,
@@ -24,15 +24,15 @@ export const FormQuestions = ({
 				const isLast = index === questions.length - 1;
 
 				return (
-					<PreviewQuestion
+					<FormQuestion
 						key={question.id}
 						index={index}
 						isLast={isLast}
-						setStep={setStep}
 						containerRef={containerRef}
 						question={question}
 						onSubmit={onSubmit}
 						goToNextStep={goToNextStep}
+						setCurrentStep={setCurrentStep}
 					/>
 				);
 			})}

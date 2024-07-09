@@ -1,9 +1,9 @@
 import { Progress } from "@mantine/core";
 import { useRef, useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
-import { NavButtons } from "~/components/NavButtons/NavButtons";
 import { useCurrentFormQuery } from "~/models/forms/read";
 import styles from "./Form.module.css";
+import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import { FormQuestions } from "./FormQuestions/FormQuestions";
 
 type FormProps = {
@@ -11,14 +11,14 @@ type FormProps = {
 };
 
 export const Form = ({ exitButton }: FormProps) => {
-	const [step, setStep] = useState(0);
+	const [currentStep, setCurrentStep] = useState(0);
 	const { isLoading, error, data } = useCurrentFormQuery();
 
 	const form = data?.forms?.[0];
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-	const isFirstStep = step === 0;
-	const isLastStep = step === (form && form?.questions?.length - 1);
+	const isFirstStep = currentStep === 0;
+	const isLastStep = currentStep === (form && form?.questions?.length - 1);
 
 	const scrollToStep = (step: number) => {
 		const container = scrollContainerRef.current;
@@ -33,11 +33,11 @@ export const Form = ({ exitButton }: FormProps) => {
 	};
 
 	const goToPreviousStep = () => {
-		scrollToStep(step - 1);
+		scrollToStep(currentStep - 1);
 	};
 
 	const goToNextStep = () => {
-		scrollToStep(step + 1);
+		scrollToStep(currentStep + 1);
 	};
 
 	const handleSubmit = () => {
@@ -51,7 +51,7 @@ export const Form = ({ exitButton }: FormProps) => {
 					size="sm"
 					radius={0}
 					className={styles.progress}
-					value={(100 / form.questions.length) * (step + 1)}
+					value={(100 / form.questions.length) * (currentStep + 1)}
 					transitionDuration={500}
 				/>
 			)}
@@ -63,14 +63,14 @@ export const Form = ({ exitButton }: FormProps) => {
 			) : (
 				<FormQuestions
 					questions={form.questions}
-					setStep={setStep}
+					setCurrentStep={setCurrentStep}
 					containerRef={scrollContainerRef}
 					onSubmit={handleSubmit}
 					goToNextStep={goToNextStep}
 				/>
 			)}
 
-			<NavButtons
+			<FormNavButtons
 				className={styles.navigation}
 				isPrevDisabled={isFirstStep}
 				isNextDisabled={isLastStep}

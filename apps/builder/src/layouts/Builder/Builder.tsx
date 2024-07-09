@@ -1,10 +1,20 @@
+import { useCurrentFormQuery } from "@/shared/models/forms/read";
 import { AppShell } from "@mantine/core";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
 import { NavThankYou } from "./Navbar/NavThankYou/NavThankYou";
 import { NavbarQuestions } from "./Navbar/NavbarQuestions/NavbarQuestions";
+import { NotFound } from "./NotFound/NotFound";
 
 export const Builder = () => {
+	const { data } = useCurrentFormQuery();
+
+	const formNotFound = data?.forms.length === 0;
+
+	if (formNotFound) {
+		return <NotFound />;
+	}
+
 	return (
 		<AppShell
 			padding="md"

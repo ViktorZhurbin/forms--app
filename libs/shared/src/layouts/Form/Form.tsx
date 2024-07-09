@@ -2,6 +2,7 @@ import { Progress } from "@mantine/core";
 import { useRef, useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
 import { useCurrentFormQuery } from "~/models/forms/read";
+import { NotFound } from "../NotFound/NotFound";
 import styles from "./Form.module.css";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import { FormQuestions } from "./FormQuestions/FormQuestions";
@@ -44,7 +45,11 @@ export const Form = ({ exitButton }: FormProps) => {
 		console.log("submit");
 	};
 
-	return (
+	const formNotFound = data?.forms.length === 0;
+
+	return formNotFound ? (
+		<NotFound />
+	) : (
 		<div className={styles.container} ref={scrollContainerRef}>
 			{form?.questions && (
 				<Progress

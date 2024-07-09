@@ -8,18 +8,20 @@ import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import { FormQuestions } from "./FormQuestions/FormQuestions";
 
 type FormProps = {
+	isPreview?: boolean;
 	exitButton?: React.ReactElement;
 };
 
-export const Form = ({ exitButton }: FormProps) => {
+export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const { isLoading, error, data } = useCurrentFormQuery();
 
 	const form = data?.forms?.[0];
+	const questions = isPreview ? form?.draftQuestions : form?.questions;
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 	const isFirstStep = currentStep === 0;
-	const isLastStep = currentStep === (form && form?.questions?.length - 1);
+	const isLastStep = currentStep === (questions && questions.length - 1);
 
 	const scrollToStep = (step: number) => {
 		const container = scrollContainerRef.current;
@@ -51,23 +53,23 @@ export const Form = ({ exitButton }: FormProps) => {
 		<NotFound />
 	) : (
 		<div className={styles.container} ref={scrollContainerRef}>
-			{form?.questions && (
+			{questions && (
 				<Progress
 					size="sm"
 					radius={0}
 					className={styles.progress}
-					value={(100 / form.questions.length) * (currentStep + 1)}
+					value={(100 / questions.length) * (currentStep + 1)}
 					transitionDuration={500}
 				/>
 			)}
 
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
 
-			{!form ? (
+			{!questions ? (
 				<FetchState isLoading={isLoading} error={error} />
 			) : (
 				<FormQuestions
-					questions={form.questions}
+					questions={questions}
 					setCurrentStep={setCurrentStep}
 					containerRef={scrollContainerRef}
 					onSubmit={handleSubmit}

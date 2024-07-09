@@ -1,6 +1,6 @@
 import { Question } from "@/shared/components/Question/Question";
-import { useCurrentQuestion } from "@/shared/models/forms/read";
 import { AddBlockButton } from "../components/AddBlockButton/AddBlockButton";
+import { useCurrentQuestion } from "../hooks/useCurrentQuestion";
 import styles from "./Main.module.css";
 
 export const Main = () => {

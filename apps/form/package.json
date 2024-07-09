@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "rsbuild dev --open --port 5174",
+		"dev": "rsbuild dev --port 5174",
 		"build": "rsbuild build",
 		"preview": "rsbuild preview",
 		"bundle-analyzer": "BUNDLE_ANALYZE=true pnpm run build",

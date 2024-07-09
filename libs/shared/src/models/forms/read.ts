@@ -1,5 +1,4 @@
 import { useFormId } from "~/hooks/useFormId";
-import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
 import { useDbQuery } from "../db";
 import type { TForm } from "./schema/forms";
 
@@ -27,20 +26,4 @@ const useCurrentForm = () => {
 	return data?.forms?.[0];
 };
 
-const useCurrentQuestion = () => {
-	const { data } = useCurrentFormQuery();
-	const selectedBlockId = useSelectedBlockId();
-
-	const form = data?.forms?.[0];
-
-	const index =
-		form?.questions.findIndex((question) => question.id === selectedBlockId) ??
-		null;
-
-	const question = index !== null && form?.questions[index];
-	const order = index && index + 1;
-
-	return { question, order };
-};
-
-export { useAllForms, useCurrentFormQuery, useCurrentForm, useCurrentQuestion };
+export { useAllForms, useCurrentFormQuery, useCurrentForm };

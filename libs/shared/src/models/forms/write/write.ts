@@ -9,6 +9,7 @@ const createForm = async () => {
 		name: getDummyFormTitle(),
 		responseCount: 0,
 		questions: [],
+		draftQuestions: [],
 	};
 
 	await dbTransact(tx.forms[formId].update(form));

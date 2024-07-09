@@ -30,10 +30,10 @@ export const Header = () => {
 				/>
 			</div>
 			<div className={styles.wrapper}>
+				<PublishButton />
 				<PreviewButton />
 				<CopyLinkButton />
 				{isDev && <OpenFormButton />}
-				<PublishButton />
 				<DarkModeToggle />
 			</div>
 		</div>

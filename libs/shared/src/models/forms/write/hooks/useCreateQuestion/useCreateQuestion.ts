@@ -16,7 +16,7 @@ export const useCreateQuestion = () => {
 	const selectedBlockId = useSelectedBlockId();
 	const form = useCurrentForm();
 
-	const selectedBlockOrder = form?.questions.findIndex(
+	const selectedBlockOrder = form?.draftQuestions.findIndex(
 		({ id }) => id === selectedBlockId,
 	);
 
@@ -34,17 +34,17 @@ export const useCreateQuestion = () => {
 			}
 
 			const newQuestion = getCreateQuestionPayload({ type });
-			const newQuestions = form?.questions.toSpliced(
+			const newQuestions = form?.draftQuestions.toSpliced(
 				newBlockOrder,
 				0,
 				newQuestion,
 			);
 
-			await updateForm({ id: formId, questions: newQuestions });
+			await updateForm({ id: formId, draftQuestions: newQuestions });
 
 			return newQuestion.id;
 		},
-		[formId, form?.questions, selectedBlockOrder],
+		[formId, form?.draftQuestions, selectedBlockOrder],
 	);
 
 	return { createQuestion };

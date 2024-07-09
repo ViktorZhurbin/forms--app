@@ -31,7 +31,7 @@
 		"@mantine/core": "^7.11.0",
 		"@mantine/hooks": "^7.11.0",
 		"@tabler/icons-react": "^3.7.0",
-		"million": "^3.1.11",
+		"lodash": "^4.17.21",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"wouter": "^3.3.0"
@@ -43,6 +43,7 @@
 		"@rsbuild/plugin-source-build": "^1.0.0-alpha.5",
 		"@rsbuild/plugin-type-check": "^1.0.0-alpha.5",
 		"@rsdoctor/rspack-plugin": "^0.3.7",
+		"@types/lodash": "^4.17.6",
 		"@types/node": "^20.14.10",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",

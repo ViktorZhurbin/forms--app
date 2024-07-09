@@ -27,7 +27,7 @@ export const NavbarQuestions = () => {
 				<AddBlockButton tooltip="Add block" />
 			</Group>
 
-			<NavbarQuestionsList questions={form.questions} />
+			<NavbarQuestionsList questions={form.draftQuestions} />
 		</Stack>
 	);
 };

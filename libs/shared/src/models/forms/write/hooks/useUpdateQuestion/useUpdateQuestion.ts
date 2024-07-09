@@ -15,7 +15,7 @@ export const useUpdateQuestion = () => {
 
 	const updateQuestion = useCallback(
 		async ({ id, payload }: UpdateQuestionParams) => {
-			const newQuestions = form?.questions.map((question) => {
+			const newQuestions = form?.draftQuestions.map((question) => {
 				if (question.id === id) {
 					return { ...question, ...payload } as TQuestion;
 				}
@@ -23,9 +23,9 @@ export const useUpdateQuestion = () => {
 				return question;
 			});
 
-			await updateForm({ id: formId, questions: newQuestions });
+			await updateForm({ id: formId, draftQuestions: newQuestions });
 		},
-		[formId, form?.questions],
+		[formId, form?.draftQuestions],
 	);
 
 	return { updateQuestion };

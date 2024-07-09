@@ -5,6 +5,7 @@ type TForm = {
 	name: string;
 	responseCount: number;
 	questions: TQuestion[];
+	draftQuestions: TQuestion[];
 };
 
 export type { TForm };

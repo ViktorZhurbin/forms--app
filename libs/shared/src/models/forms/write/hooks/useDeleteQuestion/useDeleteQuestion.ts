@@ -10,13 +10,13 @@ export const useDeleteQuestion = () => {
 
 	const deleteQuestion = useCallback(
 		async (questionId: TQuestion["id"]) => {
-			const newQuestions = form?.questions.filter(
+			const newQuestions = form?.draftQuestions.filter(
 				(question) => question.id !== questionId,
 			);
 
-			await updateForm({ id: formId, questions: newQuestions });
+			await updateForm({ id: formId, draftQuestions: newQuestions });
 		},
-		[formId, form?.questions],
+		[formId, form?.draftQuestions],
 	);
 
 	return { deleteQuestion };

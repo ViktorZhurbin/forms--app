@@ -3,9 +3,11 @@ import { EditableText } from "@/shared/components/Question/EditableText/Editable
 import { useFormId } from "@/shared/hooks/useFormId";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { updateForm } from "@/shared/models/forms/write";
+import { isDev } from "@/shared/utils/env";
 import { CopyLinkButton } from "./CopyLinkButton/CopyLinkButton";
 import styles from "./Header.module.css";
 import { HomeButton } from "./HomeButton/HomeButton";
+import { OpenFormButton } from "./OpenFormButton/OpenFormButton";
 import { PreviewButton } from "./PreviewButton/PreviewButton";
 import { PublishButton } from "./PublishButton/PublishButton";
 
@@ -30,6 +32,7 @@ export const Header = () => {
 			<div className={styles.wrapper}>
 				<PreviewButton />
 				<CopyLinkButton />
+				{isDev && <OpenFormButton />}
 				<PublishButton />
 				<DarkModeToggle />
 			</div>

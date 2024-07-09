@@ -8,8 +8,12 @@ type Schema = {
 	forms: TForm;
 };
 
-const { useQuery: useDbQuery, transact: dbTransact } = init<Schema>({
+const {
+	useQuery: useDbQuery,
+	transact: dbTransact,
+	auth: dbAuth,
+} = init<Schema>({
 	appId: APP_ID,
 });
 
-export { useDbQuery, dbTransact };
+export { useDbQuery, dbTransact, dbAuth };

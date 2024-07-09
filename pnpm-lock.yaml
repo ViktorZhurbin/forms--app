@@ -32,6 +32,9 @@ importers:
       '@mantine/hooks':
         specifier: ^7.11.0
         version: 7.11.1(react@18.3.1)
+      '@react-oauth/google':
+        specifier: ^0.12.1
+        version: 0.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tabler/icons-react':
         specifier: ^3.7.0
         version: 3.9.0(react@18.3.1)
@@ -300,6 +303,12 @@ packages:
 
   '@polka/url@1.0.0-next.25':
     resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==}
+
+  '@react-oauth/google@0.12.1':
+    resolution: {integrity: sha512-qagsy22t+7UdkYAiT5ZhfM4StXi9PPNvw0zuwNmabrWyMKddczMtBIOARflbaIj+wHiQjnMAsZmzsUYuXeyoSg==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@rsbuild/core@1.0.0-alpha.6':
     resolution: {integrity: sha512-BgZGaqbd0EspNbE4P19DopzyHV/QKCr47tdUm2jsEeMZCEbkPVIE8eT5Nh5ubeTkdM7DLHu3/+DLb7Un2xFeaw==}
@@ -2043,6 +2052,11 @@ snapshots:
       fastq: 1.17.1
 
   '@polka/url@1.0.0-next.25': {}
+
+  '@react-oauth/google@0.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@rsbuild/core@1.0.0-alpha.6':
     dependencies:

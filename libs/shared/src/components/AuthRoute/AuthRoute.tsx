@@ -1,6 +1,6 @@
 import { Center, Loader } from "@mantine/core";
 import { Redirect, Route, type RouteProps } from "wouter";
-import { Routes } from "~/constants/location";
+import { Routes, SearchParams } from "~/constants/location";
 import { useDbAuth } from "~/models/db";
 
 export const AuthRoute = (props: RouteProps) => {
@@ -18,5 +18,9 @@ export const AuthRoute = (props: RouteProps) => {
 		);
 	}
 
-	return <Redirect to={Routes.LOGIN} />;
+	const searchParams = new URLSearchParams({
+		[SearchParams.REDIRECT_TO]: window.location.href,
+	});
+
+	return <Redirect to={`${Routes.LOGIN}?${searchParams.toString()}`} />;
 };

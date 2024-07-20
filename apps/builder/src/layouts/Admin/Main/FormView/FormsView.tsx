@@ -1,5 +1,4 @@
 import { FetchError } from "@/shared/components/FetchError/FetchError";
-import { SkeletonWrapper } from "@/shared/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "@/shared/constants/forms";
 import { Routes } from "@/shared/constants/location";
 import { useAllForms } from "@/shared/models/forms/read";
@@ -8,6 +7,7 @@ import { deleteForm } from "@/shared/models/forms/write";
 import { pluralize } from "@/shared/utils/grammar";
 import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
+import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import styles from "./FormsView.module.css";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";

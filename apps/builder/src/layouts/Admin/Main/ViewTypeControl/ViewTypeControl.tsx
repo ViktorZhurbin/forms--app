@@ -1,6 +1,6 @@
-import type { FormsLayout } from "@/shared/constants/forms";
 import { Group, SegmentedControl } from "@mantine/core";
 import { IconLayoutGrid, IconList } from "@tabler/icons-react";
+import type { FormsLayout } from "~/constants/forms";
 
 type ViewTypeControlProps = {
 	view: FormsLayout;

@@ -1,7 +1,7 @@
-import { DarkModeToggle } from "@/shared/components/DarkModeToggle/DarkModeToggle";
 import { Button, Group, UnstyledButton } from "@mantine/core";
 import { IconBolt } from "@tabler/icons-react";
 import { Link } from "wouter";
+import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { AvatarMenu } from "./AvatarMenu/AvatarMenu";
 
 export const Header = () => {

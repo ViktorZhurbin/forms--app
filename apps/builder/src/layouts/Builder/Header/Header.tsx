@@ -1,9 +1,9 @@
-import { DarkModeToggle } from "@/shared/components/DarkModeToggle/DarkModeToggle";
 import { EditableText } from "@/shared/components/Question/EditableText/EditableText";
 import { useFormId } from "@/shared/hooks/useFormId";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { updateForm } from "@/shared/models/forms/write";
 import { isDev } from "@/shared/utils/env";
+import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { CopyLinkButton } from "./CopyLinkButton/CopyLinkButton";
 import styles from "./Header.module.css";
 import { HomeButton } from "./HomeButton/HomeButton";

@@ -2,12 +2,12 @@ import { IconExternalLink } from "@tabler/icons-react";
 import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
 import { useFormUrl } from "../../hooks/useFormUrl";
 
-export const OpenFormButton = () => {
+export const OpenFormButton = ({ disabled }: { disabled: boolean }) => {
 	const url = useFormUrl();
 
 	return (
 		<HeaderIconButton
-			disabled={!url}
+			disabled={disabled || !url}
 			tooltip="Open form"
 			icon={<IconExternalLink />}
 			onClick={() => {

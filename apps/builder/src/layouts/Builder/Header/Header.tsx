@@ -31,9 +31,9 @@ export const Header = () => {
 			</div>
 			<div className={styles.wrapper}>
 				<PublishButton />
-				<PreviewButton />
+				<PreviewButton disabled={!form?.draftQuestions.length} />
 				<CopyLinkButton />
-				{isDev && <OpenFormButton />}
+				{isDev && <OpenFormButton disabled={!form?.questions.length} />}
 				<DarkModeToggle />
 			</div>
 		</div>

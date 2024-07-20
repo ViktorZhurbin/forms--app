@@ -10,9 +10,10 @@ export const usePublishForm = () => {
 
 	const [isLoading, setLoading] = useState(false);
 
-	const isPublished = form
-		? isEqual(form.questions, form.draftQuestions)
-		: true;
+	const isPublished =
+		!!form?.questions.length && isEqual(form.questions, form.draftQuestions);
+
+	const isDisabled = !form?.draftQuestions.length;
 
 	const publishForm = useCallback(async () => {
 		setLoading(true);
@@ -25,5 +26,5 @@ export const usePublishForm = () => {
 		setLoading(false);
 	}, [formNanoId, form?.draftQuestions]);
 
-	return { publishForm, isLoading, isPublished };
+	return { publishForm, isLoading, isPublished, isDisabled };
 };

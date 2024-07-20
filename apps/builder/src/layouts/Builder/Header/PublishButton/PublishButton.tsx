@@ -3,12 +3,12 @@ import { IconSend2 } from "@tabler/icons-react";
 import { usePublishForm } from "~/layouts/Builder/hooks/usePublishForm";
 
 export const PublishButton = () => {
-	const { publishForm, isLoading, isPublished } = usePublishForm();
+	const { publishForm, isLoading, isPublished, isDisabled } = usePublishForm();
 
 	return (
 		<Tooltip
 			withArrow
-			disabled={isLoading}
+			disabled={isLoading || isDisabled}
 			label={
 				isPublished
 					? "Form is published"
@@ -18,7 +18,7 @@ export const PublishButton = () => {
 		>
 			<Button
 				loading={isLoading}
-				disabled={isPublished}
+				disabled={isPublished || isDisabled}
 				leftSection={<IconSend2 />}
 				variant="default"
 			>

@@ -1,4 +1,4 @@
-import { Question } from "@/shared/components/question/Question";
+import { Question } from "@/shared/components/Question/Question";
 import { AddBlockButton } from "../components/AddBlockButton/AddBlockButton";
 import { useCurrentQuestion } from "../hooks/useCurrentQuestion";
 import styles from "./Main.module.css";

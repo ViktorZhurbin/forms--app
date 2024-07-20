@@ -21,6 +21,7 @@
 		"wouter": "^3.3.0"
 	},
 	"devDependencies": {
+		"@rsbuild/core": "^1.0.1-beta.3",
 		"@rsbuild/plugin-react": "^1.0.1-beta.3",
 		"@rsbuild/plugin-source-build": "^1.0.1-beta.3",
 		"@rsbuild/plugin-type-check": "^1.0.1-beta.3",

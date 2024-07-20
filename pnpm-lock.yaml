@@ -11,9 +11,6 @@ importers:
       '@biomejs/biome':
         specifier: 1.8.3
         version: 1.8.3
-      '@rsbuild/core':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3
       '@types/node':
         specifier: ^20.14.10
         version: 20.14.11
@@ -72,6 +69,9 @@ importers:
         specifier: ^3.3.0
         version: 3.3.1(react@18.3.1)
     devDependencies:
+      '@rsbuild/core':
+        specifier: ^1.0.1-beta.3
+        version: 1.0.1-beta.3
       '@rsbuild/plugin-react':
         specifier: ^1.0.1-beta.3
         version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)
@@ -130,6 +130,9 @@ importers:
         specifier: ^3.3.0
         version: 3.3.1(react@18.3.1)
     devDependencies:
+      '@rsbuild/core':
+        specifier: ^1.0.1-beta.3
+        version: 1.0.1-beta.3
       '@rsbuild/plugin-react':
         specifier: ^1.0.1-beta.3
         version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)
@@ -182,6 +185,9 @@ importers:
         specifier: ^3.3.0
         version: 3.3.1(react@18.3.1)
     devDependencies:
+      '@rsbuild/core':
+        specifier: ^1.0.1-beta.3
+        version: 1.0.1-beta.3
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3

@@ -4,7 +4,7 @@ import { setPrefersDark } from "./setPrefersDark";
 
 export const toggleTheme = () => {
 	const currentTheme = document.documentElement.getAttribute(
-		DataAttributes.Theme
+		DataAttributes.Theme,
 	);
 
 	const shouldSwitchToDark = currentTheme === Theme.Light;

@@ -5,6 +5,7 @@
 	},
 	"files": {
 		"include": ["apps/**/src/**/*", "libs/**/src/**/*"],
+		"ignore": ["*.astro"],
 		"ignoreUnknown": true
 	},
 	"linter": {

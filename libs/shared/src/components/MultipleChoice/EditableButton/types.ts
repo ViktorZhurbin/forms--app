@@ -1,6 +1,6 @@
 type EditableButtonVariant = "outline" | "filled";
 
-type EditableButtonOldProps = {
+type EditableButtonProps = {
 	readOnly?: boolean;
 	buttonText: string;
 	classNames?: Record<"textInput", string>;
@@ -10,4 +10,4 @@ type EditableButtonOldProps = {
 	onChange?: (value: string) => void;
 };
 
-export type { EditableButtonVariant, EditableButtonOldProps };
+export type { EditableButtonVariant, EditableButtonProps };

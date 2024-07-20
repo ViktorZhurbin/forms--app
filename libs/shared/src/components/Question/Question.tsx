@@ -3,9 +3,9 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { QuestionTypes } from "~/constants/questions";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
-import { EditableButton } from "../EditableButton/EditableButton";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
+import { EditableButton } from "./EditableButton/EditableButton";
 import { EditableText } from "./EditableText/EditableText";
 import styles from "./Question.module.css";
 

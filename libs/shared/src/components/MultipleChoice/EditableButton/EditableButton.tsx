@@ -1,10 +1,10 @@
 import { Textarea } from "@mantine/core";
 import { clx } from "~/utils/classNames";
-import styles from "./EditableButtonOld.module.css";
+import styles from "./EditableButton.module.css";
 import { variantsMap } from "./constants";
-import type { EditableButtonOldProps } from "./types";
+import type { EditableButtonProps } from "./types";
 
-export const EditableButtonOld = ({
+export const EditableButton = ({
 	variant = "outline",
 	readOnly,
 	buttonText,
@@ -12,7 +12,7 @@ export const EditableButtonOld = ({
 	onClick,
 	onChange,
 	onFocus,
-}: EditableButtonOldProps) => {
+}: EditableButtonProps) => {
 	const handleClickButton = () => {
 		if (readOnly) {
 			onClick?.();

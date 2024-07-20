@@ -3,7 +3,7 @@ import type {
 	TQuestionChoice,
 } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
-import { EditableButtonOld } from "../EditableButtonOld/EditableButtonOld";
+import { EditableButton } from "./EditableButton/EditableButton";
 import styles from "./MultipleChoice.module.css";
 
 type MultipleChoiceProps = {
@@ -34,7 +34,7 @@ export const MultipleChoice = ({
 				};
 
 				return (
-					<EditableButtonOld
+					<EditableButton
 						key={id}
 						readOnly={!editMode}
 						variant="outline"

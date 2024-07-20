@@ -4,7 +4,7 @@ import { clx } from "~/utils/classNames";
 import {
 	EditableElement,
 	type EditableElementProps,
-} from "../EditableElement/EditableElement";
+} from "../../EditableElement/EditableElement";
 import styles from "./EditableButton.module.css";
 
 interface EditableButtonProps extends EditableElementProps, HTMLButtonProps {

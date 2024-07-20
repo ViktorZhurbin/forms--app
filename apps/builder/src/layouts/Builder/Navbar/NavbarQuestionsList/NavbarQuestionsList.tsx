@@ -1,38 +1,25 @@
+import { SortableDndList } from "@/shared/components/SortableDndList/SortableDndList";
 import { useFormId } from "@/shared/hooks/useFormId";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import type { TForm } from "@/shared/models/forms/schema/forms";
-import type { TQuestion } from "@/shared/models/forms/schema/questions";
 import { updateForm } from "@/shared/models/forms/write";
 import { useDeleteQuestion } from "@/shared/models/forms/write/hooks/useDeleteQuestion";
-import {
-	DndContext,
-	type DragEndEvent,
-	DragOverlay,
-	type DragStartEvent,
-	KeyboardSensor,
-	PointerSensor,
-	closestCenter,
-	useSensor,
-	useSensors,
-} from "@dnd-kit/core";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import {
-	SortableContext,
-	arrayMove,
-	sortableKeyboardCoordinates,
-	verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import { ScrollArea } from "@mantine/core";
-import { useState } from "react";
-import { createPortal } from "react-dom";
+import { useCallback } from "react";
 import { navigateToQuestion } from "../../utils/navigateToQuestion";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
 import styles from "./NavbarQuestionsList.module.css";
 
+type NavbarQuestionsListProps = {
+	questions: TForm["questions"];
+};
+
+type Question = NavbarQuestionsListProps["questions"][number];
+
 export const NavbarQuestionsList = ({
 	questions,
-}: { questions: TForm["questions"] }) => {
+}: NavbarQuestionsListProps) => {
 	const formId = useFormId();
 
 	const firstQuestion = questions?.[0];
@@ -40,108 +27,69 @@ export const NavbarQuestionsList = ({
 
 	const { deleteQuestion } = useDeleteQuestion();
 
-	const [activeItem, setActiveItem] = useState<TQuestion | null>(null);
-	const [items, setItems] = useState(questions.map((question) => question.id));
-
-	const sensors = useSensors(
-		useSensor(PointerSensor),
-		useSensor(KeyboardSensor, {
-			coordinateGetter: sortableKeyboardCoordinates,
-		}),
+	const renderDragOverlay = useCallback(
+		(activeItem: Question) => (
+			<NavbarQuestion
+				isDragged
+				id={activeItem.id}
+				type={activeItem.type}
+				group={activeItem.group}
+				title={activeItem.title}
+				isSelected={
+					Boolean(selectedBlockId) && activeItem.id === selectedBlockId
+				}
+			/>
+		),
+		[selectedBlockId],
 	);
 
-	const handleDragStart = (event: DragStartEvent) => {
-		const activId = event.active.id as string;
-		const activeItem = questions.find((question) => question.id === activId);
+	const onDragEnd = useCallback(
+		(newQuestions: Question[]): void => {
+			updateForm({ id: formId, draftQuestions: newQuestions });
+		},
+		[formId],
+	);
 
-		setActiveItem(activeItem ?? null);
+	const renderChildren = useCallback(
+		(activeItemId?: string) =>
+			questions.map(({ id, type, group, title }, index, questions) => {
+				const prevId = index === 0 ? null : questions[index - 1].id;
 
-		// setTimeout(() => {
-		// 	debugger;
-		// }, 1000);
-	};
+				const handleDelete = async () => {
+					await deleteQuestion(id);
 
-	const handleDragEnd = (event: DragEndEvent) => {
-		const { active, over } = event;
+					if (prevId) {
+						navigateToQuestion(prevId);
+					}
+				};
 
-		if (over?.id && active.id !== over.id) {
-			setItems((items) => {
-				const oldIndex = items.indexOf(active.id as string);
-				const newIndex = items.indexOf(over.id as string);
-
-				const newQuestions = arrayMove(questions, oldIndex, newIndex);
-
-				setActiveItem(null);
-				updateForm({ id: formId, questions: newQuestions });
-
-				return newQuestions.map((question) => question.id);
-			});
-		}
-	};
+				return (
+					<NavbarQuestion
+						id={id}
+						key={id}
+						type={type}
+						group={group}
+						title={title}
+						isGhost={activeItemId === id}
+						order={index + 1}
+						onDelete={handleDelete}
+						isSelected={Boolean(selectedBlockId) && id === selectedBlockId}
+					/>
+					// </SkeletonWrapper>
+				);
+			}),
+		[questions, deleteQuestion, selectedBlockId],
+	);
 
 	return (
 		<ScrollArea scrollbars="y">
 			<div className={styles.questionsList}>
-				<DndContext
-					sensors={sensors}
-					collisionDetection={closestCenter}
-					onDragEnd={handleDragEnd}
-					onDragStart={handleDragStart}
-					modifiers={[
-						restrictToVerticalAxis,
-						// restrictToFirstScrollableAncestor,
-					]}
-				>
-					<SortableContext items={items} strategy={verticalListSortingStrategy}>
-						{questions.map(({ id, type, group, title }, index, questions) => {
-							const prevId = index === 0 ? null : questions[index - 1].id;
-
-							const handleDelete = async () => {
-								await deleteQuestion(id);
-
-								if (prevId) {
-									navigateToQuestion(prevId);
-								}
-							};
-
-							return (
-								<NavbarQuestion
-									id={id}
-									key={id}
-									type={type}
-									group={group}
-									title={title}
-									isGhost={activeItem?.id === id}
-									order={index + 1}
-									onDelete={handleDelete}
-									isSelected={
-										Boolean(selectedBlockId) && id === selectedBlockId
-									}
-								/>
-								// </SkeletonWrapper>
-							);
-						})}
-
-						{createPortal(
-							<DragOverlay>
-								{activeItem ? (
-									<NavbarQuestion
-										isDragged
-										id={activeItem.id}
-										type={activeItem.type}
-										group={activeItem.group}
-										title={activeItem.title}
-										isSelected={
-											Boolean(selectedBlockId) &&
-											activeItem.id === selectedBlockId
-										}
-									/>
-								) : null}
-							</DragOverlay>,
-							document.body,
-						)}
-					</SortableContext>
-				</DndContext>
+				<SortableDndList
+					list={questions}
+					onDragEnd={onDragEnd}
+					renderChildren={renderChildren}
+					renderDragOverlay={renderDragOverlay}
+				/>
 			</div>
 		</ScrollArea>
 	);

@@ -1,3 +1,33 @@
+.wrapper {
+	--drag-handle-size: 24px;
+
+	position: relative;
+	padding-left: var(--drag-handle-size);
+
+	&:hover {
+		.dragHandle {
+			display: inline-flex;
+		}
+	}
+
+	&.isDragged {
+		.textInput {
+			opacity: 0.6;
+		}
+	}
+}
+
+.dragHandle {
+	--size: var(--drag-handle-size);
+
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 6px;
+	width: var(--size);
+	height: var(--size);
+}
+
 .textInput {
 	padding-inline: calc(1.125rem * var(--mantine-scale));
 }

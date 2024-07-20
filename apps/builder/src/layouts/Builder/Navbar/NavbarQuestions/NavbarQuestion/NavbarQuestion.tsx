@@ -1,9 +1,7 @@
+import { useDragSortable } from "@/shared/components/SortableDndList/hooks/useDragSortable";
 import type { TQuestion } from "@/shared/models/forms/schema/questions";
 import { clx } from "@/shared/utils/classNames";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import { Button, CloseButton, Text } from "@mantine/core";
-import { IconGripVertical } from "@tabler/icons-react";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import styles from "./NavbarQuestion.module.css";
@@ -28,20 +26,12 @@ export const NavbarQuestion = ({
 	isSelected,
 	onDelete,
 }: NavbarQuestionProps) => {
-	const { attributes, listeners, setNodeRef, transform, transition } =
-		useSortable({ id });
-
-	const style = {
-		transition,
-		transform: CSS.Transform.toString(transform),
-	};
+	const { DragHandle, wrapperProps } = useDragSortable(id);
 
 	return (
 		<Button
 			fullWidth
-			ref={setNodeRef}
-			style={style}
-			{...attributes}
+			{...wrapperProps}
 			variant={isSelected ? "light" : "subtle"}
 			justify="start"
 			size="md"
@@ -68,13 +58,8 @@ export const NavbarQuestion = ({
 						</Text>
 					</div>
 					<div className={styles.actions}>
-						<CloseButton
-							{...listeners}
-							size="sm"
-							component="div"
-							className={styles.dragHandle}
-							icon={<IconGripVertical />}
-						/>
+						<DragHandle className={styles.dragHandle} />
+
 						<CloseButton
 							size="sm"
 							component="div"

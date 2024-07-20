@@ -1,9 +1,9 @@
 import { Textarea, Tooltip } from "@mantine/core";
 import { type KeyboardEventHandler, useRef } from "react";
 import { clx } from "~/utils/classNames";
-import styles from "./EditableText.module.css";
+import styles from "./EditableTextarea.module.css";
 
-type EditableTextProps = {
+type EditableTextareaProps = {
 	initialValue?: string;
 	tooltip?: string;
 	placeholder?: string;
@@ -13,7 +13,7 @@ type EditableTextProps = {
 	onChange?: (value: string) => void;
 };
 
-export const EditableText = ({
+export const EditableTextarea = ({
 	variant = "body",
 	tooltip,
 	readOnly,
@@ -21,7 +21,7 @@ export const EditableText = ({
 	onChange,
 	placeholder,
 	initialValue = "",
-}: EditableTextProps) => {
+}: EditableTextareaProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
 
 	const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {

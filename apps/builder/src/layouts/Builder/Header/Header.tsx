@@ -1,4 +1,4 @@
-import { EditableText } from "@/shared/components/Question/EditableText/EditableText";
+import { EditableTextarea } from "@/shared/components/EditableTextarea/EditableTextarea";
 import { useFormId } from "@/shared/hooks/useFormId";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { updateForm } from "@/shared/models/forms/write";
@@ -23,7 +23,7 @@ export const Header = () => {
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
 				<HomeButton />
-				<EditableText
+				<EditableTextarea
 					tooltip="Rename"
 					initialValue={form?.name}
 					onChange={onChangeTitle}

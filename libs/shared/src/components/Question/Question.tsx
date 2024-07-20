@@ -3,10 +3,10 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { QuestionTypes } from "~/constants/questions";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
-import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
+import { EditableButton } from "../EditableButton/EditableButton";
+import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
 import { ShortText } from "../ShortText/ShortText";
-import { EditableButton } from "./EditableButton/EditableButton";
-import { EditableText } from "./EditableText/EditableText";
+import { MultipleChoice } from "./MultipleChoice/MultipleChoice";
 import styles from "./Question.module.css";
 
 interface QuestionProps {
@@ -53,7 +53,7 @@ export const Question = ({
 					<div className={styles.order}>
 						<Text>{order}</Text> <IconArrowRight />
 					</div>
-					<EditableText
+					<EditableTextarea
 						variant="h1"
 						readOnly={!editMode}
 						placeholder="Your question here..."

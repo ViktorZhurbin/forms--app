@@ -1,14 +1,14 @@
-import styles from "./EditableElement.module.css";
+import styles from "./ContentEditable.module.css";
 
-export type EditableElementProps = {
+export type ContentEditableProps = {
 	isEditable: boolean;
 	value: string;
 };
 
-export const EditableElement = ({
+export const ContentEditable = ({
 	value,
 	isEditable,
-}: EditableElementProps) => {
+}: ContentEditableProps) => {
 	return isEditable ? (
 		<div
 			contentEditable

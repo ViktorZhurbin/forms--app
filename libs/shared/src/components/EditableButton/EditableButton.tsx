@@ -2,12 +2,12 @@ import { Button } from "@mantine/core";
 import type { HTMLButtonProps } from "~/types/dom";
 import { clx } from "~/utils/classNames";
 import {
-	EditableElement,
-	type EditableElementProps,
-} from "../../EditableElement/EditableElement";
+	ContentEditable,
+	type ContentEditableProps,
+} from "../ContentEditable/ContentEditable";
 import styles from "./EditableButton.module.css";
 
-interface EditableButtonProps extends EditableElementProps, HTMLButtonProps {
+interface EditableButtonProps extends ContentEditableProps, HTMLButtonProps {
 	classNames?: {
 		button?: string;
 	};
@@ -33,7 +33,7 @@ export const EditableButton = ({
 				classNames?.button,
 			)}
 		>
-			<EditableElement value={value} isEditable={isEditable} />
+			<ContentEditable value={value} isEditable={isEditable} />
 		</Button>
 	);
 };

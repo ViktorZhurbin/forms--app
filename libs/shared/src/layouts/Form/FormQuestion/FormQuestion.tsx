@@ -1,6 +1,6 @@
 import { useIntersection } from "@mantine/hooks";
 import { type RefObject, useEffect } from "react";
-import { Question } from "~/components/Question/Question";
+import { Question } from "~/components/question/Question";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import styles from "./FormQuestion.module.css";
 

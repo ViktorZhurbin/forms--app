@@ -1,10 +1,10 @@
-import { QuestionTag } from "@/shared/components/QuestionTag/QuestionTag";
 import type { TQuestion } from "@/shared/models/forms/schema/questions";
 import { clx } from "@/shared/utils/classNames";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Button, CloseButton, Text } from "@mantine/core";
 import { IconGripVertical } from "@tabler/icons-react";
+import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import styles from "./NavbarQuestion.module.css";
 

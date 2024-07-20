@@ -1,7 +1,7 @@
-import { QuestionTag } from "@/shared/components/QuestionTag/QuestionTag";
 import type { QuestionTypesMapItem } from "@/shared/constants/questionMaps";
 import type { QuestionTypes } from "@/shared/constants/questions";
 import { Button, Text } from "@mantine/core";
+import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import styles from "./AddBlockModalQuestionItem.module.css";
 
 interface AddBlockModalQuestionItemProps {

@@ -23,7 +23,7 @@ export const NavbarQuestionsList = ({
 	const formNanoId = useFormNanoId();
 
 	const firstQuestion = questions?.[0];
-	const selectedBlockId = useSelectedBlockId(firstQuestion?.id);
+	const selectedBlockId = useSelectedBlockId(firstQuestion?.nanoid);
 
 	const { deleteQuestion } = useDeleteQuestion();
 
@@ -35,8 +35,9 @@ export const NavbarQuestionsList = ({
 				type={activeItem.type}
 				group={activeItem.group}
 				title={activeItem.title}
+				nanoid={activeItem.nanoid}
 				isSelected={
-					Boolean(selectedBlockId) && activeItem.id === selectedBlockId
+					Boolean(selectedBlockId) && activeItem.nanoid === selectedBlockId
 				}
 			/>
 		),
@@ -55,14 +56,14 @@ export const NavbarQuestionsList = ({
 
 	const renderChildren = useCallback(
 		(activeItemId?: string) =>
-			questions.map(({ id, type, group, title }, index, questions) => {
-				const prevId = index === 0 ? null : questions[index - 1].id;
+			questions.map(({ id, nanoid, type, group, title }, index, questions) => {
+				const prevNanoId = index === 0 ? null : questions[index - 1].nanoid;
 
 				const handleDelete = async () => {
 					await deleteQuestion(id);
 
-					if (prevId) {
-						navigateToQuestion(prevId);
+					if (prevNanoId) {
+						navigateToQuestion({ nanoid: prevNanoId });
 					}
 				};
 
@@ -73,10 +74,11 @@ export const NavbarQuestionsList = ({
 						type={type}
 						group={group}
 						title={title}
+						nanoid={nanoid}
 						isGhost={activeItemId === id}
 						order={index + 1}
 						onDelete={handleDelete}
-						isSelected={Boolean(selectedBlockId) && id === selectedBlockId}
+						isSelected={Boolean(selectedBlockId) && nanoid === selectedBlockId}
 					/>
 					// </SkeletonWrapper>
 				);

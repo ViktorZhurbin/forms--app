@@ -9,7 +9,7 @@ export const useCurrentQuestion = () => {
 
 	const index =
 		form?.draftQuestions.findIndex(
-			(question) => question.id === selectedBlockId,
+			(question) => question.nanoid === selectedBlockId,
 		) ?? null;
 
 	const question = index !== null && form?.draftQuestions[index];

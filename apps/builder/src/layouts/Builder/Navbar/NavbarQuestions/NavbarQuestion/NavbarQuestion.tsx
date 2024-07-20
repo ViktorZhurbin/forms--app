@@ -7,7 +7,7 @@ import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
-	extends Pick<TQuestion, "id" | "type" | "group" | "title"> {
+	extends Pick<TQuestion, "id" | "nanoid" | "type" | "group" | "title"> {
 	order?: number;
 	isSelected?: boolean;
 	isDragged?: boolean;
@@ -21,6 +21,7 @@ export const NavbarQuestion = ({
 	group,
 	title,
 	order,
+	nanoid,
 	isGhost,
 	isDragged,
 	isSelected,
@@ -46,7 +47,7 @@ export const NavbarQuestion = ({
 			}}
 			data-active={isSelected}
 			onClick={() => {
-				navigateToQuestion(id);
+				navigateToQuestion({ nanoid });
 			}}
 		>
 			{isGhost ? null : (

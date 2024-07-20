@@ -9,5 +9,26 @@
 		"bundle-analyzer": "BUNDLE_ANALYZE=true pnpm run build",
 		"rsdoctor": "RSDOCTOR=true pnpm run build",
 		"deps-check": "pnpx depcruise src --include-only '^src'"
+	},
+	"dependencies": {
+		"@forms/shared": "workspace:*",
+		"@instantdb/react": "^0.10.29",
+		"@mantine/core": "^7.11.0",
+		"@mantine/hooks": "^7.11.0",
+		"@tabler/icons-react": "^3.7.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"wouter": "^3.3.0"
+	},
+	"devDependencies": {
+		"@rsbuild/plugin-react": "^1.0.1-beta.3",
+		"@rsbuild/plugin-source-build": "^1.0.1-beta.3",
+		"@rsbuild/plugin-type-check": "^1.0.1-beta.3",
+		"@rsdoctor/rspack-plugin": "^0.3.7",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"postcss": "^8.4.38",
+		"postcss-preset-mantine": "^1.15.0",
+		"postcss-simple-vars": "^7.0.1"
 	}
 }

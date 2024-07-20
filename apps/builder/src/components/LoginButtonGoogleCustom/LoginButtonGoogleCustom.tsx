@@ -1,5 +1,5 @@
+import { db } from "@/shared/models/db";
 import { Button } from "@mantine/core";
-import { db } from "~/models/db";
 import { GOOGLE_CLIENT_NAME } from "~/utils/env";
 
 export const LoginButtonGoogleCustom = ({

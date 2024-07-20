@@ -1,6 +1,6 @@
-import { LoginButtonGoogleCustom } from "@/shared/components/LoginButtonGoogleCustom/LoginButtonGoogleCustom";
 import { SearchParams } from "@/shared/constants/location";
 import { Center } from "@mantine/core";
+import { LoginButtonGoogleCustom } from "~/components/LoginButtonGoogleCustom/LoginButtonGoogleCustom";
 
 export const Login = () => {
 	const searchParams = new URL(window.location.href).searchParams;

@@ -1,6 +1,6 @@
+import { db } from "@/shared/models/db";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useState } from "react";
-import { db } from "~/models/db";
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_NAME } from "~/utils/env";
 
 export const LoginButtonGoogle = ({

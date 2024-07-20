@@ -1,7 +1,7 @@
+import { Routes, SearchParams } from "@/shared/constants/location";
+import { useDbAuth } from "@/shared/models/db";
 import { Center, Loader } from "@mantine/core";
 import { Redirect, Route, type RouteProps } from "wouter";
-import { Routes, SearchParams } from "~/constants/location";
-import { useDbAuth } from "~/models/db";
 
 export const AuthRoute = (props: RouteProps) => {
 	const { isLoading, user } = useDbAuth();

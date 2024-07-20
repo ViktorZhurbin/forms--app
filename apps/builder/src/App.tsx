@@ -1,6 +1,6 @@
-import { AuthRoute } from "@/shared/components/AuthRoute/AuthRoute";
 import { Routes } from "@/shared/constants/location";
 import { Route, Switch } from "wouter";
+import { AuthRoute } from "~/components/AuthRoute/AuthRoute";
 import { ThemeProvider } from "./contexts/ThemeProvider/ThemeProvider";
 import { Admin } from "./layouts/Admin/Admin";
 import { Builder } from "./layouts/Builder/Builder";

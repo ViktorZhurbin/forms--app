@@ -1,0 +1,22 @@
+---
+import FooterBottom from "./components/FooterBottom/FooterBottom.astro";
+
+interface Props {
+	companyName: string;
+}
+
+const { companyName } = Astro.props;
+---
+
+<footer>
+	<hr />
+	<FooterBottom companyName={companyName} />
+</footer>
+
+<style>
+	footer {
+		--pico-color: var(--pico-muted-color);
+
+		padding: var(--pico-spacing);
+	}
+</style>

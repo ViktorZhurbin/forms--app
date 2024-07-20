@@ -1,0 +1,92 @@
+---
+import Grid from "~/components/ui/Grid.astro";
+import CreateFormButton from "./CreateFormButton.astro";
+
+interface Props {
+	imgSrc: string;
+	isOdd?: boolean;
+	wrapperClass?: string;
+}
+
+const { imgSrc, isOdd, wrapperClass, ...rest } = Astro.props;
+---
+
+<Grid>
+	<section {...rest} class:list={["section", { isOdd }, wrapperClass]}>
+		<slot name="title" />
+
+		<img src={imgSrc} />
+
+		<slot name="description" />
+
+		<CreateFormButton class="button" />
+	</section>
+</Grid>
+
+<style>
+	@import "~/styles/media.css";
+
+	.section {
+		display: grid;
+		align-items: center;
+		justify-content: center;
+		grid-row: 1;
+
+		grid-template-areas:
+			"title"
+			"image"
+			"description"
+			"button";
+
+		h2 {
+			grid-area: title;
+			margin-bottom: calc(var(--pico-spacing) * 2);
+		}
+
+		img {
+			grid-area: image;
+		}
+
+		p {
+			grid-area: description;
+			margin-block: calc(var(--pico-spacing) * 2);
+		}
+
+		.button {
+			grid-area: button;
+			padding: 0;
+		}
+
+		@media (--lg-up) {
+			grid-template-columns: repeat(2, 1fr);
+			justify-items: start;
+			text-align: start;
+			column-gap: calc(var(--pico-spacing) * 2);
+
+			grid-template-areas:
+				"image ."
+				"image title"
+				"image description"
+				"image button"
+				"image .";
+
+			&.isOdd {
+				grid-template-areas:
+					". 						image "
+					"title 				image "
+					"description 	image"
+					"button 			image"
+					". 						image";
+			}
+
+			p {
+				margin-top: var(--pico-spacing);
+				margin-bottom: calc(var(--pico-spacing) * 1.5);
+			}
+
+			.button {
+				align-items: start;
+			}
+		}
+	}
+</style>

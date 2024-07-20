@@ -1,0 +1,28 @@
+---
+interface Props {
+	href: string;
+	size?: "small";
+}
+
+const { href, size } = Astro.props;
+---
+
+<a href={href} class:list={[size]}>
+	<slot />
+</a>
+
+<style>
+	a {
+		color: var(--pico-muted-color);
+		text-decoration: none;
+
+		&:hover {
+			color: var(--pico-h2-color);
+			text-decoration: underline;
+		}
+	}
+
+	.small {
+		font-size: 0.75rem;
+	}
+</style>

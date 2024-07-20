@@ -1,0 +1,49 @@
+---
+import CTASection from "../components/CTASection.astro";
+---
+
+<CTASection imgSrc="/landing/hero.webp" wrapperClass="wrapperClass">
+	<h1 slot="title">
+		Some text with an <span class="accent">emphasised</span> word
+	</h1>
+	<p slot="description">
+		Description of our <b>topmost advantage</b>. <br /> In two sentences
+	</p>
+</CTASection>
+
+<style>
+	@import "~/styles/media.css";
+
+	.wrapperClass.wrapperClass {
+		grid-template-areas:
+			"title"
+			"description"
+			"button"
+			"image";
+
+		h1 {
+			grid-area: title;
+		}
+
+		p {
+			grid-area: description;
+			font-size: 1.15rem;
+			margin-top: calc(var(--pico-spacing) * 1.75);
+			margin-bottom: calc(var(--pico-spacing) * 2.5);
+		}
+
+		img {
+			grid-area: image;
+			margin-top: calc(var(--pico-spacing) * 2.25);
+		}
+
+		@media (--lg-up) {
+			grid-template-areas:
+				"image ."
+				"image title"
+				"image description"
+				"image button"
+				"image .";
+		}
+	}
+</style>

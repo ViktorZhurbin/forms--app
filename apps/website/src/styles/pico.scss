@@ -1,0 +1,38 @@
+@forward "@picocss/pico/scss/pico" with (
+	$theme-color: "jade",
+	// $enable-responsive-spacings: false,
+	$modules:
+		(
+			"layout/grid": false,
+			"layout/overflow-auto": false,
+			"layout/section": false,
+			"layout/landmarks": false,
+			"content/code": false,
+			"content/table": false,
+
+			"forms/checkbox-radio-switch": false,
+			"forms/input-color": false,
+			"forms/input-date": false,
+			"forms/input-file": false,
+			"forms/input-range": false,
+			"forms/input-search": false,
+
+			"components/dropdown": false,
+			"components/group": false,
+			"components/loading": false,
+			"components/modal": false,
+			"components/nav": false,
+			"components/progress": false,
+		)
+);
+
+// @use "@picocss/pico/scss/colors/utilities" with (
+// 	$palette: (
+// 		"color-families": (
+// 			grey,
+// 		),
+// 	),
+// 	$utilities: (
+// 		"background-colors": false,
+// 	)
+// );

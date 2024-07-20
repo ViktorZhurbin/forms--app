@@ -1,0 +1,17 @@
+---
+import IconCheckbox from "./IconCheckbox.astro";
+---
+
+<div class="wrapper">
+	<IconCheckbox class="checkbox" />
+	<span class="text"><slot /></span>
+</div>
+
+<style>
+	.wrapper {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--pico-spacing) / 4);
+		margin-top: calc(var(--pico-spacing) * 0.75);
+	}
+</style>

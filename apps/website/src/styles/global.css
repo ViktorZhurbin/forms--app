@@ -1,0 +1,32 @@
+:root {
+	/* Colors */
+	--accent-color: hsl(320deg 85% 55%);
+
+	/* Pico overrides */
+	--pico-border-radius: calc(1rem / 2);
+
+	&[data-theme="dark"] {
+		--pico-muted-color: hsl(219 11% 78%);
+	}
+
+	img {
+		border-radius: var(--pico-border-radius);
+	}
+
+	button {
+		text-wrap: nowrap;
+	}
+
+	[data-tooltip]:hover::before,
+	[data-tooltip]:hover::after {
+		opacity: 0;
+
+		@media (hover: hover) and (pointer: fine) {
+			opacity: 1;
+		}
+	}
+
+	.accent {
+		color: var(--accent-color);
+	}
+}

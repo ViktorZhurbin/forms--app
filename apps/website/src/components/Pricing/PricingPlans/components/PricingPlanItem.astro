@@ -1,0 +1,77 @@
+---
+import { Plans } from "../constants/plans";
+import type { PricingPlan } from "../constants/pricingPlans";
+
+import FeaturesFree from "./Features/FeaturesFree.astro";
+import FeaturesPro from "./Features/FeaturesPro.astro";
+import MonthlyPriceNote from "./MonthlyPriceNote.astro";
+import PriceTag from "./PriceTag.astro";
+
+interface Props {
+	plan: PricingPlan;
+	class?: string;
+}
+
+const FeaturesByPlan = {
+	[Plans.FREE]: FeaturesFree,
+	[Plans.PRO]: FeaturesPro,
+};
+
+const { plan, class: className, ...rest } = Astro.props;
+const Features = FeaturesByPlan[plan.code];
+
+const { title, description, price, buttonText, isHighlighted } = plan;
+---
+
+<article {...rest} class:list={[className, { isHighlighted }]}>
+	<h3 class="title">{title}</h3>
+	<p class="description">{description}</p>
+
+	<div>
+		<PriceTag price={price.yearly} />
+		<MonthlyPriceNote price={price.monthly} />
+	</div>
+
+	<button class:list={["button", !isHighlighted && "contrast outline"]}>
+		{buttonText}
+	</button>
+
+	<Features />
+</article>
+
+<style>
+	article {
+		margin: 0;
+		padding-block: calc(var(--pico-block-spacing-vertical) * 1.65);
+		padding-inline: calc(var(--pico-block-spacing-horizontal) * 1.65);
+		/* border-radius: var(--card-border-radius); */
+
+		/* max-width: 30rem; */
+		text-align: start;
+
+		&.isHighlighted {
+			border: 2px solid var(--pico-primary);
+		}
+
+		p,
+		span {
+			font-size: calc(var(--font-size) * 0.875);
+		}
+	}
+
+	.title {
+		font-size: calc(var(--font-size) * 1.25);
+		font-weight: 400;
+	}
+
+	.description {
+		margin-top: var(--pico-spacing);
+		margin-bottom: calc(var(--pico-spacing) * 1.75);
+	}
+
+	.button {
+		width: 100%;
+		margin-top: calc(var(--pico-spacing) * 1.5);
+		margin-bottom: calc(var(--pico-spacing) * 2.75);
+	}
+</style>

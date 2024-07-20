@@ -1,0 +1,31 @@
+---
+import { Routes } from "~/constants/routes";
+import Grid from "~/components/ui/Grid.astro";
+import CreateFormButton from "../components/CreateFormButton.astro";
+---
+
+<Grid>
+	<section>
+		<h2 slot="title">
+			Make your first form <span class="accent">in minutes</span>
+		</h2>
+		<p slot="description">
+			Unlimited forms bla bla bla. See <a href={Routes.Pricing}>pricing</a> for details
+		</p>
+		<CreateFormButton class="button" />
+	</section>
+</Grid>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	p {
+		margin-top: var(--pico-spacing);
+		margin-bottom: calc(var(--pico-spacing) * 2.5);
+	}
+</style>

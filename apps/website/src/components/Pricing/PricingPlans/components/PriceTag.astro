@@ -1,0 +1,24 @@
+---
+interface Props {
+	price: string;
+}
+
+const { price } = Astro.props;
+---
+
+<div class="wrapper">
+	<span class="price">{price}</span>
+	<span class="cycle">/mo</span>
+</div>
+
+<style>
+	.wrapper {
+		display: flex;
+		align-items: baseline;
+		gap: 4px;
+
+		.price {
+			font-size: 2.25rem;
+		}
+	}
+</style>

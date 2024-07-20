@@ -1,0 +1,18 @@
+---
+import { Routes } from "~/constants/routes";
+---
+
+<a href={Routes.Home}>
+	<h6>Forms</h6>
+</a>
+
+<style>
+	a:has(h6) {
+		text-decoration: none;
+	}
+
+	h6 {
+		margin: 0;
+		color: var(--pico-color-grey-700);
+	}
+</style>

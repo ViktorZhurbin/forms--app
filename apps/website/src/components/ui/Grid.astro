@@ -1,0 +1,61 @@
+---
+const { class: className, ...rest } = Astro.props;
+---
+
+<div {...rest} class:list={["grid", className]}>
+	<slot />
+</div>
+
+<style>
+	@import "~/styles/media.css";
+
+	.grid {
+		--grid-spacing: var(--pico-spacing);
+
+		display: grid;
+		margin: auto;
+
+		/* responsive variables */
+		grid-template-columns: repeat(4, 1fr);
+		column-gap: var(--pico-spacing);
+		padding-inline: var(--pico-spacing);
+		padding-block: calc(var(--pico-spacing) * 4);
+
+		text-align: center;
+		max-width: 1535px;
+
+		> * {
+			grid-column: 1 / -1;
+
+			@media (--sm-up) {
+				grid-column: 2 / -2;
+			}
+
+			@media (--lg-up) {
+				grid-column: 1 / -1;
+			}
+		}
+
+		@media (--xxs-up) {
+			grid-template-columns: repeat(8, 1fr);
+			column-gap: calc(var(--pico-spacing) * 1.5);
+			padding-inline: calc(var(--pico-spacing) * 1.5);
+		}
+
+		@media (--lg-up) {
+			grid-template-columns: repeat(12, 1fr);
+			column-gap: calc(var(--pico-spacing) * 2);
+			padding-block: calc(var(--pico-spacing) * 2);
+		}
+
+		@media (--xl-up) {
+			column-gap: calc(var(--pico-spacing) * 1.5);
+		}
+
+		@media (--xxl-up) {
+			column-gap: calc(var(--pico-spacing) * 4);
+			padding-inline: calc(var(--pico-spacing) * 2);
+			padding-block: calc(var(--pico-spacing) * 2.5);
+		}
+	}
+</style>

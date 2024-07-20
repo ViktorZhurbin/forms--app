@@ -1,0 +1,22 @@
+{
+	"name": "@forms/website",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "npm run build && astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@picocss/pico": "^2.0.6",
+		"astro": "^4.11.5"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.8.1",
+		"autoprefixer": "^10.4.19",
+		"postcss-custom-media": "^10.0.8",
+		"sass": "1.76.0"
+	}
+}

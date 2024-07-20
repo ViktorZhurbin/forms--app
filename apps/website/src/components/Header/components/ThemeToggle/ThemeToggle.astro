@@ -1,0 +1,62 @@
+---
+import { ToggleButtonId } from "./helpers/constants";
+import Icon from "./icon/ToggleIcon.astro";
+---
+
+<button
+	transition:persist
+	role="switch"
+	id={ToggleButtonId}
+	class="themeToggleButton"
+	data-tooltip="Switch to Light mode"
+	data-placement="left"
+>
+	<Icon />
+</button>
+
+<style>
+	@import "~/styles/media.css";
+
+	.themeToggleButton.themeToggleButton {
+		--padding: 0.3rem;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		color: var(--pico-contrast);
+		background: transparent;
+		border: 1px solid transparent;
+
+		border-radius: var(--pico-border-radius);
+		padding: var(--padding);
+		margin-right: calc(var(--padding) * -1);
+
+		@media (hover: hover) {
+			opacity: 0.8;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+</style>
+
+<script>
+	import { ToggleButtonId } from "./helpers/constants";
+	import { toggleTheme } from "./helpers/toggleTheme";
+	import { watchSystemTheme } from "./helpers/watchSystemTheme";
+
+	watchSystemTheme();
+
+	const handleClick = (e: MouseEvent) => {
+		const target = e.currentTarget as HTMLElement | null;
+
+		toggleTheme();
+		target?.blur();
+	};
+
+	document
+		.getElementById(ToggleButtonId)
+		?.addEventListener("click", handleClick);
+</script>

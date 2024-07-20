@@ -1,0 +1,27 @@
+---
+interface Props {
+	price?: string;
+}
+
+const { price } = Astro.props;
+---
+
+{
+	(
+		<p class="note">
+			{price ? (
+				<>
+					billed annually or <b>{price}</b> monthly
+				</>
+			) : (
+				<p>&nbsp;</p>
+			)}
+		</p>
+	)
+}
+
+<style>
+	.note {
+		margin-top: calc(var(--pico-spacing) / 4);
+	}
+</style>

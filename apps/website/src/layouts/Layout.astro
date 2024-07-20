@@ -1,0 +1,114 @@
+---
+import "~/styles/index.scss";
+
+import { ViewTransitions } from "astro:transitions";
+import Header from "../components/Header/Header.astro";
+import Footer from "../components/Footer/Footer.astro";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+
+		<ViewTransitions />
+		<script is:inline>
+			const setColorMode = (newDocument) => {
+				const Theme = {
+					Dark: "dark",
+					Light: "light",
+				};
+
+				try {
+					const userPrefersDark = window.localStorage.getItem("prefers-dark");
+
+					let theme;
+					if (userPrefersDark === null) {
+						const systemPrefersDark = window.matchMedia(
+							"(prefers-color-scheme: dark)"
+						).matches;
+
+						theme = systemPrefersDark ? Theme.Dark : Theme.Light;
+					} else {
+						theme = userPrefersDark === "true" ? Theme.Dark : Theme.Light;
+					}
+
+					newDocument.documentElement.setAttribute("data-theme", theme);
+				} catch {}
+			};
+
+			// on direct page access
+			setColorMode(document);
+
+			// on view transition
+			document.addEventListener("astro:before-swap", (event) => {
+				setColorMode(event.newDocument);
+			});
+		</script>
+	</head>
+	<body>
+		<Header class="nav" />
+		<main class="main">
+			<slot />
+		</main>
+		<Footer companyName="My Forms" />
+
+		<style>
+			@import "~/styles/media.css";
+
+			body {
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			/* Sticky header */
+			@media (--sm-up) {
+				body {
+					--header-height: 70px;
+				}
+
+				.nav {
+					height: var(--header-height);
+					position: fixed;
+					top: 0;
+					inset-inline: 0;
+
+					backdrop-filter: blur(5px);
+					background-color: color-mix(
+						in srgb,
+						var(--pico-background-color) 80%,
+						transparent
+					);
+				}
+
+				.main {
+					margin-top: var(--header-height);
+				}
+			}
+
+			@media (--xl-up) {
+				body,
+				.nav {
+					--max-width: 1535px;
+
+					max-width: var(--max-width);
+					margin-inline: auto;
+				}
+			}
+		</style>
+	</body>
+</html>

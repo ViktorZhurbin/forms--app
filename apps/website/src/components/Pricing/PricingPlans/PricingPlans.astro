@@ -1,0 +1,59 @@
+---
+import { pricingPlans } from "./constants/pricingPlans";
+import PricingPlanItem from "./components/PricingPlanItem.astro";
+import Grid from "~/components/ui/Grid.astro";
+---
+
+<Grid class="wrapper">
+	<div class="innerWrapper">
+		{
+			pricingPlans.map((plan) => (
+				<PricingPlanItem class="planItem" plan={plan} />
+			))
+		}
+	</div>
+</Grid>
+
+<style>
+	@import "~/styles/media.css";
+
+	.wrapper {
+		max-width: 1200px;
+	}
+
+	.innerWrapper {
+		--font-size: var(--pico-font-size);
+		--card-border-radius: 1rem;
+
+		display: grid;
+		justify-items: stretch;
+
+		row-gap: var(--pico-spacing);
+		max-width: 1200px;
+
+		padding-top: calc(var(--pico-spacing) * 2.5);
+		padding-inline: calc(var(--pico-spacing) * 1.5);
+		padding-bottom: calc(var(--pico-spacing) * 3.5);
+
+		@media (--lg-up) {
+			--card-border-radius: 1.5rem;
+
+			grid-template-columns: repeat(2, 1fr);
+			/* Aligning card rows using subgrid. See comment below */
+			grid-template-rows: repeat(5, auto);
+			gap: calc(var(--pico-spacing) * 2);
+
+			/* Aligning card rows using subgrid */
+			.planItem {
+				display: grid;
+				gap: 0;
+				grid-row: span 5;
+				grid-template-rows: repeat(5, auto); /* fallback */
+				grid-template-rows: subgrid; /* magic */
+				/* References:
+				- https://www.youtube.com/watch?v=lLnFtK1LNu4
+				- https://www.youtube.com/watch?v=IIQa9f0REtM&t=164s */
+			}
+		}
+	}
+</style>

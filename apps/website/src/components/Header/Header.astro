@@ -1,0 +1,29 @@
+---
+import Logo from "./components/Logo.astro";
+import NavMenu from "./components/NavMenu.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<nav {...rest} class:list={[className, "menu"]}>
+	<Logo />
+	<NavMenu />
+</nav>
+
+<style>
+	.menu {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		gap: 0.5rem;
+
+		padding: 0.75rem 1.5rem;
+		border-bottom: 1px solid var(--pico-muted-border-color);
+		background-color: var(--pico-background-color);
+	}
+</style>

@@ -1,0 +1,40 @@
+---
+interface Props {
+	href: string;
+	class?: string;
+}
+
+// what's rest props for:
+// https://docs.astro.build/en/guides/styling/#passing-a-class-to-a-child-component
+const { href, class: className, ...rest } = Astro.props;
+---
+
+<a
+	{...rest}
+	role="button"
+	href={href}
+	class:list={[className, "button"]}
+	data-astro-prefetch="viewport"
+>
+	<slot />
+</a>
+
+<style>
+	.button.button {
+		color: var(--pico-muted-color);
+		font-weight: 500;
+		background-color: unset;
+		border: unset;
+		padding: 0.2rem 0.4rem;
+		border: 1px solid transparent;
+
+		text-overflow: ellipsis;
+		text-wrap: nowrap;
+		overflow: hidden;
+
+		&:hover {
+			color: var(--pico-h2-color);
+			text-decoration: underline;
+		}
+	}
+</style>

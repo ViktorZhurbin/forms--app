@@ -1,0 +1,55 @@
+---
+import { Routes } from "~/constants/routes";
+import NavLink from "./NavLink.astro";
+import ThemeToggle from "./ThemeToggle/ThemeToggle.astro";
+---
+
+<div id="headerMenu">
+	<NavLink href={Routes.Home}>Home</NavLink>
+	<NavLink href={Routes.Pricing}> Pricing </NavLink>
+	<NavLink href="#" class="login">Log in</NavLink>
+	<button class="buttonLink">Get started</button>
+	<ThemeToggle />
+</div>
+
+<script is:inline>
+	const hideCurrentPathLink = () => {
+		const { pathname } = window.location;
+		const path =
+			pathname.endsWith("/") && pathname !== "/"
+				? pathname.slice(0, -1) // trim trailing slash
+				: pathname;
+
+		const selector = `#headerMenu [href='${path}']`;
+		const currentPageLink = document.querySelector(selector);
+
+		currentPageLink?.style.setProperty("display", "none");
+	};
+
+	// on direct page access
+	hideCurrentPathLink();
+
+	// on view transition
+	document.addEventListener("astro:after-swap", hideCurrentPathLink);
+</script>
+
+<style>
+	@import "~/styles/media.css";
+
+	#headerMenu {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+
+		.buttonLink {
+			padding-block: 0.5rem;
+		}
+	}
+
+	@media (--sm-down) {
+		.login,
+		.buttonLink {
+			display: none;
+		}
+	}
+</style>

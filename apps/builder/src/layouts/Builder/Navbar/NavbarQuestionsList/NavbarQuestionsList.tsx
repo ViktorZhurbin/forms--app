@@ -8,6 +8,7 @@ import { useDeleteQuestion } from "@/shared/models/forms/write/hooks/useDeleteQu
 import { ScrollArea } from "@mantine/core";
 import { useCallback } from "react";
 import { navigateToQuestion } from "../../utils/navigateToQuestion";
+import { removeSelectedBlockId } from "../../utils/removeSelectedBlockId";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
 import styles from "./NavbarQuestionsList.module.css";
 
@@ -57,13 +58,19 @@ export const NavbarQuestionsList = ({
 	const renderChildren = useCallback(
 		(activeItemId?: string) =>
 			questions.map(({ id, nanoid, type, group, title }, index, questions) => {
-				const prevNanoId = index === 0 ? null : questions[index - 1].nanoid;
+				const prevQuestion = index > 0 ? questions[index - 1] : null;
+				const nextQuestion =
+					index < questions.length - 1 ? questions[index + 1] : null;
+
+				const newSelectedBlockId = (prevQuestion ?? nextQuestion)?.nanoid;
 
 				const handleDelete = async () => {
 					await deleteQuestion(id);
 
-					if (prevNanoId) {
-						navigateToQuestion({ nanoid: prevNanoId });
+					if (newSelectedBlockId) {
+						navigateToQuestion({ nanoid: newSelectedBlockId });
+					} else {
+						removeSelectedBlockId();
 					}
 				};
 

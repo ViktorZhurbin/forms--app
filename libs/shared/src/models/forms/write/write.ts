@@ -1,30 +1,33 @@
-import { id, tx } from "@instantdb/react";
+import { id, lookup, tx } from "@instantdb/react";
+import { makeId } from "~/utils/nanoid";
 import { dbTransact } from "../../db";
 import type { TForm } from "../schema/forms";
 import { getDummyFormTitle } from "./helpers";
 
 const createForm = async () => {
-	const formId = id();
+	const nanoid = makeId();
+
 	const form: Partial<TForm> = {
+		nanoid,
 		name: getDummyFormTitle(),
 		responseCount: 0,
 		questions: [],
 		draftQuestions: [],
 	};
 
-	await dbTransact(tx.forms[formId].update(form));
+	await dbTransact(tx.forms[id()].update(form));
 
-	return formId;
+	return nanoid;
 };
 
-const updateForm = async (payload: Partial<TForm> & Pick<TForm, "id">) => {
-	const { id, ...update } = payload;
+const updateForm = async (payload: Partial<TForm> & Pick<TForm, "nanoid">) => {
+	const { nanoid, ...update } = payload;
 
-	await dbTransact(tx.forms[id].update(update));
+	await dbTransact(tx.forms[lookup("nanoid", nanoid)].update(update));
 };
 
-const deleteForm = async (id: TForm["id"]) => {
-	dbTransact([tx.forms[id].delete()]);
+const deleteForm = async ({ nanoid }: { nanoid: TForm["nanoid"] }) => {
+	dbTransact([tx.forms[lookup("nanoid", nanoid)].delete()]);
 };
 
 export { createForm, updateForm, deleteForm };

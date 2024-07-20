@@ -1,5 +1,5 @@
 import { EditableTextarea } from "@/shared/components/EditableTextarea/EditableTextarea";
-import { useFormId } from "@/shared/hooks/useFormId";
+import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { updateForm } from "@/shared/models/forms/write";
 import { isDev } from "@/shared/utils/env";
@@ -12,11 +12,11 @@ import { PreviewButton } from "./PreviewButton/PreviewButton";
 import { PublishButton } from "./PublishButton/PublishButton";
 
 export const Header = () => {
-	const formId = useFormId();
+	const formNanoId = useFormNanoId();
 	const form = useCurrentForm();
 
 	const onChangeTitle = (name: string) => {
-		updateForm({ id: formId, name });
+		updateForm({ nanoid: formNanoId, name });
 	};
 
 	return (

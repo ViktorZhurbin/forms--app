@@ -1,5 +1,5 @@
 import { SortableDndList } from "@/shared/components/SortableDndList/SortableDndList";
-import { useFormId } from "@/shared/hooks/useFormId";
+import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import type { TForm } from "@/shared/models/forms/schema/forms";
@@ -20,7 +20,7 @@ type Question = NavbarQuestionsListProps["questions"][number];
 export const NavbarQuestionsList = ({
 	questions,
 }: NavbarQuestionsListProps) => {
-	const formId = useFormId();
+	const formNanoId = useFormNanoId();
 
 	const firstQuestion = questions?.[0];
 	const selectedBlockId = useSelectedBlockId(firstQuestion?.id);
@@ -45,9 +45,12 @@ export const NavbarQuestionsList = ({
 
 	const onDragEnd = useCallback(
 		(newQuestions: Question[]): void => {
-			updateForm({ id: formId, draftQuestions: newQuestions });
+			updateForm({
+				nanoid: formNanoId,
+				draftQuestions: newQuestions,
+			});
 		},
-		[formId],
+		[formNanoId],
 	);
 
 	const renderChildren = useCallback(

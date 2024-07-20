@@ -3,27 +3,26 @@ import { Link } from "wouter";
 import type { FormViewProps } from "../types";
 
 export const ListView = ({
-	id,
 	name,
-	getHref,
+	href,
+	nanoid,
 	className,
 	responsesText,
 	getDeleteButton,
 }: FormViewProps) => {
 	return (
 		<Button
-			key={id}
 			size="md"
 			variant="default"
 			justify="start"
 			className={className}
 			component={Link}
-			href={getHref(id)}
+			href={href}
 		>
 			<Group gap={24}>
 				<Text>{name}</Text>
 				<Text size="sm">{responsesText}</Text>
-				{getDeleteButton(id)}
+				{getDeleteButton({ nanoid })}
 			</Group>
 		</Button>
 	);

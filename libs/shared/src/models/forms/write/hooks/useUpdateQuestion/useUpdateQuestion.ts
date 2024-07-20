@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useFormId } from "~/hooks/useFormId";
+import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useCurrentForm } from "~/models/forms/read";
 import type { TQuestion } from "../../../schema/questions";
 import { updateForm } from "../../write";
@@ -10,7 +10,7 @@ type UpdateQuestionParams = {
 };
 
 export const useUpdateQuestion = () => {
-	const formId = useFormId();
+	const formNanoId = useFormNanoId();
 	const form = useCurrentForm();
 
 	const updateQuestion = useCallback(
@@ -23,9 +23,12 @@ export const useUpdateQuestion = () => {
 				return question;
 			});
 
-			await updateForm({ id: formId, draftQuestions: newQuestions });
+			await updateForm({
+				nanoid: formNanoId,
+				draftQuestions: newQuestions,
+			});
 		},
-		[formId, form?.draftQuestions],
+		[formNanoId, form?.draftQuestions],
 	);
 
 	return { updateQuestion };

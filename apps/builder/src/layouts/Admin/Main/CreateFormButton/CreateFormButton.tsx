@@ -6,9 +6,9 @@ import { navigate } from "wouter/use-browser-location";
 
 export const CreateFormButton = () => {
 	const handleCreateForm = async () => {
-		const formId = await createForm();
+		const nanoid = await createForm();
 
-		const formPath = Routes.getFormPath(formId);
+		const formPath = Routes.getFormPath({ nanoid });
 		navigate(formPath);
 	};
 

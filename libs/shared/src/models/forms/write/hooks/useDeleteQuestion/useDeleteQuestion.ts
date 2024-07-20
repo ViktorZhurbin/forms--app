@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-import { useFormId } from "~/hooks/useFormId";
+import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useCurrentForm } from "~/models/forms/read";
 import type { TQuestion } from "../../../schema/questions";
 import { updateForm } from "../../write";
 
 export const useDeleteQuestion = () => {
-	const formId = useFormId();
+	const formNanoId = useFormNanoId();
 	const form = useCurrentForm();
 
 	const deleteQuestion = useCallback(
@@ -14,9 +14,12 @@ export const useDeleteQuestion = () => {
 				(question) => question.id !== questionId,
 			);
 
-			await updateForm({ id: formId, draftQuestions: newQuestions });
+			await updateForm({
+				nanoid: formNanoId,
+				draftQuestions: newQuestions,
+			});
 		},
-		[formId, form?.draftQuestions],
+		[formNanoId, form?.draftQuestions],
 	);
 
 	return { deleteQuestion };

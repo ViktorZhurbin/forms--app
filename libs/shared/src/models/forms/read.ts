@@ -1,4 +1,4 @@
-import { useFormId } from "~/hooks/useFormId";
+import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useDbQuery } from "../db";
 import type { TForm } from "./schema/forms";
 
@@ -6,18 +6,18 @@ const useAllForms = () => {
 	return useDbQuery({ forms: {} });
 };
 
-const useFormQuery = (formId: TForm["id"]) => {
+const useFormQuery = (formNanoId: TForm["nanoid"]) => {
 	return useDbQuery({
 		forms: {
-			$: { where: { id: formId } },
+			$: { where: { nanoid: formNanoId } },
 		},
 	});
 };
 
 const useCurrentFormQuery = () => {
-	const formId = useFormId();
+	const formNanoId = useFormNanoId();
 
-	return useFormQuery(formId);
+	return useFormQuery(formNanoId);
 };
 
 const useCurrentForm = () => {

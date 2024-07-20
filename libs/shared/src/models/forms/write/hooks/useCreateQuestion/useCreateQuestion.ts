@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import type { QuestionTypes } from "~/constants/questions";
-import { useFormId } from "~/hooks/useFormId";
+import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
 import { useCurrentForm } from "~/models/forms/read";
 import { updateForm } from "../../write";
@@ -12,7 +12,7 @@ type CreateQuestionParams = {
 };
 
 export const useCreateQuestion = () => {
-	const formId = useFormId();
+	const formNanoId = useFormNanoId();
 	const selectedBlockId = useSelectedBlockId();
 	const form = useCurrentForm();
 
@@ -40,11 +40,14 @@ export const useCreateQuestion = () => {
 				newQuestion,
 			);
 
-			await updateForm({ id: formId, draftQuestions: newQuestions });
+			await updateForm({
+				nanoid: formNanoId,
+				draftQuestions: newQuestions,
+			});
 
 			return newQuestion.id;
 		},
-		[formId, form?.draftQuestions, selectedBlockOrder],
+		[formNanoId, form?.draftQuestions, selectedBlockOrder],
 	);
 
 	return { createQuestion };

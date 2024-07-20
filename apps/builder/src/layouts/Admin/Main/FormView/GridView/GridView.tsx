@@ -3,16 +3,15 @@ import { Link } from "wouter";
 import type { FormViewProps } from "../types";
 
 export const GridView = ({
-	id,
+	href,
 	name,
-	getHref,
+	nanoid,
 	className,
 	responsesText,
 	getDeleteButton,
 }: FormViewProps) => {
 	return (
 		<Button
-			key={id}
 			size="md"
 			variant="default"
 			justify="start"
@@ -20,14 +19,14 @@ export const GridView = ({
 			h={100}
 			className={className}
 			component={Link}
-			href={getHref(id)}
+			href={href}
 		>
 			<Stack gap={4} align="start">
 				<Group justify="space-between">
 					<Text size="sm" fw={500}>
 						{name}
 					</Text>
-					{getDeleteButton(id)}
+					{getDeleteButton({ nanoid })}
 				</Group>
 				<Text size="sm">{responsesText}</Text>
 			</Stack>

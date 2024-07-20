@@ -1,6 +1,7 @@
 import { id } from "@instantdb/react";
 import { QuestionTypesMap } from "~/constants/questionMaps";
 import { QuestionTypes } from "~/constants/questions";
+import { makeId } from "~/utils/nanoid";
 import type {
 	TQuestion,
 	TQuestionChoice,
@@ -12,6 +13,7 @@ export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 		type,
 		title: "",
 		id: id(),
+		nanoid: makeId(),
 		group: QuestionTypesMap[type].group,
 	};
 
@@ -21,8 +23,8 @@ export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 		case QuestionTypes.YesNo:
 			update = {
 				options: [
-					{ id: id(), text: "Yes" },
-					{ id: id(), text: "No" },
+					{ id: id(), nanoid: makeId(), text: "Yes" },
+					{ id: id(), nanoid: makeId(), text: "No" },
 				],
 			} as Pick<TQuestionChoice, "options">;
 
@@ -31,8 +33,8 @@ export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 		case QuestionTypes.MultipleChoice:
 			update = {
 				options: [
-					{ id: id(), text: "Option 1" },
-					{ id: id(), text: "Option 2" },
+					{ id: id(), nanoid: makeId(), text: "Option 1" },
+					{ id: id(), nanoid: makeId(), text: "Option 2" },
 				],
 			} as Pick<TQuestionChoice, "options">;
 

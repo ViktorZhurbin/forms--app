@@ -1,10 +1,10 @@
 import { Routes } from "@/shared/constants/location";
-import { useFormId } from "@/shared/hooks/useFormId";
+import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { FORM_URL_BASE } from "@/shared/utils/env";
 
 export const useFormUrl = () => {
-	const formId = useFormId();
-	const path = Routes.getFormPath(formId);
+	const nanoid = useFormNanoId();
+	const path = Routes.getFormPath({ nanoid });
 
 	return URL.canParse(path, FORM_URL_BASE)
 		? new URL(path, FORM_URL_BASE).toString()

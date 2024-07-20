@@ -1,11 +1,11 @@
-import { useFormId } from "@/shared/hooks/useFormId";
+import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { updateForm } from "@/shared/models/forms/write";
 import { isEqual } from "lodash";
 import { useCallback, useState } from "react";
 
 export const usePublishForm = () => {
-	const formId = useFormId();
+	const formNanoId = useFormNanoId();
 	const form = useCurrentForm();
 
 	const [isLoading, setLoading] = useState(false);
@@ -18,12 +18,12 @@ export const usePublishForm = () => {
 		setLoading(true);
 
 		await updateForm({
-			id: formId,
+			nanoid: formNanoId,
 			questions: form?.draftQuestions,
 		});
 
 		setLoading(false);
-	}, [formId, form?.draftQuestions]);
+	}, [formNanoId, form?.draftQuestions]);
 
 	return { publishForm, isLoading, isPublished };
 };

@@ -1,11 +1,8 @@
-import type { useDbQuery } from "~/models/db";
+import type { Db } from "~/models/db";
 import { FetchError } from "../FetchError/FetchError";
 import { FetchLoading } from "../FetchLoading/FetchLoading";
 
-type FetchStateProps = Pick<
-	ReturnType<typeof useDbQuery>,
-	"error" | "isLoading"
->;
+type FetchStateProps = Pick<ReturnType<Db["useQuery"]>, "error" | "isLoading">;
 
 export const FetchState = ({ error, isLoading }: FetchStateProps) => {
 	if (isLoading) {

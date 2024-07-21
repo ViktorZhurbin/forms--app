@@ -17,4 +17,4 @@ const useDbAuth = db.useAuth;
 const useDbQuery: Db["useQuery"] = db.useQuery;
 const dbTransact: Db["transact"] = db.transact;
 
-export { db, useDbQuery, dbTransact, useDbAuth };
+export { db, type Db, useDbQuery, dbTransact, useDbAuth };

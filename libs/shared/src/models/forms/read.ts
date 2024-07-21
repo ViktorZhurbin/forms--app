@@ -1,6 +1,5 @@
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useDbQuery } from "../db";
-import type { TForm } from "./schema/forms";
 
 const useCurrentFormQuery = () => {
 	const formNanoId = useFormNanoId();
@@ -8,6 +7,7 @@ const useCurrentFormQuery = () => {
 	return useDbQuery({
 		forms: {
 			$: { where: { nanoid: formNanoId } },
+			workspaces: {},
 		},
 	});
 };
@@ -15,7 +15,13 @@ const useCurrentFormQuery = () => {
 const useCurrentForm = () => {
 	const { data } = useCurrentFormQuery();
 
-	return data?.forms?.[0] as TForm | undefined;
+	return data?.forms?.[0];
 };
 
-export { useCurrentFormQuery, useCurrentForm };
+const useCurrentFormWorkspace = () => {
+	const form = useCurrentForm();
+
+	return form?.workspaces[0];
+};
+
+export { useCurrentFormQuery, useCurrentForm, useCurrentFormWorkspace };

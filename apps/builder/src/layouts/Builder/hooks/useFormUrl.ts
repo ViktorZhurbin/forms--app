@@ -3,11 +3,11 @@ import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { FORM_URL_BASE } from "@/shared/utils/env";
 
 export const useFormUrl = () => {
-	const nanoid = useFormNanoId();
+	const formId = useFormNanoId();
 
-	if (!nanoid) return;
+	if (!formId) return;
 
-	const path = Routes.getFormPath({ nanoid });
+	const path = Routes.getFormPath({ formId });
 
 	if (URL.canParse(path, FORM_URL_BASE)) {
 		return new URL(path, FORM_URL_BASE).toString();

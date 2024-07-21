@@ -5,11 +5,16 @@ const SearchParams = {
 };
 
 const Routes = {
-	ROOT: "/",
 	LOGIN: "/login",
 	CREATE: "/create",
-	FORM: "/form/:nanoid",
-	getFormPath: ({ nanoid }: { nanoid: string }) => `form/${nanoid}`,
+
+	ROOT: "/",
+	ADMIN: "/ws/:workspaceId",
+	getAdminPath: ({ workspaceId }: { workspaceId?: string }) =>
+		workspaceId ? `/ws/${workspaceId}` : "/",
+
+	FORM: "/form/:formId",
+	getFormPath: ({ formId }: { formId: string }) => `/form/${formId}`,
 };
 
 export { SearchParams, Routes };

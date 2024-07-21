@@ -1,11 +1,12 @@
-import { FetchError } from "@/shared/components/FetchError/FetchError";
+import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { Routes } from "@/shared/constants/location";
-import { useDbQuery } from "@/shared/models/db";
 import type { TForm } from "@/shared/models/forms/schema/forms";
 import { deleteForm } from "@/shared/models/forms/write";
+import { useCurrentWorkspaceWithFormsQuery } from "@/shared/models/workspace/read";
 import { pluralize } from "@/shared/utils/grammar";
 import { ActionIcon, Group, Stack } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
+import { Redirect } from "wouter";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
 import styles from "./FormsView.module.css";
@@ -17,10 +18,17 @@ type FormsViewProps = {
 };
 
 export const FormsView = ({ view }: FormsViewProps) => {
-	const { isLoading, error, data } = useDbQuery({ forms: {} });
+	const { isLoading, error, data } = useCurrentWorkspaceWithFormsQuery();
 
-	if (error) {
-		return <FetchError message={error.message} />;
+	if (isLoading || error) {
+		return <FetchState isLoading={isLoading} error={error} />;
+	}
+
+	const workspace = data.workspaces[0];
+
+	if (!workspace) {
+		// can happen if url has incorrect ws id
+		return <Redirect to={Routes.ROOT} />;
 	}
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
@@ -45,13 +53,13 @@ export const FormsView = ({ view }: FormsViewProps) => {
 
 	return (
 		<Wrapper gap={8}>
-			{data?.forms.map((form) => (
+			{workspace.forms?.map((form) => (
 				<SkeletonWrapper key={form.id} visible={isLoading}>
 					<ViewComponent
 						name={form.name}
 						nanoid={form.nanoid}
 						className={styles.formItem}
-						href={Routes.getFormPath({ nanoid: form.nanoid })}
+						href={Routes.getFormPath({ formId: form.nanoid })}
 						getDeleteButton={getDeleteButton}
 						responsesText={pluralize({
 							singular: "response",

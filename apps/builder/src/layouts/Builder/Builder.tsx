@@ -1,6 +1,6 @@
 import { useCurrentFormQuery } from "@/shared/models/forms/read";
+import { NotFound } from "../NotFound/NotFound";
 import { Header } from "./Header/Header";
-import { NotFound } from "./NotFound/NotFound";
 import { BuilderBase } from "./components/BuilderBase";
 
 export const Builder = () => {

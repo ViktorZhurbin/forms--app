@@ -2,7 +2,8 @@ import { useParams } from "wouter";
 import { LocalStorage } from "~/constants/localStorage";
 
 export const useFormNanoId = () => {
-	const paramsNanoId = useParams<{ nanoid?: string }>()?.nanoid;
+	const paramsNanoId = useParams<{ workspaceId?: string; formId?: string }>()
+		?.formId;
 
 	if (paramsNanoId) {
 		return paramsNanoId;

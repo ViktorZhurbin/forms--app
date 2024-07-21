@@ -1,16 +1,11 @@
-import { Routes } from "@/shared/constants/location";
-import { Button, Group, UnstyledButton } from "@mantine/core";
+import { Button, Group } from "@mantine/core";
 import { IconBolt } from "@tabler/icons-react";
-import { Link } from "wouter";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { AvatarMenu } from "./AvatarMenu/AvatarMenu";
 
 export const Header = () => {
 	return (
-		<Group h="100%" px="md" align="center" justify="space-between">
-			<UnstyledButton component={Link} href={Routes.ROOT}>
-				Logo
-			</UnstyledButton>
+		<Group h="100%" px="md" align="center" justify="end">
 			<Group align="center" gap={8}>
 				<Button
 					disabled

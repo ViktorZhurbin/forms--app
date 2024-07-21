@@ -1,5 +1,6 @@
 import { db } from "@/shared/models/db";
 import { Button } from "@mantine/core";
+import { IconBrandGoogleFilled } from "@tabler/icons-react";
 import { GOOGLE_CLIENT_NAME } from "~/utils/env";
 
 export const LoginButtonGoogleCustom = ({
@@ -11,7 +12,7 @@ export const LoginButtonGoogleCustom = ({
 	});
 
 	return (
-		<Button href={url} component="a">
+		<Button href={url} component="a" leftSection={<IconBrandGoogleFilled />}>
 			Sign in with Google
 		</Button>
 	);

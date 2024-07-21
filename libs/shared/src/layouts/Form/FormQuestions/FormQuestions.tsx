@@ -4,7 +4,7 @@ import {
 	type FormQuestionProps,
 } from "../FormQuestion/FormQuestion";
 
-type PreviewModalQuestionsProps = Pick<
+type FormQuestionsProps = Pick<
 	FormQuestionProps,
 	"setCurrentStep" | "containerRef" | "onSubmit" | "goToNextStep"
 > & {
@@ -17,7 +17,7 @@ export const FormQuestions = ({
 	containerRef,
 	onSubmit,
 	goToNextStep,
-}: PreviewModalQuestionsProps) => {
+}: FormQuestionsProps) => {
 	return (
 		<>
 			{questions.map((question, index) => {

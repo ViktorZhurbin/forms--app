@@ -1,6 +1,6 @@
 import { FetchError } from "@/shared/components/FetchError/FetchError";
 import { Routes } from "@/shared/constants/location";
-import { useAllForms } from "@/shared/models/forms/read";
+import { useDbQuery } from "@/shared/models/db";
 import type { TForm } from "@/shared/models/forms/schema/forms";
 import { deleteForm } from "@/shared/models/forms/write";
 import { pluralize } from "@/shared/utils/grammar";
@@ -17,7 +17,7 @@ type FormsViewProps = {
 };
 
 export const FormsView = ({ view }: FormsViewProps) => {
-	const { isLoading, error, data } = useAllForms();
+	const { isLoading, error, data } = useDbQuery({ forms: {} });
 
 	if (error) {
 		return <FetchError message={error.message} />;

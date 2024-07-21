@@ -3,7 +3,7 @@ import { IconEye } from "@tabler/icons-react";
 import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
 import { PreviewModal } from "../../modals/PreviewModal/PreviewModal";
 
-export const PreviewButton = ({ disabled }: { disabled: boolean }) => {
+export const PreviewButton = ({ disabled }: { disabled?: boolean }) => {
 	const [isModalOpen, modalActions] = useDisclosure(false);
 
 	return (

@@ -1,7 +1,7 @@
 import { AppShell } from "@mantine/core";
-import { Main } from "./Main/Main";
-import { NavThankYou } from "./Navbar/NavThankYou/NavThankYou";
-import { NavbarQuestions } from "./Navbar/NavbarQuestions/NavbarQuestions";
+import { Main } from "../Main/Main";
+import { NavThankYou } from "../Navbar/NavThankYou/NavThankYou";
+import { NavbarQuestions } from "../Navbar/NavbarQuestions/NavbarQuestions";
 
 export const BuilderBase = ({ header }: { header: React.ReactElement }) => {
 	return (

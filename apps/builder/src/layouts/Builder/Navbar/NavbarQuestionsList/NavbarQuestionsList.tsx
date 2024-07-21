@@ -19,7 +19,7 @@ type NavbarQuestionsListProps = {
 type Question = NavbarQuestionsListProps["questions"][number];
 
 export const NavbarQuestionsList = ({
-	questions,
+	questions = [],
 }: NavbarQuestionsListProps) => {
 	const formNanoId = useFormNanoId();
 

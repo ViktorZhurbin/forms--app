@@ -1,5 +1,4 @@
-import { FetchError } from "@/shared/components/FetchError/FetchError";
-import { FetchLoading } from "@/shared/components/FetchLoading/FetchLoading";
+import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { useCurrentFormQuery } from "@/shared/models/forms/read";
 import { Group, Stack, Text } from "@mantine/core";
 import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
@@ -8,15 +7,11 @@ import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList"
 export const NavbarQuestions = () => {
 	const { isLoading, error, data } = useCurrentFormQuery();
 
-	if (error) {
-		return <FetchError message={error.message} />;
+	if (!data) {
+		return <FetchState error={error} isLoading={isLoading} />;
 	}
 
-	if (isLoading) {
-		return <FetchLoading />;
-	}
-
-	const form = data?.forms?.[0];
+	const form = data.forms?.[0] ?? {};
 
 	return (
 		<Stack gap={8}>

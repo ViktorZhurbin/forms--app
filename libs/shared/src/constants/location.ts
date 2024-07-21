@@ -7,6 +7,7 @@ const SearchParams = {
 const Routes = {
 	ROOT: "/",
 	LOGIN: "/login",
+	CREATE: "/create",
 	FORM: "/form/:nanoid",
 	getFormPath: ({ nanoid }: { nanoid: string }) => `form/${nanoid}`,
 };

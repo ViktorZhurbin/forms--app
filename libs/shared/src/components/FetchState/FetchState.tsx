@@ -2,11 +2,20 @@ import type { Db } from "~/models/db";
 import { FetchError } from "../FetchError/FetchError";
 import { FetchLoading } from "../FetchLoading/FetchLoading";
 
-type FetchStateProps = Pick<ReturnType<Db["useQuery"]>, "error" | "isLoading">;
+type FetchStateProps = Pick<
+	ReturnType<Db["useQuery"]>,
+	"error" | "isLoading"
+> & {
+	fullScreen?: boolean;
+};
 
-export const FetchState = ({ error, isLoading }: FetchStateProps) => {
+export const FetchState = ({
+	error,
+	isLoading,
+	fullScreen,
+}: FetchStateProps) => {
 	if (isLoading) {
-		return <FetchLoading />;
+		return <FetchLoading fullScreen={fullScreen} />;
 	}
 
 	if (error) {

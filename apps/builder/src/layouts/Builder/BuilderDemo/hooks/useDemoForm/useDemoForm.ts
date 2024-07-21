@@ -1,8 +1,33 @@
+import { useLocalDemoNanoId } from "@/shared/hooks/useLocalDemoNanoId";
+import { useCurrentFormQuery } from "@/shared/models/forms/read";
+import { createForm } from "@/shared/models/forms/write";
 import { useEffect } from "react";
-import { checkDemoFormNanoId } from "./checkDemoFormNanoId";
 
 export const useDemoForm = () => {
+	const { data, isLoading, error } = useCurrentFormQuery();
+
+	const [, setDemoLocalNanoId, removeDemoLocalNanoId] = useLocalDemoNanoId();
+
 	useEffect(() => {
-		checkDemoFormNanoId();
-	}, []);
+		if (isLoading) return;
+
+		if (error || !data?.forms.length) {
+			removeDemoLocalNanoId();
+
+			createForm().then((nanoid) => {
+				setDemoLocalNanoId(nanoid);
+			});
+		}
+	}, [
+		isLoading,
+		error,
+		data?.forms.length,
+		setDemoLocalNanoId,
+		removeDemoLocalNanoId,
+	]);
+
+	return {
+		error,
+		isLoading: isLoading || !data?.forms.length,
+	};
 };

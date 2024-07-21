@@ -1,23 +1,8 @@
 import { useParams } from "wouter";
-import { LocalStorage } from "~/constants/localStorage";
+import { useLocalDemoNanoId } from "./useLocalDemoNanoId";
 
 export const useFormNanoId = () => {
-	const paramsNanoId = useParams<{ workspaceId?: string; formId?: string }>()
-		?.formId;
+	const [demoLocalNanoId] = useLocalDemoNanoId();
 
-	if (paramsNanoId) {
-		return paramsNanoId;
-	}
-
-	try {
-		const demoLocalNanoId = localStorage.getItem(LocalStorage.DemoFormId);
-
-		if (demoLocalNanoId) {
-			return demoLocalNanoId;
-		}
-	} catch {
-		return "";
-	}
-
-	return "";
+	return useParams()?.formId ?? demoLocalNanoId ?? "";
 };

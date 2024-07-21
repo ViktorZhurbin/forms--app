@@ -4,6 +4,7 @@
 	align-items: center;
 	justify-content: space-between;
 	flex: 1;
+	padding-inline: var(--mantine-spacing-lg);
 
 	gap: var(--mantine-spacing-xs);
 }
@@ -13,7 +14,8 @@
 	align-items: center;
 	flex: 1;
 
-	padding: 20px 0;
+	padding: 20px;
+	width: 100%;
 
 	border: calc(0.0625rem * var(--mantine-scale)) solid
 		var(--mantine-color-default-border);

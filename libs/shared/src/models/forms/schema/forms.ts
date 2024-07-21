@@ -9,6 +9,7 @@ type TForm = {
 	responseCount: number;
 	questions: TQuestion[];
 	draftQuestions: TQuestion[];
+	isDemo?: boolean;
 };
 
 export type { TForm };

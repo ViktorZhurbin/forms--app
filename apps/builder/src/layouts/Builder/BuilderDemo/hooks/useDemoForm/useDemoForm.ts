@@ -14,7 +14,7 @@ export const useDemoForm = () => {
 		if (error || !data?.forms.length) {
 			removeDemoLocalNanoId();
 
-			createForm().then((nanoid) => {
+			createForm({ isDemo: true }).then((nanoid) => {
 				setDemoLocalNanoId(nanoid);
 			});
 		}

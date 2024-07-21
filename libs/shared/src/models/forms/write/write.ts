@@ -6,12 +6,14 @@ import type { TForm } from "../schema/forms";
 import { getDummyFormTitle } from "./helpers";
 
 const createForm = async ({
+	isDemo,
 	workspaceId,
-}: { workspaceId?: TWorkspace["id"] } = {}) => {
+}: { workspaceId?: TWorkspace["id"]; isDemo?: boolean } = {}) => {
 	const nanoid = makeId();
 
 	const form: Partial<TForm> = {
 		nanoid,
+		isDemo,
 		name: getDummyFormTitle(),
 		responseCount: 0,
 		questions: [],

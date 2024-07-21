@@ -1,14 +1,19 @@
 ---
 import { Routes } from "~/constants/routes";
-import NavLink from "./NavLink.astro";
+import NavLink from "../../ui/NavLink.astro";
 import ThemeToggle from "./ThemeToggle/ThemeToggle.astro";
+import ButtonLink from "~/components/ui/ButtonLink.astro";
+import { Links } from "~/constants/links";
 ---
 
 <div id="headerMenu">
 	<NavLink href={Routes.Home}>Home</NavLink>
 	<NavLink href={Routes.Pricing}> Pricing </NavLink>
 	<NavLink href="#" class="login">Log in</NavLink>
-	<button class="buttonLink">Get started</button>
+
+	<ButtonLink class="buttonLink" href={Links.DemoBuilder}>
+		Get started
+	</ButtonLink>
 	<ThemeToggle />
 </div>
 

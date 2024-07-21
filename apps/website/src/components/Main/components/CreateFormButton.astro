@@ -1,4 +1,7 @@
 ---
+import ButtonLink from "~/components/ui/ButtonLink.astro";
+import { Links } from "~/constants/links";
+
 interface Props {
 	class?: string;
 }
@@ -7,7 +10,7 @@ const { class: className, ...rest } = Astro.props;
 ---
 
 <div {...rest} class:list={[className, "wrapper"]}>
-	<button>Create a free form</button>
+	<ButtonLink href={Links.DemoBuilder}>Create a free form</ButtonLink>
 	<small>No sign up required</small>
 </div>
 

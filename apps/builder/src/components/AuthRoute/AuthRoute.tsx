@@ -1,7 +1,7 @@
 import { Routes, SearchParams } from "@/shared/constants/location";
 import { useDbAuth } from "@/shared/models/db";
-import { Center, Loader } from "@mantine/core";
 import { Redirect, Route, type RouteProps } from "wouter";
+import { FullScreenLoader } from "../FullScreenLoader/FullScreenLoader";
 
 export const AuthRoute = (props: RouteProps) => {
 	const { isLoading, user } = useDbAuth();
@@ -11,11 +11,7 @@ export const AuthRoute = (props: RouteProps) => {
 	}
 
 	if (isLoading) {
-		return (
-			<Center h="100dvh">
-				<Loader color="gray" type="dots" />
-			</Center>
-		);
+		return <FullScreenLoader />;
 	}
 
 	const searchParams = new URLSearchParams({

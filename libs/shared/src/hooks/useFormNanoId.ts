@@ -1,8 +1,22 @@
 import { useParams } from "wouter";
+import { LocalStorage } from "~/constants/localStorage";
 
 export const useFormNanoId = () => {
-	// if no nanoid, the route won't be rendered
-	const formNanoId = useParams<{ nanoid: string }>()?.nanoid;
+	const paramsNanoId = useParams<{ nanoid?: string }>()?.nanoid;
 
-	return formNanoId;
+	if (paramsNanoId) {
+		return paramsNanoId;
+	}
+
+	try {
+		const demoLocalNanoId = localStorage.getItem(LocalStorage.DemoFormId);
+
+		if (demoLocalNanoId) {
+			return demoLocalNanoId;
+		}
+	} catch {
+		return "";
+	}
+
+	return "";
 };

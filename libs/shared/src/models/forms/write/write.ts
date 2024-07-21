@@ -20,8 +20,10 @@ const createForm = async () => {
 	return nanoid;
 };
 
-const updateForm = async (payload: Partial<TForm> & Pick<TForm, "nanoid">) => {
+const updateForm = async (payload: Partial<TForm>) => {
 	const { nanoid, ...update } = payload;
+
+	if (!nanoid) return;
 
 	await dbTransact(tx.forms[lookup("nanoid", nanoid)].update(update));
 };

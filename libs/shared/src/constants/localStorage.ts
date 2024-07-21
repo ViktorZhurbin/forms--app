@@ -1,3 +1,3 @@
 export enum LocalStorage {
-	DemoForm = "demo-form",
+	DemoFormId = "demo-form-id",
 }

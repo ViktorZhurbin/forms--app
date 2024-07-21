@@ -6,13 +6,15 @@ export const OpenFormButton = ({ disabled }: { disabled: boolean }) => {
 	const url = useFormUrl();
 
 	return (
-		<HeaderIconButton
-			disabled={disabled || !url}
-			tooltip="Open form"
-			icon={<IconExternalLink />}
-			onClick={() => {
-				window.open(url, "_blank");
-			}}
-		/>
+		url && (
+			<HeaderIconButton
+				disabled={disabled || !url}
+				tooltip="Open form"
+				icon={<IconExternalLink />}
+				onClick={() => {
+					window.open(url, "_blank");
+				}}
+			/>
+		)
 	);
 };

@@ -7,15 +7,17 @@ export const CopyLinkButton = () => {
 	const url = useFormUrl();
 
 	return (
-		<CopyButton value={url} timeout={2000}>
-			{({ copied, copy }) => (
-				<HeaderIconButton
-					disabled={!url}
-					tooltip={copied ? "Copied!" : "Copy form link"}
-					icon={<IconLink />}
-					onClick={copy}
-				/>
-			)}
-		</CopyButton>
+		url && (
+			<CopyButton value={url} timeout={2000}>
+				{({ copied, copy }) => (
+					<HeaderIconButton
+						disabled={!url}
+						tooltip={copied ? "Copied!" : "Copy form link"}
+						icon={<IconLink />}
+						onClick={copy}
+					/>
+				)}
+			</CopyButton>
+		)
 	);
 };

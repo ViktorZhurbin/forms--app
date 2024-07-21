@@ -4,9 +4,12 @@ import { FORM_URL_BASE } from "@/shared/utils/env";
 
 export const useFormUrl = () => {
 	const nanoid = useFormNanoId();
+
+	if (!nanoid) return;
+
 	const path = Routes.getFormPath({ nanoid });
 
-	return URL.canParse(path, FORM_URL_BASE)
-		? new URL(path, FORM_URL_BASE).toString()
-		: "";
+	if (URL.canParse(path, FORM_URL_BASE)) {
+		return new URL(path, FORM_URL_BASE).toString();
+	}
 };

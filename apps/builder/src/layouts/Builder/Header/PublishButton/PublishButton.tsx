@@ -2,7 +2,7 @@ import { Button, Tooltip } from "@mantine/core";
 import { IconSend2 } from "@tabler/icons-react";
 import { usePublishForm } from "~/layouts/Builder/hooks/usePublishForm";
 
-export const PublishButton = () => {
+export const PublishButton = ({ onClick }: { onClick?: () => void }) => {
 	const { publishForm, isLoading, isPublished, isDisabled } = usePublishForm();
 
 	return (
@@ -14,9 +14,9 @@ export const PublishButton = () => {
 					? "Form is published"
 					: "Make your changes visible to the world"
 			}
-			onClick={publishForm}
 		>
 			<Button
+				onClick={onClick ?? publishForm}
 				loading={isLoading}
 				disabled={isPublished || isDisabled}
 				leftSection={<IconSend2 />}

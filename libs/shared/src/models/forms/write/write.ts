@@ -43,4 +43,13 @@ const deleteForm = async ({ nanoid }: { nanoid: TForm["nanoid"] }) => {
 	dbTransact([tx.forms[lookup("nanoid", nanoid)].delete()]);
 };
 
-export { createForm, updateForm, deleteForm };
+const linkFormToWorkspace = async ({
+	formId,
+	workspaceId,
+}: { formId: TForm["id"]; workspaceId: TWorkspace["id"] }) => {
+	await dbTransact(
+		tx.forms[formId].link({ workspaces: workspaceId }).merge({ isDemo: false }),
+	);
+};
+
+export { createForm, updateForm, deleteForm, linkFormToWorkspace };

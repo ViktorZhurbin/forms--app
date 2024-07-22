@@ -18,7 +18,9 @@ export const Login = () => {
 
 	return (
 		<Center h="100dvh">
-			<LoginButtonGoogleCustom redirectTo={redirectTo} />
+			<LoginButtonGoogleCustom redirectTo={redirectTo}>
+				Sign in with Google
+			</LoginButtonGoogleCustom>
 		</Center>
 	);
 };

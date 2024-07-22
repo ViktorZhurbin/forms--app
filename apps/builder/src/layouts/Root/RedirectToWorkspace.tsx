@@ -1,4 +1,6 @@
 import { Routes } from "@/shared/constants/location";
+import { useCurrentForm } from "@/shared/models/forms/read";
+import { linkFormToWorkspace } from "@/shared/models/forms/write";
 import { useUserWithWorkspacesQuery } from "@/shared/models/user/read";
 import { createDbUser } from "@/shared/models/user/write";
 import { createWorkspace } from "@/shared/models/workspace/write";
@@ -16,13 +18,19 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 		userId: authUser.id,
 	});
 
+	const formId = useCurrentForm()?.id;
+
 	useEffect(() => {
 		const firstWorkspaceId = dbUser?.workspaces[0]?.id;
 
 		if (!isLoading && firstWorkspaceId) {
+			if (formId) {
+				linkFormToWorkspace({ formId, workspaceId: firstWorkspaceId });
+			}
+
 			navigate(Routes.getAdminPath({ workspaceId: firstWorkspaceId }));
 		}
-	}, [isLoading, dbUser]);
+	}, [isLoading, dbUser, formId]);
 
 	useEffect(() => {
 		const doesUserExist = !isLoading && !error && dbUser;
@@ -43,7 +51,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 		createWorkspace({
 			userId: dbUser.id,
 			name: "My Workspace",
-		});
+		}).then();
 	}, [dbUser]);
 
 	return <FullScreenLoader />;

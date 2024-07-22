@@ -2,27 +2,25 @@
 interface Props {
 	href: string;
 	class?: string;
+	target?: string;
 }
 
-const { href, class: className, ...rest } = Astro.props;
+const { href, target = "_blank", class: className, ...rest } = Astro.props;
 ---
 
-<button {...rest} class:list={[className]} data-href={href}>
+<a
+	type="button"
+	role="button"
+	{...rest}
+	href={href}
+	target="_blank"
+	class:list={[className]}
+>
 	<slot />
-</button>
+</a>
 
-<script>
-	const buttons = document.querySelectorAll(
-		"button[data-href]"
-	) as NodeListOf<HTMLElement>;
-
-	buttons.forEach((button) => {
-		const { dataset } = button;
-
-		button.addEventListener("click", () => {
-			if (dataset.href) {
-				window.open(dataset.href, "_blank");
-			}
-		});
-	});
-</script>
+<style>
+	a {
+		margin: 0;
+	}
+</style>

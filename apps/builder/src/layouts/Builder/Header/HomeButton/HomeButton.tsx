@@ -1,14 +1,10 @@
-import { Routes } from "@/shared/constants/routes";
-import { useCurrentFormWorkspace } from "@/shared/models/forms/read";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
 import { Link } from "wouter";
+import { useAdminPath } from "../../hooks/useAdminPath";
 
 export const HomeButton = () => {
-	const currentWorkspace = useCurrentFormWorkspace();
-
-	const wsNanoId = currentWorkspace?.nanoId;
-	const path = Routes.getAdminPath({ wsNanoId });
+	const path = useAdminPath();
 
 	return (
 		<Tooltip withArrow label="Home">

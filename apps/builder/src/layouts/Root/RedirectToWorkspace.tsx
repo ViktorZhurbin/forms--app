@@ -22,6 +22,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 	const formId = useCurrentForm()?.id;
 	const [, , removeDemoLocalNanoId] = useLocalDemoNanoId();
 
+	// Redirect to the first workspace
 	useEffect(() => {
 		const firstWsNanoId = dbUser?.workspaces[0]?.nanoId;
 
@@ -39,6 +40,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 		navigate(Routes.getAdminPath({ wsNanoId: firstWsNanoId }));
 	}, [isLoading, formId, dbUser, removeDemoLocalNanoId]);
 
+	// Create a user if the user doesn't exist
 	useEffect(() => {
 		const doesUserExist = !isLoading && !error && dbUser;
 
@@ -50,6 +52,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 		});
 	}, [isLoading, error, dbUser, authUser]);
 
+	// Create a workspace if the user doesn't have any
 	useEffect(() => {
 		const hasWorkspaces = !!dbUser?.workspaces.length;
 

@@ -1,0 +1,23 @@
+.wrapper {
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	text-align: center;
+
+	padding: var(--mantine-spacing-md);
+}
+
+.icon {
+	--size: 3rem;
+
+	width: var(--size);
+	height: var(--size);
+}
+
+.text {
+	margin-top: var(--mantine-spacing-md);
+	margin-bottom: calc(var(--mantine-spacing-md) * 2);
+}

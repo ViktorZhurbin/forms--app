@@ -1,4 +1,5 @@
 import { Routes } from "@/shared/constants/routes";
+import { useLocalDemoNanoId } from "@/shared/hooks/useLocalDemoNanoId";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { linkFormToWorkspace } from "@/shared/models/forms/write";
 import { useUserWithWorkspacesQuery } from "@/shared/models/user/read";
@@ -19,18 +20,24 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 	});
 
 	const formId = useCurrentForm()?.id;
+	const [, , removeDemoLocalNanoId] = useLocalDemoNanoId();
 
 	useEffect(() => {
 		const firstWsNanoId = dbUser?.workspaces[0]?.nanoId;
 
-		if (!isLoading && firstWsNanoId) {
-			if (formId) {
-				linkFormToWorkspace({ formId, wsNanoId: firstWsNanoId });
-			}
+		if (isLoading || !firstWsNanoId) return;
 
-			navigate(Routes.getAdminPath({ wsNanoId: firstWsNanoId }));
+		if (formId) {
+			linkFormToWorkspace({
+				formId,
+				wsNanoId: firstWsNanoId,
+			});
 		}
-	}, [isLoading, dbUser, formId]);
+
+		removeDemoLocalNanoId();
+
+		navigate(Routes.getAdminPath({ wsNanoId: firstWsNanoId }));
+	}, [isLoading, formId, dbUser, removeDemoLocalNanoId]);
 
 	useEffect(() => {
 		const doesUserExist = !isLoading && !error && dbUser;

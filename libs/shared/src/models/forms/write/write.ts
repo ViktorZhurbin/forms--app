@@ -48,7 +48,7 @@ const deleteForm = async ({ nanoId }: { nanoId: TForm["nanoId"] }) => {
 const linkFormToWorkspace = async ({
 	formId,
 	wsNanoId,
-}: { formId: TForm["id"]; wsNanoId: TWorkspace["id"] }) => {
+}: { formId: TForm["id"]; wsNanoId: TWorkspace["nanoId"] }) => {
 	await dbTransact(
 		tx.forms[formId]
 			.link({ workspaces: lookup("nanoId", wsNanoId) })

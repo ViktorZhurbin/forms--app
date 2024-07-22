@@ -1,5 +1,5 @@
 import { type User, id, tx } from "@instantdb/react";
-import { makeId } from "~/utils/nanoId";
+import { makeId } from "~/utils/makeId";
 import { dbTransact } from "../db";
 import type { TWorkspace } from "./schema/workspace";
 

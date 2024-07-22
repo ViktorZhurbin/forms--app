@@ -1,7 +1,7 @@
 import { id } from "@instantdb/react";
 import { QuestionTypesMap } from "~/constants/questionMaps";
 import { QuestionTypes } from "~/constants/questions";
-import { makeId } from "~/utils/nanoId";
+import { makeId } from "~/utils/makeId";
 import type {
 	TQuestion,
 	TQuestionChoice,

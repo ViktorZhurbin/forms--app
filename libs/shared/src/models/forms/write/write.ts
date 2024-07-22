@@ -1,6 +1,6 @@
 import { id, lookup, tx } from "@instantdb/react";
 import type { TWorkspace } from "~/models/workspace/schema/workspace";
-import { makeId } from "~/utils/nanoId";
+import { makeId } from "~/utils/makeId";
 import { dbTransact } from "../../db";
 import type { TForm } from "../schema/forms";
 import { getDummyFormTitle } from "./helpers";

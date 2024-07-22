@@ -1,6 +1,6 @@
 import { Routes } from "@/shared/constants/location";
 import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
-import { FORM_URL_BASE } from "@/shared/utils/env";
+import { FORM_URL_BASE } from "~/utils/env";
 
 export const useFormUrl = () => {
 	const formId = useFormNanoId();

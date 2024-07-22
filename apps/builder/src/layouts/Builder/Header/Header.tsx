@@ -1,5 +1,5 @@
-import { isDev } from "@/shared/utils/env";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
+import { isDev } from "~/utils/env";
 import { CopyLinkButton } from "./CopyLinkButton/CopyLinkButton";
 import { EditableFormTitle } from "./EditableFormTitle/EditableFormTitle";
 import styles from "./Header.module.css";

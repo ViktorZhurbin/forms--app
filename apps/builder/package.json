@@ -27,10 +27,10 @@
 		"wouter": "^3.3.0"
 	},
 	"devDependencies": {
-		"@rsbuild/core": "^1.0.1-beta.3",
-		"@rsbuild/plugin-react": "^1.0.1-beta.3",
-		"@rsbuild/plugin-source-build": "^1.0.1-beta.3",
-		"@rsbuild/plugin-type-check": "^1.0.1-beta.3",
+		"@rsbuild/core": "^1.0.1-beta.4",
+		"@rsbuild/plugin-react": "^1.0.1-beta.4",
+		"@rsbuild/plugin-source-build": "^1.0.1-beta.4",
+		"@rsbuild/plugin-type-check": "^1.0.1-beta.4",
 		"@rsdoctor/rspack-plugin": "^0.3.7",
 		"@types/lodash": "^4.17.6",
 		"@types/react": "^18.3.3",

@@ -1,0 +1,15 @@
+.wrapper {
+	display: grid;
+	height: 100dvh;
+	grid-template-rows: auto 1fr;
+	padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+}
+
+.nav {
+	display: flex;
+	justify-content: space-between;
+}
+
+.content {
+	margin: auto;
+}

@@ -3,7 +3,7 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useState } from "react";
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_NAME } from "~/utils/env";
 
-export const LoginButtonGoogle = ({
+export const GoogleSignInButton = ({
 	onSuccess,
 }: { onSuccess?: () => void }) => {
 	const [nonce] = useState(crypto.randomUUID());

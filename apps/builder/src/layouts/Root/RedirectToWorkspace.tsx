@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/location";
+import { Routes } from "@/shared/constants/routes";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { linkFormToWorkspace } from "@/shared/models/forms/write";
 import { useUserWithWorkspacesQuery } from "@/shared/models/user/read";

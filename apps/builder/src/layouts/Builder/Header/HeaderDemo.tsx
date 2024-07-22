@@ -1,7 +1,7 @@
 import { Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
-import { LoginModal } from "../modals/LoginModal/LoginModal";
+import { SignInModal } from "../modals/SignInModal/SignInModal";
 import { EditableFormTitle } from "./EditableFormTitle/EditableFormTitle";
 import styles from "./Header.module.css";
 import { PreviewButton } from "./PreviewButton/PreviewButton";
@@ -23,7 +23,7 @@ export const HeaderDemo = () => {
 				</div>
 			</div>
 
-			<LoginModal isOpen={isModalOpen} onClose={modalActions.close} />
+			<SignInModal isOpen={isModalOpen} onClose={modalActions.close} />
 		</>
 	);
 };

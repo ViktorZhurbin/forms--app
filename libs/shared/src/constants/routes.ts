@@ -1,3 +1,5 @@
+const WEB_SITE_URL = "https://forms-website.pages.dev/";
+
 const SearchParams = {
 	BLOCK_ID: "blockId",
 	PREVIEW: "preview",
@@ -5,7 +7,7 @@ const SearchParams = {
 };
 
 const Routes = {
-	LOGIN: "/login",
+	SIGN_IN: "/signin",
 	CREATE: "/create",
 
 	ROOT: "/",
@@ -17,4 +19,4 @@ const Routes = {
 	getFormPath: ({ formId }: { formId: string }) => `/form/${formId}`,
 };
 
-export { SearchParams, Routes };
+export { SearchParams, Routes, WEB_SITE_URL };

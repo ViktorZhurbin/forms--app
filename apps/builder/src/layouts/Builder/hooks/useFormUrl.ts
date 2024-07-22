@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/location";
+import { Routes } from "@/shared/constants/routes";
 import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { FORM_URL_BASE } from "~/utils/env";
 

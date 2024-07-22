@@ -70,17 +70,17 @@ importers:
         version: 3.3.1(react@18.3.1)
     devDependencies:
       '@rsbuild/core':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4
       '@rsbuild/plugin-react':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4)
       '@rsbuild/plugin-source-build':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4)
       '@rsbuild/plugin-type-check':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)(typescript@5.5.3)
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4)(typescript@5.5.3)
       '@rsdoctor/rspack-plugin':
         specifier: ^0.3.7
         version: 0.3.8(@rspack/core@0.7.5)
@@ -131,17 +131,17 @@ importers:
         version: 3.3.1(react@18.3.1)
     devDependencies:
       '@rsbuild/core':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4
       '@rsbuild/plugin-react':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4)
       '@rsbuild/plugin-source-build':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4)
       '@rsbuild/plugin-type-check':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)(typescript@5.5.3)
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4)(typescript@5.5.3)
       '@rsdoctor/rspack-plugin':
         specifier: ^0.3.7
         version: 0.3.8(@rspack/core@0.7.5)
@@ -223,8 +223,8 @@ importers:
         version: 3.3.1(react@18.3.1)
     devDependencies:
       '@rsbuild/core':
-        specifier: ^1.0.1-beta.3
-        version: 1.0.1-beta.3
+        specifier: ^1.0.1-beta.4
+        version: 1.0.1-beta.4
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -1559,47 +1559,47 @@ packages:
     dev: false
     optional: true
 
-  /@rsbuild/core@1.0.1-beta.3:
-    resolution: {integrity: sha512-/jgx/bWfFu+dNzskpz+M/BLUrXz7bD5ShsXWUZVzUstC871nVqQpCnHn+sEL3W6FrusHYgL7uuUXjLp+nkc+kg==}
+  /@rsbuild/core@1.0.1-beta.4:
+    resolution: {integrity: sha512-mjtmZIrlNf8nHuTDIwazk/4HFkXmjg/A5CwGsl77GeCp8ciI5D2q5ZSKvFfLTOIFAWWpno3pOLT8bBR1Co9YKw==}
     engines: {node: '>=16.7.0'}
     hasBin: true
     dependencies:
       '@rspack/core': 1.0.0-alpha.5(@swc/helpers@0.5.11)
       '@rspack/lite-tapable': 1.0.0-alpha.5
       '@swc/helpers': 0.5.11
-      caniuse-lite: 1.0.30001642
+      caniuse-lite: 1.0.30001643
       core-js: 3.37.1
       postcss: 8.4.39
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
 
-  /@rsbuild/plugin-react@1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3):
-    resolution: {integrity: sha512-lR5okq3NFtAiWx5TgRbeZ96i/6JDGR9SXM0+l0YOtPtcNjEK59CkmNOziFyz8HwdYSfwQC9qstKaQlvbWi37mw==}
+  /@rsbuild/plugin-react@1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4):
+    resolution: {integrity: sha512-CIn56QLBZpS+4+zRFehDdW+1iHwi+M8omztCwzYbvkWwtz7XwGGjgnoRrw4FW+vCCW+n6PzIlOQiTZsOGrP3Fg==}
     peerDependencies:
       '@rsbuild/core': ^1.0.1-beta.0
     dependencies:
-      '@rsbuild/core': 1.0.1-beta.3
+      '@rsbuild/core': 1.0.1-beta.4
       '@rspack/plugin-react-refresh': 1.0.0-alpha.5(react-refresh@0.14.2)
       react-refresh: 0.14.2
     dev: true
 
-  /@rsbuild/plugin-source-build@1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3):
-    resolution: {integrity: sha512-xhdBr9JApDTxgCh2G/FhA+K4D1QZ2TEA4l6FXNlMe6c+2SLB/uaaFNuxUCgL7ETgVgA4Mx2kw1jJe/krOoWnEg==}
+  /@rsbuild/plugin-source-build@1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4):
+    resolution: {integrity: sha512-U9ut33vn+TPC3jRJoHYZTyrW7zS66zfetIMeePfaNOqh3jgswkb81bTj7CYRv+uKmN6VEPYRt9dwBSvsZfftjA==}
     peerDependencies:
       '@rsbuild/core': ^1.0.1-beta.0
     dependencies:
-      '@rsbuild/core': 1.0.1-beta.3
+      '@rsbuild/core': 1.0.1-beta.4
       fast-glob: 3.3.2
       json5: 2.2.3
     dev: true
 
-  /@rsbuild/plugin-type-check@1.0.1-beta.3(@rsbuild/core@1.0.1-beta.3)(typescript@5.5.3):
-    resolution: {integrity: sha512-/6t6mDRa6X9qtE0mTg63CwXTF7z3UjEHW3V5niSqFTGe+N1kr+neQsRgmhHIRpBf6kD72jQU5lTsnXH9/gDrUg==}
+  /@rsbuild/plugin-type-check@1.0.1-beta.4(@rsbuild/core@1.0.1-beta.4)(typescript@5.5.3):
+    resolution: {integrity: sha512-Ot5VjGBdAt5GK0wNCQcBDpj0FPDk+7Flt7TcmRs+dvt1F6bU9pLQ/WAxFBQ/NhrEXvWt8kx0AOJ2qTFId7nxjA==}
     peerDependencies:
       '@rsbuild/core': ^1.0.1-beta.0
     dependencies:
-      '@rsbuild/core': 1.0.1-beta.3
+      '@rsbuild/core': 1.0.1-beta.4
       deepmerge: 4.3.1
       fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.5.3)(webpack@5.93.0)
       json5: 2.2.3
@@ -1970,7 +1970,7 @@ packages:
       '@rspack/binding': 1.0.0-alpha.5
       '@rspack/lite-tapable': 1.0.0-alpha.5
       '@swc/helpers': 0.5.11
-      caniuse-lite: 1.0.30001642
+      caniuse-lite: 1.0.30001643
     dev: true
 
   /@rspack/lite-tapable@1.0.0-alpha.5:
@@ -2743,6 +2743,10 @@ packages:
 
   /caniuse-lite@1.0.30001642:
     resolution: {integrity: sha512-3XQ0DoRgLijXJErLSl+bLnJ+Et4KqV1PY6JJBGAFlsNsz31zeAIncyeZfLCabHK/jtSh+671RM9YMldxjUPZtA==}
+
+  /caniuse-lite@1.0.30001643:
+    resolution: {integrity: sha512-ERgWGNleEilSrHM6iUz/zJNSQTP8Mr21wDWpdgvRwcTXGAq6jMtOUPP4dqFPTdKqZ2wKTdtB+uucZ3MRpAUSmg==}
+    dev: true
 
   /ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}

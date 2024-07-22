@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/location";
+import { Routes } from "@/shared/constants/routes";
 import { useCurrentFormWorkspace } from "@/shared/models/forms/read";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";

@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/location";
+import { Routes } from "@/shared/constants/routes";
 import { useWorkspaceNanoId } from "@/shared/hooks/useWorkspaceNanoId";
 import { createForm } from "@/shared/models/forms/write/write";
 import { Button } from "@mantine/core";

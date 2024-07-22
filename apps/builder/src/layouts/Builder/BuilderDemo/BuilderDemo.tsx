@@ -1,5 +1,5 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { Routes } from "@/shared/constants/location";
+import { Routes } from "@/shared/constants/routes";
 import { useDbAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
 import { HeaderDemo } from "../Header/HeaderDemo";

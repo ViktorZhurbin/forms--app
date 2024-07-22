@@ -1,5 +1,5 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { Routes } from "@/shared/constants/location";
+import { Routes } from "@/shared/constants/routes";
 import type { TForm } from "@/shared/models/forms/schema/forms";
 import { deleteForm } from "@/shared/models/forms/write";
 import { useCurrentWorkspaceWithFormsQuery } from "@/shared/models/workspace/read";

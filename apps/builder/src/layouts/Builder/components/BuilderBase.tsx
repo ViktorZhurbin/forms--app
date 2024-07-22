@@ -1,9 +1,17 @@
 import { AppShell } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { Main } from "../Main/Main";
 import { NavThankYou } from "../Navbar/NavThankYou/NavThankYou";
 import { NavbarQuestions } from "../Navbar/NavbarQuestions/NavbarQuestions";
+import { SmallScreen } from "../SmallScreen/SmallScreen";
 
 export const BuilderBase = ({ header }: { header: React.ReactElement }) => {
+	const isTooSmall = useMediaQuery("(max-width: 668px)");
+
+	if (isTooSmall) {
+		return <SmallScreen />;
+	}
+
 	return (
 		<AppShell
 			padding="md"

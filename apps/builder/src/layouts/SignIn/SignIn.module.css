@@ -5,6 +5,10 @@
 	padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
 }
 
+.card {
+	padding-inline: var(--mantine-spacing-xl);
+	padding-block: calc(var(--mantine-spacing-xl) * 2);
+}
 .nav {
 	display: flex;
 	justify-content: space-between;

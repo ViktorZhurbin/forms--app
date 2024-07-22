@@ -25,7 +25,7 @@ export const SignIn = () => {
 				<DarkModeToggle />
 			</nav>
 			<div className={styles.content}>
-				<Card padding="xl" withBorder>
+				<Card withBorder className={styles.card}>
 					<SignInForm redirectTo={redirectTo} />
 				</Card>
 			</div>

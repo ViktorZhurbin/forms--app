@@ -21,14 +21,14 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 	const formId = useCurrentForm()?.id;
 
 	useEffect(() => {
-		const firstWorkspaceId = dbUser?.workspaces[0]?.id;
+		const firstWsNanoId = dbUser?.workspaces[0]?.nanoid;
 
-		if (!isLoading && firstWorkspaceId) {
+		if (!isLoading && firstWsNanoId) {
 			if (formId) {
-				linkFormToWorkspace({ formId, workspaceId: firstWorkspaceId });
+				linkFormToWorkspace({ formId, wsNanoId: firstWsNanoId });
 			}
 
-			navigate(Routes.getAdminPath({ workspaceId: firstWorkspaceId }));
+			navigate(Routes.getAdminPath({ wsNanoId: firstWsNanoId }));
 		}
 	}, [isLoading, dbUser, formId]);
 

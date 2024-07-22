@@ -1,15 +1,15 @@
 import { Routes } from "@/shared/constants/location";
-import { useWorkspaceId } from "@/shared/hooks/useWorkspaceId";
+import { useWorkspaceNanoId } from "@/shared/hooks/useWorkspaceNanoId";
 import { createForm } from "@/shared/models/forms/write/write";
 import { Button } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { navigate } from "wouter/use-browser-location";
 
 export const CreateFormButton = () => {
-	const workspaceId = useWorkspaceId();
+	const wsNanoId = useWorkspaceNanoId();
 
 	const handleCreateForm = async () => {
-		const formId = await createForm({ workspaceId });
+		const formId = await createForm({ wsNanoId });
 
 		const formPath = Routes.getFormPath({ formId });
 		navigate(formPath);

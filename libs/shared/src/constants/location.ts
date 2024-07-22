@@ -9,9 +9,9 @@ const Routes = {
 	CREATE: "/create",
 
 	ROOT: "/",
-	ADMIN: "/ws/:workspaceId",
-	getAdminPath: ({ workspaceId }: { workspaceId?: string }) =>
-		workspaceId ? `/ws/${workspaceId}` : "/",
+	ADMIN: "/ws/:wsNanoId",
+	getAdminPath: ({ wsNanoId }: { wsNanoId?: string }) =>
+		wsNanoId ? `/ws/${wsNanoId}` : "/",
 
 	FORM: "/form/:formId",
 	getFormPath: ({ formId }: { formId: string }) => `/form/${formId}`,

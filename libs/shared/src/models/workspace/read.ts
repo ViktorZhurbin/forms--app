@@ -1,12 +1,12 @@
-import { useWorkspaceId } from "~/hooks/useWorkspaceId";
+import { useWorkspaceNanoId } from "~/hooks/useWorkspaceNanoId";
 import { useDbQuery } from "../db";
 
 const useCurrentWorkspaceWithFormsQuery = () => {
-	const workspaceId = useWorkspaceId() ?? "";
+	const nanoid = useWorkspaceNanoId() ?? "";
 
 	return useDbQuery({
 		workspaces: {
-			$: { where: { id: workspaceId } },
+			$: { where: { nanoid } },
 			forms: {},
 		},
 	});

@@ -7,11 +7,11 @@ import { getDummyFormTitle } from "./helpers";
 
 const createForm = async ({
 	isDemo,
-	workspaceId,
-}: { workspaceId?: TWorkspace["id"]; isDemo?: boolean } = {}) => {
+	wsNanoId,
+}: { wsNanoId?: TWorkspace["id"]; isDemo?: boolean } = {}) => {
 	const nanoid = makeId();
 
-	const form: Partial<TForm> = {
+	const form: Omit<TForm, "id"> = {
 		nanoid,
 		isDemo,
 		name: getDummyFormTitle(),
@@ -24,8 +24,10 @@ const createForm = async ({
 
 	await dbTransact(tx.forms[formId].update(form));
 
-	if (workspaceId) {
-		dbTransact(tx.forms[formId].link({ workspaces: workspaceId }));
+	if (wsNanoId) {
+		dbTransact(
+			tx.forms[formId].link({ workspaces: lookup("nanoid", wsNanoId) }),
+		);
 	}
 
 	return nanoid;
@@ -45,10 +47,12 @@ const deleteForm = async ({ nanoid }: { nanoid: TForm["nanoid"] }) => {
 
 const linkFormToWorkspace = async ({
 	formId,
-	workspaceId,
-}: { formId: TForm["id"]; workspaceId: TWorkspace["id"] }) => {
+	wsNanoId,
+}: { formId: TForm["id"]; wsNanoId: TWorkspace["id"] }) => {
 	await dbTransact(
-		tx.forms[formId].link({ workspaces: workspaceId }).merge({ isDemo: false }),
+		tx.forms[formId]
+			.link({ workspaces: lookup("nanoid", wsNanoId) })
+			.merge({ isDemo: false }),
 	);
 };
 

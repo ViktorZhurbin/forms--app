@@ -7,8 +7,8 @@ import { Link } from "wouter";
 export const HomeButton = () => {
 	const currentWorkspace = useCurrentFormWorkspace();
 
-	const workspaceId = currentWorkspace?.id;
-	const path = Routes.getAdminPath({ workspaceId });
+	const wsNanoId = currentWorkspace?.nanoid;
+	const path = Routes.getAdminPath({ wsNanoId });
 
 	return (
 		<Tooltip withArrow label="Home">

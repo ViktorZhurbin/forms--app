@@ -21,7 +21,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 	const formId = useCurrentForm()?.id;
 
 	useEffect(() => {
-		const firstWsNanoId = dbUser?.workspaces[0]?.nanoid;
+		const firstWsNanoId = dbUser?.workspaces[0]?.nanoId;
 
 		if (!isLoading && firstWsNanoId) {
 			if (formId) {

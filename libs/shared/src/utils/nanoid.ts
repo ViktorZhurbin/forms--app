@@ -1,6 +1,6 @@
-import { customAlphabet } from "nanoid/non-secure";
+import { customAlphabet } from "nanoId/non-secure";
 
-// -_ with https://github.com/CyberAP/nanoid-dictionary?tab=readme-ov-file#nolookalikessafe
+// -_ with https://github.com/CyberAP/nanoId-dictionary?tab=readme-ov-file#nolookalikessafe
 const noLookAlikesSafe = "6789BCDFGHJKLMNPQRTWbcdfghjkmnpqrtwz-_~";
 
 /**

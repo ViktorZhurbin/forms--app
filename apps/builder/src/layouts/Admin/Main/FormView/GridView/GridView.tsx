@@ -5,7 +5,7 @@ import type { FormViewProps } from "../types";
 export const GridView = ({
 	href,
 	name,
-	nanoid,
+	nanoId,
 	className,
 	responsesText,
 	getDeleteButton,
@@ -26,7 +26,7 @@ export const GridView = ({
 					<Text size="sm" fw={500}>
 						{name}
 					</Text>
-					{getDeleteButton({ nanoid })}
+					{getDeleteButton({ nanoId })}
 				</Group>
 				<Text size="sm">{responsesText}</Text>
 			</Stack>

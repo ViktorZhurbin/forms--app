@@ -6,7 +6,7 @@ const useCurrentFormQuery = () => {
 
 	return useDbQuery({
 		forms: {
-			$: { where: { nanoid: formNanoId } },
+			$: { where: { nanoId: formNanoId } },
 			workspaces: {},
 		},
 	});

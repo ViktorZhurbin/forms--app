@@ -15,7 +15,7 @@ export const useDeleteQuestion = () => {
 			);
 
 			await updateForm({
-				nanoid: formNanoId,
+				nanoId: formNanoId,
 				draftQuestions: newQuestions,
 			});
 		},

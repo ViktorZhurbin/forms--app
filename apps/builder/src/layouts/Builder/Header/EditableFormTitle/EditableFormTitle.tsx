@@ -8,7 +8,7 @@ export const EditableFormTitle = () => {
 	const formNanoId = useFormNanoId();
 
 	const onChange = (name: string) => {
-		updateForm({ nanoid: formNanoId, name });
+		updateForm({ nanoId: formNanoId, name });
 	};
 
 	return (

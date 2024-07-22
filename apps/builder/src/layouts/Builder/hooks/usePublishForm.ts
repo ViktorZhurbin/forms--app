@@ -19,7 +19,7 @@ export const usePublishForm = () => {
 		setLoading(true);
 
 		await updateForm({
-			nanoid: formNanoId,
+			nanoId: formNanoId,
 			questions: form?.draftQuestions,
 		});
 

@@ -1,10 +1,10 @@
 import type { TForm } from "@/shared/models/forms/schema/forms";
 
-interface FormViewProps extends Pick<TForm, "nanoid" | "name"> {
+interface FormViewProps extends Pick<TForm, "nanoId" | "name"> {
 	href: string;
 	className: string;
 	responsesText: string;
-	getDeleteButton: ({ nanoid }: { nanoid: TForm["nanoid"] }) => JSX.Element;
+	getDeleteButton: ({ nanoId }: { nanoId: TForm["nanoId"] }) => JSX.Element;
 }
 
 export type { FormViewProps };

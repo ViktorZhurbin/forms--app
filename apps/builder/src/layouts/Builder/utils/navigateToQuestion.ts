@@ -3,10 +3,10 @@ import type { TQuestion } from "@/shared/models/forms/schema/questions";
 import { navigate } from "wouter/use-browser-location";
 
 export const navigateToQuestion = ({
-	nanoid,
-}: { nanoid: TQuestion["nanoid"] }) => {
+	nanoId,
+}: { nanoId: TQuestion["nanoId"] }) => {
 	const url = new URL(window.location.href);
-	url.searchParams.set(SearchParams.BLOCK_ID, nanoid);
+	url.searchParams.set(SearchParams.BLOCK_ID, nanoId);
 
 	navigate(url);
 };

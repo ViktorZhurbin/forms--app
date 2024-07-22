@@ -7,7 +7,7 @@ import { Link } from "wouter";
 export const HomeButton = () => {
 	const currentWorkspace = useCurrentFormWorkspace();
 
-	const wsNanoId = currentWorkspace?.nanoid;
+	const wsNanoId = currentWorkspace?.nanoId;
 	const path = Routes.getAdminPath({ wsNanoId });
 
 	return (

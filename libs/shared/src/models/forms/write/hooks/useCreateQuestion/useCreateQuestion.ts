@@ -17,7 +17,7 @@ export const useCreateQuestion = () => {
 	const form = useCurrentForm();
 
 	const selectedBlockOrder = form?.draftQuestions.findIndex(
-		({ nanoid }) => nanoid === selectedBlockId,
+		({ nanoId }) => nanoId === selectedBlockId,
 	);
 
 	const createQuestion = useCallback(
@@ -41,11 +41,11 @@ export const useCreateQuestion = () => {
 			);
 
 			await updateForm({
-				nanoid: formNanoId,
+				nanoId: formNanoId,
 				draftQuestions: newQuestions,
 			});
 
-			return { nanoid: newQuestion.nanoid };
+			return { nanoId: newQuestion.nanoId };
 		},
 		[formNanoId, form?.draftQuestions, selectedBlockOrder],
 	);

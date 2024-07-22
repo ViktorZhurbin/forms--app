@@ -1,6 +1,6 @@
 import { id, lookup, tx } from "@instantdb/react";
 import type { TWorkspace } from "~/models/workspace/schema/workspace";
-import { makeId } from "~/utils/nanoid";
+import { makeId } from "~/utils/nanoId";
 import { dbTransact } from "../../db";
 import type { TForm } from "../schema/forms";
 import { getDummyFormTitle } from "./helpers";
@@ -9,10 +9,10 @@ const createForm = async ({
 	isDemo,
 	wsNanoId,
 }: { wsNanoId?: TWorkspace["id"]; isDemo?: boolean } = {}) => {
-	const nanoid = makeId();
+	const nanoId = makeId();
 
 	const form: Omit<TForm, "id"> = {
-		nanoid,
+		nanoId,
 		isDemo,
 		name: getDummyFormTitle(),
 		responseCount: 0,
@@ -26,23 +26,23 @@ const createForm = async ({
 
 	if (wsNanoId) {
 		dbTransact(
-			tx.forms[formId].link({ workspaces: lookup("nanoid", wsNanoId) }),
+			tx.forms[formId].link({ workspaces: lookup("nanoId", wsNanoId) }),
 		);
 	}
 
-	return nanoid;
+	return nanoId;
 };
 
 const updateForm = async (payload: Partial<TForm>) => {
-	const { nanoid, ...update } = payload;
+	const { nanoId, ...update } = payload;
 
-	if (!nanoid) return;
+	if (!nanoId) return;
 
-	await dbTransact(tx.forms[lookup("nanoid", nanoid)].update(update));
+	await dbTransact(tx.forms[lookup("nanoId", nanoId)].update(update));
 };
 
-const deleteForm = async ({ nanoid }: { nanoid: TForm["nanoid"] }) => {
-	dbTransact([tx.forms[lookup("nanoid", nanoid)].delete()]);
+const deleteForm = async ({ nanoId }: { nanoId: TForm["nanoId"] }) => {
+	dbTransact([tx.forms[lookup("nanoId", nanoId)].delete()]);
 };
 
 const linkFormToWorkspace = async ({
@@ -51,7 +51,7 @@ const linkFormToWorkspace = async ({
 }: { formId: TForm["id"]; wsNanoId: TWorkspace["id"] }) => {
 	await dbTransact(
 		tx.forms[formId]
-			.link({ workspaces: lookup("nanoid", wsNanoId) })
+			.link({ workspaces: lookup("nanoId", wsNanoId) })
 			.merge({ isDemo: false }),
 	);
 };

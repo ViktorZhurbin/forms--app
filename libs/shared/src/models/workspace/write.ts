@@ -1,5 +1,5 @@
 import { type User, id, tx } from "@instantdb/react";
-import { makeId } from "~/utils/nanoid";
+import { makeId } from "~/utils/nanoId";
 import { dbTransact } from "../db";
 import type { TWorkspace } from "./schema/workspace";
 
@@ -9,7 +9,7 @@ const createWorkspace = async ({
 }: { name: string; userId: User["id"] }) => {
 	const workspace: Omit<TWorkspace, "id"> = {
 		name,
-		nanoid: makeId(),
+		nanoId: makeId(),
 	};
 
 	const workspaceId: string = id();

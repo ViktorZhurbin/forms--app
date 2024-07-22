@@ -24,7 +24,7 @@ export const NavbarQuestionsList = ({
 	const formNanoId = useFormNanoId();
 
 	const firstQuestion = questions?.[0];
-	const selectedBlockId = useSelectedBlockId(firstQuestion?.nanoid);
+	const selectedBlockId = useSelectedBlockId(firstQuestion?.nanoId);
 
 	const { deleteQuestion } = useDeleteQuestion();
 
@@ -36,9 +36,9 @@ export const NavbarQuestionsList = ({
 				type={activeItem.type}
 				group={activeItem.group}
 				title={activeItem.title}
-				nanoid={activeItem.nanoid}
+				nanoId={activeItem.nanoId}
 				isSelected={
-					Boolean(selectedBlockId) && activeItem.nanoid === selectedBlockId
+					Boolean(selectedBlockId) && activeItem.nanoId === selectedBlockId
 				}
 			/>
 		),
@@ -48,7 +48,7 @@ export const NavbarQuestionsList = ({
 	const onDragEnd = useCallback(
 		(newQuestions: Question[]): void => {
 			updateForm({
-				nanoid: formNanoId,
+				nanoId: formNanoId,
 				draftQuestions: newQuestions,
 			});
 		},
@@ -57,18 +57,18 @@ export const NavbarQuestionsList = ({
 
 	const renderChildren = useCallback(
 		(activeItemId?: string) =>
-			questions.map(({ id, nanoid, type, group, title }, index, questions) => {
+			questions.map(({ id, nanoId, type, group, title }, index, questions) => {
 				const prevQuestion = index > 0 ? questions[index - 1] : null;
 				const nextQuestion =
 					index < questions.length - 1 ? questions[index + 1] : null;
 
-				const newSelectedBlockId = (prevQuestion ?? nextQuestion)?.nanoid;
+				const newSelectedBlockId = (prevQuestion ?? nextQuestion)?.nanoId;
 
 				const handleDelete = async () => {
 					await deleteQuestion(id);
 
 					if (newSelectedBlockId) {
-						navigateToQuestion({ nanoid: newSelectedBlockId });
+						navigateToQuestion({ nanoId: newSelectedBlockId });
 					} else {
 						removeSelectedBlockId();
 					}
@@ -81,11 +81,11 @@ export const NavbarQuestionsList = ({
 						type={type}
 						group={group}
 						title={title}
-						nanoid={nanoid}
+						nanoId={nanoId}
 						isGhost={activeItemId === id}
 						order={index + 1}
 						onDelete={handleDelete}
-						isSelected={Boolean(selectedBlockId) && nanoid === selectedBlockId}
+						isSelected={Boolean(selectedBlockId) && nanoId === selectedBlockId}
 					/>
 					// </SkeletonWrapper>
 				);

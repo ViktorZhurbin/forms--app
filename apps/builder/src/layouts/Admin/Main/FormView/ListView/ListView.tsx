@@ -5,7 +5,7 @@ import type { FormViewProps } from "../types";
 export const ListView = ({
 	name,
 	href,
-	nanoid,
+	nanoId,
 	className,
 	responsesText,
 	getDeleteButton,
@@ -22,7 +22,7 @@ export const ListView = ({
 			<Group gap={24}>
 				<Text>{name}</Text>
 				<Text size="sm">{responsesText}</Text>
-				{getDeleteButton({ nanoid })}
+				{getDeleteButton({ nanoId })}
 			</Group>
 		</Button>
 	);

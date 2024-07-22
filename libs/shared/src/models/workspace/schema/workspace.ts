@@ -1,6 +1,6 @@
 type TWorkspace = {
 	id: string;
-	nanoid: string;
+	nanoId: string;
 	name: string;
 };
 

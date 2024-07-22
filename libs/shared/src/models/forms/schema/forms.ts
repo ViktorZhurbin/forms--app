@@ -2,7 +2,7 @@ import type { TQuestion } from "./questions";
 
 type TForm = {
 	id: string;
-	nanoid: string;
+	nanoId: string;
 	name: string;
 	responseCount: number;
 	questions: TQuestion[];

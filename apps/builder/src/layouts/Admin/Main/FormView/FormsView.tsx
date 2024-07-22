@@ -33,7 +33,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 
 	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
 
-	const getDeleteButton = ({ nanoid }: { nanoid: TForm["nanoid"] }) => {
+	const getDeleteButton = ({ nanoId }: { nanoId: TForm["nanoId"] }) => {
 		return (
 			<ActionIcon
 				variant="default"
@@ -41,7 +41,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 				onClick={(event) => {
 					event.preventDefault();
 
-					deleteForm({ nanoid });
+					deleteForm({ nanoId });
 				}}
 			>
 				<IconTrash />
@@ -57,9 +57,9 @@ export const FormsView = ({ view }: FormsViewProps) => {
 				<SkeletonWrapper key={form.id} visible={isLoading}>
 					<ViewComponent
 						name={form.name}
-						nanoid={form.nanoid}
+						nanoId={form.nanoId}
 						className={styles.formItem}
-						href={Routes.getFormPath({ formId: form.nanoid })}
+						href={Routes.getFormPath({ formId: form.nanoId })}
 						getDeleteButton={getDeleteButton}
 						responsesText={pluralize({
 							singular: "response",

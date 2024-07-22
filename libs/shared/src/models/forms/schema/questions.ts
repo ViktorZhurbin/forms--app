@@ -5,7 +5,7 @@ import type {
 
 type TQuestionBase = {
 	id: string;
-	nanoid: string;
+	nanoId: string;
 	type: QuestionTypes;
 	group: QuestionGroups;
 	title: string;
@@ -19,7 +19,7 @@ interface TQuestionChoice extends TQuestionBase {
 type TOption = {
 	id: string;
 	text: string;
-	nanoid: string;
+	nanoId: string;
 };
 
 interface TQuestionYesNo extends TQuestionChoice {

@@ -24,7 +24,7 @@ export const useUpdateQuestion = () => {
 			});
 
 			await updateForm({
-				nanoid: formNanoId,
+				nanoId: formNanoId,
 				draftQuestions: newQuestions,
 			});
 		},

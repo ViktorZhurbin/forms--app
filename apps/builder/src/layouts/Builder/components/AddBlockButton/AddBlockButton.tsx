@@ -16,12 +16,12 @@ export const AddBlockButton = ({
 
 	const handleAddBlock = useCallback(
 		async (type: QuestionTypes) => {
-			const { nanoid } = await createQuestion({
+			const { nanoId } = await createQuestion({
 				type,
 				insertBefore,
 			});
 
-			navigateToQuestion({ nanoid });
+			navigateToQuestion({ nanoId });
 			modalActions.close();
 		},
 		[insertBefore, modalActions.close, createQuestion],

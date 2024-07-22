@@ -4,7 +4,7 @@ import { AuthRoute } from "~/components/AuthRoute/AuthRoute";
 import { ThemeProvider } from "./contexts/ThemeProvider/ThemeProvider";
 import { Admin } from "./layouts/Admin/Admin";
 import { Builder } from "./layouts/Builder/Builder";
-import { BuilderDemo } from "./layouts/Builder/BuilderDemo/BuilderDemo";
+import { BuilderDemo } from "./layouts/BuilderDemo/BuilderDemo";
 import { NotFound } from "./layouts/NotFound/NotFound";
 import { Root } from "./layouts/Root/Root";
 import { SignIn } from "./layouts/SignIn/SignIn";

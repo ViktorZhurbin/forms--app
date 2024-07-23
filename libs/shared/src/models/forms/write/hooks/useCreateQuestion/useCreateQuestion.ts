@@ -22,20 +22,20 @@ export const useCreateQuestion = () => {
 
 	const createQuestion = useCallback(
 		async ({ type, insertBefore }: CreateQuestionParams) => {
-			let newBlockOrder: number;
+			let newBlockIndex: number;
 
 			// TODO: unit test this
 			if (typeof selectedBlockOrder !== "number") {
-				newBlockOrder = 0;
+				newBlockIndex = 0;
 			} else if (insertBefore) {
-				newBlockOrder = selectedBlockOrder;
+				newBlockIndex = selectedBlockOrder;
 			} else {
-				newBlockOrder = selectedBlockOrder + 1;
+				newBlockIndex = selectedBlockOrder + 1;
 			}
 
 			const newQuestion = getCreateQuestionPayload({ type });
 			const newQuestions = form?.draftQuestions.toSpliced(
-				newBlockOrder,
+				newBlockIndex,
 				0,
 				newQuestion,
 			);

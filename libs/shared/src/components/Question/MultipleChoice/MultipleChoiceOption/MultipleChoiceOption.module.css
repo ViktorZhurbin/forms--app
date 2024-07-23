@@ -13,6 +13,7 @@
 .dragHandle {
 	--size: var(--drag-handle-size);
 
+	touch-action: none;
 	position: absolute;
 	top: 6px;
 	left: calc(var(--size) * -1);

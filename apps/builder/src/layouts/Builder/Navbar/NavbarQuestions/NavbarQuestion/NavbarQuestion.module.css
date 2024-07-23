@@ -74,8 +74,12 @@
 	text-overflow: ellipsis;
 }
 
-.button:not(:hover) .actions {
-	display: none;
+@media (hover: hover) and (pointer: fine) {
+	.button:not(:hover) {
+		.actions {
+			display: none;
+		}
+	}
 }
 
 .actions {
@@ -87,6 +91,7 @@
 
 .dragHandle {
 	cursor: grab;
+	touch-action: none;
 
 	&:active {
 		cursor: grabbing;

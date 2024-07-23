@@ -2,13 +2,6 @@
 	--drag-handle-size: 24px;
 
 	position: relative;
-	padding-left: var(--drag-handle-size);
-
-	&:hover {
-		.dragHandle {
-			display: inline-flex;
-		}
-	}
 
 	&.isDragged {
 		.textInput {
@@ -20,10 +13,9 @@
 .dragHandle {
 	--size: var(--drag-handle-size);
 
-	display: none;
 	position: absolute;
-	left: 0;
 	top: 6px;
+	left: calc(var(--size) * -1);
 	width: var(--size);
 	height: var(--size);
 }

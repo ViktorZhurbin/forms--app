@@ -25,7 +25,7 @@ export const CopyLinkInput = ({ url }: { url: string }) => {
 			<TextInput
 				readOnly
 				value={url}
-				label="Send this link to other devices"
+				label="Send the link to your device with a larger screen"
 				rightSection={<CopyButtonWithTooltip url={url} />}
 			/>
 		</div>

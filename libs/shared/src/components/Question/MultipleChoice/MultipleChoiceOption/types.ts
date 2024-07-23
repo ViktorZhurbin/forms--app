@@ -1,6 +1,6 @@
 type EditableButtonVariant = "outline" | "filled";
 
-type EditableButtonProps = {
+type MultipleChoiceOptionProps = {
 	readOnly?: boolean;
 	isDragged?: boolean;
 	buttonText: string;
@@ -12,4 +12,4 @@ type EditableButtonProps = {
 	onChange?: (value: string) => void;
 };
 
-export type { EditableButtonVariant, EditableButtonProps };
+export type { EditableButtonVariant, MultipleChoiceOptionProps };

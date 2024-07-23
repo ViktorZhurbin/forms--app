@@ -5,8 +5,8 @@ import type {
 	TQuestionChoice,
 } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
-import { EditableButton } from "./EditableButton/EditableButton";
 import styles from "./MultipleChoice.module.css";
+import { MultipleChoiceOption } from "./MultipleChoiceOption/MultipleChoiceOption";
 
 type MultipleChoiceProps = {
 	questionId: TQuestion["id"];
@@ -38,7 +38,7 @@ export const MultipleChoice = ({
 				};
 
 				return (
-					<EditableButton
+					<MultipleChoiceOption
 						key={id}
 						id={id}
 						readOnly={!editMode}
@@ -69,7 +69,7 @@ export const MultipleChoice = ({
 
 	const renderDragOverlay = useCallback(
 		(activeItem: Option) => (
-			<EditableButton
+			<MultipleChoiceOption
 				readOnly
 				isDragged
 				id={activeItem.id}

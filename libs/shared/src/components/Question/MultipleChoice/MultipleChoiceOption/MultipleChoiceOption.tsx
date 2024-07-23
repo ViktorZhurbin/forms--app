@@ -1,11 +1,11 @@
 import { Textarea } from "@mantine/core";
 import { useDragSortable } from "~/components/SortableDndList/hooks/useDragSortable";
 import { clx } from "~/utils/classNames";
-import styles from "./EditableButton.module.css";
+import styles from "./MultipleChoiceOption.module.css";
 import { variantsMap } from "./constants";
-import type { EditableButtonProps } from "./types";
+import type { MultipleChoiceOptionProps } from "./types";
 
-export const EditableButton = ({
+export const MultipleChoiceOption = ({
 	id,
 	isDragged,
 	variant = "outline",
@@ -15,7 +15,7 @@ export const EditableButton = ({
 	onClick,
 	onChange,
 	onFocus,
-}: EditableButtonProps) => {
+}: MultipleChoiceOptionProps) => {
 	const { DragHandle, wrapperProps } = useDragSortable(id);
 
 	const handleClickButton = () => {

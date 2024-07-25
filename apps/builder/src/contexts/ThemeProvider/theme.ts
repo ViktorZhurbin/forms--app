@@ -30,7 +30,7 @@ const generateDarkColors = (h: number, s: number, l: number) => {
 };
 
 // Favourites
-const myTest = generateDarkColors(0, 0, 10);
+const myTest = generateDarkColors(0, 0, 9);
 const apple1 = generateDarkColors(240, 4, 9);
 const kent = generateDarkColors(233, 13, 12);
 const kentFull = [

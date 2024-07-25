@@ -16,12 +16,22 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const { isLoading, error, data } = useCurrentFormQuery();
 
-	const form = data?.forms?.[0];
-	const questions = isPreview ? form?.draftQuestions : form?.questions;
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+	if (error || isLoading) {
+		return <FetchState isLoading={isLoading} error={error} />;
+	}
+
+	const form = data.forms?.[0];
+
+	if (!form) {
+		return <NotFound />;
+	}
+
+	const questions = isPreview ? form.draftQuestions : form.questions;
+
 	const isFirstStep = currentStep === 0;
-	const isLastStep = currentStep === (questions && questions.length - 1);
+	const isLastStep = currentStep === questions.length - 1;
 
 	const scrollToStep = (step: number) => {
 		const container = scrollContainerRef.current;
@@ -47,35 +57,25 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 		console.log("submit");
 	};
 
-	const formNotFound = data?.forms.length === 0;
-
-	return formNotFound ? (
-		<NotFound />
-	) : (
+	return (
 		<div className={styles.container} ref={scrollContainerRef}>
-			{questions && (
-				<Progress
-					size="sm"
-					radius={0}
-					className={styles.progress}
-					value={(100 / questions.length) * (currentStep + 1)}
-					transitionDuration={500}
-				/>
-			)}
+			<Progress
+				size="sm"
+				radius={0}
+				className={styles.progress}
+				value={(100 / questions.length) * (currentStep + 1)}
+				transitionDuration={500}
+			/>
 
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
 
-			{!questions ? (
-				<FetchState isLoading={isLoading} error={error} />
-			) : (
-				<FormQuestions
-					questions={questions}
-					setCurrentStep={setCurrentStep}
-					containerRef={scrollContainerRef}
-					onSubmit={handleSubmit}
-					goToNextStep={goToNextStep}
-				/>
-			)}
+			<FormQuestions
+				questions={questions}
+				setCurrentStep={setCurrentStep}
+				containerRef={scrollContainerRef}
+				onSubmit={handleSubmit}
+				goToNextStep={goToNextStep}
+			/>
 
 			<FormNavButtons
 				className={styles.navigation}

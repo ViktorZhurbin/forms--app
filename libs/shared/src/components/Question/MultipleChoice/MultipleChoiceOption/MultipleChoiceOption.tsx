@@ -31,7 +31,7 @@ export const MultipleChoiceOption = ({
 			{...wrapperProps}
 			className={clx(styles.wrapper, isDragged && styles.isDragged)}
 		>
-			<DragHandle className={styles.dragHandle} />
+			{!readOnly && <DragHandle className={styles.dragHandle} />}
 			<Textarea
 				autosize
 				pointer={readOnly}

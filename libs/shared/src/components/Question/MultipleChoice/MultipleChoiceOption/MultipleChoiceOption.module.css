@@ -1,6 +1,4 @@
 .wrapper {
-	--drag-handle-size: 24px;
-
 	position: relative;
 
 	&.isDragged {
@@ -11,7 +9,7 @@
 }
 
 .dragHandle {
-	--size: var(--drag-handle-size);
+	--size: 24px;
 
 	touch-action: none;
 	position: absolute;

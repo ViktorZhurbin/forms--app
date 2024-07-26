@@ -32,7 +32,7 @@ export const FormQuestion = ({
 		if (entry?.isIntersecting) {
 			setCurrentStep(index);
 		}
-	});
+	}, [entry?.isIntersecting, index, setCurrentStep]);
 
 	return (
 		<div ref={ref} className={styles.root} data-step={index}>

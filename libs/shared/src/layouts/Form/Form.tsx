@@ -69,14 +69,16 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
 
-			{questions.map((question, index) => {
-				const isLast = index === questions.length - 1;
+			{questions.flatMap((question, index) => {
+				const isHidden = Math.abs(index - currentStep) > 1;
+
+				if (isHidden) return [];
 
 				return (
 					<FormQuestion
 						key={question.id}
 						index={index}
-						isLast={isLast}
+						isLast={index === questions.length - 1}
 						containerRef={scrollContainerRef}
 						question={question}
 						onSubmit={handleSubmit}

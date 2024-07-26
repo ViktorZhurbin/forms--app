@@ -39,7 +39,7 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 		// container may still be rendering
 		// setTimeout to wait for when it's ready to scroll
 		setTimeout(() => {
-			const target = container?.querySelectorAll("[data-step]")?.[step];
+			const target = container?.querySelector(`[data-step='${step}']`);
 
 			target?.scrollIntoView({ block: "center", behavior: "smooth" });
 		});
@@ -64,7 +64,7 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 				radius={0}
 				className={styles.progress}
 				value={(100 / questions.length) * (currentStep + 1)}
-				transitionDuration={500}
+				transitionDuration={300}
 			/>
 
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}

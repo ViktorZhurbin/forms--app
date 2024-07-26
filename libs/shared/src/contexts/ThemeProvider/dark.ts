@@ -1,5 +1,3 @@
-import { type MantineThemeOverride, createTheme } from "@mantine/core";
-
 // Default
 const mantineDefault = [
 	"hsl(0, 0%, 79%)",
@@ -29,10 +27,6 @@ const generateDarkColors = (h: number, s: number, l: number) => {
 	] as const;
 };
 
-// Favourites
-const myTest = generateDarkColors(0, 0, 9);
-const apple1 = generateDarkColors(240, 4, 9);
-const kent = generateDarkColors(233, 13, 12);
 const kentFull = [
 	"hsl(0, 0%, 97%)",
 	"hsl(218, 19%, 92%)",
@@ -46,16 +40,18 @@ const kentFull = [
 	"hsl(229, 11%, 20%)",
 ] as const;
 
-// testing
-const materialSurface = generateDarkColors(264, 8, 12);
-const muiBg = generateDarkColors(204, 14, 7);
-const apple2 = generateDarkColors(240, 4, 14);
-const josh = generateDarkColors(210, 5, 6);
+const darkPresets = {
+	mantineDefault,
+	mantineDefaultAdjusted: generateDarkColors(0, 0, 9),
+	apple1: generateDarkColors(240, 4, 9),
+	kent: generateDarkColors(233, 13, 12),
+	kentFull,
 
-export const theme: MantineThemeOverride = createTheme({
-	// autoContrast: true,
-	// defaultRadius: 6,
-	colors: {
-		dark: myTest,
-	},
-});
+	// testing
+	materialSurface: generateDarkColors(264, 8, 12),
+	muiBg: generateDarkColors(204, 14, 7),
+	apple2: generateDarkColors(240, 4, 14),
+	josh: generateDarkColors(210, 5, 6),
+};
+
+export { darkPresets };

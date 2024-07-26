@@ -1,7 +1,7 @@
 import { Routes } from "@/shared/constants/routes";
+import { ThemeProvider } from "@/shared/contexts/ThemeProvider/ThemeProvider";
 import { Route, Switch } from "wouter";
 import { AuthRoute } from "~/components/AuthRoute/AuthRoute";
-import { ThemeProvider } from "./contexts/ThemeProvider/ThemeProvider";
 import { Admin } from "./layouts/Admin/Admin";
 import { Builder } from "./layouts/Builder/Builder";
 import { BuilderDemo } from "./layouts/BuilderDemo/BuilderDemo";

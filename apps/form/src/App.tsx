@@ -1,6 +1,6 @@
 import { Routes } from "@/shared/constants/routes";
+import { ThemeProvider } from "@/shared/contexts/ThemeProvider/ThemeProvider";
 import { Route, Switch } from "wouter";
-import { ThemeProvider } from "./contexts/ThemeProvider/ThemeProvider";
 import { FormPage } from "./pages/FormPage/FormPage";
 
 export const App = () => {

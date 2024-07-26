@@ -2,7 +2,7 @@ import { Progress } from "@mantine/core";
 import { useRef, useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
 import { useCurrentFormQuery } from "~/models/forms/read";
-import { NotFound } from "../NotFound/NotFound";
+import { FormNotFound } from "../FormNotFound/FormNotFound";
 import styles from "./Form.module.css";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import { FormQuestions } from "./FormQuestions/FormQuestions";
@@ -25,7 +25,7 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const form = data.forms?.[0];
 
 	if (!form) {
-		return <NotFound />;
+		return <FormNotFound />;
 	}
 
 	const questions = isPreview ? form.draftQuestions : form.questions;

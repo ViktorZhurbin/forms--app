@@ -1,0 +1,53 @@
+.root {
+	--header-height: 60px;
+	--nav-width: 240px;
+
+	--spacing: var(--mantine-spacing-sm);
+
+	--border: 1px solid var(--mantine-color-default-border);
+
+	display: grid;
+	grid-template-rows: var(--header-height) 1fr;
+	grid-template-columns: var(--nav-width) 1fr;
+	grid-template-areas:
+		"header header"
+		"nav main";
+}
+
+.header {
+	grid-area: header;
+	height: var(--header-height);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	gap: calc(var(--mantine-spacing-md) / 2);
+
+	padding: calc(var(--spacing) / 2) var(--spacing);
+
+	border-bottom: var(--border);
+}
+
+.nav,
+.main {
+	height: calc(100dvh - var(--header-height));
+	overflow-y: auto;
+
+	padding: var(--spacing);
+}
+
+.nav {
+	grid-area: nav;
+	width: var(--nav-width);
+
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+
+	border-right: var(--border);
+}
+
+.main {
+	grid-area: main;
+	display: grid;
+}

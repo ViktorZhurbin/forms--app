@@ -15,7 +15,7 @@ export const HeaderDemo = () => {
 			<div className={styles.root}>
 				<EditableFormTitle />
 
-				<div className={styles.wrapper}>
+				<div className={styles.innerWrapper}>
 					<Button onClick={modalActions.open}>Sign in</Button>
 					<PublishButton onClick={modalActions.open} />
 					<PreviewButton />

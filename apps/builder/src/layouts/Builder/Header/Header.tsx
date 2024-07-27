@@ -11,11 +11,11 @@ import { PublishButton } from "./PublishButton/PublishButton";
 export const Header = () => {
 	return (
 		<div className={styles.root}>
-			<div className={styles.wrapper}>
+			<div className={styles.innerWrapper}>
 				<HomeButton />
 				<EditableFormTitle />
 			</div>
-			<div className={styles.wrapper}>
+			<div className={styles.innerWrapper}>
 				<PublishButton />
 				<PreviewButton />
 				<CopyLinkButton />

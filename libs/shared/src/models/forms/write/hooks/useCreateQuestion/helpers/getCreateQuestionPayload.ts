@@ -31,6 +31,7 @@ export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 			break;
 
 		case QuestionTypes.MultipleChoice:
+		case QuestionTypes.MultipleChoiceSingle:
 			update = {
 				options: [
 					{ id: id(), nanoId: makeSubId(), text: "Option 1" },

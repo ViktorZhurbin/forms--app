@@ -91,6 +91,7 @@ function QuestionComponent({
 }: Pick<QuestionProps, "editMode" | "question" | "goToNextStep">) {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
+		case QuestionTypes.MultipleChoiceSingle:
 			return (
 				<MultipleChoice
 					type="radio"

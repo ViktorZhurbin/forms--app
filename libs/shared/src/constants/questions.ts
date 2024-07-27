@@ -1,6 +1,7 @@
 enum QuestionTypes {
 	YesNo = "YesNo",
 	MultipleChoice = "MultipleChoice",
+	MultipleChoiceSingle = "MultipleChoiceSingle",
 	ShortText = "ShortText",
 }
 

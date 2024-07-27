@@ -1,7 +1,8 @@
 import {
 	IconAlignLeft,
 	IconBan,
-	IconListLetters,
+	IconList,
+	IconListCheck,
 	type TablerIcon,
 } from "@tabler/icons-react";
 import { QuestionGroups, QuestionTypes } from "./questions";
@@ -20,9 +21,15 @@ const QuestionTypesMap: Record<QuestionTypes, QuestionTypesMapItem> = {
 		group: QuestionGroups.Choice,
 	},
 	[QuestionTypes.MultipleChoice]: {
-		name: "Multiple Choice",
-		Icon: IconListLetters,
+		name: "Multiple Choice (choose many)",
+		Icon: IconListCheck,
 		type: QuestionTypes.MultipleChoice,
+		group: QuestionGroups.Choice,
+	},
+	[QuestionTypes.MultipleChoiceSingle]: {
+		name: "Multiple Choice (choose one)",
+		Icon: IconList,
+		type: QuestionTypes.MultipleChoiceSingle,
 		group: QuestionGroups.Choice,
 	},
 	[QuestionTypes.ShortText]: {

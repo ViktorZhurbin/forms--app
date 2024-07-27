@@ -30,13 +30,21 @@ interface TQuestionMultipleChoice extends TQuestionChoice {
 	type: QuestionTypes.MultipleChoice;
 }
 
+interface TQuestionMultipleChoiceSingle extends TQuestionChoice {
+	type: QuestionTypes.MultipleChoiceSingle;
+}
+
 interface TQuestionShortText extends TQuestionBase {
 	type: QuestionTypes.ShortText;
 	group: QuestionGroups.Text;
 	textPlaceholder: string;
 }
 
-type TQuestion = TQuestionYesNo | TQuestionMultipleChoice | TQuestionShortText;
+type TQuestion =
+	| TQuestionYesNo
+	| TQuestionMultipleChoice
+	| TQuestionMultipleChoiceSingle
+	| TQuestionShortText;
 
 export type {
 	TQuestionBase,

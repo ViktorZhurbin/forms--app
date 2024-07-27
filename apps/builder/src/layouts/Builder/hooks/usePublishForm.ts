@@ -1,7 +1,7 @@
 import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { useCurrentForm } from "@/shared/models/forms/read";
 import { updateForm } from "@/shared/models/forms/write";
-import { isEqual } from "lodash";
+import { isEqual } from "es-toolkit";
 import { useCallback, useState } from "react";
 
 export const usePublishForm = () => {

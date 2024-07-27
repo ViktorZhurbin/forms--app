@@ -18,6 +18,7 @@ export const PublishButton = ({ onClick }: { onClick?: () => void }) => {
 			<Button
 				onClick={onClick ?? publishForm}
 				loading={isLoading}
+				loaderProps={{ type: "dots" }}
 				disabled={isPublished || isDisabled}
 				leftSection={<IconSend2 />}
 				variant="default"

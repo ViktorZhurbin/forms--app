@@ -7,16 +7,16 @@ export const EditableFormTitle = () => {
 	const form = useCurrentForm();
 	const formNanoId = useFormNanoId();
 
-	const onChange = (name: string) => {
+	const handleEdit = (name: string) => {
 		updateForm({ nanoId: formNanoId, name });
 	};
 
 	return (
 		<Tooltip withArrow label="Rename form">
 			<TextInput
-				value={form?.name ?? ""}
-				onChange={(event) => {
-					onChange?.(event.currentTarget.value);
+				defaultValue={form?.name ?? ""}
+				onBlur={(event) => {
+					handleEdit?.(event.currentTarget.value);
 				}}
 			/>
 		</Tooltip>

@@ -9,6 +9,7 @@ export type MultipleChoiceOptionProps = {
 	readOnly?: boolean;
 	isDragged?: boolean;
 	isSelected: boolean;
+	isLast?: boolean;
 	placeholder?: string;
 	onEdit?: (value: string) => void;
 	id: string;

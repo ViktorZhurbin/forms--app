@@ -11,6 +11,7 @@ export const OptionButton = ({
 	type,
 	readOnly,
 	placeholder,
+	// isLast,
 	isDragged,
 	isSelected,
 	onClick,
@@ -20,12 +21,11 @@ export const OptionButton = ({
 	const Component = type === "radio" ? Radio : Checkbox;
 
 	const handleClick = () => {
-		if (readOnly) {
-			onClick?.();
-		} else {
-			inputRef.current?.focus();
-		}
+		onClick?.();
+
+		if (readOnly) return;
 	};
+
 	return (
 		<UnstyledButton
 			variant="default"
@@ -40,15 +40,17 @@ export const OptionButton = ({
 			<Component.Indicator checked={isSelected} />
 			<Textarea
 				autosize
-				value={text}
+				defaultValue={text}
 				ref={inputRef}
 				tabIndex={readOnly ? -1 : 0}
 				placeholder={placeholder}
 				variant="unstyled"
 				pointer={readOnly}
 				readOnly={readOnly}
-				onChange={(event) => {
-					onEdit?.(event.currentTarget.value);
+				onBlur={(event) => {
+					if (text !== event.currentTarget.value) {
+						onEdit?.(event.currentTarget.value);
+					}
 				}}
 			/>
 		</UnstyledButton>

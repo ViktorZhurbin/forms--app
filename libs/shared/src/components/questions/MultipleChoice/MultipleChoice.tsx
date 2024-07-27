@@ -1,9 +1,11 @@
+import { Anchor } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { SortableDndList } from "~/components/SortableDndList/SortableDndList";
 import type {
 	TQuestion,
 	TQuestionChoice,
 } from "~/models/forms/schema/questions";
+import { makeChoiceQuestionOption } from "~/models/forms/write/hooks/useCreateQuestion";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
 import styles from "./MultipleChoice.module.css";
 import { MultipleChoiceOption } from "./MultipleChoiceOption/MultipleChoiceOption";
@@ -11,6 +13,7 @@ import { MultipleChoiceOption } from "./MultipleChoiceOption/MultipleChoiceOptio
 export type MultipleChoiceProps = {
 	type: "checkbox" | "radio";
 	questionId: TQuestion["id"];
+	isFixed?: boolean;
 	editMode?: boolean;
 	options: TQuestionChoice["options"];
 	onSelect?: () => void;
@@ -22,6 +25,7 @@ export const MultipleChoice = ({
 	type,
 	questionId,
 	options,
+	isFixed,
 	editMode,
 	onSelect,
 }: MultipleChoiceProps) => {
@@ -29,11 +33,25 @@ export const MultipleChoice = ({
 
 	const { updateQuestion } = useUpdateQuestion();
 
+	const addOption = () => {
+		updateQuestion({
+			id: questionId,
+			payload: {
+				options: [
+					...options,
+					makeChoiceQuestionOption(`Option ${options.length + 1}`),
+				],
+			},
+		});
+	};
+
 	const Options = () => {
 		const isRadio = type === "radio";
 
-		return options.map(({ id, text }, _, options) => {
-			const onChange = (text: string) => {
+		return options.map(({ id, text }, index, options) => {
+			const handleEdit = (text: string) => {
+				if (!editMode) return;
+
 				const newOptions = options.map((option) =>
 					option.id === id ? { ...option, text } : option,
 				);
@@ -44,7 +62,7 @@ export const MultipleChoice = ({
 				});
 			};
 
-			const onClick = () => {
+			const handleSelect = () => {
 				setValues((prevValues) => {
 					if (prevValues.includes(text)) {
 						return prevValues.filter((value) => value !== text);
@@ -58,15 +76,23 @@ export const MultipleChoice = ({
 				}
 			};
 
+			const handleClick = () => {
+				if (editMode) return;
+
+				handleSelect();
+			};
+
 			return (
 				<MultipleChoiceOption
 					key={id}
 					id={id}
 					type={type}
+					isLast={index === options.length - 1}
 					readOnly={!editMode}
 					text={text}
-					onEdit={onChange}
-					onClick={onClick}
+					placeholder={`Option ${index + 1}`}
+					onEdit={handleEdit}
+					onClick={handleClick}
 					isSelected={values.includes(text)}
 				/>
 			);
@@ -102,6 +128,18 @@ export const MultipleChoice = ({
 				Options={Options}
 				DragOverlayItem={DragOverlayItem}
 			/>
+			{editMode && !isFixed && (
+				<Anchor
+					fz="sm"
+					ta="start"
+					w="max-content"
+					component="button"
+					underline="always"
+					onClick={addOption}
+				>
+					Add option
+				</Anchor>
+			)}
 		</div>
 	);
 };

@@ -14,6 +14,7 @@ export const useCurrentQuestion = () => {
 
 	const question = index !== null && form?.draftQuestions[index];
 	const order = index === null ? 1 : index + 1;
+	const isLast = order === form?.draftQuestions.length;
 
-	return { question, order };
+	return { question, order, isLast };
 };

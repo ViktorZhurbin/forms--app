@@ -15,12 +15,12 @@ type EditableTextareaProps = {
 
 export const EditableTextarea = ({
 	variant = "body",
+	readOnly = false,
+	initialValue = "",
 	tooltip,
-	readOnly,
 	onFocus,
 	onEdit,
 	placeholder,
-	initialValue = "",
 }: EditableTextareaProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
 

@@ -1,6 +1,6 @@
 import { useIntersection } from "@mantine/hooks";
 import { type RefObject, useEffect } from "react";
-import { Question } from "~/components/Question/Question";
+import { QuestionView } from "~/components/QuestionView/QuestionView";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import styles from "./FormQuestion.module.css";
 
@@ -36,7 +36,7 @@ export const FormQuestion = ({
 
 	return (
 		<div ref={ref} className={styles.root} data-step={index}>
-			<Question
+			<QuestionView
 				order={index + 1}
 				isLast={isLast}
 				question={question}

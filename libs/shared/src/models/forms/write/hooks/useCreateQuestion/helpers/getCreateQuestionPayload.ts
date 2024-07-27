@@ -20,7 +20,7 @@ const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 	const basePayload = {
 		type,
 		title: "",
-		buttonText: "Next",
+		buttonText: "",
 		id: id(),
 		nanoId: makeSubId(),
 		group: QuestionTypesMap[type].group,

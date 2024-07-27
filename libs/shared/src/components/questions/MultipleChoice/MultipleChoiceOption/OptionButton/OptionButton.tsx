@@ -4,21 +4,16 @@ import { useRef } from "react";
 import type { MultipleChoiceOptionProps } from "../MultipleChoiceOption";
 import styles from "./OptionButton.module.css";
 
-interface OptionButtonProps
-	extends Pick<
-		MultipleChoiceOptionProps,
-		"type" | "text" | "readOnly" | "isDragged" | "isSelected" | "onEdit"
-	> {
-	onSelect: () => void;
-}
+type OptionButtonProps = MultipleChoiceOptionProps;
 
 export const OptionButton = ({
 	text,
 	type,
 	readOnly,
+	placeholder,
 	isDragged,
 	isSelected,
-	onSelect,
+	onClick,
 	onEdit,
 }: OptionButtonProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -26,7 +21,7 @@ export const OptionButton = ({
 
 	const handleClick = () => {
 		if (readOnly) {
-			onSelect();
+			onClick?.();
 		} else {
 			inputRef.current?.focus();
 		}
@@ -45,12 +40,13 @@ export const OptionButton = ({
 			<Component.Indicator checked={isSelected} />
 			<Textarea
 				autosize
+				value={text}
 				ref={inputRef}
 				tabIndex={readOnly ? -1 : 0}
+				placeholder={placeholder}
 				variant="unstyled"
 				pointer={readOnly}
 				readOnly={readOnly}
-				value={text}
 				onChange={(event) => {
 					onEdit?.(event.currentTarget.value);
 				}}

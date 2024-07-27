@@ -2,13 +2,11 @@ import { Textarea } from "@mantine/core";
 import { useDragSortable } from "~/components/SortableDndList/hooks/useDragSortable";
 import { clx } from "~/utils/classNames";
 import styles from "./MultipleChoiceOption.module.css";
-import { variantsMap } from "./constants";
 import type { MultipleChoiceOptionProps } from "./types";
 
 export const MultipleChoiceOption = ({
 	id,
 	isDragged,
-	variant = "outline",
 	readOnly,
 	buttonText,
 	classNames,
@@ -24,8 +22,6 @@ export const MultipleChoiceOption = ({
 		}
 	};
 
-	const { inputVariant } = variantsMap[variant];
-
 	return (
 		<div
 			{...wrapperProps}
@@ -37,9 +33,8 @@ export const MultipleChoiceOption = ({
 				pointer={readOnly}
 				readOnly={readOnly}
 				value={buttonText}
-				variant={inputVariant}
 				classNames={{
-					input: clx(styles.textInput, styles[variant], classNames?.textInput),
+					input: clx(styles.textInput, classNames?.textInput),
 				}}
 				onFocus={onFocus}
 				onChange={(event) => {

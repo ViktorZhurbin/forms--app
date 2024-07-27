@@ -42,7 +42,6 @@ export const MultipleChoice = ({
 						key={id}
 						id={id}
 						readOnly={!editMode}
-						variant="outline"
 						buttonText={text}
 						classNames={{
 							textInput: styles.textInput,
@@ -73,7 +72,6 @@ export const MultipleChoice = ({
 				readOnly
 				isDragged
 				id={activeItem.id}
-				variant="outline"
 				buttonText={activeItem.text}
 				classNames={{
 					textInput: styles.textInput,

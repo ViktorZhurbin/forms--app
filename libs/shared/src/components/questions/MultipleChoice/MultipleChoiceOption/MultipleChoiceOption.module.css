@@ -11,28 +11,19 @@
 .dragHandle {
 	--size: 24px;
 
-	touch-action: none;
+	width: var(--size);
+	height: var(--size);
+
 	position: absolute;
 	top: 6px;
 	left: calc(var(--size) * -1);
-	width: var(--size);
-	height: var(--size);
+
+	touch-action: none;
 }
 
 .textInput {
 	padding-inline: calc(1.125rem * var(--mantine-scale));
-}
 
-.textInput.filled {
-	color: var(--mantine-color-white);
-	background-color: var(--mantine-primary-color-filled);
-
-	&:hover {
-		background-color: var(--mantine-color-blue-filled-hover);
-	}
-}
-
-.textInput.outline {
 	&:hover {
 		background-color: var(--mantine-color-default-hover);
 	}

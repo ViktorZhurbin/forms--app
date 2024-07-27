@@ -26,14 +26,14 @@ export const Question = ({
 	onSubmitForm,
 	goToNextStep,
 }: QuestionProps) => {
-	let buttonText: string;
+	let buttonTextFallback: string;
 	let onSubmit: (() => void) | undefined;
 
 	if (isLast) {
-		buttonText = "Submit";
+		buttonTextFallback = "Submit";
 		onSubmit = onSubmitForm;
 	} else {
-		buttonText = "OK";
+		buttonTextFallback = "OK";
 		onSubmit = goToNextStep;
 	}
 
@@ -43,6 +43,13 @@ export const Question = ({
 		updateQuestion({
 			id: question.id,
 			payload: { title },
+		});
+	};
+
+	const onEditButtonText = (buttonText: string) => {
+		updateQuestion({
+			id: question.id,
+			payload: { buttonText },
 		});
 	};
 
@@ -72,7 +79,8 @@ export const Question = ({
 
 					<EditableButton
 						onClick={onSubmit}
-						value={buttonText}
+						value={question.buttonText || buttonTextFallback}
+						onEdit={onEditButtonText}
 						isEditable={Boolean(editMode)}
 						classNames={{
 							button: styles.submitButton,

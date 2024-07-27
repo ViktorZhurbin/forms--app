@@ -9,6 +9,7 @@ type TQuestionBase = {
 	type: QuestionTypes;
 	group: QuestionGroups;
 	title: string;
+	buttonText: string;
 };
 
 interface TQuestionChoice extends TQuestionBase {

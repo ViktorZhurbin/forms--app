@@ -11,6 +11,7 @@ interface EditableButtonProps extends ContentEditableProps, HTMLButtonProps {
 	classNames?: {
 		button?: string;
 	};
+	onEdit: (value: string) => void;
 }
 
 export const EditableButton = ({
@@ -20,6 +21,7 @@ export const EditableButton = ({
 	isEditable,
 	classNames,
 	onFocus,
+	onEdit,
 }: EditableButtonProps) => {
 	return (
 		<Button
@@ -33,7 +35,7 @@ export const EditableButton = ({
 				classNames?.button,
 			)}
 		>
-			<ContentEditable value={value} isEditable={isEditable} />
+			<ContentEditable value={value} isEditable={isEditable} onEdit={onEdit} />
 		</Button>
 	);
 };

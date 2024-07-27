@@ -17,9 +17,10 @@ const makeChoiceQuestionOption = (
 });
 
 const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
-	const updateBase = {
+	const basePayload = {
 		type,
 		title: "",
+		buttonText: "Next",
 		id: id(),
 		nanoId: makeSubId(),
 		group: QuestionTypesMap[type].group,
@@ -57,7 +58,7 @@ const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 			break;
 	}
 
-	return { ...updateBase, ...update } as TQuestion;
+	return { ...basePayload, ...update } as TQuestion;
 };
 
 export { makeChoiceQuestionOption, getCreateQuestionPayload };

@@ -5,8 +5,8 @@ import type { TQuestion } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
-import { ShortText } from "../ShortText/ShortText";
-import { MultipleChoice } from "./MultipleChoice/MultipleChoice";
+import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
+import { ShortText } from "../questions/ShortText/ShortText";
 import styles from "./Question.module.css";
 
 interface QuestionProps {

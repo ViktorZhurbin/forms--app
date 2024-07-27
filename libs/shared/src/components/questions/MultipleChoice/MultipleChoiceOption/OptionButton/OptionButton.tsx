@@ -1,4 +1,10 @@
-import { Checkbox, Radio, Textarea, UnstyledButton } from "@mantine/core";
+import {
+	Checkbox,
+	CloseButton,
+	Radio,
+	Textarea,
+	UnstyledButton,
+} from "@mantine/core";
 import clsx from "clsx";
 import { useRef } from "react";
 import type { MultipleChoiceOptionProps } from "../MultipleChoiceOption";
@@ -7,6 +13,7 @@ import styles from "./OptionButton.module.css";
 type OptionButtonProps = MultipleChoiceOptionProps;
 
 export const OptionButton = ({
+	id,
 	text,
 	type,
 	readOnly,
@@ -16,6 +23,7 @@ export const OptionButton = ({
 	isSelected,
 	onClick,
 	onEdit,
+	onDelete,
 }: OptionButtonProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
 	const Component = type === "radio" ? Radio : Checkbox;
@@ -52,6 +60,11 @@ export const OptionButton = ({
 						onEdit?.(event.currentTarget.value);
 					}
 				}}
+			/>
+			<CloseButton
+				size="sm"
+				onClick={() => onDelete?.(id)}
+				className={styles.deleteButton}
 			/>
 		</UnstyledButton>
 	);

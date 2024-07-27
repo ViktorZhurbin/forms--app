@@ -12,6 +12,7 @@ export type MultipleChoiceOptionProps = {
 	isLast?: boolean;
 	placeholder?: string;
 	onEdit?: (value: string) => void;
+	onDelete?: (id: string) => void;
 	id: string;
 	onClick?: () => void;
 };

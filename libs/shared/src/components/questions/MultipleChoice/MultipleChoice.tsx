@@ -45,6 +45,15 @@ export const MultipleChoice = ({
 		});
 	};
 
+	const deleteOption = (id: Option["id"]) => {
+		updateQuestion({
+			id: questionId,
+			payload: {
+				options: options.filter((option) => option.id !== id),
+			},
+		});
+	};
+
 	const Options = () => {
 		const isRadio = type === "radio";
 
@@ -93,6 +102,7 @@ export const MultipleChoice = ({
 					placeholder={`Option ${index + 1}`}
 					onEdit={handleEdit}
 					onClick={handleClick}
+					onDelete={deleteOption}
 					isSelected={values.includes(text)}
 				/>
 			);

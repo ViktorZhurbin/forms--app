@@ -15,10 +15,10 @@ type OptionButtonProps = MultipleChoiceOptionProps;
 export const OptionButton = ({
 	id,
 	text,
-	type,
 	readOnly,
 	placeholder,
 	isTempNewOptionId,
+	canChooseMany,
 	isDragged,
 	isSelected,
 	onClick,
@@ -26,7 +26,7 @@ export const OptionButton = ({
 	onDelete,
 }: OptionButtonProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
-	const Component = type === "radio" ? Radio : Checkbox;
+	const Component = canChooseMany ? Checkbox : Radio;
 
 	const handleClick = () => {
 		onClick?.();

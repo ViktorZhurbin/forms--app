@@ -11,9 +11,9 @@ import styles from "./MultipleChoice.module.css";
 import { MultipleChoiceOption } from "./MultipleChoiceOption/MultipleChoiceOption";
 
 export type MultipleChoiceProps = {
-	type: "checkbox" | "radio";
+	canChooseMany: boolean;
 	questionId: TQuestion["id"];
-	isFixed?: boolean;
+	isFixedQuestions?: boolean;
 	editMode?: boolean;
 	options: TQuestionChoice["options"];
 	onSelect?: () => void;
@@ -22,10 +22,10 @@ export type MultipleChoiceProps = {
 type Option = MultipleChoiceProps["options"][number];
 
 export const MultipleChoice = ({
-	type,
+	canChooseMany,
 	questionId,
 	options,
-	isFixed,
+	isFixedQuestions,
 	editMode,
 	onSelect,
 }: MultipleChoiceProps) => {
@@ -61,8 +61,6 @@ export const MultipleChoice = ({
 	};
 
 	const Options = () => {
-		const isRadio = type === "radio";
-
 		return options.map(({ id, text }, index, options) => {
 			const handleEdit = (text: string) => {
 				if (!editMode) return;
@@ -83,10 +81,10 @@ export const MultipleChoice = ({
 						return prevValues.filter((value) => value !== text);
 					}
 
-					return isRadio ? [text] : [...prevValues, text];
+					return canChooseMany ? [...prevValues, text] : [text];
 				});
 
-				if (isRadio) {
+				if (!canChooseMany) {
 					onSelect?.();
 				}
 			};
@@ -111,9 +109,9 @@ export const MultipleChoice = ({
 				<MultipleChoiceOption
 					key={id}
 					id={id}
-					type={type}
-					readOnly={!editMode}
 					text={text}
+					readOnly={!editMode}
+					canChooseMany={canChooseMany}
 					isTempNewOptionId={tempNewOptionId === id}
 					placeholder={`Option ${index + 1}`}
 					onBlur={handleBlur}
@@ -139,8 +137,8 @@ export const MultipleChoice = ({
 		<MultipleChoiceOption
 			readOnly
 			isDragged
-			type={type}
 			id={activeItem.id}
+			canChooseMany={canChooseMany}
 			isSelected={values.includes(activeItem.text)}
 			text={activeItem.text}
 		/>
@@ -154,7 +152,7 @@ export const MultipleChoice = ({
 				Options={Options}
 				DragOverlayItem={DragOverlayItem}
 			/>
-			{editMode && !isFixed && (
+			{editMode && !isFixedQuestions && (
 				<Anchor
 					fz="sm"
 					ta="start"

@@ -95,14 +95,12 @@ function QuestionComponent({
 		case QuestionTypes.MultipleChoice:
 			return (
 				<MultipleChoice
-					type={
-						question.type === QuestionTypes.Checkboxes ? "checkbox" : "radio"
-					}
-					isFixed={question.type === QuestionTypes.YesNo}
 					editMode={editMode}
 					questionId={question.id}
 					options={question.options}
 					onSelect={goToNextStep}
+					isFixedQuestions={question.type === QuestionTypes.YesNo}
+					canChooseMany={question.type === QuestionTypes.Checkboxes}
 				/>
 			);
 

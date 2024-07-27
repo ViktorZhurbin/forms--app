@@ -4,7 +4,7 @@ import styles from "./MultipleChoiceOption.module.css";
 import { OptionButton } from "./OptionButton/OptionButton";
 
 export type MultipleChoiceOptionProps = {
-	type: MultipleChoiceProps["type"];
+	id: string;
 	text: string;
 	readOnly?: boolean;
 	isDragged?: boolean;
@@ -13,8 +13,8 @@ export type MultipleChoiceOptionProps = {
 	placeholder?: string;
 	onBlur?: (value: string) => void;
 	onDelete?: (id: string) => void;
-	id: string;
 	onClick?: () => void;
+	canChooseMany: MultipleChoiceProps["canChooseMany"];
 };
 
 export const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {

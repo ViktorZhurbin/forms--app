@@ -91,14 +91,12 @@ function QuestionComponent({
 }: Pick<QuestionProps, "editMode" | "question" | "goToNextStep">) {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
+		case QuestionTypes.Checkboxes:
 		case QuestionTypes.MultipleChoice:
-		case QuestionTypes.MultipleChoiceSingle:
 			return (
 				<MultipleChoice
 					type={
-						question.type === QuestionTypes.MultipleChoice
-							? "checkbox"
-							: "radio"
+						question.type === QuestionTypes.Checkboxes ? "checkbox" : "radio"
 					}
 					isFixed={question.type === QuestionTypes.YesNo}
 					editMode={editMode}

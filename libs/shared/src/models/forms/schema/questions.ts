@@ -26,12 +26,12 @@ interface TQuestionYesNo extends TQuestionChoice {
 	type: QuestionTypes.YesNo;
 }
 
-interface TQuestionMultipleChoice extends TQuestionChoice {
-	type: QuestionTypes.MultipleChoice;
+interface TQuestionCheckboxes extends TQuestionChoice {
+	type: QuestionTypes.Checkboxes;
 }
 
 interface TQuestionMultipleChoiceSingle extends TQuestionChoice {
-	type: QuestionTypes.MultipleChoiceSingle;
+	type: QuestionTypes.MultipleChoice;
 }
 
 interface TQuestionShortText extends TQuestionBase {
@@ -42,7 +42,7 @@ interface TQuestionShortText extends TQuestionBase {
 
 type TQuestion =
 	| TQuestionYesNo
-	| TQuestionMultipleChoice
+	| TQuestionCheckboxes
 	| TQuestionMultipleChoiceSingle
 	| TQuestionShortText;
 
@@ -52,6 +52,6 @@ export type {
 	TOption,
 	TQuestionYesNo,
 	TQuestionChoice,
-	TQuestionMultipleChoice,
+	TQuestionCheckboxes,
 	TQuestionShortText,
 };

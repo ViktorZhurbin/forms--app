@@ -38,8 +38,8 @@ const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 
 			break;
 
+		case QuestionTypes.Checkboxes:
 		case QuestionTypes.MultipleChoice:
-		case QuestionTypes.MultipleChoiceSingle:
 			update = {
 				options: [
 					makeChoiceQuestionOption("Option 1"),

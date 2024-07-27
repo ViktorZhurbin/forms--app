@@ -20,16 +20,16 @@ const QuestionTypesMap: Record<QuestionTypes, QuestionTypesMapItem> = {
 		type: QuestionTypes.YesNo,
 		group: QuestionGroups.Choice,
 	},
-	[QuestionTypes.MultipleChoice]: {
-		name: "Multiple Choice (choose many)",
+	[QuestionTypes.Checkboxes]: {
+		name: "Checkboxes",
 		Icon: IconCheckbox,
-		type: QuestionTypes.MultipleChoice,
+		type: QuestionTypes.Checkboxes,
 		group: QuestionGroups.Choice,
 	},
-	[QuestionTypes.MultipleChoiceSingle]: {
-		name: "Multiple Choice (choose one)",
+	[QuestionTypes.MultipleChoice]: {
+		name: "Multiple Choice",
 		Icon: IconCircleDot,
-		type: QuestionTypes.MultipleChoiceSingle,
+		type: QuestionTypes.MultipleChoice,
 		group: QuestionGroups.Choice,
 	},
 	[QuestionTypes.ShortText]: {

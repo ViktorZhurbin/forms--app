@@ -1,4 +1,4 @@
-import { Checkbox, Radio, Textarea } from "@mantine/core";
+import { Checkbox, Radio, Textarea, UnstyledButton } from "@mantine/core";
 import clsx from "clsx";
 import { useRef } from "react";
 import type { MultipleChoiceOptionProps } from "../MultipleChoiceOption";
@@ -32,16 +32,17 @@ export const OptionButton = ({
 		}
 	};
 	return (
-		<Component.Card
+		<UnstyledButton
+			variant="default"
+			data-checked={isSelected}
 			tabIndex={readOnly ? 0 : -1}
-			checked={isSelected}
 			onClick={handleClick}
 			className={clsx(styles.root, {
 				[styles.isEditable]: !readOnly,
 				[styles.isDragged]: isDragged,
 			})}
 		>
-			<Component.Indicator />
+			<Component.Indicator checked={isSelected} />
 			<Textarea
 				autosize
 				ref={inputRef}
@@ -54,6 +55,6 @@ export const OptionButton = ({
 					onEdit?.(event.currentTarget.value);
 				}}
 			/>
-		</Component.Card>
+		</UnstyledButton>
 	);
 };

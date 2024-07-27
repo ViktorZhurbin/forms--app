@@ -8,6 +8,13 @@
 	flex-wrap: nowrap;
 	gap: var(--mantine-spacing-xs);
 
+	border: 1px solid var(--mantine-color-gray-3);
+	border-radius: var(--mantine-radius-default);
+
+	@mixin dark {
+		border-color: var(--mantine-color-dark-4);
+	}
+
 	&.isEditable {
 		cursor: text;
 	}
@@ -22,8 +29,8 @@
 		}
 	}
 
-	&[data-checked],
-	&:focus-within {
+	&[data-checked="true"],
+	&:focus-within:not(:focus-visible) {
 		border-color: var(--mantine-primary-color-filled);
 	}
 }

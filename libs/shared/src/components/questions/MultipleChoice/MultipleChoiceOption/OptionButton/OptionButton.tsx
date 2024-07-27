@@ -65,12 +65,14 @@ export const OptionButton = ({
 					onBlur?.(event.currentTarget.value);
 				}}
 			/>
-			<CloseButton
-				size="sm"
-				component="div"
-				onClick={() => onDelete?.(id)}
-				className={styles.deleteButton}
-			/>
+			{!readOnly && (
+				<CloseButton
+					size="sm"
+					component="div"
+					onClick={() => onDelete?.(id)}
+					className={styles.deleteButton}
+				/>
+			)}
 		</UnstyledButton>
 	);
 };

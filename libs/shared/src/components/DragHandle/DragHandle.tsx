@@ -1,7 +1,7 @@
 import type { useSortable } from "@dnd-kit/sortable";
 import { CloseButton } from "@mantine/core";
 import { IconGripVertical } from "@tabler/icons-react";
-import { clx } from "~/utils/classNames";
+import clsx from "clsx";
 import styles from "./DragHandle.module.css";
 
 type DragHandleProps = {
@@ -16,7 +16,7 @@ export const DragHandle = ({ listeners, className }: DragHandleProps) => {
 			size="sm"
 			component="div"
 			icon={<IconGripVertical />}
-			className={clx(styles.dragHandle, className)}
+			className={clsx(styles.dragHandle, className)}
 		/>
 	);
 };

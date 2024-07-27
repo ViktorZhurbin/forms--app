@@ -9,8 +9,10 @@
   "scripts": {
     "prepare": "husky",
     "format": "biome check --write",
-    "all:build": "pnpm --filter './apps/**' build",
-    "all:dev": "pnpm --filter './apps/**' dev",
+    "shared:install": "pnpm --filter ...@forms/shared add",
+    "shared:dev": "pnpm --filter ...@forms/shared dev",
+    "shared:build": "pnpm --filter ...@forms/shared build",
+    "apps:build": "pnpm --filter './apps/**' build",
     "builder:dev": "pnpm --filter @forms/builder dev",
     "builder:build": "pnpm --filter @forms/builder build",
     "builder:rsdoctor": "pnpm --filter @forms/builder rsdoctor",

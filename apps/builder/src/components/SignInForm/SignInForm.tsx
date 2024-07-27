@@ -1,7 +1,7 @@
 import { Routes } from "@/shared/constants/routes";
 import { useDbAuth } from "@/shared/models/db";
-import { clx } from "@/shared/utils/classNames";
 import { Text, Title } from "@mantine/core";
+import clsx from "clsx";
 import { Redirect } from "wouter";
 import { GoogleSignInButtonCustom } from "~/components/GoogleSignInButtonCustom/GoogleSignInButtonCustom";
 import styles from "./SignInForm.module.css";
@@ -24,7 +24,7 @@ export const SignInForm = ({
 	}
 
 	return (
-		<div className={clx(styles.flexWrapper, wrapperClass)}>
+		<div className={clsx(styles.flexWrapper, wrapperClass)}>
 			<div>
 				<Title order={3}>Log in or create a new account</Title>
 				{subtitle && <Text c="dimmed">{subtitle}</Text>}

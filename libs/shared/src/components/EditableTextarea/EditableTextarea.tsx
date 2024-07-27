@@ -1,6 +1,6 @@
 import { Textarea, Tooltip } from "@mantine/core";
+import clsx from "clsx";
 import { type KeyboardEventHandler, useRef } from "react";
-import { clx } from "~/utils/classNames";
 import styles from "./EditableTextarea.module.css";
 
 type EditableTextareaProps = {
@@ -41,7 +41,7 @@ export const EditableTextarea = ({
 				value={initialValue}
 				placeholder={placeholder}
 				classNames={{
-					input: clx(
+					input: clsx(
 						styles.input,
 						styles[variant],
 						readOnly && styles.readOnly,

@@ -1,6 +1,6 @@
 import { Button } from "@mantine/core";
+import clsx from "clsx";
 import type { HTMLButtonProps } from "~/types/dom";
-import { clx } from "~/utils/classNames";
 import {
 	ContentEditable,
 	type ContentEditableProps,
@@ -27,7 +27,7 @@ export const EditableButton = ({
 			onClick={onClick}
 			onKeyDown={onKeyDown}
 			tabIndex={isEditable ? -1 : 0}
-			className={clx(
+			className={clsx(
 				styles.button,
 				isEditable ? styles.editable : null,
 				classNames?.button,

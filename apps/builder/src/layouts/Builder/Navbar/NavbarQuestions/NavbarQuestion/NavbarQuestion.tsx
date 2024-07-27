@@ -1,7 +1,7 @@
 import { useDragSortable } from "@/shared/components/SortableDndList/hooks/useDragSortable";
 import type { TQuestion } from "@/shared/models/forms/schema/questions";
-import { clx } from "@/shared/utils/classNames";
 import { Button, CloseButton, Text } from "@mantine/core";
+import clsx from "clsx";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import styles from "./NavbarQuestion.module.css";
@@ -37,7 +37,7 @@ export const NavbarQuestion = ({
 			justify="start"
 			size="md"
 			classNames={{
-				root: clx(
+				root: clsx(
 					styles.button,
 					isGhost && styles.isGhost,
 					isDragged && styles.isDragged,

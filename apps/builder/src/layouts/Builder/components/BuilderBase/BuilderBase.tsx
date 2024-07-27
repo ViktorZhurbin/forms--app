@@ -1,4 +1,5 @@
 import { useMediaQuery } from "@mantine/hooks";
+import clsx from "clsx";
 import { Main } from "../../Main/Main";
 import { NavbarQuestions } from "../../Navbar/NavbarQuestions/NavbarQuestions";
 import { NavbarThankYou } from "../../Navbar/NavbarThankYou/NavbarThankYou";
@@ -13,15 +14,15 @@ export const BuilderBase = ({ header }: { header: React.ReactElement }) => {
 	}
 
 	return (
-		<div className={styles.root}>
-			<header className={styles.header}>{header}</header>
+		<div className={clsx("root", styles.root)}>
+			<header className={clsx("header", styles.header)}>{header}</header>
 
-			<nav className={styles.nav}>
+			<nav className={clsx("nav", styles.nav)}>
 				<NavbarQuestions />
 				<NavbarThankYou />
 			</nav>
 
-			<main className={styles.main}>
+			<main className={clsx("main", styles.main)}>
 				<Main />
 			</main>
 		</div>

@@ -1,17 +1,16 @@
-import { AppShell } from "@mantine/core";
 import { Header } from "./Header/Header";
 import { Main } from "./Main/Main";
 
 export const Admin = () => {
 	return (
-		<AppShell header={{ height: 60 }} padding="md">
-			<AppShell.Header>
+		<div className="root">
+			<header className="header">
 				<Header />
-			</AppShell.Header>
+			</header>
 
-			<AppShell.Main display="flex">
+			<main className="main">
 				<Main />
-			</AppShell.Main>
-		</AppShell>
+			</main>
+		</div>
 	);
 };

@@ -5,6 +5,51 @@ body {
 	overflow-x: hidden;
 }
 
+body {
+	--header-height: 60px;
+	--nav-width: 240px;
+
+	--spacing: var(--mantine-spacing-sm);
+
+	--border: 1px solid var(--mantine-color-default-border);
+}
+
+.root {
+	display: grid;
+	grid-template-rows: var(--header-height) 1fr;
+}
+
+.header {
+	height: var(--header-height);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	gap: calc(var(--mantine-spacing-md) / 2);
+
+	padding: calc(var(--spacing) / 2) var(--spacing);
+
+	border-bottom: var(--border);
+}
+
+.nav,
+.main {
+	height: calc(100dvh - var(--header-height));
+	overflow-y: auto;
+	padding: var(--spacing);
+}
+
+.nav {
+	width: var(--nav-width);
+
+	border-right: var(--border);
+}
+
+.main {
+	padding-inline: calc(var(--spacing) * 2);
+}
+
 svg {
 	width: 1rem;
 	height: 1rem;

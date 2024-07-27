@@ -5,7 +5,7 @@ import { EditableButton } from "../EditableButton/EditableButton";
 import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
 import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
-import { ShortText } from "../questions/ShortText/ShortText";
+import { ShortTextEdit } from "../questions/ShortText/editable/ShortTextEdit";
 
 interface QuestionEditProps {
 	order: number;
@@ -82,8 +82,7 @@ function QuestionComponent({ question }: Pick<QuestionEditProps, "question">) {
 
 		case QuestionTypes.ShortText:
 			return (
-				<ShortText
-					editMode
+				<ShortTextEdit
 					questionId={question.id}
 					placeholder={question.textPlaceholder}
 				/>

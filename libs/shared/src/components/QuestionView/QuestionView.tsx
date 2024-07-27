@@ -65,7 +65,6 @@ function QuestionComponent({
 		case QuestionTypes.ShortText:
 			return (
 				<ShortText
-					editMode={false}
 					questionId={question.id}
 					placeholder={question.textPlaceholder}
 				/>

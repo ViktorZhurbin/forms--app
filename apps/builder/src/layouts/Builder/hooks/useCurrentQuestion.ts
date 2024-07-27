@@ -13,7 +13,7 @@ export const useCurrentQuestion = () => {
 		) ?? null;
 
 	const question = index !== null && form?.draftQuestions[index];
-	const order = index && index + 1;
+	const order = index === null ? 1 : index + 1;
 
 	return { question, order };
 };

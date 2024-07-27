@@ -1,5 +1,5 @@
 import { TextInput } from "@mantine/core";
-import type { ChangeEventHandler } from "react";
+import type { FocusEventHandler } from "react";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
 import styles from "./ShortText.module.css";
@@ -19,7 +19,7 @@ export const ShortText = ({
 }: ShortTextProps) => {
 	const { updateQuestion } = useUpdateQuestion();
 
-	const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+	const handleEdit: FocusEventHandler<HTMLInputElement> = (event) => {
 		if (editMode) {
 			updateQuestion({
 				id: questionId,
@@ -32,9 +32,9 @@ export const ShortText = ({
 		<TextInput
 			w="100%"
 			placeholder={placeholder}
-			value={editMode ? placeholder : "TODO :)"}
+			defaultValue={editMode ? placeholder : ""}
 			onFocus={onFocus}
-			onChange={onChange}
+			onBlur={handleEdit}
 			classNames={{ input: editMode ? styles.editModeInput : "" }}
 		/>
 	);

@@ -10,7 +10,7 @@ type EditableTextareaProps = {
 	variant?: "h1" | "body";
 	readOnly?: boolean;
 	onFocus?: () => void;
-	onChange?: (value: string) => void;
+	onEdit?: (value: string) => void;
 };
 
 export const EditableTextarea = ({
@@ -18,7 +18,7 @@ export const EditableTextarea = ({
 	tooltip,
 	readOnly,
 	onFocus,
-	onChange,
+	onEdit,
 	placeholder,
 	initialValue = "",
 }: EditableTextareaProps) => {
@@ -38,7 +38,7 @@ export const EditableTextarea = ({
 				readOnly={readOnly}
 				tabIndex={readOnly ? -1 : 0}
 				variant="unstyled"
-				value={initialValue}
+				defaultValue={initialValue}
 				placeholder={placeholder}
 				classNames={{
 					input: clsx(
@@ -49,10 +49,10 @@ export const EditableTextarea = ({
 				}}
 				onFocus={onFocus}
 				onKeyDown={handleKeyDown}
-				onChange={(event) => {
+				onBlur={(event) => {
 					const newValue = event.currentTarget.value;
 
-					onChange?.(newValue);
+					onEdit?.(newValue);
 				}}
 			/>
 		</Tooltip>

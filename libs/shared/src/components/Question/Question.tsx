@@ -39,7 +39,7 @@ export const Question = ({
 
 	const { updateQuestion } = useUpdateQuestion();
 
-	const onChangeTitle = (title: string) => {
+	const onEditTitle = (title: string) => {
 		updateQuestion({
 			id: question.id,
 			payload: { title },
@@ -58,7 +58,7 @@ export const Question = ({
 						readOnly={!editMode}
 						placeholder="Your question here..."
 						initialValue={question.title || "..."}
-						onChange={onChangeTitle}
+						onEdit={onEditTitle}
 					/>
 				</div>
 				<div className={styles.bottomWrapper}>

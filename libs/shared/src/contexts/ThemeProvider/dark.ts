@@ -14,11 +14,11 @@ const mantineDefault = [
 
 const generateDarkColors = (h: number, s: number, l: number) => {
 	return [
-		`hsl(${h}, ${s}%, ${l + 65}%)`,
+		`hsl(${h}, ${s}%, ${l + 76}%)`,
 		`hsl(${h}, ${s}%, ${l + 58}%)`,
 		`hsl(${h}, ${s}%, ${l + 37}%)`,
 		`hsl(${h}, ${s}%, ${l + 27}%)`,
-		`hsl(${h}, ${s}%, ${l + 12}%)`,
+		`hsl(${h}, ${s}%, ${l + 15}%)`,
 		`hsl(${h}, ${s}%, ${l + 9}%)`,
 		`hsl(${h}, ${s}%, ${l + 4}%)`,
 		`hsl(${h}, ${s}%, ${l}%)`,

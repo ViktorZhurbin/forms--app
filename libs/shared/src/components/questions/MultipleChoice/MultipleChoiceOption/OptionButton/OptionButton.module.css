@@ -1,0 +1,29 @@
+.root {
+	position: relative;
+	padding: 2px var(--mantine-spacing-md);
+	transition: border-color 150ms ease;
+
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	gap: var(--mantine-spacing-xs);
+
+	&.isEditable {
+		cursor: text;
+	}
+
+	&:hover,
+	&:focus-within,
+	&.isDragged {
+		background-color: var(--mantine-color-default-hover);
+
+		@mixin dark {
+			background-color: var(--mantine-color-dark-6);
+		}
+	}
+
+	&[data-checked],
+	&:focus-within {
+		border-color: var(--mantine-primary-color-filled);
+	}
+}

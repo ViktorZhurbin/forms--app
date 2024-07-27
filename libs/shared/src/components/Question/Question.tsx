@@ -63,7 +63,11 @@ export const Question = ({
 				</div>
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						<QuestionComponent question={question} editMode={editMode} />
+						<QuestionComponent
+							question={question}
+							editMode={editMode}
+							goToNextStep={goToNextStep}
+						/>
 					</Stack>
 
 					<EditableButton
@@ -83,12 +87,24 @@ export const Question = ({
 function QuestionComponent({
 	question,
 	editMode,
-}: Pick<QuestionProps, "editMode" | "question">) {
+	goToNextStep,
+}: Pick<QuestionProps, "editMode" | "question" | "goToNextStep">) {
 	switch (question.type) {
 		case QuestionTypes.YesNo:
+			return (
+				<MultipleChoice
+					type="radio"
+					editMode={editMode}
+					questionId={question.id}
+					options={question.options}
+					onSelect={goToNextStep}
+				/>
+			);
+
 		case QuestionTypes.MultipleChoice:
 			return (
 				<MultipleChoice
+					type="checkbox"
 					editMode={editMode}
 					questionId={question.id}
 					options={question.options}

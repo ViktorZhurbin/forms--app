@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { SortableDndList } from "~/components/SortableDndList/SortableDndList";
 import type {
 	TQuestion,
@@ -8,19 +8,25 @@ import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion"
 import styles from "./MultipleChoice.module.css";
 import { MultipleChoiceOption } from "./MultipleChoiceOption/MultipleChoiceOption";
 
-type MultipleChoiceProps = {
+export type MultipleChoiceProps = {
+	type: "checkbox" | "radio";
 	questionId: TQuestion["id"];
 	editMode?: boolean;
 	options: TQuestionChoice["options"];
+	onSelect?: () => void;
 };
 
 type Option = MultipleChoiceProps["options"][number];
 
 export const MultipleChoice = ({
+	type,
 	questionId,
 	options,
 	editMode,
+	onSelect,
 }: MultipleChoiceProps) => {
+	const [values, setValues] = useState<string[]>([]);
+
 	const { updateQuestion } = useUpdateQuestion();
 
 	const renderChildren = useCallback(
@@ -37,23 +43,38 @@ export const MultipleChoice = ({
 					});
 				};
 
+				const onClick = () => {
+					setValues((prevValues) => {
+						if (prevValues.includes(text)) {
+							return prevValues.filter((value) => value !== text);
+						}
+
+						if (type === "radio") {
+							return [text];
+						}
+
+						return [...prevValues, text];
+					});
+
+					if (type === "radio") {
+						onSelect?.();
+					}
+				};
+
 				return (
 					<MultipleChoiceOption
 						key={id}
 						id={id}
+						type={type}
 						readOnly={!editMode}
-						buttonText={text}
-						classNames={{
-							textInput: styles.textInput,
-						}}
-						onChange={onChange}
-						onClick={() => {
-							console.log("click");
-						}}
+						text={text}
+						onEdit={onChange}
+						onClick={onClick}
+						isSelected={values.includes(text)}
 					/>
 				);
 			}),
-		[editMode, questionId, options, updateQuestion],
+		[editMode, questionId, options, updateQuestion, values, type, onSelect],
 	);
 
 	const onDragEnd = useCallback(
@@ -71,14 +92,13 @@ export const MultipleChoice = ({
 			<MultipleChoiceOption
 				readOnly
 				isDragged
+				type={type}
 				id={activeItem.id}
-				buttonText={activeItem.text}
-				classNames={{
-					textInput: styles.textInput,
-				}}
+				isSelected={values.includes(activeItem.text)}
+				text={activeItem.text}
 			/>
 		),
-		[],
+		[values, type],
 	);
 
 	return (

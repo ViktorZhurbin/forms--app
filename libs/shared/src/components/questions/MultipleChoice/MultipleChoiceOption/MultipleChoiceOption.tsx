@@ -1,47 +1,55 @@
-import { Textarea } from "@mantine/core";
 import { useDragSortable } from "~/components/SortableDndList/hooks/useDragSortable";
-import { clx } from "~/utils/classNames";
+import type { MultipleChoiceProps } from "../MultipleChoice";
 import styles from "./MultipleChoiceOption.module.css";
-import type { MultipleChoiceOptionProps } from "./types";
+import { OptionButton } from "./OptionButton/OptionButton";
+
+export type MultipleChoiceOptionProps = {
+	id: string;
+	type: MultipleChoiceProps["type"];
+	readOnly?: boolean;
+	isSelected: boolean;
+	isDragged?: boolean;
+	text: string;
+	onClick?: () => void;
+	onEdit?: (value: string) => void;
+};
 
 export const MultipleChoiceOption = ({
 	id,
+	type,
 	isDragged,
 	readOnly,
-	buttonText,
-	classNames,
+	isSelected,
+	text,
 	onClick,
-	onChange,
-	onFocus,
+	onEdit,
 }: MultipleChoiceOptionProps) => {
 	const { DragHandle, wrapperProps } = useDragSortable(id);
 
-	const handleClickButton = () => {
+	const handleSelect = () => {
 		if (readOnly) {
 			onClick?.();
 		}
 	};
 
-	return (
-		<div
-			{...wrapperProps}
-			className={clx(styles.wrapper, isDragged && styles.isDragged)}
-		>
-			{!readOnly && <DragHandle className={styles.dragHandle} />}
-			<Textarea
-				autosize
-				pointer={readOnly}
-				readOnly={readOnly}
-				value={buttonText}
-				classNames={{
-					input: clx(styles.textInput, classNames?.textInput),
-				}}
-				onFocus={onFocus}
-				onChange={(event) => {
-					onChange?.(event.currentTarget.value);
-				}}
-				onClick={handleClickButton}
-			/>
+	const option = (
+		<OptionButton
+			type={type}
+			isDragged={isDragged}
+			isSelected={isSelected}
+			text={text}
+			readOnly={readOnly}
+			onSelect={handleSelect}
+			onEdit={onEdit}
+		/>
+	);
+
+	return readOnly ? (
+		option
+	) : (
+		<div {...wrapperProps} className={styles.wrapper} tabIndex={-1}>
+			<DragHandle className={styles.dragHandle} />
+			{option}
 		</div>
 	);
 };

@@ -1,11 +1,7 @@
 .wrapper {
-	position: relative;
+	--hover-bg: var(--mantine-color-default-hover);
 
-	&.isDragged {
-		.textInput {
-			opacity: 0.6;
-		}
-	}
+	position: relative;
 }
 
 .dragHandle {
@@ -19,12 +15,4 @@
 	left: calc(var(--size) * -1);
 
 	touch-action: none;
-}
-
-.textInput {
-	padding-inline: calc(1.125rem * var(--mantine-scale));
-
-	&:hover {
-		background-color: var(--mantine-color-default-hover);
-	}
 }

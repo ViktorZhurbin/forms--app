@@ -1,5 +1,9 @@
 .editable {
-  padding: 4px 8px;
-  outline: none;
-  cursor: text;
+	outline: none;
+	cursor: text;
+	min-width: 1rem;
+
+	&::selection {
+		background-color: var(--mantine-color-gray-8);
+	}
 }

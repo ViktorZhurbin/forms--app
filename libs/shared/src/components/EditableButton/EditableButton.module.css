@@ -1,5 +1,10 @@
 .button {
-  &.editable {
-    cursor: default;
-  }
+	&.isEditable {
+		cursor: default;
+	}
+
+	&:has([data-is-editing="true"]) {
+		outline: 2px solid var(--mantine-primary-color-filled);
+		outline-offset: calc(0.125rem * var(--mantine-scale));
+	}
 }

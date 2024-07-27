@@ -8,10 +8,11 @@ import {
 import styles from "./EditableButton.module.css";
 
 interface EditableButtonProps extends ContentEditableProps, HTMLButtonProps {
+	isEditable?: boolean;
+	onEdit: (value: string) => void;
 	classNames?: {
 		button?: string;
 	};
-	onEdit: (value: string) => void;
 }
 
 export const EditableButton = ({
@@ -29,13 +30,11 @@ export const EditableButton = ({
 			onClick={onClick}
 			onKeyDown={onKeyDown}
 			tabIndex={isEditable ? -1 : 0}
-			className={clsx(
-				styles.button,
-				isEditable ? styles.editable : null,
-				classNames?.button,
-			)}
+			className={clsx(styles.button, classNames?.button, {
+				[styles.isEditable]: isEditable,
+			})}
 		>
-			<ContentEditable value={value} isEditable={isEditable} onEdit={onEdit} />
+			{isEditable ? <ContentEditable value={value} onEdit={onEdit} /> : value}
 		</Button>
 	);
 };

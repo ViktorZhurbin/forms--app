@@ -8,7 +8,15 @@ import type {
 	TQuestionShortText,
 } from "../../../../schema/questions";
 
-export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
+const makeChoiceQuestionOption = (
+	text = "",
+): TQuestionChoice["options"][number] => ({
+	text,
+	id: id(),
+	nanoId: makeSubId(),
+});
+
+const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 	const updateBase = {
 		type,
 		title: "",
@@ -23,8 +31,8 @@ export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 		case QuestionTypes.YesNo:
 			update = {
 				options: [
-					{ id: id(), nanoId: makeSubId(), text: "Yes" },
-					{ id: id(), nanoId: makeSubId(), text: "No" },
+					makeChoiceQuestionOption("Yes"),
+					makeChoiceQuestionOption("No"),
 				],
 			} as Pick<TQuestionChoice, "options">;
 
@@ -34,8 +42,8 @@ export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 		case QuestionTypes.MultipleChoiceSingle:
 			update = {
 				options: [
-					{ id: id(), nanoId: makeSubId(), text: "Option 1" },
-					{ id: id(), nanoId: makeSubId(), text: "Option 2" },
+					makeChoiceQuestionOption("Option 1"),
+					makeChoiceQuestionOption("Option 2"),
 				],
 			} as Pick<TQuestionChoice, "options">;
 
@@ -51,3 +59,5 @@ export const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 
 	return { ...updateBase, ...update } as TQuestion;
 };
+
+export { makeChoiceQuestionOption, getCreateQuestionPayload };

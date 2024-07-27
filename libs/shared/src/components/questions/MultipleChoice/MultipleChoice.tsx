@@ -30,19 +30,25 @@ export const MultipleChoice = ({
 	onSelect,
 }: MultipleChoiceProps) => {
 	const [values, setValues] = useState<string[]>([]);
+	const [tempNewOptionId, setTempNewOptionId] = useState<string | null>(null);
 
 	const { updateQuestion } = useUpdateQuestion();
 
 	const addOption = () => {
+		const newOption = makeChoiceQuestionOption(`Option ${options.length + 1}`);
+
 		updateQuestion({
 			id: questionId,
 			payload: {
-				options: [
-					...options,
-					makeChoiceQuestionOption(`Option ${options.length + 1}`),
-				],
+				options: options.concat(newOption),
 			},
 		});
+
+		setTempNewOptionId(newOption.id);
+	};
+
+	const clearTempNewOptionId = () => {
+		setTempNewOptionId(null);
 	};
 
 	const deleteOption = (id: Option["id"]) => {
@@ -91,16 +97,26 @@ export const MultipleChoice = ({
 				handleSelect();
 			};
 
+			const handleBlur = (value: string) => {
+				if (text !== value) {
+					handleEdit?.(value);
+				}
+
+				if (tempNewOptionId === id) {
+					clearTempNewOptionId?.();
+				}
+			};
+
 			return (
 				<MultipleChoiceOption
 					key={id}
 					id={id}
 					type={type}
-					isLast={index === options.length - 1}
 					readOnly={!editMode}
 					text={text}
+					isTempNewOptionId={tempNewOptionId === id}
 					placeholder={`Option ${index + 1}`}
-					onEdit={handleEdit}
+					onBlur={handleBlur}
 					onClick={handleClick}
 					onDelete={deleteOption}
 					isSelected={values.includes(text)}

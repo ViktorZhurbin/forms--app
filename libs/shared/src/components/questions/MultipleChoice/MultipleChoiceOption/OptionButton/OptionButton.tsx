@@ -6,7 +6,7 @@ import {
 	UnstyledButton,
 } from "@mantine/core";
 import clsx from "clsx";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { MultipleChoiceOptionProps } from "../MultipleChoiceOption";
 import styles from "./OptionButton.module.css";
 
@@ -18,11 +18,11 @@ export const OptionButton = ({
 	type,
 	readOnly,
 	placeholder,
-	// isLast,
+	isTempNewOptionId,
 	isDragged,
 	isSelected,
 	onClick,
-	onEdit,
+	onBlur,
 	onDelete,
 }: OptionButtonProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -33,6 +33,12 @@ export const OptionButton = ({
 
 		if (readOnly) return;
 	};
+
+	useEffect(() => {
+		if (isTempNewOptionId) {
+			inputRef.current?.select();
+		}
+	}, [isTempNewOptionId]);
 
 	return (
 		<UnstyledButton
@@ -56,13 +62,12 @@ export const OptionButton = ({
 				pointer={readOnly}
 				readOnly={readOnly}
 				onBlur={(event) => {
-					if (text !== event.currentTarget.value) {
-						onEdit?.(event.currentTarget.value);
-					}
+					onBlur?.(event.currentTarget.value);
 				}}
 			/>
 			<CloseButton
 				size="sm"
+				component="div"
 				onClick={() => onDelete?.(id)}
 				className={styles.deleteButton}
 			/>

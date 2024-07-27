@@ -4,7 +4,7 @@ import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion"
 import { EditableButton } from "../EditableButton/EditableButton";
 import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
-import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
+import { MultipleChoiceEdit } from "../questions/MultipleChoice/editable/MultipleChoiceEdit";
 import { ShortTextEdit } from "../questions/ShortText/editable/ShortTextEdit";
 
 interface QuestionEditProps {
@@ -71,12 +71,10 @@ function QuestionComponent({ question }: Pick<QuestionEditProps, "question">) {
 		case QuestionTypes.Checkboxes:
 		case QuestionTypes.MultipleChoice:
 			return (
-				<MultipleChoice
-					editMode
+				<MultipleChoiceEdit
 					questionId={question.id}
+					questionType={question.type}
 					options={question.options}
-					isFixedQuestions={question.type === QuestionTypes.YesNo}
-					canChooseMany={question.type === QuestionTypes.Checkboxes}
 				/>
 			);
 

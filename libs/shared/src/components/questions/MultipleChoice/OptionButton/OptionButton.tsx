@@ -1,24 +1,29 @@
-import {
-	Checkbox,
-	CloseButton,
-	Radio,
-	Textarea,
-	UnstyledButton,
-} from "@mantine/core";
+import { CloseButton, Textarea, UnstyledButton } from "@mantine/core";
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
-import type { MultipleChoiceOptionProps } from "../MultipleChoiceOption";
 import styles from "./OptionButton.module.css";
 
-type OptionButtonProps = MultipleChoiceOptionProps;
+export type OptionButtonProps = {
+	id: string;
+	text: string;
+	isDragged?: boolean;
+	isEditable?: boolean;
+	isSelected?: boolean;
+	isTempNewOptionId?: boolean;
+	placeholder?: string;
+	onBlur?: (value: string) => void;
+	onDelete?: (id: string) => void;
+	onClick?: () => void;
+	Indicator: React.FC<{ checked?: boolean }>;
+};
 
 export const OptionButton = ({
 	id,
 	text,
-	readOnly,
+	isEditable,
 	placeholder,
 	isTempNewOptionId,
-	canChooseMany,
+	Indicator,
 	isDragged,
 	isSelected,
 	onClick,
@@ -26,12 +31,9 @@ export const OptionButton = ({
 	onDelete,
 }: OptionButtonProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
-	const Component = canChooseMany ? Checkbox : Radio;
 
 	const handleClick = () => {
 		onClick?.();
-
-		if (readOnly) return;
 	};
 
 	useEffect(() => {
@@ -44,28 +46,28 @@ export const OptionButton = ({
 		<UnstyledButton
 			variant="default"
 			data-checked={isSelected}
-			tabIndex={readOnly ? 0 : -1}
+			tabIndex={isEditable ? -1 : 0}
 			onClick={handleClick}
 			className={clsx(styles.root, {
-				[styles.isEditable]: !readOnly,
+				[styles.isEditable]: isEditable,
 				[styles.isDragged]: isDragged,
 			})}
 		>
-			<Component.Indicator checked={isSelected} />
+			<Indicator checked={isSelected} />
 			<Textarea
 				autosize
 				defaultValue={text}
 				ref={inputRef}
-				tabIndex={readOnly ? -1 : 0}
+				tabIndex={isEditable ? 0 : -1}
 				placeholder={placeholder}
 				variant="unstyled"
-				pointer={readOnly}
-				readOnly={readOnly}
+				pointer={!isEditable}
+				readOnly={!isEditable}
 				onBlur={(event) => {
 					onBlur?.(event.currentTarget.value);
 				}}
 			/>
-			{!readOnly && (
+			{isEditable && (
 				<CloseButton
 					size="sm"
 					component="div"

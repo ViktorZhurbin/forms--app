@@ -29,53 +29,49 @@ export const MultipleChoice = ({
 
 	const { updateQuestion } = useUpdateQuestion();
 
-	const renderChildren = useCallback(
-		() =>
-			options.map(({ id, text }, _, options) => {
-				const onChange = (text: string) => {
-					const newOptions = options.map((option) =>
-						option.id === id ? { ...option, text } : option,
-					);
+	const Options = () => {
+		const isRadio = type === "radio";
 
-					updateQuestion({
-						id: questionId,
-						payload: { options: newOptions },
-					});
-				};
-
-				const onClick = () => {
-					setValues((prevValues) => {
-						if (prevValues.includes(text)) {
-							return prevValues.filter((value) => value !== text);
-						}
-
-						if (type === "radio") {
-							return [text];
-						}
-
-						return [...prevValues, text];
-					});
-
-					if (type === "radio") {
-						onSelect?.();
-					}
-				};
-
-				return (
-					<MultipleChoiceOption
-						key={id}
-						id={id}
-						type={type}
-						readOnly={!editMode}
-						text={text}
-						onEdit={onChange}
-						onClick={onClick}
-						isSelected={values.includes(text)}
-					/>
+		return options.map(({ id, text }, _, options) => {
+			const onChange = (text: string) => {
+				const newOptions = options.map((option) =>
+					option.id === id ? { ...option, text } : option,
 				);
-			}),
-		[editMode, questionId, options, updateQuestion, values, type, onSelect],
-	);
+
+				updateQuestion({
+					id: questionId,
+					payload: { options: newOptions },
+				});
+			};
+
+			const onClick = () => {
+				setValues((prevValues) => {
+					if (prevValues.includes(text)) {
+						return prevValues.filter((value) => value !== text);
+					}
+
+					return isRadio ? [text] : [...prevValues, text];
+				});
+
+				if (isRadio) {
+					onSelect?.();
+				}
+			};
+
+			return (
+				<MultipleChoiceOption
+					key={id}
+					id={id}
+					type={type}
+					readOnly={!editMode}
+					text={text}
+					onEdit={onChange}
+					onClick={onClick}
+					isSelected={values.includes(text)}
+				/>
+			);
+		});
+	};
 
 	const onDragEnd = useCallback(
 		(newOptions: Option[]): void => {
@@ -87,18 +83,15 @@ export const MultipleChoice = ({
 		[questionId, updateQuestion],
 	);
 
-	const renderDragOverlay = useCallback(
-		(activeItem: Option) => (
-			<MultipleChoiceOption
-				readOnly
-				isDragged
-				type={type}
-				id={activeItem.id}
-				isSelected={values.includes(activeItem.text)}
-				text={activeItem.text}
-			/>
-		),
-		[values, type],
+	const DragOverlayItem = ({ activeItem }: { activeItem: Option }) => (
+		<MultipleChoiceOption
+			readOnly
+			isDragged
+			type={type}
+			id={activeItem.id}
+			isSelected={values.includes(activeItem.text)}
+			text={activeItem.text}
+		/>
 	);
 
 	return (
@@ -106,8 +99,8 @@ export const MultipleChoice = ({
 			<SortableDndList
 				list={options}
 				onDragEnd={onDragEnd}
-				renderChildren={renderChildren}
-				renderDragOverlay={renderDragOverlay}
+				Options={Options}
+				DragOverlayItem={DragOverlayItem}
 			/>
 		</div>
 	);

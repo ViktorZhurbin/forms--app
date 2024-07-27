@@ -28,21 +28,18 @@ export const NavbarQuestionsList = ({
 
 	const { deleteQuestion } = useDeleteQuestion();
 
-	const renderDragOverlay = useCallback(
-		(activeItem: Question) => (
-			<NavbarQuestion
-				isDragged
-				id={activeItem.id}
-				type={activeItem.type}
-				group={activeItem.group}
-				title={activeItem.title}
-				nanoId={activeItem.nanoId}
-				isSelected={
-					Boolean(selectedBlockId) && activeItem.nanoId === selectedBlockId
-				}
-			/>
-		),
-		[selectedBlockId],
+	const DragOverlayItem = ({ activeItem }: { activeItem: Question }) => (
+		<NavbarQuestion
+			isDragged
+			id={activeItem.id}
+			type={activeItem.type}
+			group={activeItem.group}
+			title={activeItem.title}
+			nanoId={activeItem.nanoId}
+			isSelected={
+				Boolean(selectedBlockId) && activeItem.nanoId === selectedBlockId
+			}
+		/>
 	);
 
 	const onDragEnd = useCallback(
@@ -55,43 +52,40 @@ export const NavbarQuestionsList = ({
 		[formNanoId],
 	);
 
-	const renderChildren = useCallback(
-		(activeItemId?: string) =>
-			questions.map(({ id, nanoId, type, group, title }, index, questions) => {
-				const prevQuestion = index > 0 ? questions[index - 1] : null;
-				const nextQuestion =
-					index < questions.length - 1 ? questions[index + 1] : null;
+	const Options = ({ activeItemId }: { activeItemId?: string }) =>
+		questions.map(({ id, nanoId, type, group, title }, index, questions) => {
+			const prevQuestion = index > 0 ? questions[index - 1] : null;
+			const nextQuestion =
+				index < questions.length - 1 ? questions[index + 1] : null;
 
-				const newSelectedBlockId = (prevQuestion ?? nextQuestion)?.nanoId;
+			const newSelectedBlockId = (prevQuestion ?? nextQuestion)?.nanoId;
 
-				const handleDelete = async () => {
-					await deleteQuestion(id);
+			const handleDelete = async () => {
+				await deleteQuestion(id);
 
-					if (newSelectedBlockId) {
-						navigateToQuestion({ nanoId: newSelectedBlockId });
-					} else {
-						removeSelectedBlockId();
-					}
-				};
+				if (newSelectedBlockId) {
+					navigateToQuestion({ nanoId: newSelectedBlockId });
+				} else {
+					removeSelectedBlockId();
+				}
+			};
 
-				return (
-					<NavbarQuestion
-						id={id}
-						key={id}
-						type={type}
-						group={group}
-						title={title}
-						nanoId={nanoId}
-						isGhost={activeItemId === id}
-						order={index + 1}
-						onDelete={handleDelete}
-						isSelected={Boolean(selectedBlockId) && nanoId === selectedBlockId}
-					/>
-					// </SkeletonWrapper>
-				);
-			}),
-		[questions, deleteQuestion, selectedBlockId],
-	);
+			return (
+				<NavbarQuestion
+					id={id}
+					key={id}
+					type={type}
+					group={group}
+					title={title}
+					nanoId={nanoId}
+					isGhost={activeItemId === id}
+					order={index + 1}
+					onDelete={handleDelete}
+					isSelected={Boolean(selectedBlockId) && nanoId === selectedBlockId}
+				/>
+				// </SkeletonWrapper>
+			);
+		});
 
 	return (
 		<ScrollArea scrollbars="y">
@@ -99,8 +93,8 @@ export const NavbarQuestionsList = ({
 				<SortableDndList
 					list={questions}
 					onDragEnd={onDragEnd}
-					renderChildren={renderChildren}
-					renderDragOverlay={renderDragOverlay}
+					Options={Options}
+					DragOverlayItem={DragOverlayItem}
 				/>
 			</div>
 		</ScrollArea>

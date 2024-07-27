@@ -19,17 +19,19 @@ import {
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
+type SortableDndListProps<T extends { id: string }> = {
+	list: T[];
+	onDragEnd: (newList: T[]) => void;
+	Options: React.FC<{ activeItemId?: string }>;
+	DragOverlayItem: React.FC<{ activeItem: T }>;
+};
+
 export const SortableDndList = <T extends { id: string }>({
 	list,
 	onDragEnd,
-	renderChildren,
-	renderDragOverlay,
-}: {
-	list: T[];
-	onDragEnd: (newList: T[]) => void;
-	renderChildren: (activeId?: string) => React.ReactElement[];
-	renderDragOverlay: (activeItem: T) => React.ReactElement;
-}) => {
+	Options,
+	DragOverlayItem,
+}: SortableDndListProps<T>) => {
 	const [activeItem, setActiveItem] = useState<T | null>(null);
 	const [items, setItems] = useState(list.map((question) => question.id));
 
@@ -81,11 +83,11 @@ export const SortableDndList = <T extends { id: string }>({
 			]}
 		>
 			<SortableContext items={items} strategy={verticalListSortingStrategy}>
-				{renderChildren(activeItem?.id)}
+				<Options activeItemId={activeItem?.id} />
 
 				{createPortal(
 					<DragOverlay>
-						{activeItem ? renderDragOverlay(activeItem) : null}
+						{activeItem ? <DragOverlayItem activeItem={activeItem} /> : null}
 					</DragOverlay>,
 					document.body,
 				)}

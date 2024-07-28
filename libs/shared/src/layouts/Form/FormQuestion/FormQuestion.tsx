@@ -1,5 +1,3 @@
-import { useIntersection } from "@mantine/hooks";
-import { type RefObject, useEffect } from "react";
 import { QuestionView } from "~/components/QuestionView/QuestionView";
 import type { TQuestion } from "~/models/forms/schema/questions";
 import styles from "./FormQuestion.module.css";
@@ -7,35 +5,22 @@ import styles from "./FormQuestion.module.css";
 export type FormQuestionProps = {
 	index: number;
 	isLast: boolean;
+	position?: string;
 	question: TQuestion;
-	containerRef: RefObject<HTMLDivElement>;
 	onSubmit: () => void;
 	goToNextStep: () => void;
-	setCurrentStep: (step: number) => void;
 };
 
 export const FormQuestion = ({
 	index,
-	containerRef,
+	position,
 	isLast,
 	question,
 	onSubmit,
 	goToNextStep,
-	setCurrentStep,
 }: FormQuestionProps) => {
-	const { ref, entry } = useIntersection({
-		root: containerRef.current,
-		threshold: 1,
-	});
-
-	useEffect(() => {
-		if (entry?.isIntersecting) {
-			setCurrentStep(index);
-		}
-	}, [entry?.isIntersecting, index, setCurrentStep]);
-
 	return (
-		<div ref={ref} className={styles.root} data-step={index}>
+		<div className={styles.root} data-position={position}>
 			<QuestionView
 				order={index + 1}
 				isLast={isLast}

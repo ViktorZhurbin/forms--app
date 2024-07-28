@@ -1,22 +1,29 @@
 .root {
+	position: absolute;
 	width: 100%;
-	min-height: 100%;
+	height: 100%;
+	transform: translateY(0);
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
-	scroll-snap-align: center;
+	/* scroll-snap-align: center;
 	scroll-snap-stop: always;
-	scroll-behavior: smooth;
+	scroll-behavior: smooth; */
+
+	transition: transform 600ms ease 0s, opacity 300ms ease 0s;
 
 	@media (prefers-reduced-motion: reduce) {
-		scroll-behavior: auto;
+		/* scroll-behavior: auto; */
+		transition: opacity 300ms ease 0s;
 	}
-
-	/* transition: transform 600ms ease 0s, opacity 300ms ease 0s; */
 }
 
-/* .root[data-position="hidden"] {
-	display: none;
-} */
+.root[data-position="previous"] {
+	transform: translateY(-100vh);
+}
+
+.root[data-position="next"] {
+	transform: translateY(100vh);
+}

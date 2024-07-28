@@ -5,14 +5,16 @@
 	flex-direction: column;
 
 	height: 100dvh;
-	overflow: auto;
+	overflow: hidden;
 
-	scroll-behavior: smooth;
+	touch-action: none;
+
+	/* scroll-behavior: smooth;
 	scroll-snap-type: y mandatory;
 
 	@media (prefers-reduced-motion: reduce) {
 		scroll-behavior: auto;
-	}
+	} */
 
 	scrollbar-width: none;
 	-ms-overflow-style: none;

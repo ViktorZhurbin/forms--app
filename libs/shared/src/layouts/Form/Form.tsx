@@ -1,12 +1,13 @@
 import { Progress } from "@mantine/core";
-import { useReducedMotion } from "@mantine/hooks";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
+import { useFormGestures } from "~/hooks/useFormGestures";
 import { useCurrentFormQuery } from "~/models/forms/read";
 import { FormNotFound } from "../FormNotFound/FormNotFound";
 import styles from "./Form.module.css";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import { FormQuestion } from "./FormQuestion/FormQuestion";
+import { getPosition } from "./getPosition";
 
 type FormProps = {
 	isPreview?: boolean;
@@ -16,8 +17,23 @@ type FormProps = {
 export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const { isLoading, error, data } = useCurrentFormQuery();
-	const scrollContainerRef = useRef<HTMLDivElement>(null);
-	const reducedMotion = useReducedMotion();
+
+	const goToPreviousStep = () => {
+		if (currentStep === 0) return;
+
+		setCurrentStep(currentStep - 1);
+	};
+
+	const goToNextStep = () => {
+		if (currentStep === questions.length - 1) return;
+
+		setCurrentStep(currentStep + 1);
+	};
+
+	const bind = useFormGestures({
+		goToNextStep,
+		goToPreviousStep,
+	});
 
 	if (error || isLoading) {
 		return <FetchState isLoading={isLoading} error={error} />;
@@ -34,35 +50,12 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const isFirstStep = currentStep === 0;
 	const isLastStep = currentStep === questions.length - 1;
 
-	const scrollToStep = (step: number) => {
-		const container = scrollContainerRef.current;
-
-		// container may still be rendering
-		// setTimeout to wait for when it's ready to scroll
-		setTimeout(() => {
-			const target = container?.querySelector(`[data-step='${step}']`);
-
-			target?.scrollIntoView({
-				block: "center",
-				behavior: reducedMotion ? "instant" : "smooth",
-			});
-		});
-	};
-
-	const goToPreviousStep = () => {
-		scrollToStep(currentStep - 1);
-	};
-
-	const goToNextStep = () => {
-		scrollToStep(currentStep + 1);
-	};
-
 	const handleSubmit = () => {
 		console.log("submit");
 	};
 
 	return (
-		<div className={styles.container} ref={scrollContainerRef}>
+		<div {...bind()} className={styles.container}>
 			<Progress
 				size="sm"
 				radius={0}
@@ -78,16 +71,17 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 
 				if (isHidden) return [];
 
+				const position = getPosition(currentStep, index);
+
 				return (
 					<FormQuestion
 						key={question.id}
 						index={index}
+						position={position}
 						isLast={index === questions.length - 1}
-						containerRef={scrollContainerRef}
 						question={question}
 						onSubmit={handleSubmit}
 						goToNextStep={goToNextStep}
-						setCurrentStep={setCurrentStep}
 					/>
 				);
 			})}

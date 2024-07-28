@@ -10,9 +10,13 @@
 	scroll-snap-stop: always;
 	scroll-behavior: smooth;
 
-	transition: transform 600ms ease 0s, opacity 300ms ease 0s;
+	@media (prefers-reduced-motion: reduce) {
+		scroll-behavior: auto;
+	}
+
+	/* transition: transform 600ms ease 0s, opacity 300ms ease 0s; */
 }
 
-.root[data-position="hidden"] {
+/* .root[data-position="hidden"] {
 	display: none;
-}
+} */

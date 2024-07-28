@@ -1,4 +1,5 @@
 import { Progress } from "@mantine/core";
+import { useReducedMotion } from "@mantine/hooks";
 import { useRef, useState } from "react";
 import { FetchState } from "~/components/FetchState/FetchState";
 import { useCurrentFormQuery } from "~/models/forms/read";
@@ -15,8 +16,8 @@ type FormProps = {
 export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const { isLoading, error, data } = useCurrentFormQuery();
-
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
+	const reducedMotion = useReducedMotion();
 
 	if (error || isLoading) {
 		return <FetchState isLoading={isLoading} error={error} />;
@@ -41,7 +42,10 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 		setTimeout(() => {
 			const target = container?.querySelector(`[data-step='${step}']`);
 
-			target?.scrollIntoView({ block: "center", behavior: "smooth" });
+			target?.scrollIntoView({
+				block: "center",
+				behavior: reducedMotion ? "instant" : "smooth",
+			});
 		});
 	};
 

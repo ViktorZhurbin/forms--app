@@ -21,7 +21,7 @@ export const MultipleChoice = ({
 	onSelect,
 	questionType,
 }: MultipleChoiceProps) => {
-	const [values, setValues] = useState<string[]>([]);
+	const [selectedIds, setSelectedIds] = useState<string[]>([]);
 	const canChooseMany = questionType === QuestionTypes.Checkboxes;
 	const Indicator = canChooseMany ? Checkbox.Indicator : Radio.Indicator;
 
@@ -29,16 +29,18 @@ export const MultipleChoice = ({
 		<div className={styles.wrapper}>
 			{options.map(({ id, text }, index) => {
 				const handleSelect = () => {
-					setValues((prevValues) => {
-						if (prevValues.includes(text)) {
-							return prevValues.filter((value) => value !== text);
+					setSelectedIds((prevIds) => {
+						if (prevIds.includes(id)) {
+							return prevIds.filter((value) => value !== id);
 						}
 
-						return canChooseMany ? [...prevValues, text] : [text];
+						return canChooseMany ? prevIds.concat(id) : [id];
 					});
 
 					if (!canChooseMany) {
-						onSelect?.();
+						setTimeout(() => {
+							onSelect();
+						}, 100);
 					}
 				};
 
@@ -50,7 +52,7 @@ export const MultipleChoice = ({
 						Indicator={Indicator}
 						placeholder={`Option ${index + 1}`}
 						onClick={handleSelect}
-						isSelected={values.includes(text)}
+						isSelected={selectedIds.includes(id)}
 					/>
 				);
 			})}

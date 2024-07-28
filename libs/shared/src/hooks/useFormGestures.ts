@@ -13,18 +13,14 @@ export const useFormGestures = ({
 }: UseFormGesturesParams) => {
 	const bind = useGesture(
 		{
-			onDragEnd: ({ swipe: [swipeX, swipeY], direction: [dx, dy] }) => {
-				console.log({ swipeX, swipeY, dx, dy });
-
+			onDragEnd: ({ direction: [, dy] }) => {
 				if (dy > 0) {
 					goToPreviousStep();
 				} else if (dy < 0) {
 					goToNextStep();
 				}
 			},
-			onWheelStart: ({ movement, axis, direction: [dx, dy] }) => {
-				console.log({ axis, movement, dx, dy });
-
+			onWheelStart: ({ direction: [, dy] }) => {
 				if (dy > 0) {
 					goToNextStep();
 				} else if (dy < 0) {
@@ -32,7 +28,11 @@ export const useFormGestures = ({
 				}
 			},
 		},
-		{ wheel: { axis: "y" }, drag: { axis: "y" } },
+
+		{
+			wheel: { axis: "y" },
+			drag: { axis: "y" },
+		},
 	);
 
 	return bind;

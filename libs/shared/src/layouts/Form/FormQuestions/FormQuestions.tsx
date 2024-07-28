@@ -24,7 +24,11 @@ export const FormQuestions = ({
 		const position = getPosition(currentStep, index);
 
 		return (
-			<div key={question.id} className={styles.root} data-position={position}>
+			<div
+				key={question.id}
+				className={styles.questionWrapper}
+				data-position={position}
+			>
 				<QuestionView
 					order={index + 1}
 					isLast={index === questions.length - 1}

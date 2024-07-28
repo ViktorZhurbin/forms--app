@@ -6,8 +6,7 @@ import { useCurrentFormQuery } from "~/models/forms/read";
 import { FormNotFound } from "../FormNotFound/FormNotFound";
 import styles from "./Form.module.css";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
-import { FormQuestion } from "./FormQuestion/FormQuestion";
-import { getPosition } from "./getPosition";
+import { FormQuestions } from "./FormQuestions/FormQuestions";
 
 type FormProps = {
 	isPreview?: boolean;
@@ -66,25 +65,12 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
 
-			{questions.flatMap((question, index) => {
-				const isHidden = Math.abs(index - currentStep) > 1;
-
-				if (isHidden) return [];
-
-				const position = getPosition(currentStep, index);
-
-				return (
-					<FormQuestion
-						key={question.id}
-						index={index}
-						position={position}
-						isLast={index === questions.length - 1}
-						question={question}
-						onSubmit={handleSubmit}
-						goToNextStep={goToNextStep}
-					/>
-				);
-			})}
+			<FormQuestions
+				currentStep={currentStep}
+				questions={questions}
+				onSubmit={handleSubmit}
+				goToNextStep={goToNextStep}
+			/>
 
 			<FormNavButtons
 				className={styles.navigation}

@@ -20,6 +20,10 @@
 	},
 	"devDependencies": {
 		"@rsbuild/core": "^1.0.1-beta.6",
+		"@rsbuild/plugin-react": "^1.0.1-beta.6",
+		"@rsbuild/plugin-source-build": "^1.0.1-beta.6",
+		"@rsbuild/plugin-type-check": "^1.0.1-beta.6",
+		"@rsdoctor/rspack-plugin": "^0.3.10",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"postcss": "^8.4.40",

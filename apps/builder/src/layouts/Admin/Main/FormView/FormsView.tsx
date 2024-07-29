@@ -1,7 +1,7 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { Routes } from "@/shared/constants/routes";
-import type { TForm } from "@/shared/models/forms/schema/forms";
-import { deleteForm } from "@/shared/models/forms/write";
+import type { TForm } from "@/shared/models/form/schema/form";
+import { deleteForm } from "@/shared/models/form/write";
 import { useCurrentWorkspaceWithFormsQuery } from "@/shared/models/workspace/read";
 import { pluralize } from "@/shared/utils/grammar";
 import { ActionIcon, Group, Stack } from "@mantine/core";

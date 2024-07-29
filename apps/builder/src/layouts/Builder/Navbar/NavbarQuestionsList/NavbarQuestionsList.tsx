@@ -2,9 +2,9 @@ import { SortableDndList } from "@/shared/components/SortableDndList/SortableDnd
 import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
-import type { TForm } from "@/shared/models/forms/schema/forms";
-import { updateForm } from "@/shared/models/forms/write";
-import { useDeleteQuestion } from "@/shared/models/forms/write/hooks/useDeleteQuestion";
+import type { TForm } from "@/shared/models/form/schema/form";
+import { updateForm } from "@/shared/models/form/write";
+import { useDeleteQuestion } from "@/shared/models/form/write/hooks/useDeleteQuestion";
 import { ScrollArea } from "@mantine/core";
 import { useCallback } from "react";
 import { navigateToQuestion } from "../../utils/navigateToQuestion";

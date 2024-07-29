@@ -1,4 +1,4 @@
-import { useCurrentForm } from "@/shared/models/forms/read";
+import { useCurrentForm } from "@/shared/models/form/read";
 import { IconExternalLink } from "@tabler/icons-react";
 import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
 import { useFormUrl } from "../../hooks/useFormUrl";

@@ -2,12 +2,9 @@ import { Anchor, Checkbox, Radio } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { SortableDndList } from "~/components/SortableDndList/SortableDndList";
 import { QuestionTypes } from "~/constants/questions";
-import type {
-	TQuestion,
-	TQuestionChoice,
-} from "~/models/forms/schema/questions";
-import { makeChoiceQuestionOption } from "~/models/forms/write/hooks/useCreateQuestion";
-import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
+import type { TQuestion, TQuestionChoice } from "~/models/form/schema/question";
+import { makeChoiceQuestionOption } from "~/models/form/write/hooks/useCreateQuestion";
+import { useUpdateQuestion } from "~/models/form/write/hooks/useUpdateQuestion";
 import styles from "./MultipleChoiceEdit.module.css";
 import { OptionButtonSortable } from "./OptionButtonSortable/OptionButtonSortable";
 

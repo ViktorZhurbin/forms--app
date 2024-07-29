@@ -1,6 +1,6 @@
 import { Button, Title } from "@mantine/core";
 import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion } from "~/models/forms/schema/questions";
+import type { TQuestion } from "~/models/form/schema/question";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
 import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
 import { ShortText } from "../questions/ShortText/ShortText";

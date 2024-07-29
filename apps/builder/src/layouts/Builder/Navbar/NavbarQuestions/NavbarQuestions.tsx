@@ -1,5 +1,5 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { useCurrentFormQuery } from "@/shared/models/forms/read";
+import { useCurrentFormQuery } from "@/shared/models/form/read";
 import { Group, Stack, Text } from "@mantine/core";
 import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";

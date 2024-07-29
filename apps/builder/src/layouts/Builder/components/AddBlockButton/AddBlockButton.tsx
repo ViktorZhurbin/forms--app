@@ -1,5 +1,5 @@
 import type { QuestionTypes } from "@/shared/constants/questions";
-import { useCreateQuestion } from "@/shared/models/forms/write/hooks/useCreateQuestion";
+import { useCreateQuestion } from "@/shared/models/form/write/hooks/useCreateQuestion";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";

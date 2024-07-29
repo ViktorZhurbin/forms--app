@@ -1,5 +1,5 @@
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
-import { useCurrentFormQuery } from "@/shared/models/forms/read";
+import { useCurrentFormQuery } from "@/shared/models/form/read";
 
 export const useCurrentQuestion = () => {
 	const { data } = useCurrentFormQuery();

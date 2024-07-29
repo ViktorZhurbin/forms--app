@@ -1,6 +1,6 @@
 import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
-import { useCurrentForm } from "@/shared/models/forms/read";
-import { updateForm } from "@/shared/models/forms/write";
+import { useCurrentForm } from "@/shared/models/form/read";
+import { updateForm } from "@/shared/models/form/write";
 import { TextInput, Tooltip } from "@mantine/core";
 
 export const EditableFormTitle = () => {

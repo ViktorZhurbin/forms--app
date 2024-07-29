@@ -1,4 +1,4 @@
-import type { TQuestion } from "./questions";
+import type { TQuestion } from "./question";
 
 type TForm = {
 	id: string;

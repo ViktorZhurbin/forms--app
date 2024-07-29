@@ -1,5 +1,5 @@
 import { TextInput } from "@mantine/core";
-import type { TQuestion } from "~/models/forms/schema/questions";
+import type { TQuestion } from "~/models/form/schema/question";
 
 type ShortTextProps = {
 	placeholder: string;

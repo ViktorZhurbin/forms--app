@@ -1,4 +1,4 @@
-import { useCurrentForm } from "@/shared/models/forms/read";
+import { useCurrentForm } from "@/shared/models/form/read";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
 import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import type { QuestionTypes } from "~/constants/questions";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
-import { useCurrentForm } from "~/models/forms/read";
+import { useCurrentForm } from "~/models/form/read";
 import { updateForm } from "../../write";
 import { getCreateQuestionPayload } from "./helpers/getCreateQuestionPayload";
 

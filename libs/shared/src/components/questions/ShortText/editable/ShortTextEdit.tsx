@@ -1,7 +1,7 @@
 import { TextInput } from "@mantine/core";
 import type { FocusEventHandler } from "react";
-import type { TQuestion } from "~/models/forms/schema/questions";
-import { useUpdateQuestion } from "~/models/forms/write/hooks/useUpdateQuestion";
+import type { TQuestion } from "~/models/form/schema/question";
+import { useUpdateQuestion } from "~/models/form/write/hooks/useUpdateQuestion";
 import styles from "./ShortTextEdit.module.css";
 
 type ShortTextEditProps = {

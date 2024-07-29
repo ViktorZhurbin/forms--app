@@ -1,10 +1,7 @@
 import { Checkbox, Radio } from "@mantine/core";
 import { useState } from "react";
 import { QuestionTypes } from "~/constants/questions";
-import type {
-	TQuestion,
-	TQuestionChoice,
-} from "~/models/forms/schema/questions";
+import type { TQuestion, TQuestionChoice } from "~/models/form/schema/question";
 import styles from "./MultipleChoice.module.css";
 import { OptionButton } from "./OptionButton/OptionButton";
 

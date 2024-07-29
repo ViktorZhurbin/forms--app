@@ -1,6 +1,6 @@
 import { useLocalDemoNanoId } from "@/shared/hooks/useLocalDemoNanoId";
-import { useCurrentFormQuery } from "@/shared/models/forms/read";
-import { createForm } from "@/shared/models/forms/write";
+import { useCurrentFormQuery } from "@/shared/models/form/read";
+import { createForm } from "@/shared/models/form/write";
 import { useEffect } from "react";
 
 export const useDemoForm = () => {

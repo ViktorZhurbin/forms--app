@@ -1,7 +1,7 @@
 import { Routes } from "@/shared/constants/routes";
 import { useLocalDemoNanoId } from "@/shared/hooks/useLocalDemoNanoId";
-import { useCurrentForm } from "@/shared/models/forms/read";
-import { linkFormToWorkspace } from "@/shared/models/forms/write";
+import { useCurrentForm } from "@/shared/models/form/read";
+import { linkFormToWorkspace } from "@/shared/models/form/write";
 import { useUserWithWorkspacesQuery } from "@/shared/models/user/read";
 import { createDbUser } from "@/shared/models/user/write";
 import { createWorkspace } from "@/shared/models/workspace/write";

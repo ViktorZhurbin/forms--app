@@ -1,5 +1,5 @@
 import { FetchState } from "~/components/FetchState/FetchState";
-import { useCurrentFormQuery } from "~/models/forms/read";
+import { useCurrentFormQuery } from "~/models/form/read";
 import { FormNotFound } from "../FormNotFound/FormNotFound";
 import { FormView } from "./FormView/FormView";
 

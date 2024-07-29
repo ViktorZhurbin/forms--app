@@ -1,4 +1,4 @@
-import { useCurrentFormQuery } from "@/shared/models/forms/read";
+import { useCurrentFormQuery } from "@/shared/models/form/read";
 import { NotFound } from "../NotFound/NotFound";
 import { Header } from "./Header/Header";
 import { BuilderBase } from "./components/BuilderBase/BuilderBase";

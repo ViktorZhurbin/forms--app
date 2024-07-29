@@ -1,4 +1,4 @@
-import type { TForm } from "@/shared/models/forms/schema/forms";
+import type { TForm } from "@/shared/models/form/schema/form";
 
 interface FormViewProps extends Pick<TForm, "nanoId" | "name"> {
 	href: string;

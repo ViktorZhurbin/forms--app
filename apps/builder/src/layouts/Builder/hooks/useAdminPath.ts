@@ -1,5 +1,5 @@
 import { Routes } from "@/shared/constants/routes";
-import { useCurrentFormWorkspace } from "@/shared/models/forms/read";
+import { useCurrentFormWorkspace } from "@/shared/models/form/read";
 
 export const useAdminPath = () => {
 	const currentWorkspace = useCurrentFormWorkspace();

@@ -1,14 +1,22 @@
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useDbQuery } from "../db";
 
-const useCurrentFormQuestionsQuery = () => {
+const useCurrentFormFieldsQuery = () => {
 	const formNanoId = useFormNanoId();
 
 	return useDbQuery({
-		questions: {
-			$: { where: { formNanoId } },
+		fields: {
+			$: {
+				where: { formNanoId },
+			},
 		},
 	});
 };
 
-export { useCurrentFormQuestionsQuery };
+const useOrderedFormFields = () => {
+	const { data } = useCurrentFormFieldsQuery();
+
+	return data?.fields.toSorted((a, b) => a.order - b.order);
+};
+
+export { useCurrentFormFieldsQuery, useOrderedFormFields };

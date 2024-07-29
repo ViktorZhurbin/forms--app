@@ -1,5 +1,6 @@
 import { type InstantReactWeb, init } from "@instantdb/react";
 import type { TForm } from "./form/schema/form";
+import type { TQuestion } from "./question/schema/question";
 import type { TUser } from "./user/schema/user";
 import type { TWorkspace } from "./workspace/schema/workspace";
 
@@ -8,6 +9,7 @@ const APP_ID = import.meta.env.PUBLIC_INSTANT_APP_ID;
 type Schema = {
 	users: TUser;
 	forms: TForm;
+	fields: TQuestion;
 	workspaces: TWorkspace;
 };
 

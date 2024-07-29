@@ -1,42 +1,43 @@
 import { id, lookup, tx } from "@instantdb/react";
-import type { QuestionTypes } from "~/constants/questions";
-import { makeSubId } from "~/utils/makeId";
 import { dbTransact } from "../db";
 import type { TForm } from "../form/schema/form";
-import { getCreateQuestionPayload } from "../form/write/hooks/useCreateQuestion";
 import type { TQuestion } from "./schema/question";
 
 type CreateQuestionParams = {
-	type: QuestionTypes;
+	payload: Omit<TQuestion, "id">;
 	formNanoId: TForm["nanoId"];
-	insertBefore?: boolean;
 };
 
-const createQuestion = async ({ formNanoId, type }: CreateQuestionParams) => {
-	const questionId = id();
-	const nanoId = makeSubId();
-
-	const newQuestion = getCreateQuestionPayload({ type });
-
+const createField = async ({ payload, formNanoId }: CreateQuestionParams) => {
 	await dbTransact(
-		tx.questions[questionId]
-			.update(newQuestion)
+		tx.fields[id()]
+			.update(payload)
 			.link({ forms: lookup("nanoId", formNanoId) }),
 	);
 
-	return nanoId;
+	return payload.nanoId;
 };
 
-const updateQuestion = async (
+const updateField = async (
 	payload: Partial<TQuestion> & { nanoId: TQuestion["nanoId"] },
 ) => {
 	const { nanoId, ...update } = payload;
 
-	await dbTransact(tx.questions[lookup("nanoId", nanoId)].update(update));
+	await dbTransact(tx.fields[lookup("nanoId", nanoId)].update(update));
 };
 
-const deleteQuestion = async ({ nanoId }: { nanoId: TQuestion["nanoId"] }) => {
-	dbTransact([tx.questions[lookup("nanoId", nanoId)].delete()]);
+const updateFieldsOrder = async (
+	orderedFieldsNanoIds: TQuestion["nanoId"][],
+) => {
+	const ops = orderedFieldsNanoIds.map((nanoId, index) =>
+		tx.fields[lookup("nanoId", nanoId)].update({ order: index }),
+	);
+
+	await dbTransact(ops);
 };
 
-export { createQuestion, updateQuestion, deleteQuestion };
+const deleteField = async ({ nanoId }: { nanoId: TQuestion["nanoId"] }) => {
+	dbTransact([tx.fields[lookup("nanoId", nanoId)].delete()]);
+};
+
+export { createField, updateField, updateFieldsOrder, deleteField };

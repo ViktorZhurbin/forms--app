@@ -1,6 +1,6 @@
 import { id } from "@instantdb/react";
-import { QuestionTypesMap } from "~/constants/questionMaps";
-import { FieldTypes } from "~/constants/questions";
+import { QuestionTypesMap } from "~/constants/fieldMaps";
+import { FieldTypes } from "~/constants/fields";
 import { makeSubId } from "~/utils/makeId";
 import type { TField, TFieldChoice, TFieldShortText } from "../schema";
 import { getChoiceFieldOptionPayload } from "./getChoiceFieldOptionPayload";

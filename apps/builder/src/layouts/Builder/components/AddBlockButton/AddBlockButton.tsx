@@ -1,4 +1,4 @@
-import type { FieldTypes } from "@/shared/constants/questions";
+import type { FieldTypes } from "@/shared/constants/fields";
 import { useAddField } from "@/shared/models/field/hooks/useAddField";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";

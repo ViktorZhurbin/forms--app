@@ -1,7 +1,7 @@
 import { Anchor, Checkbox, Radio } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { SortableDndList } from "~/components/SortableDndList/SortableDndList";
-import { FieldTypes } from "~/constants/questions";
+import { FieldTypes } from "~/constants/fields";
 import type { TField, TFieldChoice } from "~/models/field/schema";
 import { createChoiceFieldOption, updateField } from "~/models/field/write";
 import styles from "./MultipleChoiceEdit.module.css";

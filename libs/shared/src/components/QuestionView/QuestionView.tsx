@@ -1,5 +1,5 @@
 import { Button, Title } from "@mantine/core";
-import { FieldTypes } from "~/constants/questions";
+import { FieldTypes } from "~/constants/fields";
 import type { TField } from "~/models/field/schema";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
 import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";

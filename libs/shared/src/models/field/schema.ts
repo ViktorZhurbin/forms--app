@@ -1,4 +1,4 @@
-import type { FieldGroups, FieldTypes } from "../../constants/questions";
+import type { FieldGroups, FieldTypes } from "../../constants/fields";
 
 type TFieldBase = {
 	id: string;

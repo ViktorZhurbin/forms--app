@@ -5,7 +5,7 @@ import {
 	IconCircleDot,
 	type TablerIcon,
 } from "@tabler/icons-react";
-import { FieldGroups, FieldTypes } from "./questions";
+import { FieldGroups, FieldTypes } from "./fields";
 
 type QuestionTypesMapItem = {
 	name: string;

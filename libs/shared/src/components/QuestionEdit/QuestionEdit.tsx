@@ -1,4 +1,4 @@
-import { FieldTypes } from "~/constants/questions";
+import { FieldTypes } from "~/constants/fields";
 import type { TField } from "~/models/field/schema";
 import { updateField } from "~/models/field/write";
 import { EditableButton } from "../EditableButton/EditableButton";

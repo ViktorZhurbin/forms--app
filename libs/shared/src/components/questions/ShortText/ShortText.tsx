@@ -1,9 +1,9 @@
 import { TextInput } from "@mantine/core";
-import type { TQuestion } from "~/models/field/schema";
+import type { TField } from "~/models/field/schema";
 
 type ShortTextProps = {
 	placeholder: string;
-	questionId: TQuestion["id"];
+	questionId: TField["id"];
 };
 
 export const ShortText = ({

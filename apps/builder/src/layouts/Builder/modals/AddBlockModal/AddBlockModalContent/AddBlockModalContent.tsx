@@ -1,12 +1,12 @@
 import { QuestionGroupsMap } from "@/shared/constants/questionMaps";
-import type { QuestionTypes } from "@/shared/constants/questions";
+import type { FieldTypes } from "@/shared/constants/questions";
 import { Title } from "@mantine/core";
 import type { CSSProperties } from "react";
 import { AddBlockModalQuestionItem } from "../AddBlockModalQuestionItem/AddBlockModalQuestionItem";
 import styles from "./AddBlockModalContent.module.css";
 
 type AddBlockModalContentProps = {
-	onAddBlock: (type: QuestionTypes) => void;
+	onAddBlock: (type: FieldTypes) => void;
 };
 
 export const AddBlockModalContent = ({

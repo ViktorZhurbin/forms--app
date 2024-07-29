@@ -1,4 +1,4 @@
-import type { QuestionTypes } from "@/shared/constants/questions";
+import type { FieldTypes } from "@/shared/constants/questions";
 import { useAddField } from "@/shared/models/field/hooks/useAddField";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -15,7 +15,7 @@ export const AddBlockButton = ({
 	const { addField } = useAddField();
 
 	const handleAddBlock = useCallback(
-		async (type: QuestionTypes) => {
+		async (type: FieldTypes) => {
 			const { nanoId } = await addField({ type, insertBefore });
 
 			navigateToQuestion({ nanoId });

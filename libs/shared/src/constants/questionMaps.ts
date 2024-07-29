@@ -5,62 +5,62 @@ import {
 	IconCircleDot,
 	type TablerIcon,
 } from "@tabler/icons-react";
-import { QuestionGroups, QuestionTypes } from "./questions";
+import { FieldGroups, FieldTypes } from "./questions";
 
 type QuestionTypesMapItem = {
 	name: string;
 	Icon: TablerIcon;
-	type: QuestionTypes;
-	group: QuestionGroups;
+	type: FieldTypes;
+	group: FieldGroups;
 };
-const QuestionTypesMap: Record<QuestionTypes, QuestionTypesMapItem> = {
-	[QuestionTypes.YesNo]: {
+const QuestionTypesMap: Record<FieldTypes, QuestionTypesMapItem> = {
+	[FieldTypes.YesNo]: {
 		name: "Yes/No",
 		Icon: IconBan,
-		type: QuestionTypes.YesNo,
-		group: QuestionGroups.Choice,
+		type: FieldTypes.YesNo,
+		group: FieldGroups.Choice,
 	},
-	[QuestionTypes.Checkboxes]: {
+	[FieldTypes.Checkboxes]: {
 		name: "Checkboxes",
 		Icon: IconCheckbox,
-		type: QuestionTypes.Checkboxes,
-		group: QuestionGroups.Choice,
+		type: FieldTypes.Checkboxes,
+		group: FieldGroups.Choice,
 	},
-	[QuestionTypes.MultipleChoice]: {
+	[FieldTypes.MultipleChoice]: {
 		name: "Multiple Choice",
 		Icon: IconCircleDot,
-		type: QuestionTypes.MultipleChoice,
-		group: QuestionGroups.Choice,
+		type: FieldTypes.MultipleChoice,
+		group: FieldGroups.Choice,
 	},
-	[QuestionTypes.ShortText]: {
+	[FieldTypes.ShortText]: {
 		name: "Short Text",
 		Icon: IconAlignLeft,
-		type: QuestionTypes.ShortText,
-		group: QuestionGroups.Text,
+		type: FieldTypes.ShortText,
+		group: FieldGroups.Text,
 	},
 };
 
 type QuestionGroupsMapItem = {
 	name: string;
-	group: QuestionGroups;
+	group: FieldGroups;
 	bgColor: string;
 	types: QuestionTypesMapItem[];
 };
-const QuestionGroupsMap: Record<QuestionGroups, QuestionGroupsMapItem> = {
-	[QuestionGroups.Choice]: {
+const QuestionGroupsMap: Record<FieldGroups, QuestionGroupsMapItem> = {
+	[FieldGroups.Choice]: {
 		name: "Choice",
-		group: QuestionGroups.Choice,
+		group: FieldGroups.Choice,
 		bgColor: "var(--mantine-color-grape-2)",
 		types: Object.values(QuestionTypesMap).filter(
-			(questionType) => questionType.group === QuestionGroups.Choice,
+			(questionType) => questionType.group === FieldGroups.Choice,
 		),
 	},
-	[QuestionGroups.Text]: {
+	[FieldGroups.Text]: {
 		name: "Text",
-		group: QuestionGroups.Text,
+		group: FieldGroups.Text,
 		bgColor: "var(--mantine-color-blue-2)",
 		types: Object.values(QuestionTypesMap).filter(
-			(questionType) => questionType.group === QuestionGroups.Text,
+			(questionType) => questionType.group === FieldGroups.Text,
 		),
 	},
 };

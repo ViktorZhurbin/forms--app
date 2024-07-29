@@ -1,12 +1,12 @@
 import type { QuestionTypesMapItem } from "@/shared/constants/questionMaps";
-import type { QuestionTypes } from "@/shared/constants/questions";
+import type { FieldTypes } from "@/shared/constants/questions";
 import { Button, Text } from "@mantine/core";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import styles from "./AddBlockModalQuestionItem.module.css";
 
 interface AddBlockModalQuestionItemProps {
 	item: QuestionTypesMapItem;
-	onAddBlock: (type: QuestionTypes) => void;
+	onAddBlock: (type: FieldTypes) => void;
 }
 
 export const AddBlockModalQuestionItem = ({

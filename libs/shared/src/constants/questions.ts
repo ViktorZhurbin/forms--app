@@ -1,13 +1,13 @@
-enum QuestionTypes {
+enum FieldTypes {
 	YesNo = "YesNo",
 	Checkboxes = "Checkboxes",
 	MultipleChoice = "MultipleChoice",
 	ShortText = "ShortText",
 }
 
-enum QuestionGroups {
+enum FieldGroups {
 	Choice = "Choice",
 	Text = "Text",
 }
 
-export { QuestionTypes, QuestionGroups };
+export { FieldTypes, FieldGroups };

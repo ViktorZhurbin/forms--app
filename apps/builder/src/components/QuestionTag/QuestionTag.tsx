@@ -2,17 +2,14 @@ import {
 	QuestionGroupsMap,
 	QuestionTypesMap,
 } from "@/shared/constants/questionMaps";
-import type {
-	QuestionGroups,
-	QuestionTypes,
-} from "@/shared/constants/questions";
+import type { FieldGroups, FieldTypes } from "@/shared/constants/questions";
 import { Group, Text } from "@mantine/core";
 import styles from "./QuestionTag.module.css";
 
 type QuestionTagProps = {
 	text?: string | number;
-	type: QuestionTypes;
-	group: QuestionGroups;
+	type: FieldTypes;
+	group: FieldGroups;
 };
 
 export const QuestionTag = ({ text, group, type }: QuestionTagProps) => {

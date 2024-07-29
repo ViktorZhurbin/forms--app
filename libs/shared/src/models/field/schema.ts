@@ -1,18 +1,18 @@
-import type { QuestionGroups, QuestionTypes } from "../../constants/questions";
+import type { FieldGroups, FieldTypes } from "../../constants/questions";
 
-type TQuestionBase = {
+type TFieldBase = {
 	id: string;
 	nanoId: string;
-	type: QuestionTypes;
-	group: QuestionGroups;
+	type: FieldTypes;
+	group: FieldGroups;
 	title: string;
 	index: number;
 	isPublished: boolean;
 	buttonText: string;
 };
 
-interface TQuestionChoice extends TQuestionBase {
-	group: QuestionGroups.Choice;
+interface TFieldChoice extends TFieldBase {
+	group: FieldGroups.Choice;
 	options: TOption[];
 }
 
@@ -22,36 +22,36 @@ type TOption = {
 	nanoId: string;
 };
 
-interface TQuestionYesNo extends TQuestionChoice {
-	type: QuestionTypes.YesNo;
+interface TFieldYesNo extends TFieldChoice {
+	type: FieldTypes.YesNo;
 }
 
-interface TQuestionCheckboxes extends TQuestionChoice {
-	type: QuestionTypes.Checkboxes;
+interface TFieldCheckboxes extends TFieldChoice {
+	type: FieldTypes.Checkboxes;
 }
 
-interface TQuestionMultipleChoiceSingle extends TQuestionChoice {
-	type: QuestionTypes.MultipleChoice;
+interface TFieldMultipleChoiceSingle extends TFieldChoice {
+	type: FieldTypes.MultipleChoice;
 }
 
-interface TQuestionShortText extends TQuestionBase {
-	type: QuestionTypes.ShortText;
-	group: QuestionGroups.Text;
+interface TFieldShortText extends TFieldBase {
+	type: FieldTypes.ShortText;
+	group: FieldGroups.Text;
 	textPlaceholder: string;
 }
 
-type TQuestion =
-	| TQuestionYesNo
-	| TQuestionCheckboxes
-	| TQuestionMultipleChoiceSingle
-	| TQuestionShortText;
+type TField =
+	| TFieldYesNo
+	| TFieldCheckboxes
+	| TFieldMultipleChoiceSingle
+	| TFieldShortText;
 
 export type {
-	TQuestionBase,
-	TQuestion,
+	TFieldBase,
+	TField,
 	TOption,
-	TQuestionYesNo,
-	TQuestionChoice,
-	TQuestionCheckboxes,
-	TQuestionShortText,
+	TFieldYesNo,
+	TFieldChoice,
+	TFieldCheckboxes,
+	TFieldShortText,
 };

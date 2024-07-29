@@ -1,5 +1,5 @@
 import { useFormFields } from "@/shared/models/field/read";
-import type { TQuestion } from "@/shared/models/field/schema";
+import type { TField } from "@/shared/models/field/schema";
 import { updateManyFields } from "@/shared/models/field/write";
 import { useCallback, useState } from "react";
 
@@ -14,8 +14,8 @@ export const usePublishForm = () => {
 	};
 	const { publishedFields, unpublishedFields } =
 		fields?.reduce<{
-			publishedFields: TQuestion[];
-			unpublishedFields: TQuestion[];
+			publishedFields: TField[];
+			unpublishedFields: TField[];
 		}>((acc, field) => {
 			if (field.isPublished) {
 				acc.publishedFields.push(field);

@@ -1,5 +1,5 @@
 import { useDragSortable } from "@/shared/components/SortableDndList/hooks/useDragSortable";
-import type { TQuestion } from "@/shared/models/field/schema";
+import type { TField } from "@/shared/models/field/schema";
 import { Button, CloseButton, Text } from "@mantine/core";
 import clsx from "clsx";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
@@ -7,7 +7,7 @@ import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
-	extends Pick<TQuestion, "id" | "nanoId" | "type" | "group" | "title"> {
+	extends Pick<TField, "id" | "nanoId" | "type" | "group" | "title"> {
 	order?: number;
 	isSelected?: boolean;
 	isDragged?: boolean;

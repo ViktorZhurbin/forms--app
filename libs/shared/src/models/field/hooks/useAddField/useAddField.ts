@@ -1,6 +1,6 @@
 import { id, lookup, tx } from "@instantdb/react";
 import { useCallback } from "react";
-import type { QuestionTypes } from "~/constants/questions";
+import type { FieldTypes } from "~/constants/questions";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
 import { dbTransact } from "~/models/db";
@@ -9,7 +9,7 @@ import { getNewFieldOrder } from "../../helpers/getNewFieldOrder";
 import { useOrderedFormFields } from "../../read";
 
 type AddFieldParams = {
-	type: QuestionTypes;
+	type: FieldTypes;
 	insertBefore?: boolean;
 };
 

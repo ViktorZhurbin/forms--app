@@ -1,12 +1,12 @@
 import { TextInput } from "@mantine/core";
 import type { FocusEventHandler } from "react";
-import type { TQuestion } from "~/models/field/schema";
+import type { TField } from "~/models/field/schema";
 import { updateField } from "~/models/field/write";
 import styles from "./ShortTextEdit.module.css";
 
 type ShortTextEditProps = {
 	placeholder?: string;
-	questionId: TQuestion["id"];
+	questionId: TField["id"];
 };
 
 export const ShortTextEdit = ({

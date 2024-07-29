@@ -1,11 +1,11 @@
 import { QuestionView } from "~/components/QuestionView/QuestionView";
-import type { TQuestion } from "~/models/field/schema";
+import type { TField } from "~/models/field/schema";
 import styles from "./FormQuestions.module.css";
 import { getPosition } from "./getPosition";
 
 export type FormQuestionsProps = {
 	currentStep: number;
-	questions: TQuestion[];
+	questions: TField[];
 	onSubmit: () => void;
 	goToNextStep: () => void;
 };

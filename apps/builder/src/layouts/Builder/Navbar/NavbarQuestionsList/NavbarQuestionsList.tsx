@@ -1,7 +1,7 @@
 import { SortableDndList } from "@/shared/components/SortableDndList/SortableDndList";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 import { useOrderedFormFields } from "@/shared/models/field/read";
-import type { TQuestion } from "@/shared/models/field/schema";
+import type { TField } from "@/shared/models/field/schema";
 import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { ScrollArea } from "@mantine/core";
@@ -11,7 +11,7 @@ import { removeSelectedBlockId } from "../../utils/removeSelectedBlockId";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
 import styles from "./NavbarQuestionsList.module.css";
 
-type Question = TQuestion;
+type Question = TField;
 
 export const NavbarQuestionsList = () => {
 	const fields = useOrderedFormFields();

@@ -1,12 +1,12 @@
-import type { TQuestion } from "../../field/schema";
+import type { TField } from "../../field/schema";
 
 type TForm = {
 	id: string;
 	nanoId: string;
 	name: string;
 	responseCount: number;
-	questions: TQuestion[];
-	draftQuestions: TQuestion[];
+	questions: TField[];
+	draftQuestions: TField[];
 	isDemo?: boolean;
 };
 

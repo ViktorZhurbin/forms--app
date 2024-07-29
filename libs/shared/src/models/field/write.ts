@@ -2,10 +2,10 @@ import { id, lookup, tx } from "@instantdb/react";
 import { dbTransact } from "../db";
 import type { TForm } from "../form/schema/form";
 import { getChoiceFieldOptionPayload } from "./helpers/getChoiceFieldOptionPayload";
-import type { TQuestion, TQuestionChoice } from "./schema";
+import type { TField, TFieldChoice } from "./schema";
 
 type CreateQuestionParams = {
-	payload: Omit<TQuestion, "id">;
+	payload: Omit<TField, "id">;
 	formNanoId: TForm["nanoId"];
 };
 
@@ -22,14 +22,14 @@ const createField = async ({ payload, formNanoId }: CreateQuestionParams) => {
 const updateField = async ({
 	id,
 	payload,
-}: { id: TQuestion["id"]; payload: Partial<TQuestion> }) => {
+}: { id: TField["id"]; payload: Partial<TField> }) => {
 	await dbTransact(tx.fields[id].update(payload));
 };
 
 const createChoiceFieldOption = async ({
 	options,
 	fieldId,
-}: { fieldId: TQuestionChoice["id"]; options: TQuestionChoice["options"] }) => {
+}: { fieldId: TFieldChoice["id"]; options: TFieldChoice["options"] }) => {
 	const newOption = getChoiceFieldOptionPayload(`Option ${options.length + 1}`);
 
 	await updateField({
@@ -41,14 +41,14 @@ const createChoiceFieldOption = async ({
 };
 
 const updateManyFields = async (
-	fields: { id: TQuestion["id"]; payload: Partial<TQuestion> }[],
+	fields: { id: TField["id"]; payload: Partial<TField> }[],
 ) => {
 	const ops = fields.map(({ id, payload }) => tx.fields[id].update(payload));
 
 	await dbTransact(ops);
 };
 
-const updateFieldsIndex = async (orderedFieldsIds: TQuestion["id"][]) => {
+const updateFieldsIndex = async (orderedFieldsIds: TField["id"][]) => {
 	const ops = orderedFieldsIds.map((id, index) =>
 		tx.fields[id].update({ index }),
 	);
@@ -56,7 +56,7 @@ const updateFieldsIndex = async (orderedFieldsIds: TQuestion["id"][]) => {
 	await dbTransact(ops);
 };
 
-const deleteField = async ({ id }: { id: TQuestion["id"] }) => {
+const deleteField = async ({ id }: { id: TField["id"] }) => {
 	dbTransact([tx.fields[id].delete()]);
 };
 

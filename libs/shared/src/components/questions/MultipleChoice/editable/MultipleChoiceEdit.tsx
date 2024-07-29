@@ -1,16 +1,16 @@
 import { Anchor, Checkbox, Radio } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { SortableDndList } from "~/components/SortableDndList/SortableDndList";
-import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion, TQuestionChoice } from "~/models/field/schema";
+import { FieldTypes } from "~/constants/questions";
+import type { TField, TFieldChoice } from "~/models/field/schema";
 import { createChoiceFieldOption, updateField } from "~/models/field/write";
 import styles from "./MultipleChoiceEdit.module.css";
 import { OptionButtonSortable } from "./OptionButtonSortable/OptionButtonSortable";
 
 export type MultipleChoiceEditProps = {
-	questionId: TQuestion["id"];
-	questionType: TQuestion["type"];
-	options: TQuestionChoice["options"];
+	questionId: TField["id"];
+	questionType: TField["type"];
+	options: TFieldChoice["options"];
 };
 
 type Option = MultipleChoiceEditProps["options"][number];
@@ -20,8 +20,8 @@ export const MultipleChoiceEdit = ({
 	questionType,
 	options,
 }: MultipleChoiceEditProps) => {
-	const canChooseMany = questionType === QuestionTypes.Checkboxes;
-	const isFixedQuestions = questionType === QuestionTypes.YesNo;
+	const canChooseMany = questionType === FieldTypes.Checkboxes;
+	const isFixedQuestions = questionType === FieldTypes.YesNo;
 	const Indicator = canChooseMany ? Checkbox.Indicator : Radio.Indicator;
 
 	const [tempNewOptionId, setTempNewOptionId] = useState<string | null>(null);

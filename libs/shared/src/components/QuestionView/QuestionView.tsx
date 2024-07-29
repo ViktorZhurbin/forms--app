@@ -1,12 +1,12 @@
 import { Button, Title } from "@mantine/core";
-import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion } from "~/models/field/schema";
+import { FieldTypes } from "~/constants/questions";
+import type { TField } from "~/models/field/schema";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
 import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
 import { ShortText } from "../questions/ShortText/ShortText";
 
 interface QuestionViewProps {
-	question: TQuestion;
+	question: TField;
 	order: number;
 	isLast: boolean;
 	onSubmitForm: () => void;
@@ -48,9 +48,9 @@ function QuestionComponent({
 	goToNextStep,
 }: Pick<QuestionViewProps, "question" | "goToNextStep">) {
 	switch (question.type) {
-		case QuestionTypes.YesNo:
-		case QuestionTypes.Checkboxes:
-		case QuestionTypes.MultipleChoice:
+		case FieldTypes.YesNo:
+		case FieldTypes.Checkboxes:
+		case FieldTypes.MultipleChoice:
 			return (
 				<MultipleChoice
 					questionId={question.id}
@@ -60,7 +60,7 @@ function QuestionComponent({
 				/>
 			);
 
-		case QuestionTypes.ShortText:
+		case FieldTypes.ShortText:
 			return (
 				<ShortText
 					questionId={question.id}

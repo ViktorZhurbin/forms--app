@@ -1,10 +1,10 @@
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
-import type { TQuestion } from "~/models/field/schema";
+import type { TField } from "~/models/field/schema";
 import styles from "./QuestionBase.module.css";
 
 interface QuestionBaseProps {
-	question: TQuestion;
+	question: TField;
 	order: number;
 	isLast: boolean;
 	Title: React.FC<{ title: string }>;

@@ -1,5 +1,5 @@
-import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion } from "~/models/field/schema";
+import { FieldTypes } from "~/constants/questions";
+import type { TField } from "~/models/field/schema";
 import { updateField } from "~/models/field/write";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
@@ -10,7 +10,7 @@ import { ShortTextEdit } from "../questions/ShortText/editable/ShortTextEdit";
 interface QuestionEditProps {
 	order: number;
 	isLast: boolean;
-	question: TQuestion;
+	question: TField;
 }
 
 export const QuestionEdit = ({
@@ -65,9 +65,9 @@ export const QuestionEdit = ({
 
 function QuestionComponent({ question }: Pick<QuestionEditProps, "question">) {
 	switch (question.type) {
-		case QuestionTypes.YesNo:
-		case QuestionTypes.Checkboxes:
-		case QuestionTypes.MultipleChoice:
+		case FieldTypes.YesNo:
+		case FieldTypes.Checkboxes:
+		case FieldTypes.MultipleChoice:
 			return (
 				<MultipleChoiceEdit
 					questionId={question.id}
@@ -76,7 +76,7 @@ function QuestionComponent({ question }: Pick<QuestionEditProps, "question">) {
 				/>
 			);
 
-		case QuestionTypes.ShortText:
+		case FieldTypes.ShortText:
 			return (
 				<ShortTextEdit
 					questionId={question.id}

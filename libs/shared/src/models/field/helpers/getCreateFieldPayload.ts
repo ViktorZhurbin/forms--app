@@ -1,14 +1,14 @@
 import { id } from "@instantdb/react";
 import { QuestionTypesMap } from "~/constants/questionMaps";
-import { QuestionTypes } from "~/constants/questions";
+import { FieldTypes } from "~/constants/questions";
 import { makeSubId } from "~/utils/makeId";
-import type { TQuestion, TQuestionChoice, TQuestionShortText } from "../schema";
+import type { TField, TFieldChoice, TFieldShortText } from "../schema";
 import { getChoiceFieldOptionPayload } from "./getChoiceFieldOptionPayload";
 
 const getCreateFieldPayload = ({
 	type,
 	index,
-}: Pick<TQuestion, "type" | "index">) => {
+}: Pick<TField, "type" | "index">) => {
 	const basePayload = {
 		type,
 		index,
@@ -22,36 +22,36 @@ const getCreateFieldPayload = ({
 	let update = {};
 
 	switch (type) {
-		case QuestionTypes.YesNo:
+		case FieldTypes.YesNo:
 			update = {
 				options: [
 					getChoiceFieldOptionPayload("Yes"),
 					getChoiceFieldOptionPayload("No"),
 				],
-			} as Pick<TQuestionChoice, "options">;
+			} as Pick<TFieldChoice, "options">;
 
 			break;
 
-		case QuestionTypes.Checkboxes:
-		case QuestionTypes.MultipleChoice:
+		case FieldTypes.Checkboxes:
+		case FieldTypes.MultipleChoice:
 			update = {
 				options: [
 					getChoiceFieldOptionPayload("Option 1"),
 					getChoiceFieldOptionPayload("Option 2"),
 				],
-			} as Pick<TQuestionChoice, "options">;
+			} as Pick<TFieldChoice, "options">;
 
 			break;
 
-		case QuestionTypes.ShortText:
+		case FieldTypes.ShortText:
 			update = {
 				textPlaceholder: "Your answer here...",
-			} as Pick<TQuestionShortText, "textPlaceholder">;
+			} as Pick<TFieldShortText, "textPlaceholder">;
 
 			break;
 	}
 
-	return { ...basePayload, ...update } as TQuestion;
+	return { ...basePayload, ...update } as TField;
 };
 
 export { getCreateFieldPayload };

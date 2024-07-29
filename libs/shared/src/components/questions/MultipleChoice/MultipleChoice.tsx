@@ -1,14 +1,14 @@
 import { Checkbox, Radio } from "@mantine/core";
 import { useState } from "react";
-import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion, TQuestionChoice } from "~/models/field/schema";
+import { FieldTypes } from "~/constants/questions";
+import type { TField, TFieldChoice } from "~/models/field/schema";
 import styles from "./MultipleChoice.module.css";
 import { OptionButton } from "./OptionButton/OptionButton";
 
 export type MultipleChoiceProps = {
-	questionId: TQuestion["id"];
-	questionType: TQuestion["type"];
-	options: TQuestionChoice["options"];
+	questionId: TField["id"];
+	questionType: TField["type"];
+	options: TFieldChoice["options"];
 	onSelect: () => void;
 };
 
@@ -19,7 +19,7 @@ export const MultipleChoice = ({
 	questionType,
 }: MultipleChoiceProps) => {
 	const [selectedIds, setSelectedIds] = useState<string[]>([]);
-	const canChooseMany = questionType === QuestionTypes.Checkboxes;
+	const canChooseMany = questionType === FieldTypes.Checkboxes;
 	const Indicator = canChooseMany ? Checkbox.Indicator : Radio.Indicator;
 
 	return (

@@ -1,11 +1,12 @@
+import { id, lookup, tx } from "@instantdb/react";
 import { useCallback } from "react";
 import type { QuestionTypes } from "~/constants/questions";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
+import { dbTransact } from "~/models/db";
 import { getCreateFieldPayload } from "../../helpers/getCreateFieldPayload";
 import { getNewFieldOrder } from "../../helpers/getNewFieldOrder";
 import { useOrderedFormFields } from "../../read";
-import { createField, updateFieldsOrder } from "../../write";
 
 type AddFieldParams = {
 	type: QuestionTypes;
@@ -15,35 +16,37 @@ type AddFieldParams = {
 export const useAddField = () => {
 	const formNanoId = useFormNanoId();
 	const selectedFieldId = useSelectedBlockId();
-	const fields = useOrderedFormFields() ?? [];
+	const orderedFields = useOrderedFormFields() ?? [];
 
-	const selectedFieldOrder = fields?.findIndex(
+	const selectedFieldIndex = orderedFields?.findIndex(
 		({ nanoId }) => nanoId === selectedFieldId,
 	);
 
 	const addField = useCallback(
 		async ({ type, insertBefore }: AddFieldParams) => {
-			const newFieldOrder = getNewFieldOrder({
+			const newFieldIndex = getNewFieldOrder({
 				insertBefore,
-				selectedFieldOrder,
+				selectedFieldIndex,
 			});
 
-			const newField = getCreateFieldPayload({ type, order: newFieldOrder });
+			const newField = getCreateFieldPayload({ type, index: newFieldIndex });
 
-			const newFieldNanoId = await createField({
-				formNanoId,
-				payload: newField,
+			// maintain array-like order of fields
+			const updateOrderOps = orderedFields.map(({ id }, index) => {
+				const newIndex = index >= newFieldIndex ? index + 1 : index;
+
+				return tx.fields[id].update({ index: newIndex });
 			});
 
-			const orderedFieldsIds = fields
-				.map(({ id }) => id)
-				.toSpliced(newField.order, 0, newField.id);
+			const createFieldOp = tx.fields[id()]
+				.update(newField)
+				.link({ forms: lookup("nanoId", formNanoId) });
 
-			await updateFieldsOrder(orderedFieldsIds);
+			await dbTransact([createFieldOp].concat(updateOrderOps));
 
-			return { nanoId: newFieldNanoId };
+			return { nanoId: newField.nanoId };
 		},
-		[formNanoId, fields, selectedFieldOrder],
+		[formNanoId, orderedFields, selectedFieldIndex],
 	);
 
 	return { addField };

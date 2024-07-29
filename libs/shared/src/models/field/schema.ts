@@ -6,7 +6,7 @@ type TQuestionBase = {
 	type: QuestionTypes;
 	group: QuestionGroups;
 	title: string;
-	order: number;
+	index: number;
 	isPublished: boolean;
 	buttonText: string;
 };

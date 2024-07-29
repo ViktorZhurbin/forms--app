@@ -1,20 +1,20 @@
 type GetNewFieldOrderParams = {
-	selectedFieldOrder: number | undefined;
+	selectedFieldIndex: number | undefined;
 	insertBefore?: boolean;
 };
 
 // TODO: unit test this
 export const getNewFieldOrder = ({
 	insertBefore,
-	selectedFieldOrder,
+	selectedFieldIndex,
 }: GetNewFieldOrderParams) => {
-	if (typeof selectedFieldOrder !== "number") {
+	if (typeof selectedFieldIndex !== "number") {
 		return 0;
 	}
 
 	if (insertBefore) {
-		return selectedFieldOrder;
+		return selectedFieldIndex;
 	}
 
-	return selectedFieldOrder + 1;
+	return selectedFieldIndex + 1;
 };

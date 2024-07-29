@@ -1,8 +1,9 @@
 import { SortableDndList } from "@/shared/components/SortableDndList/SortableDndList";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
-import { deleteField, updateFieldsOrder } from "@/shared/models/field/write";
+import { useOrderedFormFields } from "@/shared/models/field/read";
+import type { TQuestion } from "@/shared/models/field/schema";
+import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
-import type { TForm } from "@/shared/models/form/schema/form";
 import { ScrollArea } from "@mantine/core";
 import { useCallback } from "react";
 import { navigateToQuestion } from "../../utils/navigateToQuestion";
@@ -10,16 +11,11 @@ import { removeSelectedBlockId } from "../../utils/removeSelectedBlockId";
 import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
 import styles from "./NavbarQuestionsList.module.css";
 
-type NavbarQuestionsListProps = {
-	questions: TForm["questions"];
-};
+type Question = TQuestion;
 
-type Question = NavbarQuestionsListProps["questions"][number];
-
-export const NavbarQuestionsList = ({
-	questions = [],
-}: NavbarQuestionsListProps) => {
-	const firstQuestion = questions?.[0];
+export const NavbarQuestionsList = () => {
+	const fields = useOrderedFormFields();
+	const firstQuestion = fields[0];
 	const selectedBlockId = useSelectedBlockId(firstQuestion?.nanoId);
 
 	const DragOverlayItem = ({ activeItem }: { activeItem: Question }) => (
@@ -39,11 +35,11 @@ export const NavbarQuestionsList = ({
 	const onDragEnd = useCallback((newQuestions: Question[]): void => {
 		const orderedFieldsIds = newQuestions.map(({ id }) => id);
 
-		updateFieldsOrder(orderedFieldsIds);
+		updateFieldsIndex(orderedFieldsIds);
 	}, []);
 
 	const Options = ({ activeItemId }: { activeItemId?: string }) =>
-		questions.map(({ id, nanoId, type, group, title }, index, questions) => {
+		fields.map(({ id, nanoId, type, group, title }, index, questions) => {
 			const prevQuestion = index > 0 ? questions[index - 1] : null;
 			const nextQuestion =
 				index < questions.length - 1 ? questions[index + 1] : null;
@@ -81,7 +77,7 @@ export const NavbarQuestionsList = ({
 		<ScrollArea scrollbars="y">
 			<div className={styles.questionsList}>
 				<SortableDndList
-					list={questions}
+					list={fields}
 					onDragEnd={onDragEnd}
 					Options={Options}
 					DragOverlayItem={DragOverlayItem}

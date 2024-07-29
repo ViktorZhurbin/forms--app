@@ -7,11 +7,11 @@ import { getChoiceFieldOptionPayload } from "./getChoiceFieldOptionPayload";
 
 const getCreateFieldPayload = ({
 	type,
-	order,
-}: Pick<TQuestion, "type" | "order">) => {
+	index,
+}: Pick<TQuestion, "type" | "index">) => {
 	const basePayload = {
 		type,
-		order,
+		index,
 		title: "",
 		buttonText: "",
 		id: id(),

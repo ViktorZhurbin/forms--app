@@ -30,7 +30,7 @@ const useFormPublishedFields = () => {
 const useOrderedFormFields = () => {
 	const fields = useFormFields();
 
-	return fields?.toSorted((a, b) => a.order - b.order);
+	return fields?.toSorted((a, b) => a.index - b.index) ?? [];
 };
 
 export {

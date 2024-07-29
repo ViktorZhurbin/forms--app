@@ -6,8 +6,7 @@ export const useCurrentField = () => {
 	const selectedBlockId = useSelectedBlockId();
 
 	const index =
-		fields?.findIndex((question) => question.nanoId === selectedBlockId) ??
-		null;
+		fields?.findIndex((field) => field.nanoId === selectedBlockId) ?? null;
 
 	const field = index !== null && fields?.[index];
 	const order = index === null ? 1 : index + 1;

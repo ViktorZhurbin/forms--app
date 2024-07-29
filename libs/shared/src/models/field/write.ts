@@ -23,7 +23,7 @@ const updateField = async ({
 	id,
 	payload,
 }: { id: TQuestion["id"]; payload: Partial<TQuestion> }) => {
-	await dbTransact(tx.fields[id].merge(payload));
+	await dbTransact(tx.fields[id].update(payload));
 };
 
 const createChoiceFieldOption = async ({
@@ -43,14 +43,14 @@ const createChoiceFieldOption = async ({
 const updateManyFields = async (
 	fields: { id: TQuestion["id"]; payload: Partial<TQuestion> }[],
 ) => {
-	const ops = fields.map(({ id, payload }) => tx.fields[id].merge(payload));
+	const ops = fields.map(({ id, payload }) => tx.fields[id].update(payload));
 
 	await dbTransact(ops);
 };
 
-const updateFieldsOrder = async (orderedFieldsIds: TQuestion["id"][]) => {
+const updateFieldsIndex = async (orderedFieldsIds: TQuestion["id"][]) => {
 	const ops = orderedFieldsIds.map((id, index) =>
-		tx.fields[id].merge({ order: index }),
+		tx.fields[id].update({ index }),
 	);
 
 	await dbTransact(ops);
@@ -65,6 +65,6 @@ export {
 	createChoiceFieldOption,
 	updateField,
 	updateManyFields,
-	updateFieldsOrder,
+	updateFieldsIndex,
 	deleteField,
 };

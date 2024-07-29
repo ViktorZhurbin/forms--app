@@ -5,7 +5,7 @@ import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";
 
 export const NavbarQuestions = () => {
-	const { isLoading, error, data } = useCurrentFormFieldsQuery();
+	const { isLoading, error } = useCurrentFormFieldsQuery();
 
 	if (isLoading || error) {
 		return <FetchState error={error} isLoading={isLoading} />;
@@ -20,7 +20,7 @@ export const NavbarQuestions = () => {
 				<AddBlockButton tooltip="Add block" />
 			</Group>
 
-			<NavbarQuestionsList questions={data.fields} />
+			<NavbarQuestionsList />
 		</Stack>
 	);
 };

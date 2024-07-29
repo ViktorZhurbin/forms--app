@@ -16,8 +16,6 @@ const createForm = async ({
 		isDemo,
 		name: getDummyFormTitle(),
 		responseCount: 0,
-		questions: [],
-		draftQuestions: [],
 	};
 
 	const formId = id();

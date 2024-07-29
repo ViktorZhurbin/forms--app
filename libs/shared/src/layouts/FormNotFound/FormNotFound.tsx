@@ -1,5 +1,5 @@
 import { Center } from "@mantine/core";
 
-export const FormNotFound = () => {
-	return <Center h="100dvh">This form doesn't seem to exist</Center>;
+export const FormNotFound = ({ text }: { text: string }) => {
+	return <Center h="100dvh">{text}</Center>;
 };

@@ -15,8 +15,12 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 		return <FetchState isLoading={isLoading} error={error} />;
 	}
 
-	if (!data?.fields?.length) {
-		return <FormNotFound />;
+	if (!Array.isArray(data?.fields)) {
+		return <FormNotFound text="This form doesn't seem to exist" />;
+	}
+
+	if (!data.fields.length) {
+		return <FormNotFound text="This form is empty" />;
 	}
 
 	const fieldsToDisplay = isPreview

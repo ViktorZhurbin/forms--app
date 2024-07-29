@@ -15,8 +15,8 @@ type Question = TQuestion;
 
 export const NavbarQuestionsList = () => {
 	const fields = useOrderedFormFields();
-	const firstQuestion = fields[0];
-	const selectedBlockId = useSelectedBlockId(firstQuestion?.nanoId);
+	const firstField = fields[0];
+	const selectedNanoId = useSelectedBlockId(firstField?.nanoId);
 
 	const DragOverlayItem = ({ activeItem }: { activeItem: Question }) => (
 		<NavbarQuestion
@@ -27,7 +27,7 @@ export const NavbarQuestionsList = () => {
 			title={activeItem.title}
 			nanoId={activeItem.nanoId}
 			isSelected={
-				Boolean(selectedBlockId) && activeItem.nanoId === selectedBlockId
+				Boolean(selectedNanoId) && activeItem.nanoId === selectedNanoId
 			}
 		/>
 	);
@@ -39,15 +39,20 @@ export const NavbarQuestionsList = () => {
 	}, []);
 
 	const Options = ({ activeItemId }: { activeItemId?: string }) =>
-		fields.map(({ id, nanoId, type, group, title }, index, questions) => {
-			const prevQuestion = index > 0 ? questions[index - 1] : null;
-			const nextQuestion =
-				index < questions.length - 1 ? questions[index + 1] : null;
-
-			const newSelectedBlockId = (prevQuestion ?? nextQuestion)?.nanoId;
-
+		fields.map(({ id, nanoId, type, group, title }, index, fields) => {
 			const handleDelete = async () => {
 				await deleteField({ id });
+
+				if (nanoId !== selectedNanoId) return;
+
+				// if the deleted field is the selected one, navigate to the next/prev one
+				const isFirst = index === 0;
+				const isLast = index === fields.length - 1;
+
+				const prevField = isFirst ? null : fields[index - 1];
+				const nextField = isLast ? null : fields[index + 1];
+
+				const newSelectedBlockId = (prevField ?? nextField)?.nanoId;
 
 				if (newSelectedBlockId) {
 					navigateToQuestion({ nanoId: newSelectedBlockId });
@@ -67,7 +72,7 @@ export const NavbarQuestionsList = () => {
 					isGhost={activeItemId === id}
 					order={index + 1}
 					onDelete={handleDelete}
-					isSelected={Boolean(selectedBlockId) && nanoId === selectedBlockId}
+					isSelected={Boolean(selectedNanoId) && nanoId === selectedNanoId}
 				/>
 				// </SkeletonWrapper>
 			);

@@ -66,6 +66,7 @@ export const NavbarQuestion = ({
 							component="div"
 							onClick={async (event) => {
 								event.preventDefault();
+								event.stopPropagation();
 
 								onDelete?.();
 							}}

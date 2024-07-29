@@ -1,6 +1,6 @@
 import { QuestionTypes } from "~/constants/questions";
-import type { TQuestion } from "~/models/form/schema/question";
 import { useUpdateQuestion } from "~/models/form/write/hooks/useUpdateQuestion";
+import type { TQuestion } from "~/models/question/schema/question";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
 import { QuestionBase } from "../QuestionBase/QuestionBase";

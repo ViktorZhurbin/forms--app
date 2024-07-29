@@ -6,7 +6,7 @@ import type {
 	TQuestion,
 	TQuestionChoice,
 	TQuestionShortText,
-} from "../../../../schema/question";
+} from "../../../../../question/schema/question";
 
 const makeChoiceQuestionOption = (
 	text = "",

@@ -1,5 +1,5 @@
 import { SearchParams } from "@/shared/constants/routes";
-import type { TQuestion } from "@/shared/models/form/schema/question";
+import type { TQuestion } from "@/shared/models/question/schema/question";
 import { navigate } from "wouter/use-browser-location";
 
 export const navigateToQuestion = ({

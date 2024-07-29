@@ -1,4 +1,4 @@
-import type { TQuestion } from "./question";
+import type { TQuestion } from "../../question/schema/question";
 
 type TForm = {
 	id: string;

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useCurrentForm } from "~/models/form/read";
-import type { TQuestion } from "../../../schema/question";
+import type { TQuestion } from "../../../../question/schema/question";
 import { updateForm } from "../../write";
 
 type UpdateQuestionParams = {

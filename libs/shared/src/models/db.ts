@@ -1,17 +1,6 @@
 import { type InstantReactWeb, init } from "@instantdb/react";
-import type { TField } from "./field/schema";
-import type { TForm } from "./form/schema/form";
-import type { TUser } from "./user/schema/user";
-import type { TWorkspace } from "./workspace/schema/workspace";
-
-const APP_ID = import.meta.env.PUBLIC_INSTANT_APP_ID;
-
-type Schema = {
-	users: TUser;
-	forms: TForm;
-	fields: TField;
-	workspaces: TWorkspace;
-};
+import { APP_ID } from "~/constants/app";
+import type { Schema } from "./schema";
 
 type Db = InstantReactWeb<Schema>;
 

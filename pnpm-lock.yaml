@@ -41,6 +41,9 @@ importers:
       '@forms/shared':
         specifier: workspace:*
         version: link:../../libs/shared
+      '@instantdb/core':
+        specifier: ^0.10.32
+        version: 0.10.32
       '@instantdb/react':
         specifier: ^0.10.32
         version: 0.10.32(react@18.3.1)
@@ -111,6 +114,9 @@ importers:
       '@forms/shared':
         specifier: workspace:*
         version: link:../../libs/shared
+      '@instantdb/core':
+        specifier: ^0.10.32
+        version: 0.10.32
       '@instantdb/react':
         specifier: ^0.10.32
         version: 0.10.32(react@18.3.1)
@@ -209,6 +215,9 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@18.3.1)
+      '@instantdb/core':
+        specifier: ^0.10.32
+        version: 0.10.32
       '@instantdb/react':
         specifier: ^0.10.32
         version: 0.10.32(react@18.3.1)

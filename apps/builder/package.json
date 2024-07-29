@@ -16,6 +16,7 @@
 		"@dnd-kit/sortable": "^8.0.0",
 		"@dnd-kit/utilities": "^3.2.2",
 		"@forms/shared": "workspace:*",
+		"@instantdb/core": "^0.10.32",
 		"@instantdb/react": "^0.10.32",
 		"@mantine/core": "^7.11.2",
 		"@mantine/hooks": "^7.11.2",

@@ -1,20 +1,20 @@
-import type { QuestionTypesMapItem } from "@/shared/constants/fieldMaps";
+import { QuestionTypesMap } from "@/shared/constants/fieldMaps";
 import type { FieldTypes } from "@/shared/constants/fields";
 import { Button, Text } from "@mantine/core";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import styles from "./AddBlockModalQuestionItem.module.css";
 
 interface AddBlockModalQuestionItemProps {
-	item: QuestionTypesMapItem;
+	type: FieldTypes;
 	onAddBlock: (type: FieldTypes) => void;
 }
 
 export const AddBlockModalQuestionItem = ({
-	item,
+	type,
 	onAddBlock,
 }: AddBlockModalQuestionItemProps) => {
 	const handleClick = () => {
-		onAddBlock(item.type);
+		onAddBlock(type);
 	};
 
 	const classNames = {
@@ -22,16 +22,18 @@ export const AddBlockModalQuestionItem = ({
 		label: styles.buttonLabel,
 	};
 
+	const { name } = QuestionTypesMap[type];
+
 	return (
 		<Button
-			key={item.type}
+			key={type}
 			variant="subtle"
 			justify="start"
 			classNames={classNames}
 			onClick={handleClick}
 		>
-			<QuestionTag type={item.type} group={item.group} />
-			<Text size="sm">{item.name}</Text>
+			<QuestionTag type={type} />
+			<Text size="sm">{name}</Text>
 		</Button>
 	);
 };

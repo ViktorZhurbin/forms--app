@@ -5,9 +5,4 @@ enum FieldTypes {
 	ShortText = "ShortText",
 }
 
-enum FieldGroups {
-	Choice = "Choice",
-	Text = "Text",
-}
-
-export { FieldTypes, FieldGroups };
+export { FieldTypes };

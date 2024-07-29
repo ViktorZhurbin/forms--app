@@ -1,25 +1,22 @@
 import {
-	QuestionGroupsMap,
 	QuestionTypesMap,
+	getGroupInfoByFieldType,
 } from "@/shared/constants/fieldMaps";
-import type { FieldGroups, FieldTypes } from "@/shared/constants/fields";
+import type { FieldTypes } from "@/shared/constants/fields";
 import { Group, Text } from "@mantine/core";
 import styles from "./QuestionTag.module.css";
 
 type QuestionTagProps = {
 	text?: string | number;
 	type: FieldTypes;
-	group: FieldGroups;
 };
 
-export const QuestionTag = ({ text, group, type }: QuestionTagProps) => {
+export const QuestionTag = ({ text, type }: QuestionTagProps) => {
 	const { Icon } = QuestionTypesMap[type];
+	const { bgColor } = getGroupInfoByFieldType(type);
 
 	return (
-		<Group
-			style={{ "--bg-color": QuestionGroupsMap[group].bgColor }}
-			className={styles.root}
-		>
+		<Group style={{ "--bg-color": bgColor }} className={styles.root}>
 			<Icon /> {text && <Text size="xs">{text}</Text>}
 		</Group>
 	);

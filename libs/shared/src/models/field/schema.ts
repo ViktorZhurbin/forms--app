@@ -1,10 +1,9 @@
-import type { FieldGroups, FieldTypes } from "../../constants/fields";
+import type { FieldTypes } from "../../constants/fields";
 
 type TFieldBase = {
 	id: string;
 	nanoId: string;
 	type: FieldTypes;
-	group: FieldGroups;
 	title: string;
 	index: number;
 	isPublished: boolean;
@@ -12,7 +11,6 @@ type TFieldBase = {
 };
 
 interface TFieldChoice extends TFieldBase {
-	group: FieldGroups.Choice;
 	options: TOption[];
 }
 
@@ -36,7 +34,6 @@ interface TFieldMultipleChoiceSingle extends TFieldChoice {
 
 interface TFieldShortText extends TFieldBase {
 	type: FieldTypes.ShortText;
-	group: FieldGroups.Text;
 	textPlaceholder: string;
 }
 

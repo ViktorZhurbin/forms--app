@@ -1,4 +1,4 @@
-import { QuestionGroupsMap } from "@/shared/constants/fieldMaps";
+import { FieldGroupsInfo } from "@/shared/constants/fieldMaps";
 import type { FieldTypes } from "@/shared/constants/fields";
 import { Title } from "@mantine/core";
 import type { CSSProperties } from "react";
@@ -12,22 +12,24 @@ type AddBlockModalContentProps = {
 export const AddBlockModalContent = ({
 	onAddBlock,
 }: AddBlockModalContentProps) => {
-	const groups = Object.values(QuestionGroupsMap);
-	const wrapperStyles = { "--groups-count": groups.length } as CSSProperties;
+	const groupsInfoValues = Object.values(FieldGroupsInfo);
+	const wrapperStyles = {
+		"--groups-count": groupsInfoValues.length,
+	} as CSSProperties;
 
 	return (
 		<div style={wrapperStyles} className={styles.wrapper}>
-			{groups.map(({ name, group, types }) => {
+			{groupsInfoValues.map(({ name, types }) => {
 				return (
-					<div key={group} className={styles.group}>
+					<div key={name} className={styles.group}>
 						<Title order={6} className={styles.groupTitle}>
 							{name}
 						</Title>
 						<div className={styles.typesList}>
-							{types.map((item) => (
+							{types.map((type) => (
 								<AddBlockModalQuestionItem
-									key={item.type}
-									item={item}
+									key={type}
+									type={type}
 									onAddBlock={onAddBlock}
 								/>
 							))}

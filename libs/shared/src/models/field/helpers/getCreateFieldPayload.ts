@@ -1,5 +1,4 @@
 import { id } from "@instantdb/react";
-import { QuestionTypesMap } from "~/constants/fieldMaps";
 import { FieldTypes } from "~/constants/fields";
 import { makeSubId } from "~/utils/makeId";
 import type { TField, TFieldChoice, TFieldShortText } from "../schema";
@@ -16,7 +15,6 @@ const getCreateFieldPayload = ({
 		buttonText: "",
 		id: id(),
 		nanoId: makeSubId(),
-		group: QuestionTypesMap[type].group,
 	};
 
 	let update = {};

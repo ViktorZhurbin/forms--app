@@ -3,68 +3,55 @@ import {
 	IconBan,
 	IconCheckbox,
 	IconCircleDot,
-	type TablerIcon,
 } from "@tabler/icons-react";
-import { FieldGroups, FieldTypes } from "./fields";
+import { FieldTypes } from "./fields";
 
-type QuestionTypesMapItem = {
-	name: string;
-	Icon: TablerIcon;
-	type: FieldTypes;
-	group: FieldGroups;
-};
-const QuestionTypesMap: Record<FieldTypes, QuestionTypesMapItem> = {
+const QuestionTypesMap = {
 	[FieldTypes.YesNo]: {
 		name: "Yes/No",
 		Icon: IconBan,
 		type: FieldTypes.YesNo,
-		group: FieldGroups.Choice,
 	},
 	[FieldTypes.Checkboxes]: {
 		name: "Checkboxes",
 		Icon: IconCheckbox,
 		type: FieldTypes.Checkboxes,
-		group: FieldGroups.Choice,
 	},
 	[FieldTypes.MultipleChoice]: {
 		name: "Multiple Choice",
 		Icon: IconCircleDot,
 		type: FieldTypes.MultipleChoice,
-		group: FieldGroups.Choice,
 	},
 	[FieldTypes.ShortText]: {
 		name: "Short Text",
 		Icon: IconAlignLeft,
 		type: FieldTypes.ShortText,
-		group: FieldGroups.Text,
 	},
 };
 
-type QuestionGroupsMapItem = {
-	name: string;
-	group: FieldGroups;
-	bgColor: string;
-	types: QuestionTypesMapItem[];
-};
-const QuestionGroupsMap: Record<FieldGroups, QuestionGroupsMapItem> = {
-	[FieldGroups.Choice]: {
+const FieldGroupsInfo = {
+	Choice: {
 		name: "Choice",
-		group: FieldGroups.Choice,
 		bgColor: "var(--mantine-color-grape-2)",
-		types: Object.values(QuestionTypesMap).filter(
-			(questionType) => questionType.group === FieldGroups.Choice,
-		),
+		types: [FieldTypes.YesNo, FieldTypes.Checkboxes, FieldTypes.MultipleChoice],
 	},
-	[FieldGroups.Text]: {
+	Text: {
 		name: "Text",
-		group: FieldGroups.Text,
 		bgColor: "var(--mantine-color-blue-2)",
-		types: Object.values(QuestionTypesMap).filter(
-			(questionType) => questionType.group === FieldGroups.Text,
-		),
+		types: [FieldTypes.ShortText],
 	},
 };
 
-export type { QuestionGroupsMapItem, QuestionTypesMapItem };
+const getGroupInfoByFieldType = (type: FieldTypes) => {
+	switch (type) {
+		case FieldTypes.Checkboxes:
+		case FieldTypes.MultipleChoice:
+		case FieldTypes.YesNo:
+			return FieldGroupsInfo.Choice;
 
-export { QuestionTypesMap, QuestionGroupsMap };
+		case FieldTypes.ShortText:
+			return FieldGroupsInfo.Text;
+	}
+};
+
+export { QuestionTypesMap, FieldGroupsInfo, getGroupInfoByFieldType };

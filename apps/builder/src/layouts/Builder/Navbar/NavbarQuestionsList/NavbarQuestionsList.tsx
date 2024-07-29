@@ -23,7 +23,6 @@ export const NavbarQuestionsList = () => {
 			isDragged
 			id={activeItem.id}
 			type={activeItem.type}
-			group={activeItem.group}
 			title={activeItem.title}
 			nanoId={activeItem.nanoId}
 			isSelected={
@@ -39,7 +38,7 @@ export const NavbarQuestionsList = () => {
 	}, []);
 
 	const Options = ({ activeItemId }: { activeItemId?: string }) =>
-		fields.map(({ id, nanoId, type, group, title }, index, fields) => {
+		fields.map(({ id, nanoId, type, title }, index, fields) => {
 			const handleDelete = async () => {
 				await deleteField({ id });
 
@@ -66,7 +65,6 @@ export const NavbarQuestionsList = () => {
 					id={id}
 					key={id}
 					type={type}
-					group={group}
 					title={title}
 					nanoId={nanoId}
 					isGhost={activeItemId === id}

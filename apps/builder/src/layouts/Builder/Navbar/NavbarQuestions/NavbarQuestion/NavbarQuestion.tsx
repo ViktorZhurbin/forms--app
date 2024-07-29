@@ -7,7 +7,7 @@ import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
 import styles from "./NavbarQuestion.module.css";
 
 interface NavbarQuestionProps
-	extends Pick<TField, "id" | "nanoId" | "type" | "group" | "title"> {
+	extends Pick<TField, "id" | "nanoId" | "type" | "title"> {
 	order?: number;
 	isSelected?: boolean;
 	isDragged?: boolean;
@@ -18,7 +18,6 @@ interface NavbarQuestionProps
 export const NavbarQuestion = ({
 	id,
 	type,
-	group,
 	title,
 	order,
 	nanoId,
@@ -53,7 +52,7 @@ export const NavbarQuestion = ({
 			{isGhost ? null : (
 				<>
 					<div className={styles.labelGroup}>
-						<QuestionTag type={type} group={group} text={order} />
+						<QuestionTag type={type} text={order} />
 						<Text size="sm" className={styles.labelTitle}>
 							{title || "..."}
 						</Text>

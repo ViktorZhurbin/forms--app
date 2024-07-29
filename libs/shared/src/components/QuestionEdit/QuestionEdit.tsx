@@ -1,6 +1,6 @@
 import { QuestionTypes } from "~/constants/questions";
-import { useUpdateQuestion } from "~/models/form/write/hooks/useUpdateQuestion";
-import type { TQuestion } from "~/models/question/schema/question";
+import type { TQuestion } from "~/models/field/schema";
+import { updateField } from "~/models/field/write";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
@@ -18,17 +18,15 @@ export const QuestionEdit = ({
 	question,
 	isLast,
 }: QuestionEditProps) => {
-	const { updateQuestion } = useUpdateQuestion();
-
 	const onEditTitle = (title: string) => {
-		updateQuestion({
+		updateField({
 			id: question.id,
 			payload: { title },
 		});
 	};
 
 	const onEditButtonText = (buttonText: string) => {
-		updateQuestion({
+		updateField({
 			id: question.id,
 			payload: { buttonText },
 		});

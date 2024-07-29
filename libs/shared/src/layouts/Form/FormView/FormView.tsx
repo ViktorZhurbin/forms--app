@@ -1,7 +1,7 @@
 import { Progress } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { useFormGestures } from "~/hooks/useFormGestures";
-import type { TQuestion } from "~/models/question/schema/question";
+import type { TQuestion } from "~/models/field/schema";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
 import { FormQuestions } from "../FormQuestions/FormQuestions";
 import styles from "./FormView.module.css";

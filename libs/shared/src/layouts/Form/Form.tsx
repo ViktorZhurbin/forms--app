@@ -1,5 +1,5 @@
 import { FetchState } from "~/components/FetchState/FetchState";
-import { useCurrentFormQuery } from "~/models/form/read";
+import { useCurrentFormFieldsQuery } from "~/models/field/read";
 import { FormNotFound } from "../FormNotFound/FormNotFound";
 import { FormView } from "./FormView/FormView";
 
@@ -9,19 +9,19 @@ type FormProps = {
 };
 
 export const Form = ({ isPreview, exitButton }: FormProps) => {
-	const { isLoading, error, data } = useCurrentFormQuery();
+	const { isLoading, error, data } = useCurrentFormFieldsQuery();
 
 	if (error || isLoading) {
 		return <FetchState isLoading={isLoading} error={error} />;
 	}
 
-	const form = data.forms?.[0];
-
-	if (!form) {
+	if (!data?.fields?.length) {
 		return <FormNotFound />;
 	}
 
-	const questions = isPreview ? form.draftQuestions : form.questions;
+	const fieldsToDisplay = isPreview
+		? data.fields
+		: data.fields.filter((field) => field.isPublished);
 
-	return <FormView questions={questions} exitButton={exitButton} />;
+	return <FormView questions={fieldsToDisplay} exitButton={exitButton} />;
 };

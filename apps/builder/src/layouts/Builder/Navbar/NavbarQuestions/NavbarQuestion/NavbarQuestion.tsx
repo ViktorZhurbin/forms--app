@@ -1,5 +1,5 @@
 import { useDragSortable } from "@/shared/components/SortableDndList/hooks/useDragSortable";
-import type { TQuestion } from "@/shared/models/question/schema/question";
+import type { TQuestion } from "@/shared/models/field/schema";
 import { Button, CloseButton, Text } from "@mantine/core";
 import clsx from "clsx";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";

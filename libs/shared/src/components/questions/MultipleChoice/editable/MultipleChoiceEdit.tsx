@@ -2,12 +2,8 @@ import { Anchor, Checkbox, Radio } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { SortableDndList } from "~/components/SortableDndList/SortableDndList";
 import { QuestionTypes } from "~/constants/questions";
-import { makeChoiceQuestionOption } from "~/models/form/write/hooks/useCreateQuestion";
-import { useUpdateQuestion } from "~/models/form/write/hooks/useUpdateQuestion";
-import type {
-	TQuestion,
-	TQuestionChoice,
-} from "~/models/question/schema/question";
+import type { TQuestion, TQuestionChoice } from "~/models/field/schema";
+import { createChoiceFieldOption, updateField } from "~/models/field/write";
 import styles from "./MultipleChoiceEdit.module.css";
 import { OptionButtonSortable } from "./OptionButtonSortable/OptionButtonSortable";
 
@@ -30,19 +26,13 @@ export const MultipleChoiceEdit = ({
 
 	const [tempNewOptionId, setTempNewOptionId] = useState<string | null>(null);
 
-	const { updateQuestion } = useUpdateQuestion();
-
-	const addOption = () => {
-		const newOption = makeChoiceQuestionOption(`Option ${options.length + 1}`);
-
-		updateQuestion({
-			id: questionId,
-			payload: {
-				options: options.concat(newOption),
-			},
+	const addOption = async () => {
+		const newOptionId = await createChoiceFieldOption({
+			options,
+			fieldId: questionId,
 		});
 
-		setTempNewOptionId(newOption.id);
+		setTempNewOptionId(newOptionId);
 	};
 
 	const clearTempNewOptionId = () => {
@@ -50,7 +40,7 @@ export const MultipleChoiceEdit = ({
 	};
 
 	const deleteOption = (id: Option["id"]) => {
-		updateQuestion({
+		updateField({
 			id: questionId,
 			payload: {
 				options: options.filter((option) => option.id !== id),
@@ -65,7 +55,7 @@ export const MultipleChoiceEdit = ({
 					option.id === id ? { ...option, text } : option,
 				);
 
-				updateQuestion({
+				updateField({
 					id: questionId,
 					payload: { options: newOptions },
 				});
@@ -98,12 +88,12 @@ export const MultipleChoiceEdit = ({
 
 	const onDragEnd = useCallback(
 		(newOptions: Option[]): void => {
-			updateQuestion({
+			updateField({
 				id: questionId,
 				payload: { options: newOptions },
 			});
 		},
-		[questionId, updateQuestion],
+		[questionId],
 	);
 
 	const DragOverlayItem = ({ activeItem }: { activeItem: Option }) => (

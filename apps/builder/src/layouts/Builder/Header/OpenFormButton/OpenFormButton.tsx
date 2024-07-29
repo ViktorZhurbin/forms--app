@@ -1,13 +1,13 @@
-import { useCurrentForm } from "@/shared/models/form/read";
+import { useFormPublishedFields } from "@/shared/models/field/read";
 import { IconExternalLink } from "@tabler/icons-react";
 import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
 import { useFormUrl } from "../../hooks/useFormUrl";
 
 export const OpenFormButton = () => {
 	const url = useFormUrl();
-	const form = useCurrentForm();
+	const fields = useFormPublishedFields();
 
-	const isDisabled = !form?.questions.length || !url;
+	const isDisabled = !fields?.length || !url;
 
 	return (
 		url && (

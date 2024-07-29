@@ -1,5 +1,5 @@
 import type { QuestionTypes } from "@/shared/constants/questions";
-import { useCreateQuestion } from "@/shared/models/form/write/hooks/useCreateQuestion";
+import { useAddField } from "@/shared/models/field/hooks/useAddField";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
@@ -12,19 +12,16 @@ export const AddBlockButton = ({
 	insertBefore,
 }: { tooltip: string; insertBefore?: boolean }) => {
 	const [isModalOpen, modalActions] = useDisclosure(false);
-	const { createQuestion } = useCreateQuestion();
+	const { addField } = useAddField();
 
 	const handleAddBlock = useCallback(
 		async (type: QuestionTypes) => {
-			const { nanoId } = await createQuestion({
-				type,
-				insertBefore,
-			});
+			const { nanoId } = await addField({ type, insertBefore });
 
 			navigateToQuestion({ nanoId });
 			modalActions.close();
 		},
-		[insertBefore, modalActions.close, createQuestion],
+		[insertBefore, modalActions.close, addField],
 	);
 
 	return (

@@ -1,5 +1,5 @@
 import { QuestionView } from "~/components/QuestionView/QuestionView";
-import type { TQuestion } from "~/models/question/schema/question";
+import type { TQuestion } from "~/models/field/schema";
 import styles from "./FormQuestions.module.css";
 import { getPosition } from "./getPosition";
 

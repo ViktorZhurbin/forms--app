@@ -2,23 +2,16 @@ import { id } from "@instantdb/react";
 import { QuestionTypesMap } from "~/constants/questionMaps";
 import { QuestionTypes } from "~/constants/questions";
 import { makeSubId } from "~/utils/makeId";
-import type {
-	TQuestion,
-	TQuestionChoice,
-	TQuestionShortText,
-} from "../../../../../question/schema/question";
+import type { TQuestion, TQuestionChoice, TQuestionShortText } from "../schema";
+import { getChoiceFieldOptionPayload } from "./getChoiceFieldOptionPayload";
 
-const makeChoiceQuestionOption = (
-	text = "",
-): TQuestionChoice["options"][number] => ({
-	text,
-	id: id(),
-	nanoId: makeSubId(),
-});
-
-const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
+const getCreateFieldPayload = ({
+	type,
+	order,
+}: Pick<TQuestion, "type" | "order">) => {
 	const basePayload = {
 		type,
+		order,
 		title: "",
 		buttonText: "",
 		id: id(),
@@ -32,8 +25,8 @@ const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 		case QuestionTypes.YesNo:
 			update = {
 				options: [
-					makeChoiceQuestionOption("Yes"),
-					makeChoiceQuestionOption("No"),
+					getChoiceFieldOptionPayload("Yes"),
+					getChoiceFieldOptionPayload("No"),
 				],
 			} as Pick<TQuestionChoice, "options">;
 
@@ -43,8 +36,8 @@ const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 		case QuestionTypes.MultipleChoice:
 			update = {
 				options: [
-					makeChoiceQuestionOption("Option 1"),
-					makeChoiceQuestionOption("Option 2"),
+					getChoiceFieldOptionPayload("Option 1"),
+					getChoiceFieldOptionPayload("Option 2"),
 				],
 			} as Pick<TQuestionChoice, "options">;
 
@@ -61,4 +54,4 @@ const getCreateQuestionPayload = ({ type }: Pick<TQuestion, "type">) => {
 	return { ...basePayload, ...update } as TQuestion;
 };
 
-export { makeChoiceQuestionOption, getCreateQuestionPayload };
+export { getCreateFieldPayload };

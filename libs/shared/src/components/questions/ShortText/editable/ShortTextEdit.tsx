@@ -1,7 +1,7 @@
 import { TextInput } from "@mantine/core";
 import type { FocusEventHandler } from "react";
-import { useUpdateQuestion } from "~/models/form/write/hooks/useUpdateQuestion";
-import type { TQuestion } from "~/models/question/schema/question";
+import type { TQuestion } from "~/models/field/schema";
+import { updateField } from "~/models/field/write";
 import styles from "./ShortTextEdit.module.css";
 
 type ShortTextEditProps = {
@@ -13,10 +13,8 @@ export const ShortTextEdit = ({
 	questionId,
 	placeholder,
 }: ShortTextEditProps) => {
-	const { updateQuestion } = useUpdateQuestion();
-
 	const handleEdit: FocusEventHandler<HTMLInputElement> = (event) => {
-		updateQuestion({
+		updateField({
 			id: questionId,
 			payload: { textPlaceholder: event.currentTarget.value },
 		});

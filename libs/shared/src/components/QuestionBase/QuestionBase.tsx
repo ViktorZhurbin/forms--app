@@ -1,6 +1,6 @@
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
-import type { TQuestion } from "~/models/question/schema/question";
+import type { TQuestion } from "~/models/field/schema";
 import styles from "./QuestionBase.module.css";
 
 interface QuestionBaseProps {

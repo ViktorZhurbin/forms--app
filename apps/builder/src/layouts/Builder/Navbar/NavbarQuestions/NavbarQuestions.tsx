@@ -1,17 +1,15 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { useCurrentFormQuery } from "@/shared/models/form/read";
+import { useCurrentFormFieldsQuery } from "@/shared/models/field/read";
 import { Group, Stack, Text } from "@mantine/core";
 import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";
 
 export const NavbarQuestions = () => {
-	const { isLoading, error, data } = useCurrentFormQuery();
+	const { isLoading, error, data } = useCurrentFormFieldsQuery();
 
 	if (isLoading || error) {
 		return <FetchState error={error} isLoading={isLoading} />;
 	}
-
-	const form = data.forms?.[0];
 
 	return (
 		<Stack gap={8}>
@@ -22,7 +20,7 @@ export const NavbarQuestions = () => {
 				<AddBlockButton tooltip="Add block" />
 			</Group>
 
-			<NavbarQuestionsList questions={form?.draftQuestions} />
+			<NavbarQuestionsList questions={data.fields} />
 		</Stack>
 	);
 };

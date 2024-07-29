@@ -1,5 +1,5 @@
 import { id } from "@instantdb/react";
-import type { TQuestionChoice } from "~/models/question/schema/question";
+import type { TQuestionChoice } from "~/models/field/schema";
 import { makeSubId } from "~/utils/makeId";
 
 export const getChoiceFieldOptionPayload = (

@@ -1,18 +1,18 @@
-import { useCurrentForm } from "@/shared/models/form/read";
+import { useFormFields } from "@/shared/models/field/read";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
 import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
 import { PreviewModal } from "../../modals/PreviewModal/PreviewModal";
 
 export const PreviewButton = () => {
-	const form = useCurrentForm();
+	const fields = useFormFields();
 
 	const [isModalOpen, modalActions] = useDisclosure(false);
 
 	return (
 		<>
 			<HeaderIconButton
-				disabled={!form?.draftQuestions.length}
+				disabled={!fields?.length}
 				tooltip="Preview"
 				icon={<IconEye />}
 				onClick={modalActions.open}

@@ -1,7 +1,4 @@
-import type {
-	QuestionGroups,
-	QuestionTypes,
-} from "../../../constants/questions";
+import type { QuestionGroups, QuestionTypes } from "../../constants/questions";
 
 type TQuestionBase = {
 	id: string;

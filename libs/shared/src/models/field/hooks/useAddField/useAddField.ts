@@ -2,10 +2,10 @@ import { useCallback } from "react";
 import type { QuestionTypes } from "~/constants/questions";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
+import { getCreateFieldPayload } from "../../helpers/getCreateFieldPayload";
+import { getNewFieldOrder } from "../../helpers/getNewFieldOrder";
 import { useOrderedFormFields } from "../../read";
 import { createField, updateFieldsOrder } from "../../write";
-import { getCreateFieldPayload } from "./helpers/getCreateFieldPayload";
-import { getNewFieldOrder } from "./helpers/getNewFieldOrder";
 
 type AddFieldParams = {
 	type: QuestionTypes;
@@ -35,11 +35,11 @@ export const useAddField = () => {
 				payload: newField,
 			});
 
-			const orderedFieldsNanoIds = fields
-				.map(({ nanoId }) => nanoId)
-				.toSpliced(newField.order, 0, newField.nanoId);
+			const orderedFieldsIds = fields
+				.map(({ id }) => id)
+				.toSpliced(newField.order, 0, newField.id);
 
-			await updateFieldsOrder(orderedFieldsNanoIds);
+			await updateFieldsOrder(orderedFieldsIds);
 
 			return { nanoId: newFieldNanoId };
 		},

@@ -1,6 +1,6 @@
 import { type InstantReactWeb, init } from "@instantdb/react";
+import type { TQuestion } from "./field/schema";
 import type { TForm } from "./form/schema/form";
-import type { TQuestion } from "./question/schema/question";
 import type { TUser } from "./user/schema/user";
 import type { TWorkspace } from "./workspace/schema/workspace";
 

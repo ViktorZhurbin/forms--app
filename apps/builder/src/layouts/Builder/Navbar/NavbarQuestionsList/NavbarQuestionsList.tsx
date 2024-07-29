@@ -1,10 +1,8 @@
 import { SortableDndList } from "@/shared/components/SortableDndList/SortableDndList";
-import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
+import { deleteField, updateFieldsOrder } from "@/shared/models/field/write";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import type { TForm } from "@/shared/models/form/schema/form";
-import { updateForm } from "@/shared/models/form/write";
-import { useDeleteQuestion } from "@/shared/models/form/write/hooks/useDeleteQuestion";
 import { ScrollArea } from "@mantine/core";
 import { useCallback } from "react";
 import { navigateToQuestion } from "../../utils/navigateToQuestion";
@@ -21,12 +19,8 @@ type Question = NavbarQuestionsListProps["questions"][number];
 export const NavbarQuestionsList = ({
 	questions = [],
 }: NavbarQuestionsListProps) => {
-	const formNanoId = useFormNanoId();
-
 	const firstQuestion = questions?.[0];
 	const selectedBlockId = useSelectedBlockId(firstQuestion?.nanoId);
-
-	const { deleteQuestion } = useDeleteQuestion();
 
 	const DragOverlayItem = ({ activeItem }: { activeItem: Question }) => (
 		<NavbarQuestion
@@ -42,15 +36,11 @@ export const NavbarQuestionsList = ({
 		/>
 	);
 
-	const onDragEnd = useCallback(
-		(newQuestions: Question[]): void => {
-			updateForm({
-				nanoId: formNanoId,
-				draftQuestions: newQuestions,
-			});
-		},
-		[formNanoId],
-	);
+	const onDragEnd = useCallback((newQuestions: Question[]): void => {
+		const orderedFieldsIds = newQuestions.map(({ id }) => id);
+
+		updateFieldsOrder(orderedFieldsIds);
+	}, []);
 
 	const Options = ({ activeItemId }: { activeItemId?: string }) =>
 		questions.map(({ id, nanoId, type, group, title }, index, questions) => {
@@ -61,7 +51,7 @@ export const NavbarQuestionsList = ({
 			const newSelectedBlockId = (prevQuestion ?? nextQuestion)?.nanoId;
 
 			const handleDelete = async () => {
-				await deleteQuestion(id);
+				await deleteField({ id });
 
 				if (newSelectedBlockId) {
 					navigateToQuestion({ nanoId: newSelectedBlockId });

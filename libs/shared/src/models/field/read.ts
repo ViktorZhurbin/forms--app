@@ -6,8 +6,10 @@ const useCurrentFormFieldsQuery = () => {
 
 	return useDbQuery({
 		fields: {
-			$: {
-				where: { formNanoId },
+			forms: {
+				$: {
+					where: { formNanoId },
+				},
 			},
 		},
 	});

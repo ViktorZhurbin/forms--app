@@ -1,6 +1,6 @@
 import { id, lookup, tx } from "@instantdb/react";
 import { useCallback } from "react";
-import type { FieldTypes } from "~/constants/fields";
+import type { FieldTypes } from "~/constants/field";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
 import { dbTransact } from "~/models/db";

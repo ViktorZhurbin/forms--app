@@ -1,5 +1,5 @@
+import type { FieldTypes } from "@/shared/constants/field";
 import { QuestionTypesMap } from "@/shared/constants/fieldMaps";
-import type { FieldTypes } from "@/shared/constants/fields";
 import { Button, Text } from "@mantine/core";
 import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
 import styles from "./AddBlockModalQuestionItem.module.css";

@@ -1,8 +1,8 @@
+import type { FieldTypes } from "@/shared/constants/field";
 import {
 	QuestionTypesMap,
 	getGroupInfoByFieldType,
 } from "@/shared/constants/fieldMaps";
-import type { FieldTypes } from "@/shared/constants/fields";
 import { Group, Text } from "@mantine/core";
 import styles from "./QuestionTag.module.css";
 

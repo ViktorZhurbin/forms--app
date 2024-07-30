@@ -1,5 +1,5 @@
 import { id } from "@instantdb/react";
-import { FieldTypes } from "~/constants/fields";
+import { FieldTypes } from "~/constants/field";
 import { makeSubId } from "~/utils/makeId";
 import type { TField, TFieldChoice, TFieldShortText } from "../schema";
 import { getChoiceFieldOptionPayload } from "./getChoiceFieldOptionPayload";

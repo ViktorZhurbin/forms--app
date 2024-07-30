@@ -4,7 +4,7 @@ import {
 	IconCheckbox,
 	IconCircleDot,
 } from "@tabler/icons-react";
-import { FieldTypes } from "./fields";
+import { FieldTypes } from "./field";
 
 const QuestionTypesMap = {
 	[FieldTypes.YesNo]: {

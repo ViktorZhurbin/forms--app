@@ -1,5 +1,5 @@
+import type { FieldTypes } from "@/shared/constants/field";
 import { FieldGroupsInfo } from "@/shared/constants/fieldMaps";
-import type { FieldTypes } from "@/shared/constants/fields";
 import { Title } from "@mantine/core";
 import type { CSSProperties } from "react";
 import { AddBlockModalQuestionItem } from "../AddBlockModalQuestionItem/AddBlockModalQuestionItem";

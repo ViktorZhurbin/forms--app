@@ -43,8 +43,9 @@ export const FormView = ({ questions, exitButton }: FormViewProps) => {
 			<Progress
 				size="sm"
 				radius={0}
+				aria-label="Form completion in percentage"
 				className={styles.progress}
-				value={(100 / questions.length) * (currentStep + 1)}
+				value={Math.round((100 / questions.length) * (currentStep + 1))}
 				transitionDuration={300}
 			/>
 

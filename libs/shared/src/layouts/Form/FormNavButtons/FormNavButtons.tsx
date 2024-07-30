@@ -23,6 +23,7 @@ export const FormNavButtons = (props: FormNavButtonsProps) => {
 		<div className={`${className} ${styles.root}`}>
 			<ActionIcon
 				size="lg"
+				aria-label="Previous step"
 				disabled={isPrevDisabled}
 				onClick={onClickPrev}
 				onKeyDown={(event) => {
@@ -36,7 +37,12 @@ export const FormNavButtons = (props: FormNavButtonsProps) => {
 				<IconChevronUp />
 			</ActionIcon>
 
-			<ActionIcon size="lg" disabled={isNextDisabled} onClick={onClickNext}>
+			<ActionIcon
+				aria-label="Next step"
+				size="lg"
+				disabled={isNextDisabled}
+				onClick={onClickNext}
+			>
 				<IconChevronDown />
 			</ActionIcon>
 		</div>

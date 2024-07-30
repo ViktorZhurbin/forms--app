@@ -32,10 +32,11 @@ export default defineConfig(({ env, command, envMode }) => {
 		performance: {
 			chunkSplit: {
 				strategy: "split-by-experience",
-				// forceSplitting: {
-				// 	"lib-ui": /node_modules[\\/](@mantine[\\/]*|@tabler\/*)/,
-				// 	"lib-instant": /node_modules[\\/]@instantdb\/*/,
-				// },
+				forceSplitting: {
+					"lib-ui": /node_modules[\\/](@mantine|@floating-ui|@tabler)\/*/,
+					"lib-instant": /node_modules\/(@instantdb|object-hash|immer)\/*/,
+					"lib-ui-extras": /node_modules\/(@dnd-kit|@use-gesture)\/*/,
+				},
 			},
 		},
 

@@ -10,6 +10,16 @@
 		"rsdoctor": "RSDOCTOR=true pnpm run build",
 		"deps-check": "pnpx depcruise src --include-only '^src'"
 	},
+	"browserslist": {
+    "production": [
+			"last 2 versions",
+      "> 1%",
+      "not dead"
+    ],
+    "development": [
+      "last 2 chrome version"
+    ]
+  },
 	"dependencies": {
 		"@dnd-kit/core": "^6.1.0",
 		"@dnd-kit/modifiers": "^7.0.0",
@@ -23,20 +33,21 @@
 		"@react-oauth/google": "^0.12.1",
 		"@tabler/icons-react": "^3.11.0",
 		"@use-gesture/react": "^10.3.1",
-		"clsx": "^2.1.1",
 		"es-toolkit": "^1.13.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"wouter": "^3.3.1"
 	},
 	"devDependencies": {
-		"@rsbuild/core": "^1.0.1-beta.6",
-		"@rsbuild/plugin-react": "^1.0.1-beta.6",
-		"@rsbuild/plugin-source-build": "^1.0.1-beta.6",
-		"@rsbuild/plugin-type-check": "^1.0.1-beta.6",
+		"@rsbuild/core": "^1.0.1-beta.7",
+		"@rsbuild/plugin-react": "^1.0.1-beta.7",
+		"@rsbuild/plugin-source-build": "^1.0.1-beta.7",
+		"@rsbuild/plugin-type-check": "^1.0.1-beta.7",
 		"@rsdoctor/rspack-plugin": "^0.3.10",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
+		"autoprefixer": "^10.4.19",
+		"clsx": "^2.1.1",
 		"postcss": "^8.4.40",
 		"postcss-preset-mantine": "^1.17.0",
 		"postcss-simple-vars": "^7.0.1"

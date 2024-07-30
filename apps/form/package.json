@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "rsbuild dev --port 5174",
 		"build": "rsbuild build",
-		"preview": "rsbuild preview",
+		"preview": "rsbuild preview --open --port 5174",
 		"bundle-analyzer": "BUNDLE_ANALYZE=true pnpm run build",
 		"rsdoctor": "RSDOCTOR=true pnpm run build",
 		"deps-check": "pnpx depcruise src --include-only '^src'"

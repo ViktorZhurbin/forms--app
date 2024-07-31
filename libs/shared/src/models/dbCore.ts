@@ -1,8 +1,8 @@
-import { type Query, init as vanillaInit } from "@instantdb/core";
+import { type Query, init } from "@instantdb/core";
 import { APP_ID } from "~/constants/app";
 import type { Schema } from "./schema";
 
-const dbCore = vanillaInit<Schema>({
+const dbCore = init<Schema>({
 	appId: APP_ID,
 });
 

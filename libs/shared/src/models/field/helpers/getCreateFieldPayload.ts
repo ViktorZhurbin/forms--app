@@ -1,7 +1,7 @@
 import { id } from "@instantdb/react";
 import { FieldTypes } from "~/constants/field";
 import { makeSubId } from "~/utils/makeId";
-import type { TField, TFieldChoice, TFieldShortText } from "../schema";
+import type { TField, TFieldChoice, TFieldText } from "../schema";
 import { getChoiceFieldOptionPayload } from "./getChoiceFieldOptionPayload";
 
 const getCreateFieldPayload = ({
@@ -44,7 +44,7 @@ const getCreateFieldPayload = ({
 		case FieldTypes.ShortText:
 			update = {
 				textPlaceholder: "Your answer here...",
-			} as Pick<TFieldShortText, "textPlaceholder">;
+			} as Pick<TFieldText, "textPlaceholder">;
 
 			break;
 	}

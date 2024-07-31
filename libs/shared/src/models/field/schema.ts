@@ -10,45 +10,22 @@ type TFieldBase = {
 	buttonText: string;
 };
 
-interface TFieldChoice extends TFieldBase {
-	options: TOption[];
-}
-
-type TOption = {
+type TChoice = {
 	id: string;
 	text: string;
 	nanoId: string;
 };
 
-interface TFieldYesNo extends TFieldChoice {
-	type: FieldTypes.YesNo;
+interface TFieldChoice extends TFieldBase {
+	type: FieldTypes.Checkboxes | FieldTypes.MultipleChoice | FieldTypes.YesNo;
+	options: TChoice[];
 }
 
-interface TFieldCheckboxes extends TFieldChoice {
-	type: FieldTypes.Checkboxes;
-}
-
-interface TFieldMultipleChoiceSingle extends TFieldChoice {
-	type: FieldTypes.MultipleChoice;
-}
-
-interface TFieldShortText extends TFieldBase {
+interface TFieldText extends TFieldBase {
 	type: FieldTypes.ShortText;
 	textPlaceholder: string;
 }
 
-type TField =
-	| TFieldYesNo
-	| TFieldCheckboxes
-	| TFieldMultipleChoiceSingle
-	| TFieldShortText;
+type TField = TFieldChoice | TFieldText;
 
-export type {
-	TFieldBase,
-	TField,
-	TOption,
-	TFieldYesNo,
-	TFieldChoice,
-	TFieldCheckboxes,
-	TFieldShortText,
-};
+export type { TField, TFieldChoice, TFieldText };

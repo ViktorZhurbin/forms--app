@@ -3,18 +3,22 @@ import type { TField } from "~/models/field/schema";
 
 type ShortTextProps = {
 	placeholder: string;
+	setValue: (value: string) => void;
 	questionId: TField["id"];
 };
 
 export const ShortText = ({
 	// questionId,
+	setValue,
 	placeholder,
 }: ShortTextProps) => {
 	return (
 		<TextInput
 			w="100%"
 			placeholder={placeholder}
-			// onBlur={handleEdit}
+			onBlur={(event) => {
+				setValue(event.target.value);
+			}}
 		/>
 	);
 };

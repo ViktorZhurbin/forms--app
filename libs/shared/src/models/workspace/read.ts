@@ -7,7 +7,7 @@ const useCurrentWorkspaceWithFormsQuery = () => {
 	return useDbQuery({
 		workspaces: {
 			$: { where: { nanoId } },
-			forms: {},
+			forms: { responses: {} },
 		},
 	});
 };

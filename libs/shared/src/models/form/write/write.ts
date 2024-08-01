@@ -15,7 +15,6 @@ const createForm = async ({
 		nanoId,
 		isDemo,
 		name: getDummyFormTitle(),
-		responseCount: 0,
 	};
 
 	const formId = id();

@@ -1,4 +1,4 @@
 export enum LocalStorage {
 	DemoFormId = "demo-form-id",
-	ResponseWithFormId = "response-id",
+	ResponseByFormId = "response-by-form-id",
 }

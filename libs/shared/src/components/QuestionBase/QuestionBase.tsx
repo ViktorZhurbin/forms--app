@@ -8,7 +8,7 @@ interface QuestionBaseProps {
 	order: number;
 	isLast: boolean;
 	Title: React.FC<{ title: string }>;
-	Question: React.FC;
+	Question: React.ReactElement;
 	ButtonSubmit: React.FC<{ className: string; text: string }>;
 }
 
@@ -34,7 +34,7 @@ export const QuestionBase = ({
 				</div>
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						<Question />
+						{Question}
 					</Stack>
 
 					<ButtonSubmit

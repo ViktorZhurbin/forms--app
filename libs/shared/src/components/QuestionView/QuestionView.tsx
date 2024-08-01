@@ -1,51 +1,55 @@
 import { Button, Title } from "@mantine/core";
-import { useRef, useState } from "react";
 import { FieldTypes } from "~/constants/field";
 import type { FormQuestionsProps } from "~/layouts/Form/FormQuestions/FormQuestions";
-import type { TField, TFieldChoice } from "~/models/field/schema";
+import type { TField } from "~/models/field/schema";
+import type {
+	TAnswer,
+	TAnswerChoice,
+	TAnswerText,
+} from "~/models/response/schema";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
 import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
 import { ShortText } from "../questions/ShortText/ShortText";
 
 interface QuestionViewProps {
-	question: TField;
+	field: TField;
 	order: number;
 	isLast: boolean;
-	goToNextStep: FormQuestionsProps["goToNextStep"];
+	answer?: TAnswer;
+	onAnswer: (answer: TAnswer) => void;
 	onSubmit: FormQuestionsProps["onSubmit"];
+	goToNextStep: FormQuestionsProps["goToNextStep"];
 }
 
 export const QuestionView = ({
 	order,
 	isLast,
-	question,
+	field,
+	answer,
 	goToNextStep,
 	onSubmit,
+	onAnswer,
 }: QuestionViewProps) => {
-	const onSubmitRef = useRef<() => void>(null);
-
 	return (
 		<QuestionBase
 			order={order}
 			isLast={isLast}
-			question={question}
+			question={field}
+			// TODO: pass ReactElement instead
 			Title={(props: { title: string }) => (
 				<Title order={1}>{props.title}</Title>
 			)}
-			Question={() => (
+			Question={
 				<QuestionComponent
-					question={question}
+					field={field}
+					answer={answer}
 					goToNextStep={goToNextStep}
-					onSubmit={onSubmit}
-					onSubmitRef={onSubmitRef}
+					onAnswer={onAnswer}
 				/>
-			)}
+			}
+			// TODO: pass ReactElement instead
 			ButtonSubmit={(props: { className: string; text: string }) => (
-				<Button
-					type="submit"
-					onClick={onSubmitRef.current ?? undefined}
-					className={props.className}
-				>
+				<Button type="submit" onClick={onSubmit} className={props.className}>
 					{props.text}
 				</Button>
 			)}
@@ -54,59 +58,35 @@ export const QuestionView = ({
 };
 
 function QuestionComponent({
-	question,
-	onSubmit,
-	onSubmitRef,
+	field,
+	answer,
+	onAnswer,
 	goToNextStep,
-}: Pick<QuestionViewProps, "question" | "goToNextStep" | "onSubmit"> & {
-	onSubmitRef: React.MutableRefObject<(() => void) | null>;
-}) {
-	const [textValue, setTextValue] = useState("");
-	const [selectedChoices, setSelectedChoices] = useState<
-		TFieldChoice["options"]
-	>([]);
-
-	const baseAnswer = {
-		fieldId: question.id,
-		type: question.type,
-	};
-
-	switch (question.type) {
+}: Pick<QuestionViewProps, "field" | "answer" | "goToNextStep" | "onAnswer">) {
+	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:
 		case FieldTypes.MultipleChoice: {
-			onSubmitRef.current = () => {
-				onSubmit({
-					...baseAnswer,
-					value: selectedChoices,
-				});
-			};
-
 			return (
 				<MultipleChoice
-					questionId={question.id}
-					options={question.options}
-					questionType={question.type}
-					setChoices={setSelectedChoices}
-					selectedChoices={selectedChoices}
-					onSelect={goToNextStep}
+					fieldId={field.id}
+					fieldType={field.type}
+					options={field.options}
+					answer={answer as TAnswerChoice | undefined}
+					onAnswer={onAnswer}
+					goToNextStep={goToNextStep}
 				/>
 			);
 		}
 
 		case FieldTypes.ShortText: {
-			onSubmitRef.current = () => {
-				onSubmit({
-					...baseAnswer,
-					value: textValue,
-				});
-			};
-
 			return (
 				<ShortText
-					questionId={question.id}
-					setValue={setTextValue}
-					placeholder={question.textPlaceholder}
+					fieldId={field.id}
+					fieldType={field.type}
+					onAnswer={onAnswer}
+					placeholder={field.textPlaceholder}
+					initialValue={(answer?.value ?? "") as TAnswerText["value"]}
 				/>
 			);
 		}

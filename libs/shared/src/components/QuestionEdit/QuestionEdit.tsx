@@ -45,7 +45,7 @@ export const QuestionEdit = ({
 					onEdit={onEditTitle}
 				/>
 			)}
-			Question={() => <QuestionComponent question={question} />}
+			Question={<QuestionComponent question={question} />}
 			ButtonSubmit={({
 				text,
 				className,

@@ -13,11 +13,13 @@ interface TAnswerText extends TAnswerBase {
 	value: string;
 }
 
-export type TAnswer = TAnswerChoice | TAnswerText;
+type TAnswer = TAnswerChoice | TAnswerText;
 
-export type TResponse = {
+type TResponse = {
 	id: string;
 	submittedAt?: string;
 	updatedAt: string;
 	answers: TAnswer[];
 };
+
+export type { TResponse, TAnswer, TAnswerChoice, TAnswerText };

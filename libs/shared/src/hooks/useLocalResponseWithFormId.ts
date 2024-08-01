@@ -4,7 +4,7 @@ import { LocalStorage } from "~/constants/localStorage";
 export const useLocalResponseWithFormId = () => {
 	return useLocalStorage<{ responseId: string; formNanoId: string }>({
 		key: LocalStorage.ResponseWithFormId,
-		defaultValue: { responseId: "1", formNanoId: "1" },
+		defaultValue: { responseId: "", formNanoId: "" },
 		serialize: (value) => {
 			return JSON.stringify(value);
 		},

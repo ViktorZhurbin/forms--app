@@ -1,53 +1,61 @@
 import { Checkbox, Radio } from "@mantine/core";
+import { useState } from "react";
 import { FieldTypes } from "~/constants/field";
 import type { TField, TFieldChoice } from "~/models/field/schema";
+import type { TAnswerChoice } from "~/models/response/schema";
 import styles from "./MultipleChoice.module.css";
 import { OptionButton } from "./OptionButton/OptionButton";
 
 export type MultipleChoiceProps = {
-	questionId: TField["id"];
-	questionType: TField["type"];
+	fieldId: TField["id"];
+	fieldType: TField["type"];
 	options: TFieldChoice["options"];
-	onSelect: () => void;
-	selectedChoices: TFieldChoice["options"];
-	setChoices: (choices: TFieldChoice["options"]) => void;
+	goToNextStep: () => void;
+	answer?: TAnswerChoice;
+	onAnswer: (answer: TAnswerChoice) => void;
 };
 
 export const MultipleChoice = ({
-	// questionId,
+	fieldId,
 	options,
-	// onSelect,
-	setChoices,
-	selectedChoices,
-	questionType,
+	answer,
+	onAnswer,
+	goToNextStep,
+	fieldType,
 }: MultipleChoiceProps) => {
-	const canChooseMany = questionType === FieldTypes.Checkboxes;
+	const [selectedChoices, setSelectedChoices] = useState<
+		TFieldChoice["options"]
+	>(answer?.value ?? []);
+
+	const canChooseMany = fieldType === FieldTypes.Checkboxes;
 	const Indicator = canChooseMany ? Checkbox.Indicator : Radio.Indicator;
+
+	const handleAnswer = (value: TAnswerChoice["value"]) => {
+		setSelectedChoices(value);
+		onAnswer({ value, fieldId, type: fieldType });
+
+		if (
+			fieldType === FieldTypes.YesNo ||
+			fieldType === FieldTypes.MultipleChoice
+		) {
+			setTimeout(goToNextStep, 200);
+		}
+	};
 
 	return (
 		<div className={styles.wrapper}>
 			{options.map((option, index) => {
-				const handleSelect = () => {
-					if (selectedChoices.find(({ id }) => id === option.id)) {
-						const choices = selectedChoices.filter(
-							({ id }) => id !== option.id,
-						);
-						setChoices(choices);
+				const isSelected = !!selectedChoices.find(({ id }) => id === option.id);
 
-						return;
+				const handleSelect = () => {
+					let choices = [];
+					if (isSelected) {
+						choices = selectedChoices.filter(({ id }) => id !== option.id);
+					} else {
+						choices = canChooseMany ? selectedChoices.concat(option) : [option];
 					}
 
-					const choices = canChooseMany
-						? selectedChoices.concat(option)
-						: [option];
-
-					setChoices(choices);
-
-					// if (!canChooseMany) {
-					// 	setTimeout(() => {
-					// 		onSelect();
-					// 	}, 100);
-					// }
+					handleAnswer(choices);
 				};
 
 				return (
@@ -58,7 +66,7 @@ export const MultipleChoice = ({
 						Indicator={Indicator}
 						placeholder={`Option ${index + 1}`}
 						onClick={handleSelect}
-						isSelected={!!selectedChoices.find(({ id }) => id === option.id)}
+						isSelected={isSelected}
 					/>
 				);
 			})}

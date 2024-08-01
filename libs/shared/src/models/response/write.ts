@@ -1,4 +1,5 @@
 import { id, lookup, tx } from "@instantdb/react";
+import { getNowISOString } from "~/utils/date";
 import { dbTransact } from "../db";
 import type { TForm } from "../form/schema/form";
 import type { TResponse } from "./schema";
@@ -9,7 +10,7 @@ const createResponse = async ({
 }: { formNanoId: TForm["nanoId"]; answers: TResponse["answers"] }) => {
 	const response: Omit<TResponse, "id"> = {
 		answers,
-		updatedAt: new Date().toISOString(),
+		updatedAt: getNowISOString(),
 	};
 
 	const responseId: string = id();
@@ -28,11 +29,11 @@ const updateResponse = async ({
 	payload,
 }: {
 	id: TResponse["id"];
-	payload: Pick<TResponse, "answers" | "submittedAt">;
+	payload: Partial<TResponse>;
 }) => {
 	const update = {
 		...payload,
-		updatedAt: new Date().toISOString(),
+		updatedAt: getNowISOString(),
 	};
 
 	await dbTransact([tx.responses[id].update(update)]);

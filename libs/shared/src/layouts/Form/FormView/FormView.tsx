@@ -1,11 +1,11 @@
 import { Progress } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { useFormGestures } from "~/hooks/useFormGestures";
-import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
 import type { TField } from "~/models/field/schema";
-import type { TAnswer, TResponse } from "~/models/response/schema";
-import { createResponse, updateResponse } from "~/models/response/write";
+import type { TResponse } from "~/models/response/schema";
+import { updateResponse } from "~/models/response/write";
+import { getNowISOString } from "~/utils/date";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
 import { FormQuestions } from "../FormQuestions/FormQuestions";
 import styles from "./FormView.module.css";
@@ -22,12 +22,7 @@ export const FormView = ({
 	response,
 	exitButton,
 }: FormViewProps) => {
-	const [{ responseId }, setLocalResponseWithFormId] =
-		useLocalResponseWithFormId();
-
-	console.log({ responseId, response });
-
-	const formNanoId = useFormNanoId();
+	const [{ responseId }] = useLocalResponseWithFormId();
 
 	const [currentStep, setCurrentStep] = useState(0);
 
@@ -51,41 +46,16 @@ export const FormView = ({
 		goToPreviousStep,
 	});
 
-	const handleSubmit = useCallback(
-		async (answer: TAnswer) => {
-			const answers = [...(response?.answers ?? []), answer];
-
-			if (!responseId) {
-				const responseId = await createResponse({ formNanoId, answers });
-				setLocalResponseWithFormId({ formNanoId, responseId });
-				goToNextStep();
-
-				return;
-			}
-
-			if (isLastStep) {
-				await updateResponse({
-					id: responseId,
-					payload: { answers, submittedAt: new Date().toISOString() },
-				});
-
-				return;
-			}
-
+	const handleSubmit = useCallback(async () => {
+		if (isLastStep) {
 			await updateResponse({
 				id: responseId,
-				payload: { answers },
+				payload: { submittedAt: getNowISOString() },
 			});
-		},
-		[
-			responseId,
-			formNanoId,
-			setLocalResponseWithFormId,
-			goToNextStep,
-			isLastStep,
-			response?.answers,
-		],
-	);
+		} else {
+			goToNextStep();
+		}
+	}, [isLastStep, responseId, goToNextStep]);
 
 	return (
 		<div {...bind()} className={styles.container}>
@@ -103,6 +73,7 @@ export const FormView = ({
 			<FormQuestions
 				currentStep={currentStep}
 				questions={questions}
+				answers={response?.answers}
 				onSubmit={handleSubmit}
 				goToNextStep={goToNextStep}
 			/>

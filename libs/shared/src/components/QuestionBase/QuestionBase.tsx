@@ -1,27 +1,20 @@
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
-import type { TField } from "~/models/field/schema";
 import styles from "./QuestionBase.module.css";
 
 interface QuestionBaseProps {
-	question: TField;
 	order: number;
-	isLast: boolean;
-	Title: React.FC<{ title: string }>;
-	Question: React.ReactElement;
-	ButtonSubmit: React.FC<{ className: string; text: string }>;
+	title: React.ReactElement;
+	question: React.ReactElement;
+	buttonSubmit: React.ReactElement;
 }
 
 export const QuestionBase = ({
 	order,
-	isLast,
-	Title,
+	title,
 	question,
-	Question,
-	ButtonSubmit,
+	buttonSubmit,
 }: QuestionBaseProps) => {
-	const buttonTextFallback = isLast ? "Submit" : "OK";
-
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
@@ -30,17 +23,14 @@ export const QuestionBase = ({
 						<Text>{order}</Text> <IconArrowRight />
 					</div>
 
-					<Title title={question?.title || "..."} />
+					{title}
 				</div>
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						{Question}
+						{question}
 					</Stack>
 
-					<ButtonSubmit
-						className={styles.submitButton}
-						text={question.buttonText || buttonTextFallback}
-					/>
+					{buttonSubmit}
 				</div>
 			</div>
 		</div>

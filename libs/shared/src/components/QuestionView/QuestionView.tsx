@@ -8,6 +8,7 @@ import type {
 	TAnswerText,
 } from "~/models/response/schema";
 import { QuestionBase } from "../QuestionBase/QuestionBase";
+import { getFieldProps } from "../QuestionBase/getFieldProps";
 import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
 import { ShortText } from "../questions/ShortText/ShortText";
 
@@ -30,34 +31,30 @@ export const QuestionView = ({
 	onSubmit,
 	onAnswer,
 }: QuestionViewProps) => {
+	const { button, title } = getFieldProps({ field, isLast });
+
 	return (
 		<QuestionBase
 			order={order}
-			isLast={isLast}
-			question={field}
-			// TODO: pass ReactElement instead
-			Title={(props: { title: string }) => (
-				<Title order={1}>{props.title}</Title>
-			)}
-			Question={
-				<QuestionComponent
+			title={<Title order={1}>{title}</Title>}
+			question={
+				<FieldComponent
 					field={field}
 					answer={answer}
 					goToNextStep={goToNextStep}
 					onAnswer={onAnswer}
 				/>
 			}
-			// TODO: pass ReactElement instead
-			ButtonSubmit={(props: { className: string; text: string }) => (
-				<Button type="submit" onClick={onSubmit} className={props.className}>
-					{props.text}
+			buttonSubmit={
+				<Button type="submit" onClick={onSubmit} className={button.className}>
+					{button.text}
 				</Button>
-			)}
+			}
 		/>
 	);
 };
 
-function QuestionComponent({
+function FieldComponent({
 	field,
 	answer,
 	onAnswer,

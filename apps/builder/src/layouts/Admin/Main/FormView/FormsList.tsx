@@ -9,15 +9,15 @@ import { IconTrash } from "@tabler/icons-react";
 import { Redirect } from "wouter";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
-import styles from "./FormsView.module.css";
+import styles from "./FormsList.module.css";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
 
 type FormsViewProps = {
-	view: FormsLayout;
+	viewType: FormsLayout;
 };
 
-export const FormsView = ({ view }: FormsViewProps) => {
+export const FormsList = ({ viewType }: FormsViewProps) => {
 	const { isLoading, error, data } = useCurrentWorkspaceWithFormsQuery();
 
 	if (isLoading || error) {
@@ -31,7 +31,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 		return <Redirect to={Routes.ROOT} />;
 	}
 
-	const ViewComponent = view === FormsLayout.List ? ListView : GridView;
+	const ViewComponent = viewType === FormsLayout.List ? ListView : GridView;
 
 	const getDeleteButton = ({ nanoId }: { nanoId: TForm["nanoId"] }) => {
 		return (
@@ -49,7 +49,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 		);
 	};
 
-	const Wrapper = view === FormsLayout.List ? Stack : Group;
+	const Wrapper = viewType === FormsLayout.List ? Stack : Group;
 
 	return (
 		<Wrapper gap={8}>
@@ -63,7 +63,7 @@ export const FormsView = ({ view }: FormsViewProps) => {
 						getDeleteButton={getDeleteButton}
 						responsesText={pluralize({
 							singular: "response",
-							count: form.responseCount,
+							count: form.responses.length,
 						})}
 					/>
 				</SkeletonWrapper>

@@ -18,8 +18,8 @@ interface QuestionViewProps {
 	isLast: boolean;
 	answer?: TAnswer;
 	onAnswer: (answer: TAnswer) => void;
-	onSubmit: FormQuestionsProps["onSubmit"];
 	goToNextStep: FormQuestionsProps["goToNextStep"];
+	onSubmit: () => void;
 }
 
 export const QuestionView = ({

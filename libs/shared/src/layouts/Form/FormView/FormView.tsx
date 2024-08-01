@@ -1,11 +1,8 @@
 import { Progress } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { useFormGestures } from "~/hooks/useFormGestures";
-import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
 import type { TField } from "~/models/field/schema";
 import type { TResponse } from "~/models/response/schema";
-import { updateResponse } from "~/models/response/write";
-import { getNowISOString } from "~/utils/date";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
 import { FormQuestions } from "../FormQuestions/FormQuestions";
 import styles from "./FormView.module.css";
@@ -22,8 +19,6 @@ export const FormView = ({
 	response,
 	exitButton,
 }: FormViewProps) => {
-	const [{ responseId }] = useLocalResponseWithFormId();
-
 	const [currentStep, setCurrentStep] = useState(0);
 
 	const isFirstStep = currentStep === 0;
@@ -46,17 +41,6 @@ export const FormView = ({
 		goToPreviousStep,
 	});
 
-	const handleSubmit = useCallback(async () => {
-		if (isLastStep) {
-			await updateResponse({
-				id: responseId,
-				payload: { submittedAt: getNowISOString() },
-			});
-		} else {
-			goToNextStep();
-		}
-	}, [isLastStep, responseId, goToNextStep]);
-
 	return (
 		<div {...bind()} className={styles.container}>
 			<Progress
@@ -74,7 +58,6 @@ export const FormView = ({
 				currentStep={currentStep}
 				questions={questions}
 				answers={response?.answers}
-				onSubmit={handleSubmit}
 				goToNextStep={goToNextStep}
 			/>
 

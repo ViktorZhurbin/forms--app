@@ -5,6 +5,7 @@ import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
 import type { TField } from "~/models/field/schema";
 import type { TAnswer } from "~/models/response/schema";
 import { createResponse, updateResponse } from "~/models/response/write";
+import { getNowISOString } from "~/utils/date";
 import styles from "./FormQuestions.module.css";
 import { getPosition } from "./getPosition";
 
@@ -12,7 +13,6 @@ export type FormQuestionsProps = {
 	currentStep: number;
 	questions: TField[];
 	answers?: TAnswer[];
-	onSubmit: () => void;
 	goToNextStep: () => void;
 };
 
@@ -20,7 +20,6 @@ export const FormQuestions = ({
 	questions,
 	answers = [],
 	currentStep,
-	onSubmit,
 	goToNextStep,
 }: FormQuestionsProps) => {
 	const [{ responseId }, setLocalResponseWithFormId] =
@@ -44,8 +43,6 @@ export const FormQuestions = ({
 				.filter(({ fieldId }) => fieldId !== answer.fieldId)
 				.concat(answer);
 
-			console.log(newAnswers);
-
 			await updateResponse({
 				id: responseId,
 				payload: { answers: newAnswers },
@@ -53,6 +50,18 @@ export const FormQuestions = ({
 		},
 		[responseId, formNanoId, setLocalResponseWithFormId, answers],
 	);
+
+	const isLastStep = currentStep === questions.length - 1;
+	const handleSubmit = useCallback(async () => {
+		if (isLastStep) {
+			await updateResponse({
+				id: responseId,
+				payload: { submittedAt: getNowISOString() },
+			});
+		} else {
+			goToNextStep();
+		}
+	}, [isLastStep, responseId, goToNextStep]);
 
 	return questions.flatMap((question, index) => {
 		const isRendered = Math.abs(index - currentStep) <= 1;
@@ -73,7 +82,7 @@ export const FormQuestions = ({
 					isLast={index === questions.length - 1}
 					field={question}
 					answer={answer}
-					onSubmit={onSubmit}
+					onSubmit={handleSubmit}
 					onAnswer={handleAnswer}
 					goToNextStep={goToNextStep}
 				/>

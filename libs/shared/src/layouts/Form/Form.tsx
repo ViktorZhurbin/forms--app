@@ -13,11 +13,11 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const fieldsQuery = useCurrentFormFieldsQuery();
 	const responsesQuery = useCurrentFormResponsesQuery();
 
-	const error = fieldsQuery.error || responsesQuery.error;
-	const isLoading = fieldsQuery.isLoading || responsesQuery.isLoading;
+	const error = fieldsQuery.error;
+	const isLoading = fieldsQuery.isLoading;
 
 	if (error || isLoading) {
-		return <FetchState isLoading={isLoading} error={error} />;
+		return <FetchState fullScreen isLoading={isLoading} error={error} />;
 	}
 
 	const fields = fieldsQuery.data?.fields;

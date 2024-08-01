@@ -33,18 +33,18 @@ export const QuestionView = ({
 }: QuestionViewProps) => {
 	const { button, title } = getFieldProps({ field, isLast });
 
+	const fieldComponent = getFieldComponent({
+		field,
+		answer,
+		onAnswer,
+		goToNextStep,
+	});
+
 	return (
 		<QuestionBase
 			order={order}
 			title={<Title order={1}>{title}</Title>}
-			question={
-				<FieldComponent
-					field={field}
-					answer={answer}
-					goToNextStep={goToNextStep}
-					onAnswer={onAnswer}
-				/>
-			}
+			question={fieldComponent}
 			buttonSubmit={
 				<Button type="submit" onClick={onSubmit} className={button.className}>
 					{button.text}
@@ -54,7 +54,7 @@ export const QuestionView = ({
 	);
 };
 
-function FieldComponent({
+function getFieldComponent({
 	field,
 	answer,
 	onAnswer,
@@ -89,6 +89,6 @@ function FieldComponent({
 		}
 
 		default:
-			return false;
+			return null;
 	}
 }

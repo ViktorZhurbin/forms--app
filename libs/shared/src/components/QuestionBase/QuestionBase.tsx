@@ -4,9 +4,9 @@ import styles from "./QuestionBase.module.css";
 
 interface QuestionBaseProps {
 	order: number;
-	title: React.ReactElement;
-	question: React.ReactElement;
-	buttonSubmit: React.ReactElement;
+	title: React.ReactNode;
+	question: React.ReactNode;
+	buttonSubmit: React.ReactNode;
 }
 
 export const QuestionBase = ({

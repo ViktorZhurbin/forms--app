@@ -42,7 +42,7 @@ export const QuestionEdit = ({ order, field, isLast }: QuestionEditProps) => {
 					onEdit={onEditTitle}
 				/>
 			}
-			question={<FieldComponent field={field} />}
+			question={getFieldComponent({ field })}
 			buttonSubmit={
 				<EditableButton
 					isEditable
@@ -57,7 +57,7 @@ export const QuestionEdit = ({ order, field, isLast }: QuestionEditProps) => {
 	);
 };
 
-function FieldComponent({ field }: Pick<QuestionEditProps, "field">) {
+function getFieldComponent({ field }: Pick<QuestionEditProps, "field">) {
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:

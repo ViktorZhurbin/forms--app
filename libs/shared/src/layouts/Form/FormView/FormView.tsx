@@ -3,26 +3,22 @@ import { useCallback, useState } from "react";
 import { useFormGestures } from "~/hooks/useFormGestures";
 import type { TField } from "~/models/field/schema";
 import type { TResponse } from "~/models/response/schema";
+import { FormFields } from "../FormFields/FormFields";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
-import { FormQuestions } from "../FormQuestions/FormQuestions";
 import styles from "./FormView.module.css";
 
 type FormViewProps = {
-	questions: TField[];
+	fields: TField[];
 	response?: TResponse;
 	isPreview?: boolean;
 	exitButton?: React.ReactElement;
 };
 
-export const FormView = ({
-	questions,
-	response,
-	exitButton,
-}: FormViewProps) => {
+export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
 	const [currentStep, setCurrentStep] = useState(0);
 
 	const isFirstStep = currentStep === 0;
-	const isLastStep = currentStep === questions.length - 1;
+	const isLastStep = currentStep === fields.length - 1;
 
 	const goToPreviousStep = useCallback(() => {
 		if (isFirstStep) return;
@@ -48,15 +44,15 @@ export const FormView = ({
 				radius={0}
 				aria-label="Form completion in percentage"
 				className={styles.progress}
-				value={Math.round((100 / questions.length) * (currentStep + 1))}
+				value={Math.round((100 / fields.length) * (currentStep + 1))}
 				transitionDuration={300}
 			/>
 
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
 
-			<FormQuestions
+			<FormFields
 				currentStep={currentStep}
-				questions={questions}
+				fields={fields}
 				answers={response?.answers}
 				goToNextStep={goToNextStep}
 			/>

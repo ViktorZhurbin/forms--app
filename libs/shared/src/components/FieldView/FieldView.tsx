@@ -1,28 +1,27 @@
 import { Button, Title } from "@mantine/core";
 import { FieldTypes } from "~/constants/field";
-import type { FormQuestionsProps } from "~/layouts/Form/FormQuestions/FormQuestions";
 import type { TField } from "~/models/field/schema";
 import type {
 	TAnswer,
 	TAnswerChoice,
 	TAnswerText,
 } from "~/models/response/schema";
-import { QuestionBase } from "../QuestionBase/QuestionBase";
-import { getFieldProps } from "../QuestionBase/getFieldProps";
-import { MultipleChoice } from "../questions/MultipleChoice/MultipleChoice";
-import { ShortText } from "../questions/ShortText/ShortText";
+import { FieldBase } from "../FieldBase/FieldBase";
+import { getFieldProps } from "../FieldBase/getFieldProps";
+import { MultipleChoice } from "../fields/MultipleChoice/MultipleChoice";
+import { ShortText } from "../fields/ShortText/ShortText";
 
-interface QuestionViewProps {
+interface FieldViewProps {
 	field: TField;
 	order: number;
 	isLast: boolean;
 	answer?: TAnswer;
 	onAnswer: (answer: TAnswer) => void;
-	goToNextStep: FormQuestionsProps["goToNextStep"];
 	onSubmit: () => void;
+	goToNextStep: () => void;
 }
 
-export const QuestionView = ({
+export const FieldView = ({
 	order,
 	isLast,
 	field,
@@ -30,7 +29,7 @@ export const QuestionView = ({
 	goToNextStep,
 	onSubmit,
 	onAnswer,
-}: QuestionViewProps) => {
+}: FieldViewProps) => {
 	const { button, title } = getFieldProps({ field, isLast });
 
 	const fieldComponent = getFieldComponent({
@@ -41,10 +40,10 @@ export const QuestionView = ({
 	});
 
 	return (
-		<QuestionBase
+		<FieldBase
 			order={order}
 			title={<Title order={1}>{title}</Title>}
-			question={fieldComponent}
+			field={fieldComponent}
 			buttonSubmit={
 				<Button type="submit" onClick={onSubmit} className={button.className}>
 					{button.text}
@@ -59,7 +58,7 @@ function getFieldComponent({
 	answer,
 	onAnswer,
 	goToNextStep,
-}: Pick<QuestionViewProps, "field" | "answer" | "goToNextStep" | "onAnswer">) {
+}: Pick<FieldViewProps, "field" | "answer" | "goToNextStep" | "onAnswer">) {
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:

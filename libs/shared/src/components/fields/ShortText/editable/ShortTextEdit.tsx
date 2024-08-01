@@ -6,16 +6,13 @@ import styles from "./ShortTextEdit.module.css";
 
 type ShortTextEditProps = {
 	placeholder?: string;
-	questionId: TField["id"];
+	fieldId: TField["id"];
 };
 
-export const ShortTextEdit = ({
-	questionId,
-	placeholder,
-}: ShortTextEditProps) => {
+export const ShortTextEdit = ({ fieldId, placeholder }: ShortTextEditProps) => {
 	const handleEdit: FocusEventHandler<HTMLInputElement> = (event) => {
 		updateField({
-			id: questionId,
+			id: fieldId,
 			payload: { textPlaceholder: event.currentTarget.value },
 		});
 	};

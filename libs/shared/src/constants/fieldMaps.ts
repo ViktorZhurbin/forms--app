@@ -6,7 +6,7 @@ import {
 } from "@tabler/icons-react";
 import { FieldTypes } from "./field";
 
-const QuestionTypesMap = {
+const FieldTypesMap = {
 	[FieldTypes.YesNo]: {
 		name: "Yes/No",
 		Icon: IconBan,
@@ -54,4 +54,4 @@ const getGroupInfoByFieldType = (type: FieldTypes) => {
 	}
 };
 
-export { QuestionTypesMap, FieldGroupsInfo, getGroupInfoByFieldType };
+export { FieldTypesMap, FieldGroupsInfo, getGroupInfoByFieldType };

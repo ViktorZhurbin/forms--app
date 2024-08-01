@@ -1,7 +1,7 @@
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { Main } from "../../Main/Main";
-import { NavbarQuestions } from "../../Navbar/NavbarQuestions/NavbarQuestions";
+import { NavbarFields } from "../../Navbar/NavbarFields/NavbarFields";
 import { NavbarThankYou } from "../../Navbar/NavbarThankYou/NavbarThankYou";
 import { SmallScreen } from "../../SmallScreen/SmallScreen";
 import styles from "./BuilderBase.module.css";
@@ -18,7 +18,7 @@ export const BuilderBase = ({ header }: { header: React.ReactElement }) => {
 			<header className={clsx("header", styles.header)}>{header}</header>
 
 			<nav className={clsx("nav", styles.nav)}>
-				<NavbarQuestions />
+				<NavbarFields />
 				<NavbarThankYou />
 			</nav>
 

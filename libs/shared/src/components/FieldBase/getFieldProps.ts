@@ -1,5 +1,5 @@
 import type { TField } from "~/models/field/schema";
-import styles from "./QuestionBase.module.css";
+import styles from "./FieldBase.module.css";
 
 export const getFieldProps = (params: { field: TField; isLast: boolean }) => {
 	const { field, isLast } = params;

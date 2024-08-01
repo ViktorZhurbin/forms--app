@@ -2,11 +2,11 @@ import { useDragSortable } from "@/shared/components/SortableDndList/hooks/useDr
 import type { TField } from "@/shared/models/field/schema";
 import { Button, CloseButton, Text } from "@mantine/core";
 import clsx from "clsx";
-import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
-import { navigateToQuestion } from "~/layouts/Builder/utils/navigateToQuestion";
-import styles from "./NavbarQuestion.module.css";
+import { FieldTag } from "~/components/FieldTag/FieldTag";
+import { navigateToField } from "~/layouts/Builder/utils/navigateToField";
+import styles from "./NavbarField.module.css";
 
-interface NavbarQuestionProps
+interface NavbarFieldProps
 	extends Pick<TField, "id" | "nanoId" | "type" | "title"> {
 	order?: number;
 	isSelected?: boolean;
@@ -15,7 +15,7 @@ interface NavbarQuestionProps
 	onDelete?: () => void;
 }
 
-export const NavbarQuestion = ({
+export const NavbarField = ({
 	id,
 	type,
 	title,
@@ -25,7 +25,7 @@ export const NavbarQuestion = ({
 	isDragged,
 	isSelected,
 	onDelete,
-}: NavbarQuestionProps) => {
+}: NavbarFieldProps) => {
 	const { DragHandle, wrapperProps } = useDragSortable(id);
 
 	return (
@@ -46,13 +46,13 @@ export const NavbarQuestion = ({
 			}}
 			data-active={isSelected}
 			onClick={() => {
-				navigateToQuestion({ nanoId });
+				navigateToField({ nanoId });
 			}}
 		>
 			{isGhost ? null : (
 				<>
 					<div className={styles.labelGroup}>
-						<QuestionTag type={type} text={order} />
+						<FieldTag type={type} text={order} />
 						<Text size="sm" className={styles.labelTitle}>
 							{title || "..."}
 						</Text>

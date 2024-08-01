@@ -1,20 +1,20 @@
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
-import styles from "./QuestionBase.module.css";
+import styles from "./FieldBase.module.css";
 
-interface QuestionBaseProps {
+interface FieldBaseProps {
 	order: number;
 	title: React.ReactNode;
-	question: React.ReactNode;
+	field: React.ReactNode;
 	buttonSubmit: React.ReactNode;
 }
 
-export const QuestionBase = ({
+export const FieldBase = ({
 	order,
 	title,
-	question,
+	field,
 	buttonSubmit,
-}: QuestionBaseProps) => {
+}: FieldBaseProps) => {
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
@@ -27,7 +27,7 @@ export const QuestionBase = ({
 				</div>
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">
-						{question}
+						{field}
 					</Stack>
 
 					{buttonSubmit}

@@ -3,18 +3,18 @@ import type { TField } from "~/models/field/schema";
 import { updateField } from "~/models/field/write";
 import { EditableButton } from "../EditableButton/EditableButton";
 import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
-import { QuestionBase } from "../QuestionBase/QuestionBase";
-import { getFieldProps } from "../QuestionBase/getFieldProps";
-import { MultipleChoiceEdit } from "../questions/MultipleChoice/editable/MultipleChoiceEdit";
-import { ShortTextEdit } from "../questions/ShortText/editable/ShortTextEdit";
+import { FieldBase } from "../FieldBase/FieldBase";
+import { getFieldProps } from "../FieldBase/getFieldProps";
+import { MultipleChoiceEdit } from "../fields/MultipleChoice/editable/MultipleChoiceEdit";
+import { ShortTextEdit } from "../fields/ShortText/editable/ShortTextEdit";
 
-interface QuestionEditProps {
+interface FieldEditProps {
 	order: number;
 	isLast: boolean;
 	field: TField;
 }
 
-export const QuestionEdit = ({ order, field, isLast }: QuestionEditProps) => {
+export const FieldEdit = ({ order, field, isLast }: FieldEditProps) => {
 	const onEditTitle = (title: string) => {
 		updateField({
 			id: field.id,
@@ -32,7 +32,7 @@ export const QuestionEdit = ({ order, field, isLast }: QuestionEditProps) => {
 	const { button, title } = getFieldProps({ field, isLast });
 
 	return (
-		<QuestionBase
+		<FieldBase
 			order={order}
 			title={
 				<EditableTextarea
@@ -42,7 +42,7 @@ export const QuestionEdit = ({ order, field, isLast }: QuestionEditProps) => {
 					onEdit={onEditTitle}
 				/>
 			}
-			question={getFieldComponent({ field })}
+			field={getFieldComponent({ field })}
 			buttonSubmit={
 				<EditableButton
 					isEditable
@@ -57,25 +57,22 @@ export const QuestionEdit = ({ order, field, isLast }: QuestionEditProps) => {
 	);
 };
 
-function getFieldComponent({ field }: Pick<QuestionEditProps, "field">) {
+function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:
 		case FieldTypes.MultipleChoice:
 			return (
 				<MultipleChoiceEdit
-					questionId={field.id}
-					questionType={field.type}
+					fieldId={field.id}
+					fieldType={field.type}
 					options={field.options}
 				/>
 			);
 
 		case FieldTypes.ShortText:
 			return (
-				<ShortTextEdit
-					questionId={field.id}
-					placeholder={field.textPlaceholder}
-				/>
+				<ShortTextEdit fieldId={field.id} placeholder={field.textPlaceholder} />
 			);
 
 		default:

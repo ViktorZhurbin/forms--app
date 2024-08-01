@@ -8,20 +8,20 @@ import styles from "./MultipleChoiceEdit.module.css";
 import { OptionButtonSortable } from "./OptionButtonSortable/OptionButtonSortable";
 
 export type MultipleChoiceEditProps = {
-	questionId: TField["id"];
-	questionType: TField["type"];
+	fieldId: TField["id"];
+	fieldType: TField["type"];
 	options: TFieldChoice["options"];
 };
 
 type Option = MultipleChoiceEditProps["options"][number];
 
 export const MultipleChoiceEdit = ({
-	questionId,
-	questionType,
+	fieldId,
+	fieldType,
 	options,
 }: MultipleChoiceEditProps) => {
-	const canChooseMany = questionType === FieldTypes.Checkboxes;
-	const isFixedQuestions = questionType === FieldTypes.YesNo;
+	const canChooseMany = fieldType === FieldTypes.Checkboxes;
+	const isFixedOptions = fieldType === FieldTypes.YesNo;
 	const Indicator = canChooseMany ? Checkbox.Indicator : Radio.Indicator;
 
 	const [tempNewOptionId, setTempNewOptionId] = useState<string | null>(null);
@@ -29,7 +29,7 @@ export const MultipleChoiceEdit = ({
 	const addOption = async () => {
 		const newOptionId = await createChoiceFieldOption({
 			options,
-			fieldId: questionId,
+			fieldId: fieldId,
 		});
 
 		setTempNewOptionId(newOptionId);
@@ -41,7 +41,7 @@ export const MultipleChoiceEdit = ({
 
 	const deleteOption = (id: Option["id"]) => {
 		updateField({
-			id: questionId,
+			id: fieldId,
 			payload: {
 				options: options.filter((option) => option.id !== id),
 			},
@@ -56,7 +56,7 @@ export const MultipleChoiceEdit = ({
 				);
 
 				updateField({
-					id: questionId,
+					id: fieldId,
 					payload: { options: newOptions },
 				});
 			};
@@ -89,11 +89,11 @@ export const MultipleChoiceEdit = ({
 	const onDragEnd = useCallback(
 		(newOptions: Option[]): void => {
 			updateField({
-				id: questionId,
+				id: fieldId,
 				payload: { options: newOptions },
 			});
 		},
-		[questionId],
+		[fieldId],
 	);
 
 	const DragOverlayItem = ({ activeItem }: { activeItem: Option }) => (
@@ -113,7 +113,7 @@ export const MultipleChoiceEdit = ({
 				Options={Options}
 				DragOverlayItem={DragOverlayItem}
 			/>
-			{!isFixedQuestions && (
+			{!isFixedOptions && (
 				<Anchor
 					fz="sm"
 					ta="start"

@@ -2,9 +2,9 @@ import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { useCurrentFormFieldsQuery } from "@/shared/models/field/read";
 import { Group, Stack, Text } from "@mantine/core";
 import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
-import { NavbarQuestionsList } from "../NavbarQuestionsList/NavbarQuestionsList";
+import { NavbarFieldsList } from "../NavbarFieldsList/NavbarFieldsList";
 
-export const NavbarQuestions = () => {
+export const NavbarFields = () => {
 	const { isLoading, error } = useCurrentFormFieldsQuery();
 
 	if (isLoading || error) {
@@ -20,7 +20,7 @@ export const NavbarQuestions = () => {
 				<AddBlockButton tooltip="Add block" />
 			</Group>
 
-			<NavbarQuestionsList />
+			<NavbarFieldsList />
 		</Stack>
 	);
 };

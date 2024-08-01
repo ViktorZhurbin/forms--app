@@ -2,7 +2,7 @@ import type { FieldTypes } from "@/shared/constants/field";
 import { FieldGroupsInfo } from "@/shared/constants/fieldMaps";
 import { Title } from "@mantine/core";
 import type { CSSProperties } from "react";
-import { AddBlockModalQuestionItem } from "../AddBlockModalQuestionItem/AddBlockModalQuestionItem";
+import { AddBlockModalFieldItem } from "../AddBlockModalFieldItem/AddBlockModalFieldItem";
 import styles from "./AddBlockModalContent.module.css";
 
 type AddBlockModalContentProps = {
@@ -27,7 +27,7 @@ export const AddBlockModalContent = ({
 						</Title>
 						<div className={styles.typesList}>
 							{types.map((type) => (
-								<AddBlockModalQuestionItem
+								<AddBlockModalFieldItem
 									key={type}
 									type={type}
 									onAddBlock={onAddBlock}

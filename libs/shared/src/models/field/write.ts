@@ -4,12 +4,12 @@ import type { TForm } from "../form/schema/form";
 import { getChoiceFieldOptionPayload } from "./helpers/getChoiceFieldOptionPayload";
 import type { TField, TFieldChoice } from "./schema";
 
-type CreateQuestionParams = {
+type CreateFieldParams = {
 	payload: Omit<TField, "id">;
 	formNanoId: TForm["nanoId"];
 };
 
-const createField = async ({ payload, formNanoId }: CreateQuestionParams) => {
+const createField = async ({ payload, formNanoId }: CreateFieldParams) => {
 	await dbTransact(
 		tx.fields[id()]
 			.update(payload)

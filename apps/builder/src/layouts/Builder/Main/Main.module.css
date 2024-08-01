@@ -10,7 +10,7 @@
 	gap: var(--mantine-spacing-xs);
 }
 
-.questionWrapper {
+.fieldWrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;

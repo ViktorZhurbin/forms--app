@@ -1,18 +1,18 @@
 import type { FieldTypes } from "@/shared/constants/field";
-import { QuestionTypesMap } from "@/shared/constants/fieldMaps";
+import { FieldTypesMap } from "@/shared/constants/fieldMaps";
 import { Button, Text } from "@mantine/core";
-import { QuestionTag } from "~/components/QuestionTag/QuestionTag";
-import styles from "./AddBlockModalQuestionItem.module.css";
+import { FieldTag } from "~/components/FieldTag/FieldTag";
+import styles from "./AddBlockModalFieldItem.module.css";
 
-interface AddBlockModalQuestionItemProps {
+interface AddBlockModalFieldItemProps {
 	type: FieldTypes;
 	onAddBlock: (type: FieldTypes) => void;
 }
 
-export const AddBlockModalQuestionItem = ({
+export const AddBlockModalFieldItem = ({
 	type,
 	onAddBlock,
-}: AddBlockModalQuestionItemProps) => {
+}: AddBlockModalFieldItemProps) => {
 	const handleClick = () => {
 		onAddBlock(type);
 	};
@@ -22,7 +22,7 @@ export const AddBlockModalQuestionItem = ({
 		label: styles.buttonLabel,
 	};
 
-	const { name } = QuestionTypesMap[type];
+	const { name } = FieldTypesMap[type];
 
 	return (
 		<Button
@@ -32,7 +32,7 @@ export const AddBlockModalQuestionItem = ({
 			classNames={classNames}
 			onClick={handleClick}
 		>
-			<QuestionTag type={type} />
+			<FieldTag type={type} />
 			<Text size="sm">{name}</Text>
 		</Button>
 	);

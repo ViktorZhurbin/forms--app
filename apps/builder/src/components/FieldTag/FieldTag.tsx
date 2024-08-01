@@ -1,18 +1,18 @@
 import type { FieldTypes } from "@/shared/constants/field";
 import {
-	QuestionTypesMap,
+	FieldTypesMap,
 	getGroupInfoByFieldType,
 } from "@/shared/constants/fieldMaps";
 import { Group, Text } from "@mantine/core";
-import styles from "./QuestionTag.module.css";
+import styles from "./FieldTag.module.css";
 
-type QuestionTagProps = {
+type FieldTagProps = {
 	text?: string | number;
 	type: FieldTypes;
 };
 
-export const QuestionTag = ({ text, type }: QuestionTagProps) => {
-	const { Icon } = QuestionTypesMap[type];
+export const FieldTag = ({ text, type }: FieldTagProps) => {
+	const { Icon } = FieldTypesMap[type];
 	const { bgColor } = getGroupInfoByFieldType(type);
 
 	return (

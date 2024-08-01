@@ -1,27 +1,27 @@
 import { useCallback } from "react";
-import { QuestionView } from "~/components/QuestionView/QuestionView";
+import { FieldView } from "~/components/FieldView/FieldView";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
 import type { TField } from "~/models/field/schema";
 import type { TAnswer } from "~/models/response/schema";
 import { createResponse, updateResponse } from "~/models/response/write";
 import { getNowISOString } from "~/utils/date";
-import styles from "./FormQuestions.module.css";
+import styles from "./FormFields.module.css";
 import { getPosition } from "./getPosition";
 
-export type FormQuestionsProps = {
+export type FormFieldsProps = {
 	currentStep: number;
-	questions: TField[];
+	fields: TField[];
 	answers?: TAnswer[];
 	goToNextStep: () => void;
 };
 
-export const FormQuestions = ({
-	questions,
+export const FormFields = ({
+	fields,
 	answers = [],
 	currentStep,
 	goToNextStep,
-}: FormQuestionsProps) => {
+}: FormFieldsProps) => {
 	const [{ responseId }, setLocalResponseWithFormId] =
 		useLocalResponseWithFormId();
 
@@ -51,7 +51,7 @@ export const FormQuestions = ({
 		[responseId, formNanoId, setLocalResponseWithFormId, answers],
 	);
 
-	const isLastStep = currentStep === questions.length - 1;
+	const isLastStep = currentStep === fields.length - 1;
 	const handleSubmit = useCallback(async () => {
 		if (isLastStep) {
 			await updateResponse({
@@ -63,24 +63,24 @@ export const FormQuestions = ({
 		}
 	}, [isLastStep, responseId, goToNextStep]);
 
-	return questions.flatMap((question, index) => {
+	return fields.flatMap((field, index) => {
 		const isRendered = Math.abs(index - currentStep) <= 1;
 
 		if (!isRendered) return [];
 
 		const position = getPosition(currentStep, index);
-		const answer = answers.find(({ fieldId }) => fieldId === question.id);
+		const answer = answers.find(({ fieldId }) => fieldId === field.id);
 
 		return (
 			<div
-				key={question.id}
-				className={styles.questionWrapper}
+				key={field.id}
+				className={styles.fieldWrapper}
 				data-position={position}
 			>
-				<QuestionView
+				<FieldView
 					order={index + 1}
-					isLast={index === questions.length - 1}
-					field={question}
+					isLast={index === fields.length - 1}
+					field={field}
 					answer={answer}
 					onSubmit={handleSubmit}
 					onAnswer={handleAnswer}

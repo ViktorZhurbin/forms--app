@@ -6,20 +6,18 @@ import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { ScrollArea } from "@mantine/core";
 import { useCallback } from "react";
-import { navigateToQuestion } from "../../utils/navigateToQuestion";
+import { navigateToField } from "../../utils/navigateToField";
 import { removeSelectedBlockId } from "../../utils/removeSelectedBlockId";
-import { NavbarQuestion } from "../NavbarQuestions/NavbarQuestion/NavbarQuestion";
-import styles from "./NavbarQuestionsList.module.css";
+import { NavbarField } from "../NavbarFields/NavbarField/NavbarField";
+import styles from "./NavbarFieldsList.module.css";
 
-type Question = TField;
-
-export const NavbarQuestionsList = () => {
+export const NavbarFieldsList = () => {
 	const fields = useOrderedFormFields();
 	const firstField = fields[0];
 	const selectedNanoId = useSelectedBlockId(firstField?.nanoId);
 
-	const DragOverlayItem = ({ activeItem }: { activeItem: Question }) => (
-		<NavbarQuestion
+	const DragOverlayItem = ({ activeItem }: { activeItem: TField }) => (
+		<NavbarField
 			isDragged
 			id={activeItem.id}
 			type={activeItem.type}
@@ -31,7 +29,7 @@ export const NavbarQuestionsList = () => {
 		/>
 	);
 
-	const onDragEnd = useCallback((newQuestions: Question[]): void => {
+	const onDragEnd = useCallback((newQuestions: TField[]): void => {
 		const orderedFieldsIds = newQuestions.map(({ id }) => id);
 
 		updateFieldsIndex(orderedFieldsIds);
@@ -54,14 +52,14 @@ export const NavbarQuestionsList = () => {
 				const newSelectedBlockId = (prevField ?? nextField)?.nanoId;
 
 				if (newSelectedBlockId) {
-					navigateToQuestion({ nanoId: newSelectedBlockId });
+					navigateToField({ nanoId: newSelectedBlockId });
 				} else {
 					removeSelectedBlockId();
 				}
 			};
 
 			return (
-				<NavbarQuestion
+				<NavbarField
 					id={id}
 					key={id}
 					type={type}
@@ -78,7 +76,7 @@ export const NavbarQuestionsList = () => {
 
 	return (
 		<ScrollArea scrollbars="y">
-			<div className={styles.questionsList}>
+			<div className={styles.fieldsList}>
 				<SortableDndList
 					list={fields}
 					onDragEnd={onDragEnd}

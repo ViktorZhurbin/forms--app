@@ -33,7 +33,7 @@ export const SortableDndList = <T extends { id: string }>({
 	DragOverlayItem,
 }: SortableDndListProps<T>) => {
 	const [activeItem, setActiveItem] = useState<T | null>(null);
-	const [items, setItems] = useState(list.map((question) => question.id));
+	const [items, setItems] = useState(list.map((field) => field.id));
 
 	const sensors = useSensors(
 		useSensor(PointerSensor),
@@ -44,13 +44,9 @@ export const SortableDndList = <T extends { id: string }>({
 
 	const handleDragStart = (event: DragStartEvent) => {
 		const activId = event.active.id as string;
-		const activeItem = list.find((question) => question.id === activId);
+		const activeItem = list.find((field) => field.id === activId);
 
 		setActiveItem(activeItem ?? null);
-
-		// setTimeout(() => {
-		// 	debugger;
-		// }, 1000);
 	};
 
 	const handleDragEnd = (event: DragEndEvent) => {
@@ -66,7 +62,7 @@ export const SortableDndList = <T extends { id: string }>({
 				setActiveItem(null);
 				onDragEnd(newList);
 
-				return newList.map((question) => question.id);
+				return newList.map((field) => field.id);
 			});
 		}
 	};

@@ -18,9 +18,9 @@ export const FormQuestions = ({
 	goToNextStep,
 }: FormQuestionsProps) => {
 	return questions.flatMap((question, index) => {
-		const isHidden = Math.abs(index - currentStep) > 1;
+		const isRendered = Math.abs(index - currentStep) <= 1;
 
-		if (isHidden) return [];
+		if (!isRendered) return [];
 
 		const position = getPosition(currentStep, index);
 

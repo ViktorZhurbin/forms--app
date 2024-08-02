@@ -24,7 +24,7 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
 
-  apps/builder:
+  apps/editor:
     dependencies:
       '@dnd-kit/core':
         specifier: ^6.1.0
@@ -2011,7 +2011,7 @@ packages:
       '@rspack/binding': 1.0.0-beta.1
       '@rspack/lite-tapable': 1.0.0-beta.1
       '@swc/helpers': 0.5.11
-      caniuse-lite: 1.0.30001643
+      caniuse-lite: 1.0.30001644
     dev: true
 
   /@rspack/lite-tapable@1.0.0-beta.1:
@@ -2742,7 +2742,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001643
+      caniuse-lite: 1.0.30001644
       electron-to-chromium: 1.4.832
       node-releases: 2.0.17
       update-browserslist-db: 1.1.0(browserslist@4.23.2)
@@ -2788,10 +2788,10 @@ packages:
 
   /caniuse-lite@1.0.30001643:
     resolution: {integrity: sha512-ERgWGNleEilSrHM6iUz/zJNSQTP8Mr21wDWpdgvRwcTXGAq6jMtOUPP4dqFPTdKqZ2wKTdtB+uucZ3MRpAUSmg==}
+    dev: true
 
   /caniuse-lite@1.0.30001644:
     resolution: {integrity: sha512-YGvlOZB4QhZuiis+ETS0VXR+MExbFf4fZYYeMTEE0aTQd/RdIjkTyZjLrbYVKnHzppDvnOhritRVv+i7Go6mHw==}
-    dev: true
 
   /ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}

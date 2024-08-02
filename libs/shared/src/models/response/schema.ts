@@ -19,7 +19,7 @@ type TResponse = {
 	id: string;
 	submittedAt?: string;
 	updatedAt: string;
-	answers: TAnswer[];
+	answers: Record<TField["id"], TAnswer>;
 };
 
 export type { TResponse, TAnswer, TAnswerChoice, TAnswerText };

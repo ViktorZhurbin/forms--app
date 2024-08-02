@@ -51,8 +51,6 @@ export const FormsList = ({ viewType }: FormsViewProps) => {
 
 	const Wrapper = viewType === FormsLayout.List ? Stack : Group;
 
-	console.log(workspace);
-
 	return (
 		<Wrapper gap={8}>
 			{workspace.forms?.map((form) => (

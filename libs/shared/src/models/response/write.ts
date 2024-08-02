@@ -2,14 +2,16 @@ import { id, lookup, tx } from "@instantdb/react";
 import { getNowISOString } from "~/utils/date";
 import { dbTransact } from "../db";
 import type { TForm } from "../form/schema/form";
-import type { TResponse } from "./schema";
+import type { TAnswer, TResponse } from "./schema";
 
-const createResponse = async ({
-	answers,
-	formNanoId,
-}: { formNanoId: TForm["nanoId"]; answers: TResponse["answers"] }) => {
+const createResponse = async (params: {
+	answer: TAnswer;
+	formNanoId: TForm["nanoId"];
+}) => {
+	const { answer, formNanoId } = params;
+
 	const response: Omit<TResponse, "id"> = {
-		answers,
+		answers: { [answer.fieldId]: answer },
 		updatedAt: getNowISOString(),
 	};
 
@@ -24,19 +26,34 @@ const createResponse = async ({
 	return responseId;
 };
 
-const updateResponse = async ({
-	id,
-	payload,
-}: {
-	id: TResponse["id"];
+const updateResponse = async (params: {
+	responseId: TResponse["id"];
 	payload: Partial<TResponse>;
 }) => {
+	const { responseId, payload } = params;
+
 	const update = {
 		...payload,
 		updatedAt: getNowISOString(),
 	};
 
-	await dbTransact([tx.responses[id].update(update)]);
+	await dbTransact([tx.responses[responseId].update(update)]);
 };
 
-export { createResponse, updateResponse };
+const updateAnswer = async (params: {
+	answer: TAnswer;
+	responseId: TResponse["id"];
+}) => {
+	const {
+		responseId,
+		answer: { fieldId, value },
+	} = params;
+
+	await dbTransact([
+		tx.responses[responseId]
+			.merge({ answers: { [fieldId]: { value: value } } })
+			.update({ updatedAt: getNowISOString() }),
+	]);
+};
+
+export { createResponse, updateResponse, updateAnswer };

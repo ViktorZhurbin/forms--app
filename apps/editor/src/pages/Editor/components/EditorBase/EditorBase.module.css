@@ -1,12 +1,8 @@
-.root {
+.content {
+	display: grid;
 	grid-template-columns: var(--nav-width) 1fr;
 	grid-template-areas:
-		"header header"
 		"nav main";
-}
-
-.header {
-	grid-area: header;
 }
 
 .nav {

@@ -1,5 +1,6 @@
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
+import { FormLayout } from "../../FormLayout/FormLayout";
 import { Main } from "../../Main/Main";
 import { NavbarFields } from "../../Navbar/NavbarFields/NavbarFields";
 import { NavbarThankYou } from "../../Navbar/NavbarThankYou/NavbarThankYou";
@@ -14,17 +15,17 @@ export const EditorBase = ({ header }: { header: React.ReactElement }) => {
 	}
 
 	return (
-		<div className={clsx("root", styles.root)}>
-			<header className={clsx("header", styles.header)}>{header}</header>
+		<FormLayout header={header}>
+			<div className={styles.content}>
+				<nav className={clsx("nav", styles.nav)}>
+					<NavbarFields />
+					<NavbarThankYou />
+				</nav>
 
-			<nav className={clsx("nav", styles.nav)}>
-				<NavbarFields />
-				<NavbarThankYou />
-			</nav>
-
-			<main className={clsx("main", styles.main)}>
-				<Main />
-			</main>
-		</div>
+				<main className={clsx("main", styles.main)}>
+					<Main />
+				</main>
+			</div>
+		</FormLayout>
 	);
 };

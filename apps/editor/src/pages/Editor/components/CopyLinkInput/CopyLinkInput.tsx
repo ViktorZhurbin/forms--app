@@ -1,23 +1,5 @@
-import { ActionIcon, CopyButton, TextInput, Tooltip } from "@mantine/core";
-import { IconCheck, IconCopy } from "@tabler/icons-react";
-
-const CopyButtonWithTooltip = ({ url }: { url: string }) => {
-	return (
-		<CopyButton value={url} timeout={2000}>
-			{({ copied, copy }) => (
-				<Tooltip withArrow position="right" label={copied ? "Copied" : "Copy"}>
-					<ActionIcon
-						color={copied ? "teal" : "gray"}
-						variant="subtle"
-						onClick={copy}
-					>
-						{copied ? <IconCheck /> : <IconCopy />}
-					</ActionIcon>
-				</Tooltip>
-			)}
-		</CopyButton>
-	);
-};
+import { TextInput } from "@mantine/core";
+import { CopyButtonWithTooltip } from "~/components/CopyButtonWithTooltip/CopyButtonWithTooltip";
 
 export const CopyLinkInput = ({ url }: { url: string }) => {
 	return (

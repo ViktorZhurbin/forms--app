@@ -1,5 +1,5 @@
 import { Routes, WEB_SITE_URL } from "@/shared/constants/routes";
-import { useDbAuth } from "@/shared/models/db";
+import { useAuth } from "@/shared/models/db";
 import { Button } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { Link } from "wouter";
@@ -8,7 +8,7 @@ import { useAdminPath } from "../../hooks/useAdminPath";
 import styles from "./ButtonLinks.module.css";
 
 export const ButtonLinks = () => {
-	const { isLoading, user } = useDbAuth();
+	const { isLoading, user } = useAuth();
 	const adminPath = useAdminPath();
 
 	if (isLoading) {

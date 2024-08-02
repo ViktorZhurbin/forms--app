@@ -1,6 +1,6 @@
 import { type User, id, tx } from "@instantdb/react";
 import { makeId } from "~/utils/makeId";
-import { dbTransact } from "../db";
+import { db } from "../db";
 import type { TWorkspace } from "./schema/workspace";
 
 const createWorkspace = async ({
@@ -14,7 +14,7 @@ const createWorkspace = async ({
 
 	const workspaceId: string = id();
 
-	await dbTransact([
+	await db.transact([
 		tx.workspaces[workspaceId].update(workspace).link({ users: userId }),
 	]);
 

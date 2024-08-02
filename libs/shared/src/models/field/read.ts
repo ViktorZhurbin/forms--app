@@ -1,10 +1,10 @@
 import { useFormNanoId } from "~/hooks/useFormNanoId";
-import { useDbQuery } from "../db";
+import { useQuery } from "../db";
 
 const useCurrentFormFieldsQuery = () => {
 	const formNanoId = useFormNanoId();
 
-	return useDbQuery({
+	return useQuery({
 		fields: {
 			forms: {
 				$: {

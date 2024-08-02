@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import type { FieldTypes } from "~/constants/field";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useSelectedBlockId } from "~/hooks/useSelectedBlockId";
-import { dbTransact } from "~/models/db";
+import { db } from "~/models/db";
 import { getCreateFieldPayload } from "../../helpers/getCreateFieldPayload";
 import { getNewFieldOrder } from "../../helpers/getNewFieldOrder";
 import { useOrderedFormFields } from "../../read";
@@ -42,7 +42,7 @@ export const useAddField = () => {
 				.update(newField)
 				.link({ forms: lookup("nanoId", formNanoId) });
 
-			await dbTransact([createFieldOp].concat(updateOrderOps));
+			await db.transact([createFieldOp].concat(updateOrderOps));
 
 			return { nanoId: newField.nanoId };
 		},

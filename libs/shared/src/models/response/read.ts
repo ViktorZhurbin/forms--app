@@ -1,10 +1,10 @@
 import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
-import { useDbQuery } from "../db";
+import { useQuery } from "../db";
 
 const useCurrentFormResponsesQuery = () => {
 	const [ids] = useLocalResponseWithFormId();
 
-	return useDbQuery({
+	return useQuery({
 		responses: {
 			$: { where: { id: ids.responseId } },
 		},

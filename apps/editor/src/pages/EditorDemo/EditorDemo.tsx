@@ -1,13 +1,13 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { Routes } from "@/shared/constants/routes";
-import { useDbAuth } from "@/shared/models/db";
+import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
 import { HeaderDemo } from "../Editor/Header/HeaderDemo";
 import { EditorBase } from "../Editor/components/EditorBase/EditorBase";
 import { useDemoForm } from "./hooks/useDemoForm";
 
 export const EditorDemo = () => {
-	const auth = useDbAuth();
+	const auth = useAuth();
 
 	const { isLoading, error } = useDemoForm();
 

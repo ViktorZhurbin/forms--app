@@ -1,5 +1,5 @@
 import { id, lookup, tx } from "@instantdb/react";
-import { dbTransact } from "../db";
+import { db } from "../db";
 import type { TForm } from "../form/schema/form";
 import { getChoiceFieldOptionPayload } from "./helpers/getChoiceFieldOptionPayload";
 import type { TField, TFieldChoice } from "./schema";
@@ -10,7 +10,7 @@ type CreateFieldParams = {
 };
 
 const createField = async ({ payload, formNanoId }: CreateFieldParams) => {
-	await dbTransact(
+	await db.transact(
 		tx.fields[id()]
 			.update(payload)
 			.link({ forms: lookup("nanoId", formNanoId) }),
@@ -23,7 +23,7 @@ const updateField = async ({
 	id,
 	payload,
 }: { id: TField["id"]; payload: Partial<TField> }) => {
-	await dbTransact(tx.fields[id].update(payload));
+	await db.transact(tx.fields[id].update(payload));
 };
 
 const createChoiceFieldOption = async ({
@@ -45,7 +45,7 @@ const updateManyFields = async (
 ) => {
 	const ops = fields.map(({ id, payload }) => tx.fields[id].update(payload));
 
-	await dbTransact(ops);
+	await db.transact(ops);
 };
 
 const updateFieldsIndex = async (orderedFieldsIds: TField["id"][]) => {
@@ -53,11 +53,11 @@ const updateFieldsIndex = async (orderedFieldsIds: TField["id"][]) => {
 		tx.fields[id].update({ index }),
 	);
 
-	await dbTransact(ops);
+	await db.transact(ops);
 };
 
 const deleteField = async ({ id }: { id: TField["id"] }) => {
-	dbTransact([tx.fields[id].delete()]);
+	db.transact([tx.fields[id].delete()]);
 };
 
 export {

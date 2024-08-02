@@ -1,11 +1,11 @@
 import { Routes } from "@/shared/constants/routes";
-import { useDbAuth } from "@/shared/models/db";
+import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
 import { FullScreenLoader } from "~/components/FullScreenLoader/FullScreenLoader";
 import { RedirectToWorkspace } from "./RedirectToWorkspace";
 
 export const Root = () => {
-	const auth = useDbAuth();
+	const auth = useAuth();
 
 	if (auth.isLoading) {
 		return <FullScreenLoader />;

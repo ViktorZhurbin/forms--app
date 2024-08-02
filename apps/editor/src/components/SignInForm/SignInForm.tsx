@@ -1,5 +1,5 @@
 import { Routes } from "@/shared/constants/routes";
-import { useDbAuth } from "@/shared/models/db";
+import { useAuth } from "@/shared/models/db";
 import { Text, Title } from "@mantine/core";
 import clsx from "clsx";
 import { Redirect } from "wouter";
@@ -17,7 +17,7 @@ export const SignInForm = ({
 	redirectTo,
 	wrapperClass,
 }: SignInFormProps) => {
-	const auth = useDbAuth();
+	const auth = useAuth();
 
 	if (auth.user) {
 		return <Redirect to={Routes.ROOT} />;

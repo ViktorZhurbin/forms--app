@@ -1,6 +1,6 @@
 import { id, lookup, tx } from "@instantdb/react";
 import { getNowISOString } from "~/utils/date";
-import { dbTransact } from "../db";
+import { db } from "../db";
 import type { TForm } from "../form/schema/form";
 import type { TAnswer, TResponse } from "./schema";
 
@@ -17,7 +17,7 @@ const createResponse = async (params: {
 
 	const responseId: string = id();
 
-	await dbTransact([
+	await db.transact([
 		tx.responses[responseId]
 			.update(response)
 			.link({ forms: lookup("nanoId", formNanoId) }),
@@ -37,7 +37,7 @@ const updateResponse = async (params: {
 		updatedAt: getNowISOString(),
 	};
 
-	await dbTransact([tx.responses[responseId].update(update)]);
+	await db.transact([tx.responses[responseId].update(update)]);
 };
 
 const updateAnswer = async (params: {
@@ -46,7 +46,7 @@ const updateAnswer = async (params: {
 }) => {
 	const { responseId, answer } = params;
 
-	await dbTransact([
+	await db.transact([
 		tx.responses[responseId]
 			.merge({ answers: { [answer.fieldId]: answer } })
 			.update({ updatedAt: getNowISOString() }),

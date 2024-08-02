@@ -1,10 +1,10 @@
 import { Routes, SearchParams } from "@/shared/constants/routes";
-import { useDbAuth } from "@/shared/models/db";
+import { useAuth } from "@/shared/models/db";
 import { Redirect, Route, type RouteProps } from "wouter";
 import { FullScreenLoader } from "../FullScreenLoader/FullScreenLoader";
 
 export const AuthRoute = (props: RouteProps) => {
-	const { isLoading, user } = useDbAuth();
+	const { isLoading, user } = useAuth();
 
 	if (user) {
 		return <Route {...props} />;

@@ -8,8 +8,6 @@ const db: Db = init<Schema>({
 	appId: APP_ID,
 });
 
-const useDbAuth = db.useAuth;
-const useDbQuery: Db["useQuery"] = db.useQuery;
-const dbTransact: Db["transact"] = db.transact;
+const { useAuth, useQuery } = db;
 
-export { db, type Db, useDbQuery, dbTransact, useDbAuth };
+export { db, type Db, useAuth, useQuery };

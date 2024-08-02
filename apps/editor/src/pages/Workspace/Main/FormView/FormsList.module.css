@@ -24,3 +24,9 @@
 	right: 0;
 	top: 0;
 }
+
+[data-view-type="list"] {
+	.delete {
+		top: 6px;
+	}
+}

@@ -53,7 +53,7 @@ export const FormsList = ({ viewType }: FormsViewProps) => {
 	const Wrapper = viewType === FormsLayout.List ? Stack : Group;
 
 	return (
-		<Wrapper gap={8}>
+		<Wrapper gap={8} data-view-type={viewType}>
 			{workspace.forms?.map((form) => (
 				<SkeletonWrapper key={form.id} visible={isLoading}>
 					<ViewComponent

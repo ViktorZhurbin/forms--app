@@ -23,11 +23,8 @@ const EditorRoutes = {
 	CREATE: "/create",
 
 	WS: `/${Paths.WS}/:wsNanoId`,
-
 	FORM: `/${Paths.Form}/:formNanoId/:tab?`,
-	FORM_CREATE: `/${Paths.Form}/:formNanoId/${TabPaths.Create}`,
-	FORM_RESULTS: `/${Paths.Form}/:formNanoId/${TabPaths.Results}`,
-};
+} as const;
 
 const EditorRouteUtils = {
 	getWsPath(params: { wsNanoId?: string }) {

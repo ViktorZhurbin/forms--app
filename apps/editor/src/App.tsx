@@ -2,7 +2,7 @@ import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { ThemeProvider } from "@/shared/contexts/ThemeProvider/ThemeProvider";
 import { Route, Switch } from "wouter";
 import { AuthRoute } from "~/components/AuthRoute/AuthRoute";
-import { Editor } from "./pages/Editor/Editor";
+import { FormPage } from "./pages/Editor/FormPage";
 import { EditorDemo } from "./pages/EditorDemo/EditorDemo";
 import { NotFound } from "./pages/NotFound/NotFound";
 import { Root } from "./pages/Root/Root";
@@ -19,8 +19,7 @@ export const App = () => {
 				<AuthRoute path={EditorRoutes.ROOT} component={Root} />
 				<AuthRoute path={EditorRoutes.WS} component={Workspace} />
 
-				<AuthRoute path={EditorRoutes.FORM} component={Editor} />
-				<AuthRoute path={EditorRoutes.FORM_CREATE} component={Editor} />
+				<AuthRoute path={EditorRoutes.FORM} component={FormPage} />
 
 				{/* Default route in a switch */}
 				<Route component={NotFound} />

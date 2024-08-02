@@ -44,14 +44,11 @@ const updateAnswer = async (params: {
 	answer: TAnswer;
 	responseId: TResponse["id"];
 }) => {
-	const {
-		responseId,
-		answer: { fieldId, value },
-	} = params;
+	const { responseId, answer } = params;
 
 	await dbTransact([
 		tx.responses[responseId]
-			.merge({ answers: { [fieldId]: { value: value } } })
+			.merge({ answers: { [answer.fieldId]: answer } })
 			.update({ updatedAt: getNowISOString() }),
 	]);
 };

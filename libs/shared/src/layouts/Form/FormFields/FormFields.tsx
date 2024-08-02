@@ -3,8 +3,12 @@ import { FieldView } from "~/components/FieldView/FieldView";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
 import type { TField } from "~/models/field/schema";
-import type { TAnswer } from "~/models/response/schema";
-import { createResponse, updateResponse } from "~/models/response/write";
+import type { TAnswer, TResponse } from "~/models/response/schema";
+import {
+	createResponse,
+	updateAnswer,
+	updateResponse,
+} from "~/models/response/write";
 import { getNowISOString } from "~/utils/date";
 import styles from "./FormFields.module.css";
 import { getPosition } from "./getPosition";
@@ -12,13 +16,13 @@ import { getPosition } from "./getPosition";
 export type FormFieldsProps = {
 	currentStep: number;
 	fields: TField[];
-	answers?: TAnswer[];
+	answers?: TResponse["answers"];
 	goToNextStep: () => void;
 };
 
 export const FormFields = ({
 	fields,
-	answers = [],
+	answers = {},
 	currentStep,
 	goToNextStep,
 }: FormFieldsProps) => {
@@ -31,31 +35,24 @@ export const FormFields = ({
 		async (answer: TAnswer) => {
 			if (!responseId) {
 				const responseId = await createResponse({
+					answer,
 					formNanoId,
-					answers: [answer],
 				});
 				setLocalResponseWithFormId({ formNanoId, responseId });
 
 				return;
 			}
 
-			const newAnswers = answers
-				.filter(({ fieldId }) => fieldId !== answer.fieldId)
-				.concat(answer);
-
-			await updateResponse({
-				id: responseId,
-				payload: { answers: newAnswers },
-			});
+			await updateAnswer({ responseId, answer });
 		},
-		[responseId, formNanoId, setLocalResponseWithFormId, answers],
+		[responseId, formNanoId, setLocalResponseWithFormId],
 	);
 
 	const isLastStep = currentStep === fields.length - 1;
 	const handleSubmit = useCallback(async () => {
 		if (isLastStep) {
 			await updateResponse({
-				id: responseId,
+				responseId,
 				payload: { submittedAt: getNowISOString() },
 			});
 		} else {
@@ -69,7 +66,7 @@ export const FormFields = ({
 		if (!isRendered) return [];
 
 		const position = getPosition(currentStep, index);
-		const answer = answers.find(({ fieldId }) => fieldId === field.id);
+		const answer = answers[field.id];
 
 		return (
 			<div

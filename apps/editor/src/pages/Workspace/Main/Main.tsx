@@ -1,12 +1,11 @@
 import { Group, Stack, Text } from "@mantine/core";
-import { useState } from "react";
-import { FormsLayout } from "~/constants/forms";
+import { useLocalFormsLayout } from "../hooks/useLocalFormsLayout";
 import { CreateFormButton } from "./CreateFormButton/CreateFormButton";
 import { FormsList } from "./FormView/FormsList";
 import { ViewTypeControl } from "./ViewTypeControl/ViewTypeControl";
 
 export const Main = () => {
-	const [view, setView] = useState<FormsLayout>(FormsLayout.Grid);
+	const [view, setView] = useLocalFormsLayout();
 
 	return (
 		<Stack flex={1}>

@@ -11,8 +11,8 @@ const Routes = {
 	CREATE: "/create",
 
 	ROOT: "/",
-	ADMIN: "/ws/:wsNanoId",
-	getAdminPath: ({ wsNanoId }: { wsNanoId?: string }) =>
+	WS: "/ws/:wsNanoId",
+	getWsPath: ({ wsNanoId }: { wsNanoId?: string }) =>
 		wsNanoId ? `/ws/${wsNanoId}` : "/",
 
 	FORM: "/form/:formId",

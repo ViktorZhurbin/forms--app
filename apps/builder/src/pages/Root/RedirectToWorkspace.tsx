@@ -37,7 +37,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 
 		removeDemoLocalNanoId();
 
-		navigate(Routes.getAdminPath({ wsNanoId: firstWsNanoId }));
+		navigate(Routes.getWsPath({ wsNanoId: firstWsNanoId }));
 	}, [isLoading, formId, dbUser, removeDemoLocalNanoId]);
 
 	// Create a user if the user doesn't exist

@@ -1,9 +1,9 @@
 import { useCurrentFormQuery } from "@/shared/models/form/read";
 import { NotFound } from "../NotFound/NotFound";
 import { Header } from "./Header/Header";
-import { BuilderBase } from "./components/BuilderBase/BuilderBase";
+import { EditorBase } from "./components/EditorBase/EditorBase";
 
-export const Builder = () => {
+export const Editor = () => {
 	const { data } = useCurrentFormQuery();
 
 	const formNotFound = data?.forms.length === 0;
@@ -12,5 +12,5 @@ export const Builder = () => {
 		return <NotFound />;
 	}
 
-	return <BuilderBase header={<Header />} />;
+	return <EditorBase header={<Header />} />;
 };

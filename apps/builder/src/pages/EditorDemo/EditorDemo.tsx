@@ -2,11 +2,11 @@ import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { Routes } from "@/shared/constants/routes";
 import { useDbAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
-import { HeaderDemo } from "../Builder/Header/HeaderDemo";
-import { BuilderBase } from "../Builder/components/BuilderBase/BuilderBase";
+import { HeaderDemo } from "../Editor/Header/HeaderDemo";
+import { EditorBase } from "../Editor/components/EditorBase/EditorBase";
 import { useDemoForm } from "./hooks/useDemoForm";
 
-export const BuilderDemo = () => {
+export const EditorDemo = () => {
 	const auth = useDbAuth();
 
 	const { isLoading, error } = useDemoForm();
@@ -19,5 +19,5 @@ export const BuilderDemo = () => {
 		return <FetchState fullScreen isLoading={isLoading} error={error} />;
 	}
 
-	return <BuilderBase header={<HeaderDemo />} />;
+	return <EditorBase header={<HeaderDemo />} />;
 };

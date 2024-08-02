@@ -6,5 +6,5 @@ export const useAdminPath = () => {
 
 	const wsNanoId = currentWorkspace?.nanoId;
 
-	return Routes.getAdminPath({ wsNanoId });
+	return Routes.getWsPath({ wsNanoId });
 };

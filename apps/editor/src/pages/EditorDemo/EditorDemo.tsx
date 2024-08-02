@@ -1,7 +1,7 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
+import { EditorRoutes } from "~/constants/routes";
 import { HeaderDemo } from "../Editor/Header/HeaderDemo";
 import { EditorBase } from "../Editor/components/EditorBase/EditorBase";
 import { useDemoForm } from "./hooks/useDemoForm";

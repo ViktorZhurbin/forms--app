@@ -1,4 +1,3 @@
-import { EditorRouteUtils } from "@/shared/constants/editor.routes";
 import { useLocalDemoNanoId } from "@/shared/hooks/useLocalDemoNanoId";
 import { useCurrentForm } from "@/shared/models/form/read";
 import { linkFormToWorkspace } from "@/shared/models/form/write";
@@ -9,6 +8,7 @@ import type { User } from "@instantdb/react";
 import { useEffect } from "react";
 import { navigate } from "wouter/use-browser-location";
 import { FullScreenLoader } from "~/components/FullScreenLoader/FullScreenLoader";
+import { RouteUtils } from "~/utils/routes";
 
 export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 	const {
@@ -37,7 +37,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 
 		removeDemoLocalNanoId();
 
-		navigate(EditorRouteUtils.getWsPath({ wsNanoId: firstWsNanoId }));
+		navigate(RouteUtils.getWsPath({ wsNanoId: firstWsNanoId }));
 	}, [isLoading, formId, dbUser, removeDemoLocalNanoId]);
 
 	// Create a user if the user doesn't exist

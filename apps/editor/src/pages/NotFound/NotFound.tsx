@@ -1,6 +1,6 @@
-import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { Button, Text } from "@mantine/core";
 import { Link } from "wouter";
+import { EditorRoutes } from "~/constants/routes";
 import styles from "./NotFound.module.css";
 
 export const NotFound = () => {

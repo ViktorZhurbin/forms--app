@@ -1,7 +1,7 @@
-import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
 import { FullScreenLoader } from "~/components/FullScreenLoader/FullScreenLoader";
+import { EditorRoutes } from "~/constants/routes";
 import { RedirectToWorkspace } from "./RedirectToWorkspace";
 
 export const Root = () => {

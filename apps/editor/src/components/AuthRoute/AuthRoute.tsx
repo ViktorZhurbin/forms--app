@@ -1,6 +1,7 @@
-import { EditorRoutes, SearchParams } from "@/shared/constants/editor.routes";
+import { SearchParams } from "@/shared/constants/location";
 import { useAuth } from "@/shared/models/db";
 import { Redirect, Route, type RouteProps } from "wouter";
+import { EditorRoutes } from "~/constants/routes";
 import { FullScreenLoader } from "../FullScreenLoader/FullScreenLoader";
 
 export const AuthRoute = (props: RouteProps) => {

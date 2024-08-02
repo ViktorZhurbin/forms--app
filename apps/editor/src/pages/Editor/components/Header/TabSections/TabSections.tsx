@@ -1,25 +1,19 @@
-import { EditorRouteUtils, TabPaths } from "@/shared/constants/editor.routes";
 import { Tabs } from "@mantine/core";
-import { useParams } from "wouter";
-import { navigate } from "wouter/use-browser-location";
+import { useLocation } from "wouter";
+import { TabPaths } from "~/constants/routes";
 import styles from "./TabSections.module.css";
 
 export const TabSections = () => {
-	const { tab = "create", formNanoId } = useParams();
+	const [location, setLocation] = useLocation();
 
 	const handleChange = (value: string | null): void => {
-		if (!value || !formNanoId) return;
+		if (!value) return;
 
-		const tabPath = EditorRouteUtils.getFormTabPath({
-			formNanoId,
-			tab: value as TabPaths,
-		});
-
-		navigate(tabPath);
+		setLocation(value);
 	};
 
 	return (
-		<Tabs value={tab} onChange={handleChange}>
+		<Tabs value={location} onChange={handleChange}>
 			<Tabs.List className={styles.tabsList}>
 				<Tabs.Tab value={TabPaths.Create}>Create</Tabs.Tab>
 				<Tabs.Tab value={TabPaths.Results}>Results</Tabs.Tab>

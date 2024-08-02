@@ -1,4 +1,4 @@
-import { SearchParams, WEB_SITE_URL } from "@/shared/constants/editor.routes";
+import { SearchParams, WEB_SITE_URL } from "@/shared/constants/location";
 import { ActionIcon, Card } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";

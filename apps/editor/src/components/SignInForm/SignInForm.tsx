@@ -1,9 +1,9 @@
-import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Text, Title } from "@mantine/core";
 import clsx from "clsx";
 import { Redirect } from "wouter";
 import { GoogleSignInButtonCustom } from "~/components/GoogleSignInButtonCustom/GoogleSignInButtonCustom";
+import { EditorRoutes } from "~/constants/routes";
 import styles from "./SignInForm.module.css";
 
 type SignInFormProps = {

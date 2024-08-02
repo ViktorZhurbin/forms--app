@@ -1,10 +1,10 @@
-import { EditorRouteUtils } from "@/shared/constants/editor.routes";
 import { useCurrentFormWorkspace } from "@/shared/models/form/read";
+import { RouteUtils } from "~/utils/routes";
 
-export const useAdminPath = () => {
+export const useWsPath = () => {
 	const currentWorkspace = useCurrentFormWorkspace();
 
 	const wsNanoId = currentWorkspace?.nanoId;
 
-	return EditorRouteUtils.getWsPath({ wsNanoId });
+	return RouteUtils.getWsPath({ wsNanoId });
 };

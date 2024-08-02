@@ -1,33 +1,36 @@
-import { EditorRoutes, WEB_SITE_URL } from "@/shared/constants/editor.routes";
+import { WEB_SITE_URL } from "@/shared/constants/location";
 import { useAuth } from "@/shared/models/db";
 import { Button } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { Link } from "wouter";
+import { EditorRoutes } from "~/constants/routes";
 import { CopyLinkInput } from "../../components/CopyLinkInput/CopyLinkInput";
-import { useAdminPath } from "../../hooks/useAdminPath";
+import { useWsPath } from "../../hooks/useWsPath";
 import styles from "./ButtonLinks.module.css";
 
 export const ButtonLinks = () => {
 	const { isLoading, user } = useAuth();
-	const adminPath = useAdminPath();
+	const wsPath = useWsPath();
 
 	if (isLoading) {
 		return null;
 	}
 
 	if (user) {
-		<Button
-			component={Link}
-			href={adminPath}
-			leftSection={<IconArrowNarrowLeft />}
-		>
-			Back to dashboard
-		</Button>;
+		return (
+			<Button
+				component={Link}
+				href={`~${wsPath}`}
+				leftSection={<IconArrowNarrowLeft />}
+			>
+				Back to dashboard
+			</Button>
+		);
 	}
 
 	return (
 		<div className={styles.wrapper}>
-			<Button fullWidth component={Link} href={EditorRoutes.SIGN_IN}>
+			<Button fullWidth component={Link} href={`~${EditorRoutes.SIGN_IN}`}>
 				Create an account
 			</Button>
 			<Button fullWidth component="a" href={WEB_SITE_URL}>

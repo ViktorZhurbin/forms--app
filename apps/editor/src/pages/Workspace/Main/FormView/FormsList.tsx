@@ -1,8 +1,4 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import {
-	EditorRouteUtils,
-	EditorRoutes,
-} from "@/shared/constants/editor.routes";
 import type { TForm } from "@/shared/models/form/schema/form";
 import { deleteForm } from "@/shared/models/form/write";
 import { useCurrentWorkspaceWithFormsQuery } from "@/shared/models/workspace/read";
@@ -12,6 +8,8 @@ import { IconTrash } from "@tabler/icons-react";
 import { Redirect } from "wouter";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
+import { EditorRoutes } from "~/constants/routes";
+import { RouteUtils } from "~/utils/routes";
 import styles from "./FormsList.module.css";
 import { GridView } from "./GridView/GridView";
 import { ListView } from "./ListView/ListView";
@@ -62,7 +60,7 @@ export const FormsList = ({ viewType }: FormsViewProps) => {
 						name={form.name}
 						nanoId={form.nanoId}
 						className={styles.formItem}
-						href={EditorRouteUtils.getFormCreatePath({
+						href={RouteUtils.getFormPath({
 							formNanoId: form.nanoId,
 						})}
 						getDeleteButton={getDeleteButton}

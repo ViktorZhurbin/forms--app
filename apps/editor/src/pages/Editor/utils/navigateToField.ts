@@ -1,4 +1,4 @@
-import { SearchParams } from "@/shared/constants/editor.routes";
+import { SearchParams } from "@/shared/constants/location";
 import type { TField } from "@/shared/models/field/schema";
 import { navigate } from "wouter/use-browser-location";
 

@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/routes";
+import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Text, Title } from "@mantine/core";
 import clsx from "clsx";
@@ -20,7 +20,7 @@ export const SignInForm = ({
 	const auth = useAuth();
 
 	if (auth.user) {
-		return <Redirect to={Routes.ROOT} />;
+		return <Redirect to={EditorRoutes.ROOT} />;
 	}
 
 	return (

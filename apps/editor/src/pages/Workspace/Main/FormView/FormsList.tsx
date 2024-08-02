@@ -1,5 +1,8 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { Routes } from "@/shared/constants/routes";
+import {
+	EditorRouteUtils,
+	EditorRoutes,
+} from "@/shared/constants/editor.routes";
 import type { TForm } from "@/shared/models/form/schema/form";
 import { deleteForm } from "@/shared/models/form/write";
 import { useCurrentWorkspaceWithFormsQuery } from "@/shared/models/workspace/read";
@@ -28,7 +31,7 @@ export const FormsList = ({ viewType }: FormsViewProps) => {
 
 	if (!workspace) {
 		// can happen if url has incorrect ws id
-		return <Redirect to={Routes.ROOT} />;
+		return <Redirect to={EditorRoutes.ROOT} />;
 	}
 
 	const ViewComponent = viewType === FormsLayout.List ? ListView : GridView;
@@ -59,7 +62,9 @@ export const FormsList = ({ viewType }: FormsViewProps) => {
 						name={form.name}
 						nanoId={form.nanoId}
 						className={styles.formItem}
-						href={Routes.getFormPath({ formId: form.nanoId })}
+						href={EditorRouteUtils.getFormCreatePath({
+							formNanoId: form.nanoId,
+						})}
 						getDeleteButton={getDeleteButton}
 						responsesText={pluralize({
 							singular: "response",

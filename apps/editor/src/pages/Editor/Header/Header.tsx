@@ -1,5 +1,6 @@
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { isDev } from "~/utils/env";
+import { TabSections } from "../components/Header/TabSections/TabSections";
 import { CopyLinkButton } from "./CopyLinkButton/CopyLinkButton";
 import { EditableFormTitle } from "./EditableFormTitle/EditableFormTitle";
 import styles from "./Header.module.css";
@@ -15,6 +16,9 @@ export const Header = () => {
 				<HomeButton />
 				<EditableFormTitle />
 			</div>
+
+			<TabSections />
+
 			<div className={styles.innerWrapper}>
 				<PublishButton />
 				<PreviewButton />

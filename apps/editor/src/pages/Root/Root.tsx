@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/routes";
+import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
 import { FullScreenLoader } from "~/components/FullScreenLoader/FullScreenLoader";
@@ -15,5 +15,5 @@ export const Root = () => {
 		return <RedirectToWorkspace authUser={auth.user} />;
 	}
 
-	return <Redirect to={Routes.SIGN_IN} />;
+	return <Redirect to={EditorRoutes.SIGN_IN} />;
 };

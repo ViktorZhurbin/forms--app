@@ -1,4 +1,4 @@
-import { Routes, WEB_SITE_URL } from "@/shared/constants/routes";
+import { EditorRoutes, WEB_SITE_URL } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Button } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
@@ -27,7 +27,7 @@ export const ButtonLinks = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<Button fullWidth component={Link} href={Routes.SIGN_IN}>
+			<Button fullWidth component={Link} href={EditorRoutes.SIGN_IN}>
 				Create an account
 			</Button>
 			<Button fullWidth component="a" href={WEB_SITE_URL}>

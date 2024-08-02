@@ -1,4 +1,4 @@
-import { Routes, SearchParams } from "@/shared/constants/routes";
+import { EditorRoutes, SearchParams } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Redirect, Route, type RouteProps } from "wouter";
 import { FullScreenLoader } from "../FullScreenLoader/FullScreenLoader";
@@ -18,5 +18,5 @@ export const AuthRoute = (props: RouteProps) => {
 		[SearchParams.REDIRECT_TO]: window.location.href,
 	});
 
-	return <Redirect to={`${Routes.SIGN_IN}?${searchParams.toString()}`} />;
+	return <Redirect to={`${EditorRoutes.SIGN_IN}?${searchParams.toString()}`} />;
 };

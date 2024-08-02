@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/routes";
+import { EditorRouteUtils } from "@/shared/constants/editor.routes";
 import { useWorkspaceNanoId } from "@/shared/hooks/useWorkspaceNanoId";
 import { createForm } from "@/shared/models/form/write/write";
 import { Button } from "@mantine/core";
@@ -9,9 +9,9 @@ export const CreateFormButton = () => {
 	const wsNanoId = useWorkspaceNanoId();
 
 	const handleCreateForm = async () => {
-		const formId = await createForm({ wsNanoId });
+		const formNanoId = await createForm({ wsNanoId });
 
-		const formPath = Routes.getFormPath({ formId });
+		const formPath = EditorRouteUtils.getFormCreatePath({ formNanoId });
 		navigate(formPath);
 	};
 

@@ -1,4 +1,4 @@
-import { Routes } from "@/shared/constants/routes";
+import { EditorRouteUtils } from "@/shared/constants/editor.routes";
 import { useLocalDemoNanoId } from "@/shared/hooks/useLocalDemoNanoId";
 import { useCurrentForm } from "@/shared/models/form/read";
 import { linkFormToWorkspace } from "@/shared/models/form/write";
@@ -37,7 +37,7 @@ export const RedirectToWorkspace = ({ authUser }: { authUser: User }) => {
 
 		removeDemoLocalNanoId();
 
-		navigate(Routes.getWsPath({ wsNanoId: firstWsNanoId }));
+		navigate(EditorRouteUtils.getWsPath({ wsNanoId: firstWsNanoId }));
 	}, [isLoading, formId, dbUser, removeDemoLocalNanoId]);
 
 	// Create a user if the user doesn't exist

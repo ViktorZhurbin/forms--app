@@ -1,5 +1,5 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import { Routes } from "@/shared/constants/routes";
+import { EditorRoutes } from "@/shared/constants/editor.routes";
 import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
 import { HeaderDemo } from "../Editor/Header/HeaderDemo";
@@ -12,7 +12,7 @@ export const EditorDemo = () => {
 	const { isLoading, error } = useDemoForm();
 
 	if (auth.user) {
-		return <Redirect to={Routes.ROOT} />;
+		return <Redirect to={EditorRoutes.ROOT} />;
 	}
 
 	if (isLoading || error) {

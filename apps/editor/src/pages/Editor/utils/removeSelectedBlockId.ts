@@ -1,4 +1,4 @@
-import { SearchParams } from "@/shared/constants/routes";
+import { SearchParams } from "@/shared/constants/editor.routes";
 import { navigate } from "wouter/use-browser-location";
 
 export const removeSelectedBlockId = () => {

@@ -37,42 +37,43 @@ export const ResultsTable = (props: ResultsTableProps) => {
 		label: showPartial ? "Updated at" : "Submitted at",
 	} as const;
 
-	console.log(dateField);
-
 	return (
-		<Table
-			striped
-			highlightOnHover
-			withColumnBorders
-			withTableBorder
-			horizontalSpacing="md"
-		>
-			<Table.Thead>
-				<Table.Tr>
-					<Table.Th>{dateField.label}</Table.Th>
-					{getHeaders()}
-				</Table.Tr>
-			</Table.Thead>
+		<Table.ScrollContainer minWidth="900px">
+			<Table
+				striped
+				stickyHeader
+				highlightOnHover
+				withColumnBorders
+				withTableBorder
+				horizontalSpacing="md"
+			>
+				<Table.Thead>
+					<Table.Tr>
+						<Table.Th>{dateField.label}</Table.Th>
+						{getHeaders()}
+					</Table.Tr>
+				</Table.Thead>
 
-			<Table.Tbody>
-				{preparedResponses.map(({ id, answers, ...rest }) => {
-					const dateProperty = rest[dateField.value];
+				<Table.Tbody>
+					{preparedResponses.map(({ id, answers, ...rest }) => {
+						const dateProperty = rest[dateField.value];
 
-					return (
-						<Table.Tr key={id}>
-							<Table.Td>
-								{dateProperty ? (
-									<Stack gap={0}>
-										<span>{dateProperty.date}</span>
-										<span>{dateProperty.time}</span>
-									</Stack>
-								) : null}
-							</Table.Td>
-							{getRows(answers)}
-						</Table.Tr>
-					);
-				})}
-			</Table.Tbody>
-		</Table>
+						return (
+							<Table.Tr key={id}>
+								<Table.Td>
+									{dateProperty ? (
+										<Stack gap={0}>
+											<span>{dateProperty.date}</span>
+											<span>{dateProperty.time}</span>
+										</Stack>
+									) : null}
+								</Table.Td>
+								{getRows(answers)}
+							</Table.Tr>
+						);
+					})}
+				</Table.Tbody>
+			</Table>
+		</Table.ScrollContainer>
 	);
 };

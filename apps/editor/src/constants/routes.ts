@@ -1,21 +1,32 @@
 const Paths = {
 	Root: "/",
-	WS: "ws",
-	Form: "form",
+	WS: "/ws",
+	Form: "/form",
+	Signin: "/signin",
+	Create: "/create",
 };
 
-enum TabPaths {
-	Create = "/create",
-	Results = "/results",
+enum Tabs {
+	Create = "create",
+	Results = "results",
 }
 
-const EditorRoutes = {
-	ROOT: Paths.Root,
-	SIGN_IN: "/signin",
-	CREATE: "/create",
+type FormPathParams = {
+	formNanoId: string;
+	tabName?: string;
+};
 
-	WS: `/${Paths.WS}/:wsNanoId`,
-	FORM: `/${Paths.Form}/:formNanoId`,
+type WsPathParams = {
+	wsNanoId?: string;
+};
+
+const Routes = {
+	ROOT: Paths.Root,
+	SIGN_IN: Paths.Signin,
+	CREATE: Paths.Create,
+
+	WS: `${Paths.WS}/:wsNanoId`,
+	FORM: `${Paths.Form}/:formNanoId/:tabName?`,
 } as const;
 
-export { Paths, EditorRoutes, TabPaths };
+export { Paths, type FormPathParams, type WsPathParams, Routes, Tabs };

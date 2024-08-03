@@ -1,6 +1,5 @@
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { isDev } from "~/utils/env";
-import { TabSections } from "../components/Header/TabSections/TabSections";
 import { CopyLinkButton } from "./CopyLinkButton/CopyLinkButton";
 import { EditableFormTitle } from "./EditableFormTitle/EditableFormTitle";
 import styles from "./Header.module.css";
@@ -8,6 +7,7 @@ import { HomeButton } from "./HomeButton/HomeButton";
 import { OpenFormButton } from "./OpenFormButton/OpenFormButton";
 import { PreviewButton } from "./PreviewButton/PreviewButton";
 import { PublishButton } from "./PublishButton/PublishButton";
+import { SectionsControl } from "./SectionsControl/SectionsControl";
 
 export const Header = () => {
 	return (
@@ -17,7 +17,7 @@ export const Header = () => {
 				<EditableFormTitle />
 			</div>
 
-			<TabSections />
+			<SectionsControl />
 
 			<div className={styles.innerWrapper}>
 				<PublishButton />

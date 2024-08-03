@@ -3,7 +3,7 @@ import { Text, Title } from "@mantine/core";
 import clsx from "clsx";
 import { Redirect } from "wouter";
 import { GoogleSignInButtonCustom } from "~/components/GoogleSignInButtonCustom/GoogleSignInButtonCustom";
-import { EditorRoutes } from "~/constants/routes";
+import { Routes } from "~/constants/routes";
 import styles from "./SignInForm.module.css";
 
 type SignInFormProps = {
@@ -20,7 +20,7 @@ export const SignInForm = ({
 	const auth = useAuth();
 
 	if (auth.user) {
-		return <Redirect to={EditorRoutes.ROOT} />;
+		return <Redirect to={Routes.ROOT} />;
 	}
 
 	return (

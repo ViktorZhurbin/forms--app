@@ -1,16 +1,20 @@
-import { Paths } from "~/constants/routes";
+import {
+	type FormPathParams,
+	Paths,
+	type WsPathParams,
+} from "~/constants/routes";
 
 const RouteUtils = {
-	getWsPath(params: { wsNanoId?: string }) {
+	getWsPath(params: WsPathParams) {
 		const { wsNanoId } = params;
 
-		return wsNanoId ? `/${Paths.WS}/${wsNanoId}` : Paths.Root;
+		return wsNanoId ? `${Paths.WS}/${wsNanoId}` : Paths.Root;
 	},
 
-	getFormPath(params: { formNanoId: string }) {
-		const { formNanoId } = params;
+	getFormPath(params: FormPathParams) {
+		const { formNanoId, tabName } = params;
 
-		return `/${Paths.Form}/${formNanoId}`;
+		return `${Paths.Form}/${formNanoId}${tabName ? `/${tabName}` : ""}`;
 	},
 };
 

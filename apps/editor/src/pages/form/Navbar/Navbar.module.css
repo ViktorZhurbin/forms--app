@@ -1,0 +1,4 @@
+.navbar {
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+}

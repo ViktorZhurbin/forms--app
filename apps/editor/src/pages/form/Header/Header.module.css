@@ -4,7 +4,7 @@
 
 	display: flex;
 	align-items: center;
-	gap: calc(var(--mantine-spacing-md) / 2);
+	gap: var(--mantine-spacing-md);
 	flex-wrap: nowrap;
 	justify-content: space-between;
 }

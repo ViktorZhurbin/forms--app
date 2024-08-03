@@ -1,15 +1,11 @@
 .content {
 	display: grid;
 	grid-template-columns: var(--nav-width) 1fr;
-	grid-template-areas:
-		"nav main";
+	grid-template-areas: "nav main";
 }
 
 .nav {
 	grid-area: nav;
-
-	display: grid;
-	grid-template-rows: repeat(2, 1fr);
 }
 
 .main {

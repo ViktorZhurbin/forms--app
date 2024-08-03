@@ -1,10 +1,11 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
-import { EditorRoutes } from "~/constants/routes";
+import { Routes } from "~/constants/routes";
 import { HeaderDemo } from "./Header/HeaderDemo";
 import { useDemoForm } from "./hooks/useDemoForm";
-import { EditorBase } from "./layouts/EditorBase/EditorBase";
+import { FormLayout } from "./layouts/FormLayout";
+import { EditorContent } from "./sections/Editor/Editor";
 
 export const EditorDemo = () => {
 	const auth = useAuth();
@@ -12,12 +13,16 @@ export const EditorDemo = () => {
 	const { isLoading, error } = useDemoForm();
 
 	if (auth.user) {
-		return <Redirect to={EditorRoutes.ROOT} />;
+		return <Redirect to={Routes.ROOT} />;
 	}
 
 	if (isLoading || error) {
 		return <FetchState fullScreen isLoading={isLoading} error={error} />;
 	}
 
-	return <EditorBase header={<HeaderDemo />} />;
+	return (
+		<FormLayout header={<HeaderDemo />}>
+			<EditorContent />
+		</FormLayout>
+	);
 };

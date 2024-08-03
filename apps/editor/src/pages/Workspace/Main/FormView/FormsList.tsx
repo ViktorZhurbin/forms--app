@@ -8,7 +8,7 @@ import { IconTrash } from "@tabler/icons-react";
 import { Redirect } from "wouter";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
-import { EditorRoutes } from "~/constants/routes";
+import { Routes } from "~/constants/routes";
 import { RouteUtils } from "~/utils/routes";
 import styles from "./FormsList.module.css";
 import { GridView } from "./GridView/GridView";
@@ -29,7 +29,7 @@ export const FormsList = ({ viewType }: FormsViewProps) => {
 
 	if (!workspace) {
 		// can happen if url has incorrect ws id
-		return <Redirect to={EditorRoutes.ROOT} />;
+		return <Redirect to={Routes.ROOT} />;
 	}
 
 	const ViewComponent = viewType === FormsLayout.List ? ListView : GridView;

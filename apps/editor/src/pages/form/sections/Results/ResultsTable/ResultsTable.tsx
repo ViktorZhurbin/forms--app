@@ -1,6 +1,8 @@
 import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
-import { Stack, Table } from "@mantine/core";
+import { Checkbox, Stack, Table } from "@mantine/core";
+import { useState } from "react";
+import { TableActions } from "../TableActions/TableActions";
 import { FilterTab } from "../constants/filter";
 import { getPreparedResponses } from "../helpers/getPreparedResponses";
 
@@ -11,10 +13,25 @@ export type ResultsTableProps = {
 };
 
 export const ResultsTable = (props: ResultsTableProps) => {
+	const [selectedIds, setSelectedIds] = useState<TResponse["id"][]>([]);
+
 	const { preparedFields, preparedResponses } = getPreparedResponses(props);
 
 	const getHeaders = () => (
 		<Table.Tr>
+			<Table.Th>
+				<Checkbox
+					aria-label="Select row"
+					checked={selectedIds.length === preparedResponses.length}
+					onChange={(event) =>
+						setSelectedIds(
+							event.currentTarget.checked
+								? preparedResponses.map(({ id }) => id)
+								: [],
+						)
+					}
+				/>
+			</Table.Th>
 			<Table.Th>{dateField.label}</Table.Th>
 			{preparedFields.map(({ id, title, isDeleted }) => {
 				const header = `${title}${isDeleted ? " (deleted)" : ""}`;
@@ -35,8 +52,26 @@ export const ResultsTable = (props: ResultsTableProps) => {
 				</Stack>
 			) : null;
 
+			const isSelected = selectedIds.includes(id);
+
 			return (
-				<Table.Tr key={id}>
+				<Table.Tr
+					key={id}
+					bg={isSelected ? "var(--mantine-color-blue-light)" : undefined}
+				>
+					<Table.Td>
+						<Checkbox
+							aria-label="Select row"
+							checked={isSelected}
+							onChange={(event) =>
+								setSelectedIds(
+									event.currentTarget.checked
+										? selectedIds.concat(id)
+										: selectedIds.filter((rowId) => rowId !== id),
+								)
+							}
+						/>
+					</Table.Td>
 					<Table.Td>{date}</Table.Td>
 					{preparedFields.map(({ id: fieldId }) => {
 						const { value } = answers[fieldId] ?? {};
@@ -59,18 +94,22 @@ export const ResultsTable = (props: ResultsTableProps) => {
 	} as const;
 
 	return (
-		<Table.ScrollContainer minWidth="900px">
-			<Table
-				striped
-				stickyHeader
-				highlightOnHover
-				withColumnBorders
-				withTableBorder
-				horizontalSpacing="md"
-			>
-				<Table.Thead>{getHeaders()}</Table.Thead>
-				<Table.Tbody>{getRows()}</Table.Tbody>
-			</Table>
-		</Table.ScrollContainer>
+		<div>
+			<TableActions selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
+
+			<Table.ScrollContainer minWidth="900px">
+				<Table
+					striped
+					stickyHeader
+					highlightOnHover
+					withColumnBorders
+					withTableBorder
+					horizontalSpacing="md"
+				>
+					<Table.Thead>{getHeaders()}</Table.Thead>
+					<Table.Tbody>{getRows()}</Table.Tbody>
+				</Table>
+			</Table.ScrollContainer>
+		</div>
 	);
 };

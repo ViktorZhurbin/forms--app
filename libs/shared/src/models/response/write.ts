@@ -55,4 +55,10 @@ const updateAnswer = async (params: {
 	]);
 };
 
-export { createResponse, updateResponse, updateAnswer };
+const deleteResponses = async ({ ids }: { ids: TResponse["id"][] }) => {
+	const ops = ids.map((id) => tx.responses[id].delete());
+
+	await db.transact(ops);
+};
+
+export { createResponse, updateResponse, updateAnswer, deleteResponses };

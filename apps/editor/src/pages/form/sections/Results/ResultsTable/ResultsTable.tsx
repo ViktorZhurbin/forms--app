@@ -1,13 +1,11 @@
 import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
 import { Table } from "@mantine/core";
-import type { FilterTab } from "../constants/filter";
 import { getPreparedResponses } from "../helpers/getPreparedResponses";
 
 export type ResultsTableProps = {
 	fields: TField[];
 	responses: TResponse[];
-	filter: FilterTab | null;
 };
 
 export const ResultsTable = (props: ResultsTableProps) => {

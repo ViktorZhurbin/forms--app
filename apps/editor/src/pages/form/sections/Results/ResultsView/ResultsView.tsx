@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ResultsTable } from "../ResultsTable/ResultsTable";
 import { ResultsTabs } from "../ResultsTabs/ResultsTabs";
 import { FilterTab } from "../constants/filter";
+import { useFilteredResponses } from "../hooks/useFilteredResponses";
 import styles from "./ResultsView.module.css";
 
 export const ResultsView = (props: {
@@ -14,10 +15,22 @@ export const ResultsView = (props: {
 
 	const [filter, setFilter] = useState(FilterTab.All);
 
+	const { responsesToShow, tabValues } = useFilteredResponses({
+		filter,
+		responses,
+	});
+
 	return (
 		<div className={styles.root}>
-			<ResultsTabs value={filter} onChange={setFilter} />
-			<ResultsTable fields={fields} responses={responses} filter={filter} />
+			<ResultsTabs
+				value={filter}
+				tabValues={tabValues}
+				onChange={(value) => {
+					setFilter(value as FilterTab);
+				}}
+			/>
+
+			<ResultsTable fields={fields} responses={responsesToShow} />
 		</div>
 	);
 };

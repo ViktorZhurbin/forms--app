@@ -1,0 +1,7 @@
+.tab {
+	font-weight: 600;
+
+	&:not([data-active="true"]) {
+		opacity: 0.6;
+	}
+}

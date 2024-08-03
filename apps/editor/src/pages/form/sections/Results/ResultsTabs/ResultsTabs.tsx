@@ -1,23 +1,28 @@
 import { Tabs } from "@mantine/core";
-import { FilterTab } from "../constants/filter";
+import type { FilterTab } from "../constants/filter";
+import styles from "./ResultsTabs.module.css";
 
 export const ResultsTabs = (props: {
 	value: FilterTab;
 	onChange: (value: FilterTab) => void;
+	tabValues: { value: FilterTab; label: string }[];
 }) => {
-	const { value, onChange } = props;
+	const { value, onChange, tabValues } = props;
 
 	return (
 		<Tabs
+			classNames={styles}
 			value={value}
 			onChange={(value) => {
 				onChange(value as FilterTab);
 			}}
 		>
 			<Tabs.List>
-				<Tabs.Tab value={FilterTab.All}>All</Tabs.Tab>
-				<Tabs.Tab value={FilterTab.Completed}>Completed</Tabs.Tab>
-				<Tabs.Tab value={FilterTab.Partial}>Partial</Tabs.Tab>
+				{tabValues.map(({ value, label }) => (
+					<Tabs.Tab key={value} value={value}>
+						{label}
+					</Tabs.Tab>
+				))}
 			</Tabs.List>
 		</Tabs>
 	);

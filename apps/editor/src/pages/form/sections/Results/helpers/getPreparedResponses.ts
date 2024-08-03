@@ -2,26 +2,14 @@ import type { TField } from "@/shared/models/field/schema";
 import { getTimeFromISOString } from "@/shared/utils/date";
 import { uniqBy } from "es-toolkit";
 import type { ResultsTableProps } from "../ResultsTable/ResultsTable";
-import { FilterTab } from "../constants/filter";
 
 export const getPreparedResponses = (params: ResultsTableProps) => {
-	const { fields, responses, filter } = params;
+	const { fields, responses } = params;
 
-	const preparedResponses = responses
-		.filter((response) => {
-			if (filter === FilterTab.Completed) {
-				return response.submittedAt;
-			}
-			if (filter === FilterTab.Partial) {
-				return !response.submittedAt;
-			}
-
-			return true;
-		})
-		.toSorted(
-			(a, b) =>
-				getTimeFromISOString(b.updatedAt) - getTimeFromISOString(a.updatedAt),
-		);
+	const preparedResponses = responses.toSorted(
+		(a, b) =>
+			getTimeFromISOString(b.updatedAt) - getTimeFromISOString(a.updatedAt),
+	);
 
 	const currentFieldsById = fields?.reduce<Record<string, TField>>(
 		(acc, field) => {

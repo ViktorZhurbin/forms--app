@@ -49,8 +49,8 @@ export const TableActions = (props: {
 				</>
 			)}
 			<div />
-			<Tooltip withArrow label="Download all responses">
-				<ActionIcon color="gray">
+			<Tooltip withArrow disabled label={"Download all responses"}>
+				<ActionIcon disabled color="gray">
 					<IconDownload />
 				</ActionIcon>
 			</Tooltip>

@@ -2,10 +2,10 @@ import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { useAuth } from "@/shared/models/db";
 import { Redirect } from "wouter";
 import { Routes } from "~/constants/routes";
-import { HeaderDemo } from "./Header/HeaderDemo";
+import { HeaderDemo } from "./components/Header/HeaderDemo";
 import { useDemoForm } from "./hooks/useDemoForm";
 import { FormLayout } from "./layouts/FormLayout";
-import { EditorContent } from "./sections/Editor/Editor";
+import { Editor } from "./sections/Editor/Editor";
 
 export const EditorDemo = () => {
 	const auth = useAuth();
@@ -22,7 +22,7 @@ export const EditorDemo = () => {
 
 	return (
 		<FormLayout header={<HeaderDemo />}>
-			<EditorContent />
+			<Editor />
 		</FormLayout>
 	);
 };

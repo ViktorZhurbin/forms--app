@@ -6,8 +6,8 @@ import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
 // import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { ScrollArea } from "@mantine/core";
 import { useCallback } from "react";
-import { navigateToField } from "../../utils/navigateToField";
-import { removeSelectedBlockId } from "../../utils/removeSelectedBlockId";
+import { navigateToField } from "../../../../utils/navigateToField";
+import { removeSelectedBlockId } from "../../../../utils/removeSelectedBlockId";
 import { NavbarField } from "../NavbarFields/NavbarField/NavbarField";
 import styles from "./NavbarFieldsList.module.css";
 

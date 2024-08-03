@@ -1,16 +1,17 @@
 import { useParams } from "wouter";
 import { type FormPathParams, Tabs } from "~/constants/routes";
-import { Header } from "./Header/Header";
+import { Header } from "./components/Header/Header";
 import { FormLayout } from "./layouts/FormLayout";
-import { EditorContent } from "./sections/Editor/Editor";
+import { Editor } from "./sections/Editor/Editor";
 import { Results } from "./sections/Results";
 
-export const EditorSections = () => {
+export const Form = () => {
 	const { tabName } = useParams<FormPathParams>();
 
-	return (
-		<FormLayout header={<Header />}>{getContentByTabname(tabName)}</FormLayout>
-	);
+	const header = <Header />;
+	const content = getContentByTabname(tabName);
+
+	return <FormLayout header={header}>{content}</FormLayout>;
 };
 
 function getContentByTabname(tabName?: string) {
@@ -19,6 +20,6 @@ function getContentByTabname(tabName?: string) {
 			return <Results />;
 
 		default:
-			return <EditorContent />;
+			return <Editor />;
 	}
 }

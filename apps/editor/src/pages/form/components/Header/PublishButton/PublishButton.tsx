@@ -1,6 +1,6 @@
 import { Button, Tooltip } from "@mantine/core";
 import { IconSend2 } from "@tabler/icons-react";
-import { usePublishForm } from "../../hooks/usePublishForm";
+import { usePublishForm } from "~/pages/form/hooks/usePublishForm";
 
 export const PublishButton = ({ onClick }: { onClick?: () => void }) => {
 	const { publishForm, isLoading, isPublished, isDisabled } = usePublishForm();

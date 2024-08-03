@@ -7,7 +7,7 @@ import { Root } from "./pages/Root/Root";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { Workspace } from "./pages/Workspace/Workspace";
 import { EditorDemo } from "./pages/form/EditorDemo";
-import { EditorSections } from "./pages/form/EditorSections";
+import { Form } from "./pages/form/Form";
 
 export const App = () => {
 	return (
@@ -15,12 +15,10 @@ export const App = () => {
 			<Switch>
 				<Route path={Routes.SIGN_IN} component={SignIn} />
 				<Route path={Routes.CREATE} component={EditorDemo} />
-
 				<AuthRoute path={Routes.ROOT} component={Root} />
 				<AuthRoute path={Routes.WS} component={Workspace} />
-
-				<AuthRoute path={Routes.FORM} component={EditorSections} />
-
+				``
+				<AuthRoute path={Routes.FORM} component={Form} />
 				{/* Default route in a switch */}
 				<Route>
 					<NotFound />

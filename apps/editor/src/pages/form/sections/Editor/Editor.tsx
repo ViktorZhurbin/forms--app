@@ -2,12 +2,12 @@ import { useCurrentFormQuery } from "@/shared/models/form/read";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { NotFound } from "~/pages/NotFound/NotFound";
-import { Main } from "../../Main/Main";
-import { Navbar } from "../../Navbar/Navbar";
-import { SmallScreen } from "../../SmallScreen/SmallScreen";
+import { SmallScreen } from "../../components/SmallScreen/SmallScreen";
 import styles from "./Editor.module.css";
+import { Main } from "./Main/Main";
+import { Navbar } from "./Navbar/Navbar";
 
-export const EditorContent = () => {
+export const Editor = () => {
 	const { data } = useCurrentFormQuery();
 	const isTooSmall = useMediaQuery("(max-width: 668px)");
 

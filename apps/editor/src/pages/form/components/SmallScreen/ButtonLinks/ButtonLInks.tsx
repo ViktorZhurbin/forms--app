@@ -4,8 +4,8 @@ import { Button } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { Link } from "wouter";
 import { Routes } from "~/constants/routes";
-import { CopyLinkInput } from "../../components/CopyLinkInput/CopyLinkInput";
-import { useWsPath } from "../../hooks/useWsPath";
+import { useWsPath } from "~/pages/form/hooks/useWsPath";
+import { CopyLinkInput } from "../../CopyLinkInput/CopyLinkInput";
 import styles from "./ButtonLinks.module.css";
 
 export const ButtonLinks = () => {

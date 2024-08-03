@@ -3,7 +3,7 @@ import type { TField } from "@/shared/models/field/schema";
 import { Button, CloseButton, Text } from "@mantine/core";
 import clsx from "clsx";
 import { FieldTag } from "~/components/FieldTag/FieldTag";
-import { navigateToField } from "../../../utils/navigateToField";
+import { navigateToField } from "../../../../../utils/navigateToField";
 import styles from "./NavbarField.module.css";
 
 interface NavbarFieldProps

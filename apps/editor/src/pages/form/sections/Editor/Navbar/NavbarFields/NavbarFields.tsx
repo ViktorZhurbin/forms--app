@@ -1,7 +1,7 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { useCurrentFormFieldsQuery } from "@/shared/models/field/read";
 import { Group, Stack, Text } from "@mantine/core";
-import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
+import { AddBlockButton } from "../../../../components/AddBlockButton/AddBlockButton";
 import { NavbarFieldsList } from "../NavbarFieldsList/NavbarFieldsList";
 
 export const NavbarFields = () => {

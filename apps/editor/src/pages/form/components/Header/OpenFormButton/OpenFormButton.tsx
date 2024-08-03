@@ -1,7 +1,7 @@
 import { useFormPublishedFields } from "@/shared/models/field/read";
 import { IconExternalLink } from "@tabler/icons-react";
-import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
-import { useFormUrl } from "../../hooks/useFormUrl";
+import { useFormUrl } from "~/pages/form/hooks/useFormUrl";
+import { HeaderIconButton } from "../HeaderIconButton/HeaderIconButton";
 
 export const OpenFormButton = () => {
 	const url = useFormUrl();

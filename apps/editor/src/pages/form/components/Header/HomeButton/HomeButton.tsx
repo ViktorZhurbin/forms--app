@@ -1,7 +1,7 @@
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
 import { Link } from "wouter";
-import { useWsPath } from "../../hooks/useWsPath";
+import { useWsPath } from "~/pages/form/hooks/useWsPath";
 
 export const HomeButton = () => {
 	const wsPath = useWsPath();

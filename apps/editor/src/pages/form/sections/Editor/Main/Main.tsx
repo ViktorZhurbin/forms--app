@@ -1,6 +1,6 @@
 import { FieldEdit } from "@/shared/components/FieldEdit/FieldEdit";
-import { AddBlockButton } from "../components/AddBlockButton/AddBlockButton";
-import { useCurrentField } from "../hooks/useCurrentField";
+import { AddBlockButton } from "../../../components/AddBlockButton/AddBlockButton";
+import { useCurrentField } from "../../../hooks/useCurrentField";
 import styles from "./Main.module.css";
 
 export const Main = () => {

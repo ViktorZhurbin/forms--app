@@ -1,8 +1,8 @@
 import { useFormFields } from "@/shared/models/field/read";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
-import { HeaderIconButton } from "../../components/HeaderIconButton/HeaderIconButton";
-import { PreviewModal } from "../../modals/PreviewModal/PreviewModal";
+import { PreviewModal } from "~/pages/form/modals/PreviewModal/PreviewModal";
+import { HeaderIconButton } from "../HeaderIconButton/HeaderIconButton";
 
 export const PreviewButton = () => {
 	const fields = useFormFields();

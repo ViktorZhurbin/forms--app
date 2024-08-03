@@ -12,7 +12,7 @@ export const Main = () => {
 		<div className={styles.root}>
 			<AddBlockButton insertBefore tooltip="Add block above" />
 			<div className={styles.fieldWrapper}>
-				<FieldEdit field={field} order={order} isLast={isLast} />
+				<FieldEdit key={field.id} field={field} order={order} isLast={isLast} />
 			</div>
 			<AddBlockButton tooltip="Add block below" />
 		</div>

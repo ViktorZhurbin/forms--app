@@ -6,6 +6,10 @@
 
 .nav {
 	grid-area: nav;
+
+	display: grid;
+	grid-template-rows: 60% 38%;
+	gap: 2%;
 }
 
 .main {

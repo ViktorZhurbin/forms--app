@@ -1,15 +1,21 @@
 import type { TField } from "@/shared/models/field/schema";
-import { getTimeFromISOString } from "@/shared/utils/date";
+import { formatISODate, getTimeFromISOString } from "@/shared/utils/date";
 import { uniqBy } from "es-toolkit";
 import type { ResultsTableProps } from "../ResultsTable/ResultsTable";
 
 export const getPreparedResponses = (params: ResultsTableProps) => {
 	const { fields, responses } = params;
 
-	const preparedResponses = responses.toSorted(
-		(a, b) =>
-			getTimeFromISOString(b.updatedAt) - getTimeFromISOString(a.updatedAt),
-	);
+	const preparedResponses = responses
+		.map((response) => {
+			const submitted = formatISODate(response.submittedAt);
+
+			return { ...response, submitted };
+		})
+		.toSorted(
+			(a, b) =>
+				getTimeFromISOString(b.updatedAt) - getTimeFromISOString(a.updatedAt),
+		);
 
 	const currentFieldsById = fields?.reduce<Record<string, TField>>(
 		(acc, field) => {

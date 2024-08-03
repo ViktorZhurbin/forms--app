@@ -1,6 +1,6 @@
 import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
-import { Table } from "@mantine/core";
+import { Stack, Table } from "@mantine/core";
 import { getPreparedResponses } from "../helpers/getPreparedResponses";
 
 export type ResultsTableProps = {
@@ -45,9 +45,16 @@ export const ResultsTable = (props: ResultsTableProps) => {
 			</Table.Thead>
 
 			<Table.Tbody>
-				{preparedResponses.map(({ id, answers, submittedAt }) => (
+				{preparedResponses.map(({ id, answers, submitted }) => (
 					<Table.Tr key={id}>
-						<Table.Td>{submittedAt}</Table.Td>
+						<Table.Td>
+							{submitted ? (
+								<Stack gap={0}>
+									<span>{submitted.date}</span>
+									<span>{submitted.time}</span>
+								</Stack>
+							) : null}
+						</Table.Td>
 						{getRows(answers)}
 					</Table.Tr>
 				))}

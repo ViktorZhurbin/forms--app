@@ -1,6 +1,6 @@
 import { Text, Title } from "@mantine/core";
 import { IconDeviceLaptop } from "@tabler/icons-react";
-import { ButtonLinks } from "./ButtonLinks/ButtonLInks";
+import { ButtonLinks } from "./ButtonLinks/ButtonLinks";
 import styles from "./SmallScreen.module.css";
 
 export const SmallScreen = () => {

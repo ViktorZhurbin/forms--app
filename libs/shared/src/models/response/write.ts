@@ -9,9 +9,10 @@ const createResponse = async (params: {
 	formNanoId: TForm["nanoId"];
 }) => {
 	const { answer, formNanoId } = params;
+	const fieldId = answer.field.id;
 
 	const response: Omit<TResponse, "id"> = {
-		answers: { [answer.fieldId]: answer },
+		answers: { [fieldId]: answer },
 		updatedAt: getNowISOString(),
 	};
 
@@ -45,10 +46,11 @@ const updateAnswer = async (params: {
 	responseId: TResponse["id"];
 }) => {
 	const { responseId, answer } = params;
+	const fieldId = answer.field.id;
 
 	await db.transact([
 		tx.responses[responseId]
-			.merge({ answers: { [answer.fieldId]: answer } })
+			.merge({ answers: { [fieldId]: answer } })
 			.update({ updatedAt: getNowISOString() }),
 	]);
 };

@@ -1,5 +1,6 @@
 import { Checkbox, Radio } from "@mantine/core";
 import { useState } from "react";
+import type { HandleFieldAnswer } from "~/components/FieldView/FieldView";
 import { FieldTypes } from "~/constants/field";
 import type { TField, TFieldChoice } from "~/models/field/schema";
 import type { TAnswerChoice } from "~/models/response/schema";
@@ -7,36 +8,34 @@ import styles from "./MultipleChoice.module.css";
 import { OptionButton } from "./OptionButton/OptionButton";
 
 export type MultipleChoiceProps = {
-	fieldId: TField["id"];
-	fieldType: TField["type"];
+	field: TField;
 	options: TFieldChoice["options"];
 	goToNextStep: () => void;
 	answer?: TAnswerChoice;
-	onAnswer: (answer: TAnswerChoice) => void;
+	onAnswer: HandleFieldAnswer<TAnswerChoice>;
 };
 
 export const MultipleChoice = ({
-	fieldId,
+	field,
 	options,
 	answer,
 	onAnswer,
 	goToNextStep,
-	fieldType,
 }: MultipleChoiceProps) => {
 	const [selectedChoices, setSelectedChoices] = useState<
 		TFieldChoice["options"]
 	>(answer?.value ?? []);
 
-	const canChooseMany = fieldType === FieldTypes.Checkboxes;
+	const canChooseMany = field.type === FieldTypes.Checkboxes;
 	const Indicator = canChooseMany ? Checkbox.Indicator : Radio.Indicator;
 
 	const handleAnswer = (value: TAnswerChoice["value"]) => {
 		setSelectedChoices(value);
-		onAnswer({ value, fieldId, type: fieldType });
+		onAnswer({ value });
 
 		if (
-			fieldType === FieldTypes.YesNo ||
-			fieldType === FieldTypes.MultipleChoice
+			field.type === FieldTypes.YesNo ||
+			field.type === FieldTypes.MultipleChoice
 		) {
 			setTimeout(goToNextStep, 200);
 		}

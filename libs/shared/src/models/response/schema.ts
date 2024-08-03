@@ -1,8 +1,7 @@
 import type { TField, TFieldChoice } from "../field/schema";
 
 type TAnswerBase = {
-	fieldId: TField["id"];
-	type: TField["type"];
+	field: Pick<TField, "id" | "type" | "title">;
 };
 
 interface TAnswerChoice extends TAnswerBase {

@@ -1,4 +1,5 @@
 import { Button, Title } from "@mantine/core";
+import { useCallback } from "react";
 import { FieldTypes } from "~/constants/field";
 import type { TField } from "~/models/field/schema";
 import type {
@@ -21,6 +22,10 @@ interface FieldViewProps {
 	goToNextStep: () => void;
 }
 
+export type HandleFieldAnswer<T extends TAnswer = TAnswer> = ({
+	value,
+}: { value: T["value"] }) => void;
+
 export const FieldView = ({
 	order,
 	isLast,
@@ -32,11 +37,26 @@ export const FieldView = ({
 }: FieldViewProps) => {
 	const { button, title } = getFieldProps({ field, isLast });
 
+	const handleFieldAnswer: HandleFieldAnswer = useCallback(
+		({ value }) => {
+			const partialField: TAnswer["field"] = {
+				id: field.id,
+				type: field.type,
+				title: field.title,
+			};
+
+			const answer = { value, field: partialField } as TAnswer;
+
+			onAnswer(answer);
+		},
+		[field, onAnswer],
+	);
+
 	const fieldComponent = getFieldComponent({
 		field,
 		answer,
-		onAnswer,
 		goToNextStep,
+		onAnswer: handleFieldAnswer,
 	});
 
 	return (
@@ -58,15 +78,16 @@ function getFieldComponent({
 	answer,
 	onAnswer,
 	goToNextStep,
-}: Pick<FieldViewProps, "field" | "answer" | "goToNextStep" | "onAnswer">) {
+}: Pick<FieldViewProps, "field" | "answer" | "goToNextStep"> & {
+	onAnswer: HandleFieldAnswer;
+}) {
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:
 		case FieldTypes.MultipleChoice: {
 			return (
 				<MultipleChoice
-					fieldId={field.id}
-					fieldType={field.type}
+					field={field}
 					options={field.options}
 					answer={answer as TAnswerChoice | undefined}
 					onAnswer={onAnswer}
@@ -78,8 +99,6 @@ function getFieldComponent({
 		case FieldTypes.ShortText: {
 			return (
 				<ShortText
-					fieldId={field.id}
-					fieldType={field.type}
 					onAnswer={onAnswer}
 					placeholder={field.textPlaceholder}
 					initialValue={(answer?.value ?? "") as TAnswerText["value"]}

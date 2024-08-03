@@ -6,7 +6,7 @@ export const App = () => {
 	return (
 		<ThemeProvider>
 			<Switch>
-				<Route path="/form:formNanoId" component={FormPage} />
+				<Route path="/form/:formNanoId" component={FormPage} />
 
 				{/* Default route in a switch */}
 				<Route>404: No such page!</Route>

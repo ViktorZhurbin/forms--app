@@ -30,7 +30,11 @@ export const ResultsView = (props: {
 				}}
 			/>
 
-			<ResultsTable fields={fields} responses={responsesToShow} />
+			<ResultsTable
+				fields={fields}
+				filter={filter}
+				responses={responsesToShow}
+			/>
 		</div>
 	);
 };

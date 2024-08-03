@@ -1,10 +1,12 @@
 import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
 import { Stack, Table } from "@mantine/core";
+import { FilterTab } from "../constants/filter";
 import { getPreparedResponses } from "../helpers/getPreparedResponses";
 
 export type ResultsTableProps = {
 	fields: TField[];
+	filter: FilterTab;
 	responses: TResponse[];
 };
 
@@ -29,6 +31,14 @@ export const ResultsTable = (props: ResultsTableProps) => {
 			return <Table.Td key={fieldId}>{stringValue || "-"}</Table.Td>;
 		});
 
+	const showPartial = props.filter === FilterTab.Partial;
+	const dateField = {
+		value: showPartial ? "updated" : "submitted",
+		label: showPartial ? "Updated at" : "Submitted at",
+	} as const;
+
+	console.log(dateField);
+
 	return (
 		<Table
 			striped
@@ -39,25 +49,29 @@ export const ResultsTable = (props: ResultsTableProps) => {
 		>
 			<Table.Thead>
 				<Table.Tr>
-					<Table.Th>Submitted at</Table.Th>
+					<Table.Th>{dateField.label}</Table.Th>
 					{getHeaders()}
 				</Table.Tr>
 			</Table.Thead>
 
 			<Table.Tbody>
-				{preparedResponses.map(({ id, answers, submitted }) => (
-					<Table.Tr key={id}>
-						<Table.Td>
-							{submitted ? (
-								<Stack gap={0}>
-									<span>{submitted.date}</span>
-									<span>{submitted.time}</span>
-								</Stack>
-							) : null}
-						</Table.Td>
-						{getRows(answers)}
-					</Table.Tr>
-				))}
+				{preparedResponses.map(({ id, answers, ...rest }) => {
+					const dateProperty = rest[dateField.value];
+
+					return (
+						<Table.Tr key={id}>
+							<Table.Td>
+								{dateProperty ? (
+									<Stack gap={0}>
+										<span>{dateProperty.date}</span>
+										<span>{dateProperty.time}</span>
+									</Stack>
+								) : null}
+							</Table.Td>
+							{getRows(answers)}
+						</Table.Tr>
+					);
+				})}
 			</Table.Tbody>
 		</Table>
 	);

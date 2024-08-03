@@ -9,8 +9,9 @@ export const getPreparedResponses = (params: ResultsTableProps) => {
 	const preparedResponses = responses
 		.map((response) => {
 			const submitted = formatISODate(response.submittedAt);
+			const updated = formatISODate(response.updatedAt);
 
-			return { ...response, submitted };
+			return { ...response, submitted, updated };
 		})
 		.toSorted(
 			(a, b) =>

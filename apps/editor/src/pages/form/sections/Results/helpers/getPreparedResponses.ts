@@ -1,18 +1,27 @@
 import type { TField } from "@/shared/models/field/schema";
-import type { TResponse } from "@/shared/models/response/schema";
 import { getTimeFromISOString } from "@/shared/utils/date";
 import { uniqBy } from "es-toolkit";
+import type { ResultsTableProps } from "../ResultsTable/ResultsTable";
+import { FilterTab } from "../constants/filter";
 
-export const getPreparedResponses = (params: {
-	fields: TField[];
-	responses: TResponse[];
-}) => {
-	const { fields, responses } = params;
+export const getPreparedResponses = (params: ResultsTableProps) => {
+	const { fields, responses, filter } = params;
 
-	const sortedResponses = responses.toSorted(
-		(a, b) =>
-			getTimeFromISOString(b.updatedAt) - getTimeFromISOString(a.updatedAt),
-	);
+	const preparedResponses = responses
+		.filter((response) => {
+			if (filter === FilterTab.Completed) {
+				return response.submittedAt;
+			}
+			if (filter === FilterTab.Partial) {
+				return !response.submittedAt;
+			}
+
+			return true;
+		})
+		.toSorted(
+			(a, b) =>
+				getTimeFromISOString(b.updatedAt) - getTimeFromISOString(a.updatedAt),
+		);
 
 	const currentFieldsById = fields?.reduce<Record<string, TField>>(
 		(acc, field) => {
@@ -23,12 +32,12 @@ export const getPreparedResponses = (params: {
 		{},
 	);
 
-	const allAnswers = sortedResponses.flatMap(({ answers }) =>
+	const allAnswers = preparedResponses.flatMap(({ answers }) =>
 		Object.values(answers),
 	);
 	const uniqueAnswers = uniqBy(allAnswers, ({ field }) => field.id);
 
-	const uniqueSortedFields = uniqueAnswers
+	const preparedFields = uniqueAnswers
 		.map(({ field }) => {
 			const currentField = currentFieldsById[field.id];
 
@@ -42,7 +51,7 @@ export const getPreparedResponses = (params: {
 		.sort((a, b) => a.index - b.index);
 
 	return {
-		uniqueSortedFields,
-		sortedResponses,
+		preparedFields,
+		preparedResponses,
 	};
 };

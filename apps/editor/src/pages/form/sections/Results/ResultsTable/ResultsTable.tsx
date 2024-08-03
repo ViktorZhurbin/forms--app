@@ -1,28 +1,27 @@
 import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
 import { Table } from "@mantine/core";
+import type { FilterTab } from "../constants/filter";
 import { getPreparedResponses } from "../helpers/getPreparedResponses";
 
-export const ResultsTable = (props: {
+export type ResultsTableProps = {
 	fields: TField[];
 	responses: TResponse[];
-}) => {
-	const { fields, responses } = props;
+	filter: FilterTab | null;
+};
 
-	const { uniqueSortedFields, sortedResponses } = getPreparedResponses({
-		fields,
-		responses,
-	});
+export const ResultsTable = (props: ResultsTableProps) => {
+	const { preparedFields, preparedResponses } = getPreparedResponses(props);
 
 	const getHeaders = () =>
-		uniqueSortedFields.map(({ id, title, isDeleted }) => {
+		preparedFields.map(({ id, title, isDeleted }) => {
 			const header = `${title}${isDeleted ? " (deleted)" : ""}`;
 
 			return <Table.Th key={id}>{header}</Table.Th>;
 		});
 
 	const getRows = (answers: TResponse["answers"]) =>
-		uniqueSortedFields.map(({ id: fieldId }) => {
+		preparedFields.map(({ id: fieldId }) => {
 			const { value } = answers[fieldId] ?? {};
 
 			const stringValue = Array.isArray(value)
@@ -48,7 +47,7 @@ export const ResultsTable = (props: {
 			</Table.Thead>
 
 			<Table.Tbody>
-				{sortedResponses.map(({ id, answers, submittedAt }) => (
+				{preparedResponses.map(({ id, answers, submittedAt }) => (
 					<Table.Tr key={id}>
 						<Table.Td>{submittedAt}</Table.Td>
 						{getRows(answers)}

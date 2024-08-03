@@ -1,6 +1,5 @@
 import { FetchState } from "@/shared/components/FetchState/FetchState";
-import styles from "./Results.module.css";
-import { ResultsTable } from "./ResultsTable/ResultsTable";
+import { ResultsView } from "./ResultsView/ResultsView";
 import { useFormWithFieldsAndResponses } from "./hooks/useFormWithFieldsAndResponses";
 
 export const Results = () => {
@@ -16,9 +15,5 @@ export const Results = () => {
 		return null;
 	}
 
-	return (
-		<div className={styles.root}>
-			<ResultsTable fields={form.fields} responses={form.responses} />
-		</div>
-	);
+	return <ResultsView fields={form.fields} responses={form.responses} />;
 };

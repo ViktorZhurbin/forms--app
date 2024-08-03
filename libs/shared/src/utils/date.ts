@@ -1,3 +1,6 @@
 const getNowISOString = () => new Date().toISOString();
 
-export { getNowISOString };
+const getTimeFromISOString = (isoString: string) =>
+	new Date(isoString).getTime();
+
+export { getNowISOString, getTimeFromISOString };

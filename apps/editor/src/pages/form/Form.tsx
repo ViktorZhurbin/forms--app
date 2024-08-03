@@ -3,7 +3,7 @@ import { type FormPathParams, Tabs } from "~/constants/routes";
 import { Header } from "./components/Header/Header";
 import { FormLayout } from "./layouts/FormLayout";
 import { Editor } from "./sections/Editor/Editor";
-import { Results } from "./sections/Results";
+import { Results } from "./sections/Results/Results";
 
 export const Form = () => {
 	const { tabName } = useParams<FormPathParams>();

@@ -37,7 +37,7 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 	return (
 		<FormView
 			isPreview={isPreview}
-			fields={fieldsToDisplay}
+			fields={fieldsToDisplay.toSorted((a, b) => a.index - b.index)}
 			response={responsesQuery.data?.responses?.[0]}
 			exitButton={exitButton}
 		/>

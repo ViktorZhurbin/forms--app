@@ -13,23 +13,44 @@ export type ResultsTableProps = {
 export const ResultsTable = (props: ResultsTableProps) => {
 	const { preparedFields, preparedResponses } = getPreparedResponses(props);
 
-	const getHeaders = () =>
-		preparedFields.map(({ id, title, isDeleted }) => {
-			const header = `${title}${isDeleted ? " (deleted)" : ""}`;
+	const getHeaders = () => (
+		<Table.Tr>
+			<Table.Th>{dateField.label}</Table.Th>
+			{preparedFields.map(({ id, title, isDeleted }) => {
+				const header = `${title}${isDeleted ? " (deleted)" : ""}`;
 
-			return <Table.Th key={id}>{header}</Table.Th>;
+				return <Table.Th key={id}>{header}</Table.Th>;
+			})}
+		</Table.Tr>
+	);
+
+	const getRows = () => {
+		return preparedResponses.map(({ id, answers, ...rest }) => {
+			const dateProperty = rest[dateField.value];
+
+			const date = dateProperty ? (
+				<Stack gap={0}>
+					<span>{dateProperty.date}</span>
+					<span>{dateProperty.time}</span>
+				</Stack>
+			) : null;
+
+			return (
+				<Table.Tr key={id}>
+					<Table.Td>{date}</Table.Td>
+					{preparedFields.map(({ id: fieldId }) => {
+						const { value } = answers[fieldId] ?? {};
+
+						const stringValue = Array.isArray(value)
+							? value.map((item) => item.text).join(", ")
+							: value;
+
+						return <Table.Td key={fieldId}>{stringValue}</Table.Td>;
+					})}
+				</Table.Tr>
+			);
 		});
-
-	const getRows = (answers: TResponse["answers"]) =>
-		preparedFields.map(({ id: fieldId }) => {
-			const { value } = answers[fieldId] ?? {};
-
-			const stringValue = Array.isArray(value)
-				? value.map((item) => item.text).join(", ")
-				: value;
-
-			return <Table.Td key={fieldId}>{stringValue || "-"}</Table.Td>;
-		});
+	};
 
 	const showPartial = props.filter === FilterTab.Partial;
 	const dateField = {
@@ -47,32 +68,8 @@ export const ResultsTable = (props: ResultsTableProps) => {
 				withTableBorder
 				horizontalSpacing="md"
 			>
-				<Table.Thead>
-					<Table.Tr>
-						<Table.Th>{dateField.label}</Table.Th>
-						{getHeaders()}
-					</Table.Tr>
-				</Table.Thead>
-
-				<Table.Tbody>
-					{preparedResponses.map(({ id, answers, ...rest }) => {
-						const dateProperty = rest[dateField.value];
-
-						return (
-							<Table.Tr key={id}>
-								<Table.Td>
-									{dateProperty ? (
-										<Stack gap={0}>
-											<span>{dateProperty.date}</span>
-											<span>{dateProperty.time}</span>
-										</Stack>
-									) : null}
-								</Table.Td>
-								{getRows(answers)}
-							</Table.Tr>
-						);
-					})}
-				</Table.Tbody>
+				<Table.Thead>{getHeaders()}</Table.Thead>
+				<Table.Tbody>{getRows()}</Table.Tbody>
 			</Table>
 		</Table.ScrollContainer>
 	);

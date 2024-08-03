@@ -2,13 +2,13 @@ import { ThemeProvider } from "@/shared/contexts/ThemeProvider/ThemeProvider";
 import { Redirect, Route, Switch } from "wouter";
 import { AuthRoute } from "~/components/AuthRoute/AuthRoute";
 import { EditorRoutes, TabPaths } from "~/constants/routes";
-import { Editor } from "./pages/Editor/Editor";
-import { Results } from "./pages/Editor/Results";
-import { EditorDemo } from "./pages/EditorDemo/EditorDemo";
 import { NotFound } from "./pages/NotFound/NotFound";
 import { Root } from "./pages/Root/Root";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { Workspace } from "./pages/Workspace/Workspace";
+import { Editor } from "./pages/form/Editor";
+import { EditorDemo } from "./pages/form/EditorDemo";
+import { Results } from "./pages/form/Results";
 
 export const App = () => {
 	return (

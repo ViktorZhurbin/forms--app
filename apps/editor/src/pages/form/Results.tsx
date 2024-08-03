@@ -1,5 +1,5 @@
-import { FormLayout } from "./FormLayout/FormLayout";
 import { Header } from "./Header/Header";
+import { FormLayout } from "./layouts/FormLayout";
 
 export const Results = () => {
 	return (

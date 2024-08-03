@@ -1,10 +1,10 @@
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
-import { FormLayout } from "../../FormLayout/FormLayout";
 import { Main } from "../../Main/Main";
 import { NavbarFields } from "../../Navbar/NavbarFields/NavbarFields";
 import { NavbarThankYou } from "../../Navbar/NavbarThankYou/NavbarThankYou";
 import { SmallScreen } from "../../SmallScreen/SmallScreen";
+import { FormLayout } from "../FormLayout";
 import styles from "./EditorBase.module.css";
 
 export const EditorBase = ({ header }: { header: React.ReactElement }) => {

@@ -1,17 +1,9 @@
-import { useCallback } from "react";
 import { FieldView } from "~/components/FieldView/FieldView";
-import { useFormNanoId } from "~/hooks/useFormNanoId";
-import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
 import type { TField } from "~/models/field/schema";
-import type { TAnswer, TResponse } from "~/models/response/schema";
-import {
-	createResponse,
-	updateAnswer,
-	updateResponse,
-} from "~/models/response/write";
-import { getNowISOString } from "~/utils/date";
+import type { TResponse } from "~/models/response/schema";
 import styles from "./FormFields.module.css";
 import { getPosition } from "./getPosition";
+import { useAnswer } from "./useAnswer";
 
 export type FormFieldsProps = {
 	currentStep: number;
@@ -26,39 +18,10 @@ export const FormFields = ({
 	currentStep,
 	goToNextStep,
 }: FormFieldsProps) => {
-	const [{ responseId }, setLocalResponseWithFormId] =
-		useLocalResponseWithFormId();
-
-	const formNanoId = useFormNanoId();
-
-	const handleAnswer = useCallback(
-		async (answer: TAnswer) => {
-			if (!responseId) {
-				const responseId = await createResponse({
-					answer,
-					formNanoId,
-				});
-				setLocalResponseWithFormId({ formNanoId, responseId });
-
-				return;
-			}
-
-			await updateAnswer({ responseId, answer });
-		},
-		[responseId, formNanoId, setLocalResponseWithFormId],
-	);
-
-	const isLastStep = currentStep === fields.length - 1;
-	const handleSubmit = useCallback(async () => {
-		if (isLastStep) {
-			await updateResponse({
-				responseId,
-				payload: { submittedAt: getNowISOString() },
-			});
-		} else {
-			goToNextStep();
-		}
-	}, [isLastStep, responseId, goToNextStep]);
+	const { handleAnswer, handleSubmit } = useAnswer({
+		goToNextStep,
+		isLastStep: currentStep === fields.length - 1,
+	});
 
 	return fields.flatMap((field, index) => {
 		const isRendered = Math.abs(index - currentStep) <= 1;

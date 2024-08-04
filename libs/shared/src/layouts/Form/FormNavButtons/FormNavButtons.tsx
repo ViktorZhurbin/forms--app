@@ -19,13 +19,6 @@ export const FormNavButtons = (props: { className?: string }) => {
 				onClick={() => {
 					swiper.slidePrev();
 				}}
-				onKeyDown={(event) => {
-					// stop tabbing to next element on the last form element
-					if (event.key === "Tab" && !event.shiftKey && isEnd) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-				}}
 			>
 				<IconChevronUp />
 			</ActionIcon>

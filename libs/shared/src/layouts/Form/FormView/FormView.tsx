@@ -1,7 +1,8 @@
 import "swiper/css";
 import "swiper/css/mousewheel";
 import "swiper/css/effect-fade";
-import { EffectFade, Mousewheel } from "swiper/modules";
+import "swiper/css/a11y";
+import { A11y, EffectFade, Mousewheel } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FieldView } from "~/components/FieldView/FieldView";
@@ -42,11 +43,17 @@ export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
 				fadeEffect={{
 					crossFade: true,
 				}}
+				a11y={{
+					firstSlideMessage: "This is the start of the form",
+					lastSlideMessage: "This is the end of the form",
+					nextSlideMessage: "Next question",
+					prevSlideMessage: "Previous question",
+				}}
 				spaceBetween={0}
 				slidesPerView={1}
 				className={styles.swiper}
 				direction="vertical"
-				modules={[Mousewheel, EffectFade]}
+				modules={[Mousewheel, EffectFade, A11y]}
 				mousewheel={{
 					forceToAxis: true,
 				}}

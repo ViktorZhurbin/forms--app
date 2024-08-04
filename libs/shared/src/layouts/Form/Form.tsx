@@ -1,5 +1,5 @@
 import { FetchState } from "~/components/FetchState/FetchState";
-import { useCurrentFormFieldsQuery } from "~/models/field/read";
+import { useCurrentFormWithFieldsQuery } from "~/models/field/read";
 import { useCurrentFormResponsesQuery } from "~/models/response/read";
 import { FormNotFound } from "../FormNotFound/FormNotFound";
 import { FormView } from "./FormView/FormView";
@@ -10,17 +10,14 @@ type FormProps = {
 };
 
 export const Form = ({ isPreview, exitButton }: FormProps) => {
-	const fieldsQuery = useCurrentFormFieldsQuery();
+	const { isLoading, error, data } = useCurrentFormWithFieldsQuery();
 	const responsesQuery = useCurrentFormResponsesQuery();
-
-	const error = fieldsQuery.error;
-	const isLoading = fieldsQuery.isLoading;
 
 	if (error || isLoading) {
 		return <FetchState fullScreen isLoading={isLoading} error={error} />;
 	}
 
-	const fields = fieldsQuery.data?.fields;
+	const fields = data?.forms?.[0]?.fields;
 
 	if (!Array.isArray(fields)) {
 		return <FormNotFound text="This form doesn't seem to exist" />;

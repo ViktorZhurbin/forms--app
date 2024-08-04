@@ -1,24 +1,23 @@
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useQuery } from "../db";
 
-const useCurrentFormFieldsQuery = () => {
+const useCurrentFormWithFieldsQuery = () => {
 	const formNanoId = useFormNanoId();
 
 	return useQuery({
-		fields: {
-			forms: {
-				$: {
-					where: { formNanoId },
-				},
+		forms: {
+			$: {
+				where: { nanoId: formNanoId },
 			},
+			fields: {},
 		},
 	});
 };
 
 const useFormFields = () => {
-	const { data } = useCurrentFormFieldsQuery();
+	const { data } = useCurrentFormWithFieldsQuery();
 
-	return data?.fields;
+	return data?.forms?.[0]?.fields;
 };
 
 const useFormPublishedFields = () => {
@@ -34,7 +33,7 @@ const useOrderedFormFields = () => {
 };
 
 export {
-	useCurrentFormFieldsQuery,
+	useCurrentFormWithFieldsQuery,
 	useFormFields,
 	useFormPublishedFields,
 	useOrderedFormFields,

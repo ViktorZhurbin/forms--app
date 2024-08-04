@@ -1,9 +1,12 @@
-import { Progress } from "@mantine/core";
-import { useCallback, useState } from "react";
-import { useFormGestures } from "~/hooks/useFormGestures";
+import "swiper/css";
+import "swiper/css/mousewheel";
+import "swiper/css/effect-fade";
+import { EffectFade, Mousewheel } from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FieldView } from "~/components/FieldView/FieldView";
 import type { TField } from "~/models/field/schema";
 import type { TResponse } from "~/models/response/schema";
-import { FormFields } from "../FormFields/FormFields";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
 
@@ -15,30 +18,13 @@ type FormViewProps = {
 };
 
 export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
-	const [currentStep, setCurrentStep] = useState(0);
-
-	const isFirstStep = currentStep === 0;
-	const isLastStep = currentStep === fields.length - 1;
-
-	const goToPreviousStep = useCallback(() => {
-		if (isFirstStep) return;
-
-		setCurrentStep(currentStep - 1);
-	}, [currentStep, isFirstStep]);
-
-	const goToNextStep = useCallback(() => {
-		if (isLastStep) return;
-
-		setCurrentStep(currentStep + 1);
-	}, [currentStep, isLastStep]);
-
-	const bind = useFormGestures({
-		goToNextStep,
-		goToPreviousStep,
-	});
-
 	return (
-		<div {...bind()} className={styles.container}>
+		<div className={styles.container}>
+			{/* TODO:
+			- move inside Swiper
+			- extract into a component
+			- use siper instance inside
+			- refine calculations based on answers
 			<Progress
 				size="sm"
 				radius={0}
@@ -46,24 +32,44 @@ export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
 				className={styles.progress}
 				value={Math.round((100 / fields.length) * (currentStep + 1))}
 				transitionDuration={300}
-			/>
+			/> */}
 
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
 
-			<FormFields
-				currentStep={currentStep}
-				fields={fields}
-				answers={response?.answers}
-				goToNextStep={goToNextStep}
-			/>
+			<Swiper
+				speed={400}
+				effect="fade"
+				fadeEffect={{
+					crossFade: true,
+				}}
+				spaceBetween={0}
+				slidesPerView={1}
+				className={styles.swiper}
+				direction="vertical"
+				modules={[Mousewheel, EffectFade]}
+				mousewheel={{
+					forceToAxis: true,
+				}}
+				// onSlideChange={(swiper) => console.log("slide change")}
+				// onSwiper={(swiper) => setSwiper(swiper)}
+			>
+				{fields.flatMap((field, index) => {
+					const answer = response?.answers[field.id];
 
-			<FormNavButtons
-				className={styles.navigation}
-				isPrevDisabled={isFirstStep}
-				isNextDisabled={isLastStep}
-				onClickPrev={goToPreviousStep}
-				onClickNext={goToNextStep}
-			/>
+					return (
+						<SwiperSlide key={field.id} className={styles.swiperSlide}>
+							{({ isActive, isPrev, isNext }) => {
+								if (!isActive && !isPrev && !isNext) return null;
+
+								return (
+									<FieldView order={index + 1} field={field} answer={answer} />
+								);
+							}}
+						</SwiperSlide>
+					);
+				})}
+				<FormNavButtons className={styles.navButtons} />
+			</Swiper>
 		</div>
 	);
 };

@@ -11,17 +11,17 @@
 		"deps-check": "pnpx depcruise src --include-only '^src'"
 	},
 	"browserslist": {
-    "production": [
+		"production": [
 			"last 2 versions",
-      "> 1%",
-      "not dead"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+			"> 1%",
+			"not dead"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
 	"dependencies": {
 		"@dnd-kit/core": "^6.1.0",
 		"@dnd-kit/modifiers": "^7.0.0",
@@ -34,10 +34,10 @@
 		"@mantine/hooks": "^7.11.2",
 		"@react-oauth/google": "^0.12.1",
 		"@tabler/icons-react": "^3.11.0",
-		"@use-gesture/react": "^10.3.1",
 		"es-toolkit": "^1.13.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
+		"swiper": "^11.1.9",
 		"wouter": "^3.3.1"
 	},
 	"devDependencies": {

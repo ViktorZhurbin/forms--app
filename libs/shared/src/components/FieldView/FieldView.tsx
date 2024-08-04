@@ -1,6 +1,8 @@
 import { Button, Title } from "@mantine/core";
 import { useCallback } from "react";
 import { FieldTypes } from "~/constants/field";
+import { useAnswer } from "~/hooks/useAnswer";
+import { useSwiperDetails } from "~/layouts/Form/useSwiperDetails";
 import type { TField } from "~/models/field/schema";
 import type {
 	TAnswer,
@@ -15,11 +17,8 @@ import { ShortText } from "../fields/ShortText/ShortText";
 interface FieldViewProps {
 	field: TField;
 	order: number;
-	isLast: boolean;
 	answer?: TAnswer;
-	onAnswer: (answer: TAnswer) => void;
-	onSubmit: () => void;
-	goToNextStep: () => void;
+	className?: string;
 }
 
 export type HandleFieldAnswer<T extends TAnswer = TAnswer> = ({
@@ -28,14 +27,17 @@ export type HandleFieldAnswer<T extends TAnswer = TAnswer> = ({
 
 export const FieldView = ({
 	order,
-	isLast,
 	field,
 	answer,
-	goToNextStep,
-	onSubmit,
-	onAnswer,
+	className,
 }: FieldViewProps) => {
-	const { button, title } = getFieldProps({ field, isLast });
+	const { isEnd, goToNextStep } = useSwiperDetails();
+	const { button, title } = getFieldProps({ field, isLast: isEnd });
+
+	const { handleAnswer, handleSubmit } = useAnswer({
+		isLastStep: isEnd,
+		goToNextStep,
+	});
 
 	const handleFieldAnswer: HandleFieldAnswer = useCallback(
 		({ value }) => {
@@ -47,9 +49,9 @@ export const FieldView = ({
 
 			const answer = { value, field: partialField } as TAnswer;
 
-			onAnswer(answer);
+			handleAnswer(answer);
 		},
-		[field, onAnswer],
+		[field, handleAnswer],
 	);
 
 	const fieldComponent = getFieldComponent({
@@ -62,10 +64,15 @@ export const FieldView = ({
 	return (
 		<FieldBase
 			order={order}
+			className={className}
 			title={<Title order={1}>{title}</Title>}
 			field={fieldComponent}
 			buttonSubmit={
-				<Button type="submit" onClick={onSubmit} className={button.className}>
+				<Button
+					type="submit"
+					onClick={handleSubmit}
+					className={button.className}
+				>
 					{button.text}
 				</Button>
 			}
@@ -78,7 +85,8 @@ function getFieldComponent({
 	answer,
 	onAnswer,
 	goToNextStep,
-}: Pick<FieldViewProps, "field" | "answer" | "goToNextStep"> & {
+}: Pick<FieldViewProps, "field" | "answer"> & {
+	goToNextStep: () => void;
 	onAnswer: HandleFieldAnswer;
 }) {
 	switch (field.type) {

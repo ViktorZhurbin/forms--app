@@ -1,34 +1,27 @@
 import { ActionIcon } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import clsx from "clsx";
+import { useSwiper } from "swiper/react";
+import { useSwiperDetails } from "../useSwiperDetails";
 import styles from "./FormNavButtons.module.css";
 
-type FormNavButtonsProps = {
-	className: string;
-	isPrevDisabled: boolean;
-	isNextDisabled: boolean;
-	onClickPrev: () => void;
-	onClickNext: () => void;
-};
+export const FormNavButtons = (props: { className?: string }) => {
+	const swiper = useSwiper();
 
-export const FormNavButtons = (props: FormNavButtonsProps) => {
-	const {
-		className,
-		isPrevDisabled,
-		isNextDisabled,
-		onClickPrev,
-		onClickNext,
-	} = props;
+	const { isBeginning, isEnd } = useSwiperDetails();
 
 	return (
-		<div className={`${className} ${styles.root}`}>
+		<div className={clsx(styles.root, props.className)}>
 			<ActionIcon
 				size="lg"
 				aria-label="Previous step"
-				disabled={isPrevDisabled}
-				onClick={onClickPrev}
+				disabled={isBeginning}
+				onClick={() => {
+					swiper.slidePrev();
+				}}
 				onKeyDown={(event) => {
 					// stop tabbing to next element on the last form element
-					if (event.key === "Tab" && !event.shiftKey && isNextDisabled) {
+					if (event.key === "Tab" && !event.shiftKey && isEnd) {
 						event.preventDefault();
 						event.stopPropagation();
 					}
@@ -40,8 +33,10 @@ export const FormNavButtons = (props: FormNavButtonsProps) => {
 			<ActionIcon
 				aria-label="Next step"
 				size="lg"
-				disabled={isNextDisabled}
-				onClick={onClickNext}
+				disabled={isEnd}
+				onClick={() => {
+					swiper.slideNext();
+				}}
 			>
 				<IconChevronDown />
 			</ActionIcon>

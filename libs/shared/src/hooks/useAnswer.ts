@@ -12,7 +12,7 @@ import { getNowISOString } from "~/utils/date";
 export const useAnswer = ({
 	isLastStep,
 	goToNextStep,
-}: { isLastStep: boolean; goToNextStep: () => void }) => {
+}: { isLastStep?: boolean; goToNextStep?: () => void }) => {
 	const [{ responseId }, setLocalResponseWithFormId] =
 		useLocalResponseWithFormId();
 
@@ -42,7 +42,7 @@ export const useAnswer = ({
 				payload: { submittedAt: getNowISOString() },
 			});
 		} else {
-			goToNextStep();
+			goToNextStep?.();
 		}
 	}, [isLastStep, responseId, goToNextStep]);
 

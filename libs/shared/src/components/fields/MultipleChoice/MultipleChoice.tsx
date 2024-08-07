@@ -1,9 +1,9 @@
 import { Checkbox, Radio } from "@mantine/core";
 import { useState } from "react";
-import type { HandleFieldAnswer } from "~/components/FieldView/FieldView";
 import { FieldTypes } from "~/constants/field";
 import type { TField, TFieldChoice } from "~/models/field/schema";
 import type { TAnswerChoice } from "~/models/response/schema";
+import type { HandleFieldAnswer } from "../FieldView/FieldView";
 import styles from "./MultipleChoice.module.css";
 import { OptionButton } from "./OptionButton/OptionButton";
 

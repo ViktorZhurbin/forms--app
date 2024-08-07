@@ -1,7 +1,7 @@
 import { TextInput } from "@mantine/core";
 import { debounce } from "es-toolkit";
-import type { HandleFieldAnswer } from "~/components/FieldView/FieldView";
 import type { TAnswerText } from "~/models/response/schema";
+import type { HandleFieldAnswer } from "../FieldView/FieldView";
 
 type ShortTextProps = {
 	placeholder: string;

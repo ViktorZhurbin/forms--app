@@ -2,7 +2,7 @@ import { ActionIcon } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import clsx from "clsx";
 import { useSwiper } from "swiper/react";
-import { useSwiperDetails } from "../useSwiperDetails";
+import { useSwiperDetails } from "~/components/fields/hooks/useSwiperDetails";
 import styles from "./FormNavButtons.module.css";
 
 export const FormNavButtons = (props: { className?: string }) => {

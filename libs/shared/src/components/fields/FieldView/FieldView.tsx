@@ -2,17 +2,17 @@ import { Button, Title } from "@mantine/core";
 import { useCallback } from "react";
 import { FieldTypes } from "~/constants/field";
 import { useAnswer } from "~/hooks/useAnswer";
-import { useSwiperDetails } from "~/layouts/Form/useSwiperDetails";
 import type { TField } from "~/models/field/schema";
 import type {
 	TAnswer,
 	TAnswerChoice,
 	TAnswerText,
 } from "~/models/response/schema";
-import { FieldBase } from "../FieldBase/FieldBase";
-import { getFieldProps } from "../FieldBase/getFieldProps";
-import { MultipleChoice } from "../fields/MultipleChoice/MultipleChoice";
-import { ShortText } from "../fields/ShortText/ShortText";
+import { FieldBase } from "../../FieldBase/FieldBase";
+import { getFieldProps } from "../../FieldBase/getFieldProps";
+import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
+import { ShortText } from "../ShortText/ShortText";
+import { useSwiperDetails } from "../hooks/useSwiperDetails";
 
 interface FieldViewProps {
 	field: TField;

@@ -5,7 +5,7 @@ import "swiper/css/a11y";
 import { A11y, EffectFade, Mousewheel } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FieldView } from "~/components/FieldView/FieldView";
+import { FieldView } from "~/components/fields/FieldView/FieldView";
 import type { TField } from "~/models/field/schema";
 import type { TResponse } from "~/models/response/schema";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";

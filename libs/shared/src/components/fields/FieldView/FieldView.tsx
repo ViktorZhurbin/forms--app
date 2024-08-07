@@ -108,7 +108,7 @@ function getFieldComponent({
 			return (
 				<ShortText
 					onAnswer={onAnswer}
-					placeholder={field.textPlaceholder}
+					placeholder={field.placeholder}
 					initialValue={(answer?.value ?? "") as TAnswerText["value"]}
 				/>
 			);

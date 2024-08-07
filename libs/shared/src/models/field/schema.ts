@@ -23,7 +23,7 @@ interface TFieldChoice extends TFieldBase {
 
 interface TFieldText extends TFieldBase {
 	type: FieldTypes.ShortText;
-	textPlaceholder: string;
+	placeholder: string;
 }
 
 type TField = TFieldChoice | TFieldText;

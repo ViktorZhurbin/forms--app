@@ -43,8 +43,8 @@ const getCreateFieldPayload = ({
 
 		case FieldTypes.ShortText:
 			update = {
-				textPlaceholder: "Your answer here...",
-			} as Pick<TFieldText, "textPlaceholder">;
+				placeholder: "Your answer here...",
+			} as Pick<TFieldText, "placeholder">;
 
 			break;
 	}

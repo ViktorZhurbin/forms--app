@@ -72,7 +72,7 @@ function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
 
 		case FieldTypes.ShortText:
 			return (
-				<ShortTextEdit fieldId={field.id} placeholder={field.textPlaceholder} />
+				<ShortTextEdit fieldId={field.id} placeholder={field.placeholder} />
 			);
 
 		default:

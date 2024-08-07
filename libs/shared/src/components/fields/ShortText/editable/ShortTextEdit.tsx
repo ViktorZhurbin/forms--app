@@ -13,7 +13,7 @@ export const ShortTextEdit = ({ fieldId, placeholder }: ShortTextEditProps) => {
 	const handleEdit: FocusEventHandler<HTMLInputElement> = (event) => {
 		updateField({
 			id: fieldId,
-			payload: { textPlaceholder: event.currentTarget.value },
+			payload: { placeholder: event.currentTarget.value },
 		});
 	};
 

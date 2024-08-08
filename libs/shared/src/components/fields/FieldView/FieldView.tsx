@@ -65,6 +65,7 @@ export const FieldView = ({
 	return (
 		<FieldBase
 			order={order}
+			fieldType={field.type}
 			classNames={{ root: className, order: styles.order }}
 			title={<Title order={1}>{title.text}</Title>}
 			description={

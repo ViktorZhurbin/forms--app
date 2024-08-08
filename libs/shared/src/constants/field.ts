@@ -15,4 +15,8 @@ const isChoiceField = (type: FieldTypes) => {
 	);
 };
 
-export { FieldTypes, isChoiceField };
+const isWelcomeOrEndingField = (type: FieldTypes) => {
+	return type === FieldTypes.Welcome || type === FieldTypes.Ending;
+};
+
+export { FieldTypes, isChoiceField, isWelcomeOrEndingField };

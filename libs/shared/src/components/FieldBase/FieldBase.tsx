@@ -1,6 +1,7 @@
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import clsx from "clsx";
+import { type FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
 import styles from "./FieldBase.module.css";
 
 interface FieldBaseProps {
@@ -9,6 +10,7 @@ interface FieldBaseProps {
 	description?: React.ReactNode;
 	field: React.ReactNode;
 	buttonSubmit: React.ReactNode;
+	fieldType: FieldTypes;
 	classNames?: {
 		root?: string;
 		order?: string;
@@ -16,15 +18,23 @@ interface FieldBaseProps {
 }
 
 export const FieldBase = ({
-	order,
+	order: orderProp,
 	title,
 	description,
 	field,
+	fieldType,
 	classNames,
 	buttonSubmit,
 }: FieldBaseProps) => {
+	const isWelcomeOrEnding = isWelcomeOrEndingField(fieldType);
+	const order = isWelcomeOrEnding ? null : orderProp;
+
 	return (
-		<div className={clsx(styles.root, classNames?.root)}>
+		<div
+			className={clsx(styles.root, classNames?.root, {
+				[styles.centered]: isWelcomeOrEnding,
+			})}
+		>
 			<div className={styles.wrapper}>
 				<div className={styles.headerGroup}>
 					<div className={styles.titleWrapper}>
@@ -38,9 +48,11 @@ export const FieldBase = ({
 					{description}
 				</div>
 				<div className={styles.bottomWrapper}>
-					<Stack gap={8} w="100%">
-						{field}
-					</Stack>
+					{field && (
+						<Stack gap={8} w="100%">
+							{field}
+						</Stack>
+					)}
 
 					{buttonSubmit}
 				</div>

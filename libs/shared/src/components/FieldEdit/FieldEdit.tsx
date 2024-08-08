@@ -42,6 +42,7 @@ export const FieldEdit = ({ order, field, isLast }: FieldEditProps) => {
 	return (
 		<FieldBase
 			order={order}
+			fieldType={field.type}
 			classNames={{ order: styles.order }}
 			title={
 				<EditableTextarea

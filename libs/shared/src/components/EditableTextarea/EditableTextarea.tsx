@@ -1,4 +1,4 @@
-import { Textarea, Tooltip } from "@mantine/core";
+import { type MantineSize, Textarea, Tooltip } from "@mantine/core";
 import clsx from "clsx";
 import { type KeyboardEventHandler, useRef } from "react";
 import styles from "./EditableTextarea.module.css";
@@ -7,16 +7,18 @@ type EditableTextareaProps = {
 	initialValue?: string;
 	tooltip?: string;
 	placeholder?: string;
-	variant?: "h1" | "body";
+	variant?: "h1";
+	size?: MantineSize;
 	readOnly?: boolean;
 	onFocus?: () => void;
 	onEdit?: (value: string) => void;
 };
 
 export const EditableTextarea = ({
-	variant = "body",
+	variant,
 	readOnly = false,
 	initialValue = "",
+	size,
 	tooltip,
 	onFocus,
 	onEdit,
@@ -34,6 +36,7 @@ export const EditableTextarea = ({
 		<Tooltip withArrow label={tooltip} disabled={!tooltip}>
 			<Textarea
 				autosize
+				size={size}
 				ref={inputRef}
 				readOnly={readOnly}
 				tabIndex={readOnly ? -1 : 0}
@@ -41,11 +44,10 @@ export const EditableTextarea = ({
 				defaultValue={initialValue}
 				placeholder={placeholder}
 				classNames={{
-					input: clsx(
-						styles.input,
-						styles[variant],
-						readOnly && styles.readOnly,
-					),
+					input: clsx(styles.input, {
+						[styles.h1]: variant === "h1",
+						[styles.readOnly]: readOnly,
+					}),
 				}}
 				onFocus={onFocus}
 				onKeyDown={handleKeyDown}

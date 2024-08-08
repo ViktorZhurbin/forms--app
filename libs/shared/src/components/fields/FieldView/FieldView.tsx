@@ -1,4 +1,4 @@
-import { Button, Title } from "@mantine/core";
+import { Button, Text, Title } from "@mantine/core";
 import { useCallback } from "react";
 import { FieldTypes } from "~/constants/field";
 import { useAnswer } from "~/hooks/useAnswer";
@@ -13,6 +13,7 @@ import { getFieldProps } from "../../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
 import { useSwiperDetails } from "../hooks/useSwiperDetails";
+import styles from "./FieldView.module.css";
 
 interface FieldViewProps {
 	field: TField;
@@ -64,8 +65,11 @@ export const FieldView = ({
 	return (
 		<FieldBase
 			order={order}
-			className={className}
-			title={<Title order={1}>{title}</Title>}
+			classNames={{ root: className, order: styles.order }}
+			title={<Title order={1}>{title.text}</Title>}
+			description={
+				field?.description && <Text size="xl">{field?.description}</Text>
+			}
 			field={fieldComponent}
 			buttonSubmit={
 				<Button

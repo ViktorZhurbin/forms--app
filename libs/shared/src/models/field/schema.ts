@@ -5,6 +5,7 @@ type TFieldBase = {
 	nanoId: string;
 	type: FieldTypes;
 	title: string;
+	description?: string;
 	index: number;
 	isPublished: boolean;
 	buttonText: string;

@@ -7,6 +7,7 @@ import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoiceEdit } from "../fields/MultipleChoice/editable/MultipleChoiceEdit";
 import { ShortTextEdit } from "../fields/ShortText/editable/ShortTextEdit";
+import styles from "./FieldEdit.module.css";
 
 interface FieldEditProps {
 	order: number;
@@ -22,6 +23,13 @@ export const FieldEdit = ({ order, field, isLast }: FieldEditProps) => {
 		});
 	};
 
+	const onEditDescription = (description: string) => {
+		updateField({
+			id: field.id,
+			payload: { description },
+		});
+	};
+
 	const onEditButtonText = (buttonText: string) => {
 		updateField({
 			id: field.id,
@@ -34,12 +42,21 @@ export const FieldEdit = ({ order, field, isLast }: FieldEditProps) => {
 	return (
 		<FieldBase
 			order={order}
+			classNames={{ order: styles.order }}
 			title={
 				<EditableTextarea
 					variant="h1"
 					placeholder="Your question here..."
-					initialValue={title}
+					initialValue={title.text}
 					onEdit={onEditTitle}
+				/>
+			}
+			description={
+				<EditableTextarea
+					size="lg"
+					initialValue={field.description}
+					placeholder="Description (optional)"
+					onEdit={onEditDescription}
 				/>
 			}
 			field={getFieldComponent({ field })}
@@ -74,6 +91,10 @@ function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
 			return (
 				<ShortTextEdit fieldId={field.id} placeholder={field.placeholder} />
 			);
+
+		case FieldTypes.Welcome:
+		case FieldTypes.Ending:
+			return false;
 
 		default:
 			return false;

@@ -7,7 +7,7 @@
 	max-width: 720px;
 
 	display: grid;
-	gap: 32px;
+	gap: var(--mantine-spacing-lg);
 }
 
 .titleWrapper {
@@ -15,7 +15,6 @@
 
 	.order {
 		position: absolute;
-		transform: translate(-110%, 65%);
 		display: flex;
 		gap: 2px;
 		flex-wrap: nowrap;

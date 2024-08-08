@@ -6,27 +6,36 @@ import styles from "./FieldBase.module.css";
 interface FieldBaseProps {
 	order: number;
 	title: React.ReactNode;
+	description?: React.ReactNode;
 	field: React.ReactNode;
 	buttonSubmit: React.ReactNode;
-	className?: string;
+	classNames?: {
+		root?: string;
+		order?: string;
+	};
 }
 
 export const FieldBase = ({
 	order,
 	title,
+	description,
 	field,
-	className,
+	classNames,
 	buttonSubmit,
 }: FieldBaseProps) => {
 	return (
-		<div className={clsx(styles.root, className)}>
+		<div className={clsx(styles.root, classNames?.root)}>
 			<div className={styles.wrapper}>
-				<div className={styles.titleWrapper}>
-					<div className={styles.order}>
-						<Text>{order}</Text> <IconArrowRight />
+				<div className={styles.headerGroup}>
+					<div className={styles.titleWrapper}>
+						{order && (
+							<div className={clsx(styles.order, classNames?.order)}>
+								<Text>{order}</Text> <IconArrowRight />
+							</div>
+						)}
+						{title}
 					</div>
-
-					{title}
+					{description}
 				</div>
 				<div className={styles.bottomWrapper}>
 					<Stack gap={8} w="100%">

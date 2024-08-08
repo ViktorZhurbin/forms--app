@@ -1,5 +1,5 @@
 import { Button, Text, Title } from "@mantine/core";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { FieldTypes } from "~/constants/field";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField } from "~/models/field/schema";
@@ -62,6 +62,14 @@ export const FieldView = ({
 		onAnswer: handleFieldAnswer,
 	});
 
+	const buttonRef = useRef<HTMLButtonElement>(null);
+
+	useEffect(() => {
+		if (!fieldComponent) {
+			buttonRef.current?.focus();
+		}
+	}, [fieldComponent]);
+
 	return (
 		<FieldBase
 			order={order}
@@ -74,6 +82,7 @@ export const FieldView = ({
 			field={fieldComponent}
 			buttonSubmit={
 				<Button
+					ref={buttonRef}
 					type="submit"
 					onClick={handleSubmit}
 					className={button.className}

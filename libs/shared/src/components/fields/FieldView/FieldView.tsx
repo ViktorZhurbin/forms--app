@@ -114,6 +114,10 @@ function getFieldComponent({
 			);
 		}
 
+		case FieldTypes.Welcome:
+		case FieldTypes.Ending:
+			return false;
+
 		default:
 			return null;
 	}

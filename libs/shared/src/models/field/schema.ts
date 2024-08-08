@@ -26,6 +26,10 @@ interface TFieldText extends TFieldBase {
 	placeholder: string;
 }
 
-type TField = TFieldChoice | TFieldText;
+interface TFieldInfo extends TFieldBase {
+	type: FieldTypes.Welcome | FieldTypes.Ending;
+}
 
-export type { TField, TFieldChoice, TFieldText };
+type TField = TFieldChoice | TFieldText | TFieldInfo;
+
+export type { TField, TFieldChoice, TFieldText, TFieldInfo };

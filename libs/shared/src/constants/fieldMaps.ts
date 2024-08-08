@@ -3,6 +3,8 @@ import {
 	IconBan,
 	IconCheckbox,
 	IconCircleDot,
+	IconCornerDownLeft,
+	IconCornerDownRight,
 } from "@tabler/icons-react";
 import { FieldTypes } from "./field";
 
@@ -27,6 +29,16 @@ const FieldTypesMap = {
 		Icon: IconAlignLeft,
 		type: FieldTypes.ShortText,
 	},
+	[FieldTypes.Welcome]: {
+		name: "Welcome",
+		Icon: IconCornerDownRight,
+		type: FieldTypes.Welcome,
+	},
+	[FieldTypes.Ending]: {
+		name: "Ending",
+		Icon: IconCornerDownLeft,
+		type: FieldTypes.Ending,
+	},
 };
 
 const FieldGroupsInfo = {
@@ -40,6 +52,11 @@ const FieldGroupsInfo = {
 		bgColor: "var(--mantine-color-blue-2)",
 		types: [FieldTypes.ShortText],
 	},
+	Info: {
+		name: "Info",
+		bgColor: "var(--mantine-color-gray-2)",
+		types: [FieldTypes.Welcome, FieldTypes.Ending],
+	},
 };
 
 const getGroupInfoByFieldType = (type: FieldTypes) => {
@@ -51,6 +68,10 @@ const getGroupInfoByFieldType = (type: FieldTypes) => {
 
 		case FieldTypes.ShortText:
 			return FieldGroupsInfo.Text;
+
+		case FieldTypes.Welcome:
+		case FieldTypes.Ending:
+			return FieldGroupsInfo.Info;
 	}
 };
 

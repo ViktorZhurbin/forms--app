@@ -3,6 +3,8 @@ enum FieldTypes {
 	Checkboxes = "Checkboxes",
 	MultipleChoice = "MultipleChoice",
 	ShortText = "ShortText",
+	Welcome = "Welcome",
+	Ending = "Ending",
 }
 
 const isChoiceField = (type: FieldTypes) => {

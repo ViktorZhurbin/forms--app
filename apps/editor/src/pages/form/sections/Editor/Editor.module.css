@@ -5,11 +5,15 @@
 }
 
 .nav {
+	--fields-height: 58%;
+	--gap: 2%;
+	--endings-height: calc(100% - (var(--fields-height) + var(--gap)));
+
 	grid-area: nav;
 
 	display: grid;
-	grid-template-rows: 60% 38%;
-	gap: 2%;
+	grid-template-rows: var(--fields-height) var(--endings-height);
+	gap: var(--gap);
 }
 
 .main {

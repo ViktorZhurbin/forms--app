@@ -1,10 +1,10 @@
 import {
 	IconAlignLeft,
+	IconBalloon,
 	IconBan,
 	IconCheckbox,
 	IconCircleDot,
-	IconCornerDownLeft,
-	IconCornerDownRight,
+	IconHeartHandshake,
 } from "@tabler/icons-react";
 import { FieldTypes } from "./field";
 
@@ -31,12 +31,12 @@ const FieldTypesMap = {
 	},
 	[FieldTypes.Welcome]: {
 		name: "Welcome",
-		Icon: IconCornerDownRight,
+		Icon: IconBalloon,
 		type: FieldTypes.Welcome,
 	},
 	[FieldTypes.Ending]: {
 		name: "Ending",
-		Icon: IconCornerDownLeft,
+		Icon: IconHeartHandshake,
 		type: FieldTypes.Ending,
 	},
 };

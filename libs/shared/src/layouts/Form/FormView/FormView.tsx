@@ -55,6 +55,7 @@ export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
 				direction="vertical"
 				modules={[Mousewheel, EffectFade, A11y]}
 				mousewheel={{
+					thresholdDelta: 100,
 					forceToAxis: true,
 				}}
 				// onSlideChange={(swiper) => console.log("slide change")}

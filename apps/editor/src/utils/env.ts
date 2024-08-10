@@ -1,4 +1,4 @@
-const isDev = process.env.NODE_ENV === "development";
+const isDev = import.meta.env.MODE === "development";
 
 const FORM_URL_BASE = import.meta.env.PUBLIC_FORM_URL;
 const GOOGLE_CLIENT_ID = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID;

@@ -1,5 +1,4 @@
 import "swiper/css";
-import "swiper/css/mousewheel";
 import "swiper/css/effect-fade";
 import "swiper/css/a11y";
 import { A11y, EffectFade, Mousewheel } from "swiper/modules";

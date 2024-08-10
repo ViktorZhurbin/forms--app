@@ -49,6 +49,11 @@ export default defineConfig(({ env, command, envMode }) => {
 							// plugin options
 							supports: {
 								generateTileGraph: true,
+							},
+							linter: {
+								rules: {
+									"ecma-version-check": "off",
+								}
 							}
 						})
 					);

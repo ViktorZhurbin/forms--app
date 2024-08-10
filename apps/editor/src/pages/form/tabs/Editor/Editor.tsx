@@ -5,8 +5,7 @@ import { NotFound } from "~/pages/NotFound/NotFound";
 import { SmallScreen } from "../../components/SmallScreen/SmallScreen";
 import styles from "./Editor.module.css";
 import { Main } from "./Main/Main";
-import { NavbarFields } from "./Navbar/NavbarFields/NavbarFields";
-import { NavbarThankYou } from "./Navbar/NavbarThankYou/NavbarThankYou";
+import { Navbar } from "./Navbar/Navbar";
 
 export const Editor = () => {
 	const { data } = useCurrentFormQuery();
@@ -25,8 +24,7 @@ export const Editor = () => {
 	return (
 		<div className={styles.content}>
 			<nav className={clsx("nav", styles.nav)}>
-				<NavbarFields />
-				<NavbarThankYou />
+				<Navbar />
 			</nav>
 
 			<main className={clsx("main", styles.main)}>

@@ -1,0 +1,6 @@
+.root {
+	display: grid;
+	grid-template-rows: 2fr 1fr;
+	gap: var(--mantine-spacing-sm);
+	overflow: hidden;
+}

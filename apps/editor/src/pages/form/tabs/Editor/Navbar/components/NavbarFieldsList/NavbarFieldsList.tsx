@@ -3,12 +3,10 @@ import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 import { useOrderedFormFields } from "@/shared/models/field/read";
 import type { TField } from "@/shared/models/field/schema";
 import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
-// import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
-import { ScrollArea } from "@mantine/core";
 import { useCallback } from "react";
-import { navigateToField } from "../../../../utils/navigateToField";
-import { removeSelectedBlockId } from "../../../../utils/removeSelectedBlockId";
-import { NavbarField } from "../NavbarFields/NavbarField/NavbarField";
+import { navigateToField } from "~/pages/form/utils/navigateToField";
+import { removeSelectedBlockId } from "~/pages/form/utils/removeSelectedBlockId";
+import { NavbarField } from "../NavbarField/NavbarField";
 import styles from "./NavbarFieldsList.module.css";
 
 export const NavbarFieldsList = () => {
@@ -75,15 +73,13 @@ export const NavbarFieldsList = () => {
 		});
 
 	return (
-		<ScrollArea scrollbars="y">
-			<div className={styles.fieldsList}>
-				<SortableDndList
-					list={fields}
-					onDragEnd={onDragEnd}
-					Options={Options}
-					DragOverlayItem={DragOverlayItem}
-				/>
-			</div>
-		</ScrollArea>
+		<div className={styles.fieldsList}>
+			<SortableDndList
+				list={fields}
+				onDragEnd={onDragEnd}
+				Options={Options}
+				DragOverlayItem={DragOverlayItem}
+			/>
+		</div>
 	);
 };

@@ -4,19 +4,15 @@
 	grid-template-areas: "nav main";
 }
 
-.nav {
-	--fields-height: 58%;
-	--gap: 2%;
-	--endings-height: calc(100% - (var(--fields-height) + var(--gap)));
-
-	grid-area: nav;
-
+.nav,
+.main {
 	display: grid;
-	grid-template-rows: var(--fields-height) var(--endings-height);
-	gap: var(--gap);
+}
+
+.nav {
+	grid-area: nav;
 }
 
 .main {
 	grid-area: main;
-	display: grid;
 }

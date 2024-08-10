@@ -1,0 +1,13 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: var(--mantine-spacing-xs);
+	overflow: hidden;
+}
+
+.header {
+	display: flex;
+	gap: var(--mantine-spacing-xs);
+	align-items: center;
+	justify-content: space-between;
+}

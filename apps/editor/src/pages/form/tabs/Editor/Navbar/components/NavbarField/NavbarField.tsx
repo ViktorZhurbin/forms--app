@@ -3,7 +3,7 @@ import type { TField } from "@/shared/models/field/schema";
 import { Button, CloseButton, Text } from "@mantine/core";
 import clsx from "clsx";
 import { FieldTag } from "~/components/FieldTag/FieldTag";
-import { navigateToField } from "../../../../../utils/navigateToField";
+import { navigateToFieldId } from "~/pages/form/utils/navigateToFieldId";
 import styles from "./NavbarField.module.css";
 
 interface NavbarFieldProps
@@ -46,7 +46,7 @@ export const NavbarField = ({
 			}}
 			data-active={isSelected}
 			onClick={() => {
-				navigateToField({ nanoId });
+				navigateToFieldId({ nanoId });
 			}}
 		>
 			{isGhost ? null : (

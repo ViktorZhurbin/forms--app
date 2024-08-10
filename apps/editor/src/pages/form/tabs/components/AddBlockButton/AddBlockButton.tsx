@@ -4,7 +4,7 @@ import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { useCallback } from "react";
-import { navigateToField } from "~/pages/form/utils/navigateToField";
+import { navigateToFieldId } from "~/pages/form/utils/navigateToFieldId";
 import { AddBlockModal } from "./AddBlockModal/AddBlockModal";
 
 export const AddBlockButton = ({
@@ -18,7 +18,7 @@ export const AddBlockButton = ({
 		async (type: FieldTypes) => {
 			const { nanoId } = await addField({ type, insertBefore });
 
-			navigateToField({ nanoId });
+			navigateToFieldId({ nanoId });
 			modalActions.close();
 		},
 		[insertBefore, modalActions.close, addField],

@@ -3,8 +3,7 @@ import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 import type { TField } from "@/shared/models/field/schema";
 import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
 import { useCallback } from "react";
-import { navigateToField } from "~/pages/form/utils/navigateToField";
-import { removeSelectedBlockId } from "~/pages/form/utils/removeSelectedBlockId";
+import { navigateToFieldId } from "~/pages/form/utils/navigateToFieldId";
 import { NavbarField } from "../NavbarField/NavbarField";
 import styles from "./NavbarFieldsList.module.css";
 
@@ -50,9 +49,9 @@ export const NavbarFieldsList = (props: { fields: TField[] }) => {
 				const newSelectedBlockId = (prevField ?? nextField)?.nanoId;
 
 				if (newSelectedBlockId) {
-					navigateToField({ nanoId: newSelectedBlockId });
+					navigateToFieldId({ nanoId: newSelectedBlockId });
 				} else {
-					removeSelectedBlockId();
+					navigateToFieldId({ nanoId: null });
 				}
 			};
 

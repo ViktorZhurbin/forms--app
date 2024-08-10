@@ -14,6 +14,8 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 	const { isLoading, error, data } = useCurrentFormWithFieldsQuery();
 	const responsesQuery = useCurrentFormResponsesQuery();
 
+	console.log(responsesQuery);
+
 	if (error || isLoading) {
 		return <FetchState fullScreen isLoading={isLoading} error={error} />;
 	}

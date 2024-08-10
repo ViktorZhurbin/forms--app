@@ -1,6 +1,11 @@
 .root {
 	display: grid;
-	grid-template-rows: 2fr 1fr;
+	grid-template-rows: 2fr auto 1fr;
 	gap: var(--mantine-spacing-sm);
 	overflow: hidden;
+}
+
+.spacer {
+	border-top: var(--border);
+	margin-inline: var(--mantine-spacing-xs);
 }

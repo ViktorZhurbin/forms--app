@@ -40,6 +40,8 @@ export const Navbar = () => {
 				icon={<AddBlockButton tooltip="Add block" />}
 			/>
 
+			<div className={styles.spacer} />
+
 			<NavbarSection title="Endings" fields={endings} />
 		</div>
 	);

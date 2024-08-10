@@ -15,7 +15,12 @@ export type ResultsTableProps = {
 export const ResultsTable = (props: ResultsTableProps) => {
 	const [selectedIds, setSelectedIds] = useState<TResponse["id"][]>([]);
 
-	const { preparedFields, preparedResponses } = getPreparedResponses(props);
+	const { fields, filter, responses } = props;
+
+	const { preparedFields, preparedResponses } = getPreparedResponses({
+		fields,
+		responses,
+	});
 
 	const getHeaders = () => (
 		<Table.Tr>
@@ -87,7 +92,7 @@ export const ResultsTable = (props: ResultsTableProps) => {
 		});
 	};
 
-	const showPartial = props.filter === FilterTab.Partial;
+	const showPartial = filter === FilterTab.Partial;
 	const dateField = {
 		value: showPartial ? "updated" : "submitted",
 		label: showPartial ? "Updated at" : "Submitted at",

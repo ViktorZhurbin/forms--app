@@ -8,7 +8,7 @@
 		"preview": "rsbuild preview --open --port 5174",
 		"bundle-analyzer": "BUNDLE_ANALYZE=true pnpm run build",
 		"rsdoctor": "RSDOCTOR=true pnpm run build",
-		"deps-check": "pnpx depcruise src --include-only '^src'"
+		"deps-check": "depcruise src --include-only '^src'"
 	},
 	"browserslist": {
 		"production": [
@@ -45,6 +45,7 @@
 		"@types/react-dom": "^18.3.0",
 		"autoprefixer": "^10.4.19",
 		"clsx": "^2.1.1",
+    "dependency-cruiser": "^16.3.10",
 		"postcss": "^8.4.40",
 		"postcss-preset-mantine": "^1.17.0",
 		"postcss-simple-vars": "^7.0.1"

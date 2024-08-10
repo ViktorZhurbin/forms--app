@@ -1,9 +1,12 @@
 import type { TField } from "@/shared/models/field/schema";
+import type { TResponse } from "@/shared/models/response/schema";
 import { formatISODate, getTimeFromISOString } from "@/shared/utils/date";
 import { uniqBy } from "es-toolkit";
-import type { ResultsTableProps } from "../ResultsTable/ResultsTable";
 
-export const getPreparedResponses = (params: ResultsTableProps) => {
+export const getPreparedResponses = (params: {
+	fields: TField[];
+	responses: TResponse[];
+}) => {
 	const { fields, responses } = params;
 
 	const preparedResponses = responses

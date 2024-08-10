@@ -7,5 +7,5 @@
 
 .spacer {
 	border-top: var(--border);
-	margin-inline: var(--mantine-spacing-xs);
+	margin-inline: var(--spacing);
 }

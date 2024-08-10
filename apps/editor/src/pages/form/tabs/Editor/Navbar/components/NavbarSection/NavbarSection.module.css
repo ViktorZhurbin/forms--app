@@ -11,3 +11,8 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.header,
+.content {
+	padding-inline: var(--spacing);
+}

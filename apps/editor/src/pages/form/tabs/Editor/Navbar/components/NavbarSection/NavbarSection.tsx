@@ -18,7 +18,12 @@ export const NavbarSection = (props: {
 				{icon}
 			</div>
 
-			<ScrollArea scrollbars="y">
+			<ScrollArea
+				offsetScrollbars
+				type="auto"
+				scrollbars="y"
+				className={styles.content}
+			>
 				<NavbarFieldsList fields={fields} />
 			</ScrollArea>
 		</div>

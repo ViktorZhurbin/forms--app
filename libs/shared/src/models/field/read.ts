@@ -1,4 +1,5 @@
 import { useFormNanoId } from "~/hooks/useFormNanoId";
+import { getOrderedFields } from "~/utils/field";
 import { useQuery } from "../db";
 
 const useCurrentFormWithFieldsQuery = () => {
@@ -29,7 +30,7 @@ const useFormPublishedFields = () => {
 const useOrderedFormFields = () => {
 	const fields = useFormFields();
 
-	return fields?.toSorted((a, b) => a.index - b.index) ?? [];
+	return getOrderedFields(fields);
 };
 
 export {

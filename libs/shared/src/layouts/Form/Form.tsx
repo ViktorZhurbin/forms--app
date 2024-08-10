@@ -1,6 +1,7 @@
 import { FetchState } from "~/components/FetchState/FetchState";
 import { useCurrentFormWithFieldsQuery } from "~/models/field/read";
 import { useCurrentFormResponsesQuery } from "~/models/response/read";
+import { getOrderedFields } from "~/utils/field";
 import { FormNotFound } from "../FormNotFound/FormNotFound";
 import { FormView } from "./FormView/FormView";
 
@@ -34,7 +35,7 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 	return (
 		<FormView
 			isPreview={isPreview}
-			fields={fieldsToDisplay.toSorted((a, b) => a.index - b.index)}
+			fields={getOrderedFields(fieldsToDisplay)}
 			response={responsesQuery.data?.responses?.[0]}
 			exitButton={exitButton}
 		/>

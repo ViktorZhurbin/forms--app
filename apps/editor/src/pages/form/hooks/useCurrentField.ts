@@ -2,15 +2,18 @@ import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 import { useOrderedFormFields } from "@/shared/models/field/read";
 
 export const useCurrentField = () => {
-	const fields = useOrderedFormFields();
+	const orderedFields = useOrderedFormFields();
 	const selectedBlockId = useSelectedBlockId();
 
-	const index =
-		fields?.findIndex((field) => field.nanoId === selectedBlockId) ?? null;
+	const currentFieldIndex = orderedFields?.findIndex(
+		(field) => field.nanoId === selectedBlockId,
+	);
 
-	const field = index !== null && fields?.[index];
+	const index = currentFieldIndex ?? null;
+
+	const field = index !== null && orderedFields?.[index];
 	const order = index === null ? 1 : index + 1;
-	const isLast = order === fields?.length;
+	const isLast = order === orderedFields?.length;
 
 	return { field, order, isLast };
 };

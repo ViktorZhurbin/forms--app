@@ -16,7 +16,7 @@ type AddFieldParams = {
 export const useAddField = () => {
 	const formNanoId = useFormNanoId();
 	const selectedFieldId = useSelectedBlockId();
-	const orderedFields = useOrderedFormFields() ?? [];
+	const orderedFields = useOrderedFormFields();
 
 	const selectedFieldIndex = orderedFields?.findIndex(
 		({ nanoId }) => nanoId === selectedFieldId,

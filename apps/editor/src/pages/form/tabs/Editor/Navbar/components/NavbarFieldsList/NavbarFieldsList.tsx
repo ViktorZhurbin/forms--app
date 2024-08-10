@@ -1,6 +1,5 @@
 import { SortableDndList } from "@/shared/components/SortableDndList/SortableDndList";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
-import { useOrderedFormFields } from "@/shared/models/field/read";
 import type { TField } from "@/shared/models/field/schema";
 import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
 import { useCallback } from "react";
@@ -9,8 +8,9 @@ import { removeSelectedBlockId } from "~/pages/form/utils/removeSelectedBlockId"
 import { NavbarField } from "../NavbarField/NavbarField";
 import styles from "./NavbarFieldsList.module.css";
 
-export const NavbarFieldsList = () => {
-	const fields = useOrderedFormFields();
+export const NavbarFieldsList = (props: { fields: TField[] }) => {
+	const { fields } = props;
+
 	const firstField = fields[0];
 	const selectedNanoId = useSelectedBlockId(firstField?.nanoId);
 

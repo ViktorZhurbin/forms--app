@@ -1,13 +1,15 @@
+import type { TField } from "@/shared/models/field/schema";
 import { ScrollArea } from "@mantine/core";
+import { NavbarFieldsList } from "../NavbarFieldsList/NavbarFieldsList";
 import { NavbarTitle } from "../NavbarTitle/NavbarTitle";
 import styles from "./NavbarSection.module.css";
 
 export const NavbarSection = (props: {
 	title: string;
+	fields: TField[];
 	icon?: React.ReactNode;
-	children: React.ReactNode;
 }) => {
-	const { title, icon, children } = props;
+	const { title, icon, fields } = props;
 
 	return (
 		<div className={styles.root}>
@@ -16,7 +18,9 @@ export const NavbarSection = (props: {
 				{icon}
 			</div>
 
-			<ScrollArea scrollbars="y">{children}</ScrollArea>
+			<ScrollArea scrollbars="y">
+				<NavbarFieldsList fields={fields} />
+			</ScrollArea>
 		</div>
 	);
 };

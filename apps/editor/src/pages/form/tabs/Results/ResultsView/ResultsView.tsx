@@ -1,5 +1,6 @@
 import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
+import { Center } from "@mantine/core";
 import { useState } from "react";
 import { ResultsTable } from "../ResultsTable/ResultsTable";
 import { ResultsTabs } from "../ResultsTabs/ResultsTabs";
@@ -19,6 +20,10 @@ export const ResultsView = (props: {
 		filter,
 		responses,
 	});
+
+	if (!responsesToShow.length) {
+		return <Center>No responses so far</Center>;
+	}
 
 	return (
 		<div className={styles.root}>

@@ -1,7 +1,7 @@
 import { FetchState } from "~/components/FetchState/FetchState";
 import { useCurrentFormWithFieldsQuery } from "~/models/field/read";
 import { useCurrentFormResponsesQuery } from "~/models/response/read";
-import { getOrderedFields } from "~/utils/field";
+import { getFieldsAndEndings } from "~/utils/field";
 import { FormNotFound } from "../FormNotFound/FormNotFound";
 import { FormView } from "./FormView/FormView";
 
@@ -18,24 +18,26 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 		return <FetchState fullScreen isLoading={isLoading} error={error} />;
 	}
 
-	const fields = data?.forms?.[0]?.fields;
+	const allFields = data?.forms?.[0]?.fields;
 
-	if (!Array.isArray(fields)) {
+	if (!Array.isArray(allFields)) {
 		return <FormNotFound text="This form doesn't seem to exist" />;
 	}
 
-	if (!fields.length) {
+	if (!allFields.length) {
 		return <FormNotFound text="This form is empty" />;
 	}
 
 	const fieldsToDisplay = isPreview
-		? fields
-		: fields.filter((field) => field.isPublished);
+		? allFields
+		: allFields.filter((field) => field.isPublished);
+
+	const { fields, endings } = getFieldsAndEndings(fieldsToDisplay);
 
 	return (
 		<FormView
 			isPreview={isPreview}
-			fields={getOrderedFields(fieldsToDisplay)}
+			fields={fields.concat(endings)}
 			response={responsesQuery.data?.responses?.[0]}
 			exitButton={exitButton}
 		/>

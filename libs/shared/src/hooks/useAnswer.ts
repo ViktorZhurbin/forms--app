@@ -8,16 +8,20 @@ import {
 	updateResponse,
 } from "~/models/response/write";
 import { getNowISOString } from "~/utils/date";
+import { useIsPreview } from "./useIsPreview";
 
 export const useAnswer = ({
 	isLastStep,
 	goToNextStep,
 }: { isLastStep?: boolean; goToNextStep?: () => void }) => {
 	const formNanoId = useFormNanoId();
+	const isPreview = useIsPreview();
 	const [responseId, setLocalResponseId] = useLocalFormResponseId();
 
 	const handleAnswer = useCallback(
 		async (answer: TAnswer) => {
+			if (isPreview) return;
+
 			if (!responseId) {
 				const responseId = await createResponse({
 					answer,
@@ -30,11 +34,11 @@ export const useAnswer = ({
 
 			await updateAnswer({ responseId, answer });
 		},
-		[responseId, formNanoId, setLocalResponseId],
+		[responseId, formNanoId, setLocalResponseId, isPreview],
 	);
 
 	const handleSubmit = useCallback(async () => {
-		if (isLastStep) {
+		if (isLastStep && !isPreview) {
 			await updateResponse({
 				responseId,
 				payload: { submittedAt: getNowISOString() },
@@ -42,7 +46,7 @@ export const useAnswer = ({
 		} else {
 			goToNextStep?.();
 		}
-	}, [isLastStep, responseId, goToNextStep]);
+	}, [isLastStep, responseId, goToNextStep, isPreview]);
 
 	return { handleAnswer, handleSubmit };
 };

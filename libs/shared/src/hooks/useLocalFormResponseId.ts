@@ -6,7 +6,6 @@ export const useLocalFormResponseId = () => {
 
 	return useLocalStorage<string>({
 		key: formNanoId,
-		defaultValue: "",
 		serialize: (value) => {
 			return JSON.stringify(value);
 		},

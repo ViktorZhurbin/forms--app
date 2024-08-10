@@ -1,11 +1,11 @@
 import { WEB_SITE_URL } from "@/shared/constants/location";
 import { useAuth } from "@/shared/models/db";
-import { Button } from "@mantine/core";
+import { Button, TextInput } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
 import { Link } from "wouter";
+import { CopyButtonWithTooltip } from "~/components/CopyButtonWithTooltip/CopyButtonWithTooltip";
 import { Routes } from "~/constants/routes";
 import { useWsPath } from "~/pages/form/hooks/useWsPath";
-import { CopyLinkInput } from "../../CopyLinkInput/CopyLinkInput";
 import styles from "./ButtonLinks.module.css";
 
 export const ButtonLinks = () => {
@@ -40,3 +40,18 @@ export const ButtonLinks = () => {
 		</div>
 	);
 };
+
+function CopyLinkInput(props: { url: string }) {
+	const { url } = props;
+
+	return (
+		<div>
+			<TextInput
+				readOnly
+				value={url}
+				label="Send the link to your device with a larger screen"
+				rightSection={<CopyButtonWithTooltip url={url} />}
+			/>
+		</div>
+	);
+}

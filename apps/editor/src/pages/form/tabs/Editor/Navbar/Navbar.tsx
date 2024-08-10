@@ -3,7 +3,7 @@ import { FieldTypes } from "@/shared/constants/field";
 import { useCurrentFormWithFieldsQuery } from "@/shared/models/field/read";
 import type { TField } from "@/shared/models/field/schema";
 import { getOrderedFields } from "@/shared/utils/field";
-import { AddBlockButton } from "~/pages/form/components/AddBlockButton/AddBlockButton";
+import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import styles from "./Navbar.module.css";
 import { NavbarSection } from "./components/NavbarSection/NavbarSection";
 

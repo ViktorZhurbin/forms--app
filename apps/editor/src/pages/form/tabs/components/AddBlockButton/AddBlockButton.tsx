@@ -4,8 +4,8 @@ import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { useCallback } from "react";
-import { AddBlockModal } from "../../modals/AddBlockModal/AddBlockModal";
-import { navigateToField } from "../../utils/navigateToField";
+import { navigateToField } from "~/pages/form/utils/navigateToField";
+import { AddBlockModal } from "./AddBlockModal/AddBlockModal";
 
 export const AddBlockButton = ({
 	tooltip,

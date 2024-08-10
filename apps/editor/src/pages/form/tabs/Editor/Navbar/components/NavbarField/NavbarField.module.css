@@ -1,7 +1,5 @@
 .button {
-	--padding-left: 12px;
-
-	padding-inline: var(--padding-left) 8px;
+	padding-inline: var(--sidebar-padding-x) calc(var(--sidebar-padding-x) * 0.75);
 	position: relative;
 	display: flex;
 	border: unset;
@@ -23,7 +21,7 @@
 		--border-left-width: 2px;
 
 		border-left: var(--border-left-width) solid transparent;
-		padding-left: calc(var(--padding-left) - var(--border-left-width));
+		padding-left: calc(var(--sidebar-padding-x) - var(--border-left-width));
 
 		&:not(&.isGhost) {
 			border-left-color: var(--mantine-color-blue-5);

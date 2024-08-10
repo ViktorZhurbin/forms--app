@@ -1,18 +1,27 @@
-.content {
+.root {
+	--sidebar-padding-x: var(--mantine-spacing-sm);
+	--sidebar-width: minmax(min(100px, 240px), 1fr);
+
 	display: grid;
-	grid-template-columns: var(--nav-width) 1fr;
-	grid-template-areas: "nav main";
+	grid-template-columns: var(--sidebar-width) 2fr var(--sidebar-width);
+	grid-template-areas: "left main right";
 }
 
-.nav,
+.sidebar,
 .main {
 	display: grid;
 }
 
-.nav {
-	grid-area: nav;
+.sidebar.left {
+	grid-area: left;
 }
 
 .main {
 	grid-area: main;
+	border-left: var(--border);
+	border-right: var(--border);
+}
+
+.sidebar.right {
+	grid-area: right;
 }

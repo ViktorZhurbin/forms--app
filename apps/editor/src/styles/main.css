@@ -7,7 +7,6 @@ body {
 
 body {
 	--header-height: 60px;
-	--nav-width: 240px;
 
 	--spacing: var(--mantine-spacing-sm);
 	--spacing-sm: calc(var(--spacing) / 2);
@@ -19,6 +18,13 @@ body {
 .root {
 	display: grid;
 	grid-template-rows: var(--header-height) calc(100dvh - var(--header-height));
+
+	max-width: 1700px;
+	margin: 0 auto;
+	border: var(--border);
+
+	height: 100dvh;
+	overflow: hidden;
 }
 
 .header {
@@ -35,16 +41,10 @@ body {
 	border-bottom: var(--border);
 }
 
-.nav,
+.sidebar,
 .main {
 	overflow-y: auto;
 	padding-block: var(--spacing);
-}
-
-.nav {
-	width: var(--nav-width);
-
-	border-right: var(--border);
 }
 
 .main {

@@ -1,12 +1,12 @@
-import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
+import { useLocalFormResponseId } from "~/hooks/useLocalFormResponseId";
 import { useQuery } from "../db";
 
 const useCurrentFormResponsesQuery = () => {
-	const [ids] = useLocalResponseWithFormId();
+	const [responseId] = useLocalFormResponseId();
 
 	return useQuery({
 		responses: {
-			$: { where: { id: ids.responseId } },
+			$: { where: { id: responseId } },
 		},
 	});
 };

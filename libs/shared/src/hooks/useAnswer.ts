@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
-import { useLocalResponseWithFormId } from "~/hooks/useLocalResponseWithFormId";
+import { useLocalFormResponseId } from "~/hooks/useLocalFormResponseId";
 import type { TAnswer } from "~/models/response/schema";
 import {
 	createResponse,
@@ -13,10 +13,8 @@ export const useAnswer = ({
 	isLastStep,
 	goToNextStep,
 }: { isLastStep?: boolean; goToNextStep?: () => void }) => {
-	const [{ responseId }, setLocalResponseWithFormId] =
-		useLocalResponseWithFormId();
-
 	const formNanoId = useFormNanoId();
+	const [responseId, setLocalResponseId] = useLocalFormResponseId();
 
 	const handleAnswer = useCallback(
 		async (answer: TAnswer) => {
@@ -25,14 +23,14 @@ export const useAnswer = ({
 					answer,
 					formNanoId,
 				});
-				setLocalResponseWithFormId({ formNanoId, responseId });
+				setLocalResponseId(responseId);
 
 				return;
 			}
 
 			await updateAnswer({ responseId, answer });
 		},
-		[responseId, formNanoId, setLocalResponseWithFormId],
+		[responseId, formNanoId, setLocalResponseId],
 	);
 
 	const handleSubmit = useCallback(async () => {

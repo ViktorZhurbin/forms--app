@@ -5,7 +5,7 @@ import { Routes } from "~/constants/routes";
 import { HeaderDemo } from "./components/Header/HeaderDemo";
 import { useDemoForm } from "./hooks/useDemoForm";
 import { FormLayout } from "./layouts/FormLayout";
-import { Editor } from "./sections/Editor/Editor";
+import { Editor } from "./tabs/Editor/Editor";
 
 export const EditorDemo = () => {
 	const auth = useAuth();

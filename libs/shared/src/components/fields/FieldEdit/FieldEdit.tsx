@@ -95,9 +95,9 @@ function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
 
 		case FieldTypes.Welcome:
 		case FieldTypes.Ending:
-			return false;
+			return null;
 
 		default:
-			return false;
+			return null;
 	}
 }

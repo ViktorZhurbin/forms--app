@@ -1,6 +1,6 @@
 import { Button, Text, Title } from "@mantine/core";
 import { useCallback, useEffect, useRef } from "react";
-import { FieldTypes } from "~/constants/field";
+import { FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField } from "~/models/field/schema";
 import type {
@@ -40,35 +40,13 @@ export const FieldView = ({
 		goToNextStep,
 	});
 
-	const handleFieldAnswer: HandleFieldAnswer = useCallback(
-		({ value }) => {
-			const partialField: TAnswer["field"] = {
-				id: field.id,
-				type: field.type,
-				title: field.title,
-			};
-
-			const answer = { value, field: partialField } as TAnswer;
-
-			handleAnswer(answer);
-		},
-		[field, handleAnswer],
-	);
-
-	const fieldComponent = getFieldComponent({
-		field,
-		answer,
-		goToNextStep,
-		onAnswer: handleFieldAnswer,
-	});
-
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
-		if (!fieldComponent) {
+		if (isWelcomeOrEndingField(field.type)) {
 			buttonRef.current?.focus();
 		}
-	}, [fieldComponent]);
+	}, [field.type]);
 
 	return (
 		<FieldBase
@@ -79,7 +57,14 @@ export const FieldView = ({
 			description={
 				field?.description && <Text size="xl">{field?.description}</Text>
 			}
-			field={fieldComponent}
+			field={
+				<FieldComponent
+					field={field}
+					answer={answer}
+					goToNextStep={goToNextStep}
+					onAnswer={handleAnswer}
+				/>
+			}
 			buttonSubmit={
 				<Button
 					ref={buttonRef}
@@ -94,15 +79,29 @@ export const FieldView = ({
 	);
 };
 
-function getFieldComponent({
-	field,
-	answer,
-	onAnswer,
-	goToNextStep,
-}: Pick<FieldViewProps, "field" | "answer"> & {
-	goToNextStep: () => void;
-	onAnswer: HandleFieldAnswer;
-}) {
+function FieldComponent(
+	props: Pick<FieldViewProps, "field" | "answer"> & {
+		goToNextStep: () => void;
+		onAnswer: (answer: TAnswer) => void;
+	},
+) {
+	const { field, answer, onAnswer, goToNextStep } = props;
+
+	const handleAnswer: HandleFieldAnswer = useCallback(
+		({ value }) => {
+			const answerField: TAnswer["field"] = {
+				id: field.id,
+				type: field.type,
+				title: field.title,
+			};
+
+			const answer = { value, field: answerField } as TAnswer;
+
+			onAnswer(answer);
+		},
+		[field.id, field.type, field.title, onAnswer],
+	);
+
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:
@@ -112,7 +111,7 @@ function getFieldComponent({
 					field={field}
 					options={field.options}
 					answer={answer as TAnswerChoice | undefined}
-					onAnswer={onAnswer}
+					onAnswer={handleAnswer}
 					goToNextStep={goToNextStep}
 				/>
 			);
@@ -121,7 +120,7 @@ function getFieldComponent({
 		case FieldTypes.ShortText: {
 			return (
 				<ShortText
-					onAnswer={onAnswer}
+					onAnswer={handleAnswer}
 					placeholder={field.placeholder}
 					initialValue={(answer?.value ?? "") as TAnswerText["value"]}
 				/>

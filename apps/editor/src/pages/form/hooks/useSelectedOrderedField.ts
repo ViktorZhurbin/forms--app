@@ -1,7 +1,7 @@
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 import { useOrderedFormFields } from "@/shared/models/field/read";
 
-export const useCurrentField = () => {
+export const useSelectedOrderedField = () => {
 	const orderedFields = useOrderedFormFields();
 	const selectedBlockId = useSelectedBlockId();
 

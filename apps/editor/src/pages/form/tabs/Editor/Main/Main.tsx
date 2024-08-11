@@ -1,10 +1,10 @@
 import { FieldEdit } from "@/shared/components/fields/FieldEdit/FieldEdit";
-import { useCurrentField } from "../../../hooks/useCurrentField";
+import { useSelectedOrderedField } from "~/pages/form/hooks/useSelectedOrderedField";
 import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import styles from "./Main.module.css";
 
 export const Main = () => {
-	const { field, order, isLast } = useCurrentField();
+	const { field, order, isLast } = useSelectedOrderedField();
 
 	if (!field || order === null) return null;
 

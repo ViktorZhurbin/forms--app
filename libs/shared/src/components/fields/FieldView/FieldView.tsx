@@ -8,8 +8,8 @@ import type {
 	TAnswerChoice,
 	TAnswerText,
 } from "~/models/response/schema";
-import { FieldBase } from "../../FieldBase/FieldBase";
-import { getFieldProps } from "../../FieldBase/getFieldProps";
+import { FieldBase } from "../FieldBase/FieldBase";
+import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
 import { useSwiperDetails } from "../hooks/useSwiperDetails";

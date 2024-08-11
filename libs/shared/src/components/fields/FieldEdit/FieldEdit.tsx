@@ -1,12 +1,12 @@
 import { FieldTypes } from "~/constants/field";
 import type { TField } from "~/models/field/schema";
 import { updateField } from "~/models/field/write";
-import { EditableButton } from "../EditableButton/EditableButton";
-import { EditableTextarea } from "../EditableTextarea/EditableTextarea";
+import { EditableButton } from "../../EditableButton/EditableButton";
+import { EditableTextarea } from "../../EditableTextarea/EditableTextarea";
 import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
-import { MultipleChoiceEdit } from "../fields/MultipleChoice/editable/MultipleChoiceEdit";
-import { ShortTextEdit } from "../fields/ShortText/editable/ShortTextEdit";
+import { MultipleChoiceEdit } from "../MultipleChoice/editable/MultipleChoiceEdit";
+import { ShortTextEdit } from "../ShortText/editable/ShortTextEdit";
 import styles from "./FieldEdit.module.css";
 
 interface FieldEditProps {

@@ -1,4 +1,4 @@
-import { FieldEdit } from "@/shared/components/FieldEdit/FieldEdit";
+import { FieldEdit } from "@/shared/components/fields/FieldEdit/FieldEdit";
 import { useCurrentField } from "../../../hooks/useCurrentField";
 import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import styles from "./Main.module.css";

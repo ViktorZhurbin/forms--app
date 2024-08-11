@@ -1,18 +1,16 @@
-import { Button, Group, Modal, Text } from "@mantine/core";
-import type { ModalProps } from "../types";
+import { Button, Group, Modal, type ModalProps, Text } from "@mantine/core";
 
 export const ConfirmationModal = (
 	props: {
-		title: string;
 		text: string;
 		confirmButtontext: string;
 		onConfirm: () => void;
 	} & ModalProps,
 ) => {
-	const { isOpen, onClose, onConfirm, title, text, confirmButtontext } = props;
+	const { opened, onClose, onConfirm, title, text, confirmButtontext } = props;
 
 	return (
-		<Modal opened={isOpen} onClose={onClose} title={title}>
+		<Modal opened={opened} onClose={onClose} title={title}>
 			<Text size="sm">{text}</Text>
 			<Group mt="xl" justify="end">
 				<Button variant="default" onClick={onClose}>

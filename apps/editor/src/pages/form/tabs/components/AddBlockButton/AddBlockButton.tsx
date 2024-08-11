@@ -34,7 +34,7 @@ export const AddBlockButton = ({
 
 			<AddBlockModal
 				onClose={modalActions.close}
-				isOpen={isModalOpen}
+				opened={isModalOpen}
 				onAddBlock={handleAddBlock}
 			/>
 		</>

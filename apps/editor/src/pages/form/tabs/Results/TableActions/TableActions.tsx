@@ -4,7 +4,7 @@ import { pluralize } from "@/shared/utils/grammar";
 import { ActionIcon, Button, Group, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconDownload, IconTrash } from "@tabler/icons-react";
-import { ConfirmationModal } from "~/pages/form/modals/ConfirmationModal/ConfirmationModal";
+import { ConfirmationModal } from "~/components/modals/ConfirmationModal/ConfirmationModal";
 
 export const TableActions = (props: {
 	selectedIds: TResponse["id"][];
@@ -39,7 +39,7 @@ export const TableActions = (props: {
 					</Button>
 
 					<ConfirmationModal
-						isOpen={opened}
+						opened={opened}
 						onClose={modalActions.close}
 						title={`Delete ${selectedRowsText}?`}
 						text="Are you sure you want to delete selected responses?"

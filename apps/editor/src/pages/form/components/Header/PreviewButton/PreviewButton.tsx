@@ -2,9 +2,9 @@ import { SearchParams } from "@/shared/constants/location";
 import { useFormFields } from "@/shared/models/field/read";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
-import { PreviewModal } from "~/pages/form/modals/PreviewModal/PreviewModal";
 import { setSearchParams } from "~/utils/searchParams";
 import { HeaderIconButton } from "../HeaderIconButton/HeaderIconButton";
+import { PreviewModal } from "./PreviewModal/PreviewModal";
 
 export const PreviewButton = () => {
 	const fields = useFormFields();
@@ -30,7 +30,7 @@ export const PreviewButton = () => {
 				onClick={handleModalOpen}
 			/>
 
-			<PreviewModal isOpen={isModalOpen} onClose={handleModalClose} />
+			<PreviewModal opened={isModalOpen} onClose={handleModalClose} />
 		</>
 	);
 };

@@ -1,10 +1,9 @@
 import { Form } from "@/shared/layouts/Form/Form";
-import { Button, Modal } from "@mantine/core";
+import { Button, Modal, type ModalProps } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
-import type { ModalProps } from "../types";
 import styles from "./PreviewModal.module.css";
 
-export const PreviewModal = ({ isOpen, onClose }: ModalProps) => {
+export const PreviewModal = ({ opened, onClose }: ModalProps) => {
 	return (
 		<Modal
 			fullScreen
@@ -12,7 +11,7 @@ export const PreviewModal = ({ isOpen, onClose }: ModalProps) => {
 			withOverlay={false}
 			withCloseButton={false}
 			transitionProps={{ transition: "fade-down" }}
-			opened={isOpen}
+			opened={opened}
 			onClose={onClose}
 			classNames={{
 				content: styles.modalContent,

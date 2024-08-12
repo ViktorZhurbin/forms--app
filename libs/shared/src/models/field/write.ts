@@ -1,4 +1,5 @@
 import { id, lookup, tx } from "@instantdb/react";
+import { objectEntries } from "~/utils/object";
 import { db } from "../db";
 import type { TForm } from "../form/schema/form";
 import { getChoiceFieldOptionPayload } from "./helpers/getChoiceFieldOptionPayload";
@@ -60,24 +61,18 @@ const deleteField = async ({ id }: { id: TField["id"] }) => {
 	db.transact([tx.fields[id].delete()]);
 };
 
-type UpdateSettingPayload<T extends TField> = {
-	key: keyof T["settings"];
-	value: T["settings"][keyof T["settings"]];
-};
-
-const updateFieldSetting = async <T extends TField>(params: {
-	id: TField["id"];
-	payload: UpdateSettingPayload<T>;
+const updateFieldSetting = async <Field extends TField>(params: {
+	field: Field;
+	payload: Partial<Field["settings"]>;
 }) => {
-	const {
-		id,
-		payload: { key, value },
-	} = params;
+	const { field, payload } = params;
 
-	await db.transact(tx.fields[id].merge({ settings: { [key]: value } }));
+	const ops = objectEntries(payload).map(([key, value]) =>
+		tx.fields[field.id].merge({ settings: { [key]: value } }),
+	);
+
+	await db.transact(ops);
 };
-
-export type { UpdateSettingPayload };
 
 export {
 	createField,

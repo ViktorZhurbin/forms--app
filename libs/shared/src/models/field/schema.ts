@@ -33,16 +33,20 @@ interface TFieldText extends TFieldBase {
 	settings: TSharedQuestonSettings;
 }
 
-type TInfoSettings = {
-	showSmth: boolean;
-};
-
-interface TFieldInfo extends TFieldBase {
-	type: FieldTypes.Welcome | FieldTypes.Ending;
-	// TODO: specify settings object
-	settings: TInfoSettings;
+interface TFieldWelcome extends TFieldBase {
+	type: FieldTypes.Welcome;
+	settings: {
+		showResponseCount: boolean;
+	};
 }
 
-type TField = TFieldChoice | TFieldText | TFieldInfo;
+interface TFieldEnding extends TFieldBase {
+	type: FieldTypes.Ending;
+	settings: {
+		showButton: boolean;
+	};
+}
 
-export type { TField, TFieldChoice, TFieldText, TFieldInfo };
+type TField = TFieldChoice | TFieldText | TFieldWelcome | TFieldEnding;
+
+export type { TField, TFieldChoice, TFieldText };

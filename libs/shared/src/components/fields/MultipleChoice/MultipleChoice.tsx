@@ -34,8 +34,9 @@ export const MultipleChoice = ({
 		onAnswer({ value });
 
 		if (
-			field.type === FieldTypes.YesNo ||
-			field.type === FieldTypes.MultipleChoice
+			value.length &&
+			(field.type === FieldTypes.YesNo ||
+				field.type === FieldTypes.MultipleChoice)
 		) {
 			setTimeout(goToNextStep, 200);
 		}

@@ -17,18 +17,30 @@ type TChoice = {
 	nanoId: string;
 };
 
+type TSharedQuestonSettings = {
+	isRequired: boolean;
+};
+
 interface TFieldChoice extends TFieldBase {
 	type: FieldTypes.Checkboxes | FieldTypes.MultipleChoice | FieldTypes.YesNo;
 	options: TChoice[];
+	settings: TSharedQuestonSettings;
 }
 
 interface TFieldText extends TFieldBase {
 	type: FieldTypes.ShortText;
 	placeholder: string;
+	settings: TSharedQuestonSettings;
 }
+
+type TInfoSettings = {
+	showSmth: boolean;
+};
 
 interface TFieldInfo extends TFieldBase {
 	type: FieldTypes.Welcome | FieldTypes.Ending;
+	// TODO: specify settings object
+	settings: TInfoSettings;
 }
 
 type TField = TFieldChoice | TFieldText | TFieldInfo;

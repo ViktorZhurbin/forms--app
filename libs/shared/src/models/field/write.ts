@@ -60,11 +60,31 @@ const deleteField = async ({ id }: { id: TField["id"] }) => {
 	db.transact([tx.fields[id].delete()]);
 };
 
+type UpdateSettingPayload<T extends TField> = {
+	key: keyof T["settings"];
+	value: T["settings"][keyof T["settings"]];
+};
+
+const updateFieldSetting = async <T extends TField>(params: {
+	id: TField["id"];
+	payload: UpdateSettingPayload<T>;
+}) => {
+	const {
+		id,
+		payload: { key, value },
+	} = params;
+
+	await db.transact(tx.fields[id].merge({ settings: { [key]: value } }));
+};
+
+export type { UpdateSettingPayload };
+
 export {
 	createField,
 	createChoiceFieldOption,
 	updateField,
 	updateManyFields,
 	updateFieldsIndex,
+	updateFieldSetting,
 	deleteField,
 };

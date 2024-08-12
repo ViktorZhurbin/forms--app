@@ -49,7 +49,7 @@ const linkFormToWorkspace = async ({
 	await db.transact(
 		tx.forms[formId]
 			.link({ workspaces: lookup("nanoId", wsNanoId) })
-			.merge({ isDemo: false }),
+			.update({ isDemo: false }),
 	);
 };
 

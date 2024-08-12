@@ -39,7 +39,7 @@ function RequiredSwitch(props: {
 	return (
 		<SettingsSwitch
 			label="Required"
-			checked={field.settings?.isRequired}
+			checked={!!field.settings?.isRequired}
 			onChange={(e) => {
 				updateFieldSetting({
 					field,

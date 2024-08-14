@@ -1,4 +1,4 @@
-import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
+import { DarkModeToggle } from "@/shared/components/DarkModeToggle/DarkModeToggle";
 import { isDev } from "~/utils/env";
 import { CopyLinkButton } from "./CopyLinkButton/CopyLinkButton";
 import { EditableFormTitle } from "./EditableFormTitle/EditableFormTitle";

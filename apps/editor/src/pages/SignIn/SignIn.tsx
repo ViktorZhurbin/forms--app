@@ -1,7 +1,7 @@
+import { DarkModeToggle } from "@/shared/components/DarkModeToggle/DarkModeToggle";
 import { SearchParams, WEB_SITE_URL } from "@/shared/constants/location";
 import { ActionIcon, Card } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
-import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { SignInForm } from "~/components/SignInForm/SignInForm";
 import styles from "./SignIn.module.css";
 

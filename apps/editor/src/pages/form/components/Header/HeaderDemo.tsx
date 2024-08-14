@@ -1,6 +1,6 @@
+import { DarkModeToggle } from "@/shared/components/DarkModeToggle/DarkModeToggle";
 import { Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { EditableFormTitle } from "./EditableFormTitle/EditableFormTitle";
 import styles from "./Header.module.css";
 import { PreviewButton } from "./PreviewButton/PreviewButton";

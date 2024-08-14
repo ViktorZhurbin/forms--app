@@ -33,13 +33,13 @@
 	z-index: 3;
 }
 
-.exitButton {
+.topFixed {
 	top: 0;
 	right: 0;
 	z-index: 2;
 }
 
-.exitButton,
+.topFixed,
 .navButtons {
 	position: fixed;
 

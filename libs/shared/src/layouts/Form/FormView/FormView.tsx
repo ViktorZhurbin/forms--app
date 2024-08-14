@@ -5,6 +5,7 @@ import { A11y, EffectFade, Mousewheel } from "swiper/modules";
 
 import { useCallback, useState } from "react";
 import { Swiper, type SwiperClass, SwiperSlide } from "swiper/react";
+import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField } from "~/models/field/schema";
@@ -12,13 +13,6 @@ import type { TAnswer, TResponse } from "~/models/response/schema";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
 import { getFieldState } from "../helpers/getFieldState";
 import styles from "./FormView.module.css";
-
-type FormViewProps = {
-	fields: TField[];
-	response?: TResponse;
-	isPreview?: boolean;
-	exitButton?: React.ReactElement;
-};
 
 const swiperProps = {
 	speed: 400,
@@ -43,7 +37,19 @@ const swiperProps = {
 	},
 };
 
-export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
+type FormViewProps = {
+	fields: TField[];
+	response?: TResponse;
+	isPreview?: boolean;
+	exitButton?: React.ReactElement;
+};
+
+export const FormView = ({
+	fields,
+	response,
+	exitButton,
+	isPreview,
+}: FormViewProps) => {
 	const [swiper, setSwiper] = useState<SwiperClass>();
 	const [showRequiredError, setShowRequiredError] = useState(false);
 
@@ -93,7 +99,9 @@ export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
 
 	return (
 		<div className={styles.container}>
-			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
+			<div className={styles.topFixed}>
+				{isPreview && exitButton ? exitButton : <DarkModeToggle />}
+			</div>
 			<Swiper {...swiperProps} onSwiper={setSwiper}>
 				{fields.map((field, index, list) => {
 					const answer = response?.answers[field.id];

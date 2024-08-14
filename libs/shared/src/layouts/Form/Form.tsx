@@ -34,11 +34,13 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 
 	const { fields, endings } = getFieldsAndEndings(fieldsToDisplay);
 
+	const response = responsesQuery.data?.responses?.[0];
+
 	return (
 		<FormView
 			isPreview={isPreview}
 			fields={fields.concat(endings)}
-			response={responsesQuery.data?.responses?.[0]}
+			response={response}
 			exitButton={exitButton}
 		/>
 	);

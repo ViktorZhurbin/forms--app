@@ -10,15 +10,12 @@ import {
 import { getNowISOString } from "~/utils/date";
 import { useIsPreview } from "./useIsPreview";
 
-export const useAnswer = ({
-	isLastStep,
-	goToNextStep,
-}: { isLastStep?: boolean; goToNextStep?: () => void }) => {
+export const useAnswer = () => {
 	const formNanoId = useFormNanoId();
 	const isPreview = useIsPreview();
 	const [responseId, setLocalResponseId] = useLocalFormResponseId();
 
-	const handleAnswer = useCallback(
+	const createOrUpdateAnswer = useCallback(
 		async (answer: TAnswer) => {
 			if (isPreview) return;
 
@@ -37,16 +34,14 @@ export const useAnswer = ({
 		[responseId, formNanoId, setLocalResponseId, isPreview],
 	);
 
-	const handleSubmit = useCallback(async () => {
-		if (isLastStep && !isPreview) {
-			await updateResponse({
-				responseId,
-				payload: { submittedAt: getNowISOString() },
-			});
-		} else {
-			goToNextStep?.();
-		}
-	}, [isLastStep, responseId, goToNextStep, isPreview]);
+	const submitAnswer = useCallback(async () => {
+		if (isPreview) return;
 
-	return { handleAnswer, handleSubmit };
+		await updateResponse({
+			responseId,
+			payload: { submittedAt: getNowISOString() },
+		});
+	}, [responseId, isPreview]);
+
+	return { createOrUpdateAnswer, submitAnswer };
 };

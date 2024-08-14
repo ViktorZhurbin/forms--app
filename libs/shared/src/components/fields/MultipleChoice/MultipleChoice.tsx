@@ -29,9 +29,10 @@ export const MultipleChoice = ({
 	const canChooseMany = field.type === FieldTypes.Checkboxes;
 	const Indicator = canChooseMany ? Checkbox.Indicator : Radio.Indicator;
 
-	const handleAnswer = (value: TAnswerChoice["value"]) => {
+	const handleAnswer = async (value: TAnswerChoice["value"]) => {
+		console.log("start");
 		setSelectedChoices(value);
-		onAnswer({ value });
+		await onAnswer({ value });
 
 		if (
 			value.length &&

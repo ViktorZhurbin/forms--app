@@ -3,11 +3,14 @@ import "swiper/css/effect-fade";
 import "swiper/css/a11y";
 import { A11y, EffectFade, Mousewheel } from "swiper/modules";
 
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useCallback, useState } from "react";
+import { Swiper, type SwiperClass, SwiperSlide } from "swiper/react";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
+import { useAnswer } from "~/hooks/useAnswer";
 import type { TField } from "~/models/field/schema";
-import type { TResponse } from "~/models/response/schema";
+import type { TAnswer, TResponse } from "~/models/response/schema";
 import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
+import { getFieldState } from "../helpers/getFieldState";
 import styles from "./FormView.module.css";
 
 type FormViewProps = {
@@ -17,65 +20,108 @@ type FormViewProps = {
 	exitButton?: React.ReactElement;
 };
 
+const swiperProps = {
+	speed: 400,
+	effect: "fade",
+	fadeEffect: {
+		crossFade: true,
+	},
+	a11y: {
+		firstSlideMessage: "This is the start of the form",
+		lastSlideMessage: "This is the end of the form",
+		nextSlideMessage: "Next question",
+		prevSlideMessage: "Previous question",
+	},
+	spaceBetween: 0,
+	slidesPerView: 1,
+	className: styles.swiper,
+	direction: "vertical" as const,
+	modules: [Mousewheel, EffectFade, A11y],
+	mousewheel: {
+		thresholdDelta: 100,
+		forceToAxis: true,
+	},
+};
+
 export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
+	const [swiper, setSwiper] = useState<SwiperClass>();
+	const [showRequiredError, setShowRequiredError] = useState(false);
+
+	const handleGoNext = useCallback(
+		async (params = { skipCheck: false }) => {
+			if (!swiper) return;
+
+			if (params.skipCheck) {
+				swiper.slideNext();
+
+				return;
+			}
+
+			const fieldState = getFieldState({
+				index: swiper.activeIndex,
+				fields,
+				response,
+			});
+
+			if (fieldState.isRequiredAndHasNoAnswer) {
+				setShowRequiredError(true);
+				return;
+			}
+
+			swiper.slideNext();
+		},
+		[fields, response, swiper, response?.updatedAt],
+	);
+
+	const { createOrUpdateAnswer, submitAnswer } = useAnswer();
+
+	const handleAnswer = useCallback(
+		async (answer: TAnswer) => {
+			await createOrUpdateAnswer(answer);
+			setShowRequiredError(false);
+		},
+		[createOrUpdateAnswer],
+	);
+
+	const handleSubmit = useCallback(async () => {
+		if (swiper?.isEnd) {
+			await submitAnswer();
+		} else {
+			handleGoNext();
+		}
+	}, [submitAnswer, handleGoNext, swiper?.isEnd]);
+
 	return (
 		<div className={styles.container}>
-			{/* TODO:
-			- move inside Swiper
-			- extract into a component
-			- use siper instance inside
-			- refine calculations based on answers
-			<Progress
-				size="sm"
-				radius={0}
-				aria-label="Form completion in percentage"
-				className={styles.progress}
-				value={Math.round((100 / fields.length) * (currentStep + 1))}
-				transitionDuration={300}
-			/> */}
-
 			{exitButton && <div className={styles.exitButton}>{exitButton}</div>}
-
-			<Swiper
-				speed={400}
-				effect="fade"
-				fadeEffect={{
-					crossFade: true,
-				}}
-				a11y={{
-					firstSlideMessage: "This is the start of the form",
-					lastSlideMessage: "This is the end of the form",
-					nextSlideMessage: "Next question",
-					prevSlideMessage: "Previous question",
-				}}
-				spaceBetween={0}
-				slidesPerView={1}
-				className={styles.swiper}
-				direction="vertical"
-				modules={[Mousewheel, EffectFade, A11y]}
-				mousewheel={{
-					thresholdDelta: 100,
-					forceToAxis: true,
-				}}
-				// onSlideChange={(swiper) => console.log("slide change")}
-				// onSwiper={(swiper) => setSwiper(swiper)}
-			>
-				{fields.flatMap((field, index) => {
+			<Swiper {...swiperProps} onSwiper={setSwiper}>
+				{fields.map((field, index, list) => {
 					const answer = response?.answers[field.id];
+
+					const prevFieldState = getFieldState({
+						index: index - 1,
+						fields: list,
+						response,
+					});
 
 					return (
 						<SwiperSlide key={field.id} className={styles.swiperSlide}>
-							{({ isActive, isPrev, isNext }) => {
-								if (!isActive && !isPrev && !isNext) return null;
-
-								return (
-									<FieldView order={index + 1} field={field} answer={answer} />
-								);
-							}}
+							<FieldView
+								order={index + 1}
+								field={field}
+								answer={answer}
+								onGoNext={() => {
+									handleGoNext({ skipCheck: true });
+								}}
+								onAnswer={handleAnswer}
+								onSubmit={handleSubmit}
+								showRequiredError={showRequiredError}
+								isNextHidden={prevFieldState.isRequiredAndHasNoAnswer}
+							/>
 						</SwiperSlide>
 					);
 				})}
-				<FormNavButtons className={styles.navButtons} />
+				<FormNavButtons className={styles.navButtons} onGoNext={handleGoNext} />
 			</Swiper>
 		</div>
 	);

@@ -8,9 +8,9 @@ export const useSwiperDetails = () => {
 
 	useEffect(() => {
 		const updateState = () => {
-			const { isBeginning, isEnd } = swiper;
+			const { isBeginning, isEnd, allowSlideNext } = swiper;
 
-			setState({ isBeginning, isEnd });
+			setState({ isBeginning, isEnd, allowSlideNext });
 		};
 
 		swiper.onAny(updateState);
@@ -20,8 +20,5 @@ export const useSwiperDetails = () => {
 		};
 	}, [swiper]);
 
-	return {
-		...state,
-		goToNextStep: swiper.slideNext.bind(swiper),
-	};
+	return state;
 };

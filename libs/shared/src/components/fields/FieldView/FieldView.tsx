@@ -1,7 +1,8 @@
-import { Button, Text, Title } from "@mantine/core";
+import { Alert, Button, Text, Title } from "@mantine/core";
+import { IconAlertTriangle } from "@tabler/icons-react";
 import { useCallback, useEffect, useRef } from "react";
+import { useSwiperSlide } from "swiper/react";
 import { FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
-import { useAnswer } from "~/hooks/useAnswer";
 import type { TField } from "~/models/field/schema";
 import type {
 	TAnswer,
@@ -18,27 +19,32 @@ import styles from "./FieldView.module.css";
 interface FieldViewProps {
 	field: TField;
 	order: number;
+	isNextHidden: boolean;
 	answer?: TAnswer;
 	className?: string;
+	showRequiredError: boolean;
+	onSubmit: () => void;
+	onGoNext: () => void;
+	onAnswer: (answer: TAnswer) => Promise<void>;
 }
 
 export type HandleFieldAnswer<T extends TAnswer = TAnswer> = ({
 	value,
-}: { value: T["value"] }) => void;
+}: { value: T["value"] }) => Promise<void>;
 
 export const FieldView = ({
 	order,
 	field,
 	answer,
+	onGoNext,
 	className,
+	onAnswer,
+	onSubmit,
+	isNextHidden,
+	showRequiredError,
 }: FieldViewProps) => {
-	const { isEnd, goToNextStep } = useSwiperDetails();
+	const { isEnd } = useSwiperDetails();
 	const { button, title } = getFieldProps({ field, isLast: isEnd });
-
-	const { handleAnswer, handleSubmit } = useAnswer({
-		isLastStep: isEnd,
-		goToNextStep,
-	});
 
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -47,6 +53,11 @@ export const FieldView = ({
 			buttonRef.current?.focus();
 		}
 	}, [field.type]);
+
+	const { isActive, isPrev, isNext } = useSwiperSlide();
+	const isDefaultHidden = !isActive && !isPrev && !isNext;
+
+	if (isDefaultHidden || (isNext && isNextHidden)) return null;
 
 	return (
 		<FieldBase
@@ -61,19 +72,30 @@ export const FieldView = ({
 				<FieldComponent
 					field={field}
 					answer={answer}
-					goToNextStep={goToNextStep}
-					onAnswer={handleAnswer}
+					onAnswer={onAnswer}
+					onGoNext={onGoNext}
 				/>
 			}
 			buttonSubmit={
-				<Button
-					ref={buttonRef}
-					type="submit"
-					onClick={handleSubmit}
-					className={button.className}
-				>
-					{button.text}
-				</Button>
+				showRequiredError ? (
+					<Alert
+						color="red"
+						variant="light"
+						className={styles.alert}
+						icon={<IconAlertTriangle />}
+					>
+						<b>Oops!</b> Please answer the question
+					</Alert>
+				) : (
+					<Button
+						ref={buttonRef}
+						type="submit"
+						onClick={onSubmit}
+						className={button.className}
+					>
+						{button.text}
+					</Button>
+				)
 			}
 		/>
 	);
@@ -81,14 +103,14 @@ export const FieldView = ({
 
 function FieldComponent(
 	props: Pick<FieldViewProps, "field" | "answer"> & {
-		goToNextStep: () => void;
-		onAnswer: (answer: TAnswer) => void;
+		onGoNext: () => void;
+		onAnswer: (answer: TAnswer) => Promise<void>;
 	},
 ) {
-	const { field, answer, onAnswer, goToNextStep } = props;
+	const { field, answer, onAnswer, onGoNext } = props;
 
 	const handleAnswer: HandleFieldAnswer = useCallback(
-		({ value }) => {
+		async ({ value }) => {
 			const answerField: TAnswer["field"] = {
 				id: field.id,
 				type: field.type,
@@ -97,7 +119,7 @@ function FieldComponent(
 
 			const answer = { value, field: answerField } as TAnswer;
 
-			onAnswer(answer);
+			await onAnswer(answer);
 		},
 		[field.id, field.type, field.title, onAnswer],
 	);
@@ -112,7 +134,7 @@ function FieldComponent(
 					options={field.options}
 					answer={answer as TAnswerChoice | undefined}
 					onAnswer={handleAnswer}
-					goToNextStep={goToNextStep}
+					goToNextStep={onGoNext}
 				/>
 			);
 		}

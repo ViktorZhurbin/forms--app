@@ -1,3 +1,7 @@
 .order {
 	transform: translate(-130%, 30%);
 }
+
+.alert {
+	padding-block: 6px;
+}

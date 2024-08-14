@@ -81,7 +81,7 @@ export const FieldView = ({
 					<Alert
 						color="red"
 						variant="light"
-						className={styles.alert}
+						classNames={{ root: styles.alertRoot, icon: styles.alertIcon }}
 						icon={<IconAlertTriangle />}
 					>
 						<b>Oops!</b> Please answer the question

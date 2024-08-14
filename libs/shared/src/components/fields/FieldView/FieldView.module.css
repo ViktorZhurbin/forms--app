@@ -2,6 +2,10 @@
 	transform: translate(-130%, 30%);
 }
 
-.alert {
+.alertRoot {
 	padding-block: 6px;
+}
+
+.alertIcon {
+	margin-right: 6px;
 }

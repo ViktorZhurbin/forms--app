@@ -13,7 +13,9 @@ export const Navbar = () => {
 		return <FetchState error={error} isLoading={isLoading} />;
 	}
 
-	const { fields, endings } = getFieldsAndEndings(data?.forms?.[0]?.fields);
+	const { fields, endings } = getFieldsAndEndings(
+		data?.forms?.[0]?.draftFields,
+	);
 
 	return (
 		<div className={styles.root}>

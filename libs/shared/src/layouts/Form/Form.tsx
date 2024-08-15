@@ -18,7 +18,7 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 		return <FetchState fullScreen isLoading={isLoading} error={error} />;
 	}
 
-	const allFields = data?.forms?.[0]?.fields;
+	const allFields = data?.forms?.[0]?.[isPreview ? "draftFields" : "fields"];
 
 	if (!Array.isArray(allFields)) {
 		return <FormNotFound text="This form doesn't seem to exist" />;
@@ -28,11 +28,7 @@ export const Form = ({ isPreview, exitButton }: FormProps) => {
 		return <FormNotFound text="This form is empty" />;
 	}
 
-	const fieldsToDisplay = isPreview
-		? allFields
-		: allFields.filter((field) => field.isPublished);
-
-	const { fields, endings } = getFieldsAndEndings(fieldsToDisplay);
+	const { fields, endings } = getFieldsAndEndings(allFields);
 
 	const response = responsesQuery.data?.responses?.[0];
 

@@ -1,8 +1,8 @@
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
-import { useOrderedFormFields } from "@/shared/models/field/read";
+import { useOrderedFormDraftFields } from "@/shared/models/field/read";
 
 export const useSelectedOrderedField = () => {
-	const orderedFields = useOrderedFormFields();
+	const orderedFields = useOrderedFormDraftFields();
 	const selectedBlockId = useSelectedBlockId();
 
 	const currentFieldIndex = orderedFields?.findIndex(

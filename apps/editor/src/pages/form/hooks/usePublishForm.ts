@@ -1,48 +1,26 @@
-import { useFormFields } from "@/shared/models/field/read";
-import type { TField } from "@/shared/models/field/schema";
-import { updateManyFields } from "@/shared/models/field/write";
+import { useFormNanoId } from "@/shared/hooks/useFormNanoId";
+import { useFormOrderedFields } from "@/shared/models/field/read";
+import { publishFormFields } from "@/shared/models/field/write";
+import { isEqual } from "es-toolkit";
 import { useCallback, useState } from "react";
 
 export const usePublishForm = () => {
-	const fields = useFormFields();
+	const formNanoId = useFormNanoId();
+	const { fields, draftFields } = useFormOrderedFields();
 
 	const [isLoading, setLoading] = useState(false);
 
-	const defaultValue = {
-		publishedFields: [],
-		unpublishedFields: [],
-	};
-	const { publishedFields, unpublishedFields } =
-		fields?.reduce<{
-			publishedFields: TField[];
-			unpublishedFields: TField[];
-		}>((acc, field) => {
-			if (field.isPublished) {
-				acc.publishedFields.push(field);
-			} else {
-				acc.unpublishedFields.push(field);
-			}
+	console.log({ fields, draftFields });
 
-			return acc;
-		}, defaultValue) ?? defaultValue;
-
-	const isPublished = publishedFields.length > 0 && !unpublishedFields.length;
-	const isDisabled = !unpublishedFields.length;
+	const isPublished = isEqual(fields, draftFields);
 
 	const publishForm = useCallback(async () => {
 		setLoading(true);
 
-		const update = unpublishedFields.map(({ id }) => {
-			return {
-				id,
-				payload: { isPublished: true },
-			};
-		});
-
-		await updateManyFields(update);
+		await publishFormFields({ formNanoId, draftFields });
 
 		setLoading(false);
-	}, [unpublishedFields]);
+	}, [formNanoId, draftFields]);
 
-	return { publishForm, isLoading, isPublished, isDisabled };
+	return { publishForm, isLoading, isPublished };
 };

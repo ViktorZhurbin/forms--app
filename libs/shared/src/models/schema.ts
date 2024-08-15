@@ -8,6 +8,7 @@ export type Schema = {
 	users: TUser;
 	forms: TForm;
 	fields: TField;
+	draftFields: TField;
 	responses: TResponse;
 	workspaces: TWorkspace;
 };

@@ -11,31 +11,40 @@ const useCurrentFormWithFieldsQuery = () => {
 				where: { nanoId: formNanoId },
 			},
 			fields: {},
+			draftFields: {},
 		},
 	});
 };
 
-const useFormFields = () => {
+const useFormOrderedFields = () => {
 	const { data } = useCurrentFormWithFieldsQuery();
 
-	return data?.forms?.[0]?.fields;
+	const form = data?.forms?.[0];
+
+	return {
+		fields: getOrderedFields(form?.fields ?? []),
+		draftFields: getOrderedFields(form?.draftFields ?? []),
+	};
+};
+
+const useFormDraftFields = () => {
+	return useFormOrderedFields().draftFields;
 };
 
 const useFormPublishedFields = () => {
-	const fields = useFormFields();
-
-	return fields?.filter(({ isPublished }) => isPublished);
+	return useFormOrderedFields().fields;
 };
 
-const useOrderedFormFields = () => {
-	const fields = useFormFields();
+const useOrderedFormDraftFields = () => {
+	const fields = useFormDraftFields();
 
 	return getOrderedFields(fields);
 };
 
 export {
 	useCurrentFormWithFieldsQuery,
-	useFormFields,
+	useFormOrderedFields,
+	useFormDraftFields,
 	useFormPublishedFields,
-	useOrderedFormFields,
+	useOrderedFormDraftFields,
 };

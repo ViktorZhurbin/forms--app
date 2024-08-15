@@ -7,7 +7,6 @@ type TFieldBase = {
 	title: string;
 	description?: string;
 	index: number;
-	isPublished: boolean;
 	buttonText: string;
 };
 

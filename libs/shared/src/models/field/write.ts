@@ -5,26 +5,31 @@ import type { TForm } from "../form/schema/form";
 import { getChoiceFieldOptionPayload } from "./helpers/getChoiceFieldOptionPayload";
 import type { TField, TFieldChoice } from "./schema";
 
-type CreateFieldParams = {
-	payload: Omit<TField, "id">;
+const createField = async (params: {
+	newField: Omit<TField, "id">;
 	formNanoId: TForm["nanoId"];
-};
+	updateFieldIndecies: Pick<TField, "id" | "index">[];
+}) => {
+	const { newField, formNanoId, updateFieldIndecies } = params;
 
-const createField = async ({ payload, formNanoId }: CreateFieldParams) => {
-	await db.transact(
-		tx.fields[id()]
-			.update(payload)
-			.link({ forms: lookup("nanoId", formNanoId) }),
+	const updateOrderOps = updateFieldIndecies.map(({ id, index }) =>
+		tx.draftFields[id].update({ index }),
 	);
 
-	return payload.nanoId;
+	const createFieldOp = tx.draftFields[id()]
+		.update(newField)
+		.link({ forms: lookup("nanoId", formNanoId) });
+
+	await db.transact([createFieldOp].concat(updateOrderOps));
+
+	return newField.nanoId;
 };
 
 const updateField = async ({
 	id,
 	payload,
 }: { id: TField["id"]; payload: Partial<TField> }) => {
-	await db.transact(tx.fields[id].update(payload));
+	await db.transact(tx.draftFields[id].update(payload));
 };
 
 const createChoiceFieldOption = async ({
@@ -41,24 +46,29 @@ const createChoiceFieldOption = async ({
 	return newOption.id;
 };
 
-const updateManyFields = async (
-	fields: { id: TField["id"]; payload: Partial<TField> }[],
-) => {
-	const ops = fields.map(({ id, payload }) => tx.fields[id].update(payload));
+const publishFormFields = async (params: {
+	formNanoId: TForm["nanoId"];
+	draftFields: { id: TField["id"] & Partial<TField> }[];
+}) => {
+	const { formNanoId, draftFields } = params;
+
+	const ops = draftFields.map(({ id, ...payload }) =>
+		tx.fields[id].update(payload).link({ forms: lookup("nanoId", formNanoId) }),
+	);
 
 	await db.transact(ops);
 };
 
 const updateFieldsIndex = async (orderedFieldsIds: TField["id"][]) => {
 	const ops = orderedFieldsIds.map((id, index) =>
-		tx.fields[id].update({ index }),
+		tx.draftFields[id].update({ index }),
 	);
 
 	await db.transact(ops);
 };
 
 const deleteField = async ({ id }: { id: TField["id"] }) => {
-	db.transact([tx.fields[id].delete()]);
+	db.transact([tx.draftFields[id].delete()]);
 };
 
 const updateFieldSetting = async <Field extends TField>(params: {
@@ -68,7 +78,7 @@ const updateFieldSetting = async <Field extends TField>(params: {
 	const { field, payload } = params;
 
 	const ops = objectEntries(payload).map(([key, value]) =>
-		tx.fields[field.id].merge({ settings: { [key]: value } }),
+		tx.draftFields[field.id].merge({ settings: { [key]: value } }),
 	);
 
 	await db.transact(ops);
@@ -78,7 +88,7 @@ export {
 	createField,
 	createChoiceFieldOption,
 	updateField,
-	updateManyFields,
+	publishFormFields,
 	updateFieldsIndex,
 	updateFieldSetting,
 	deleteField,

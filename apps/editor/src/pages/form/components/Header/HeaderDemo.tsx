@@ -16,10 +16,10 @@ export const HeaderDemo = () => {
 				<EditableFormTitle />
 
 				<div className={styles.innerWrapper}>
-					<Button onClick={modalActions.open}>Sign in</Button>
 					<PublishButton onClick={modalActions.open} />
 					<PreviewButton />
 					<DarkModeToggle />
+					<Button onClick={modalActions.open}>Sign in</Button>
 				</div>
 			</div>
 

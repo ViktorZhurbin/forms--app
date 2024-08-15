@@ -18,6 +18,7 @@
 
 .main {
 	grid-area: main;
+	min-width: max-content;
 	border-left: var(--border);
 	border-right: var(--border);
 }

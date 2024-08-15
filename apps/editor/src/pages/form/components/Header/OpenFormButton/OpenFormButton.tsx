@@ -1,7 +1,7 @@
+import { HeaderIconButton } from "@/shared/components/HeaderIconButton/HeaderIconButton";
 import { useFormPublishedFields } from "@/shared/models/field/read";
 import { IconExternalLink } from "@tabler/icons-react";
 import { useFormUrl } from "~/pages/form/hooks/useFormUrl";
-import { HeaderIconButton } from "../HeaderIconButton/HeaderIconButton";
 
 export const OpenFormButton = () => {
 	const url = useFormUrl();

@@ -1,8 +1,9 @@
+import { HeaderIconButton } from "@/shared/components/HeaderIconButton/HeaderIconButton";
 import { db } from "@/shared/models/db";
-import { Avatar, Menu, UnstyledButton } from "@mantine/core";
-// import { IconSettings } from "@tabler/icons-react";
+import { Menu } from "@mantine/core";
+import { IconUserCircle } from "@tabler/icons-react";
 
-export const AvatarMenu = () => {
+export const UserMenu = () => {
 	const handleSignOut = () => {
 		db.auth.signOut();
 	};
@@ -10,7 +11,13 @@ export const AvatarMenu = () => {
 	return (
 		<Menu shadow="md" width={200} offset={4}>
 			<Menu.Target>
-				<Avatar component={UnstyledButton} />
+				<div>
+					<HeaderIconButton
+						icon={
+							<IconUserCircle stroke={1.5} style={{ width: 20, height: 20 }} />
+						}
+					/>
+				</div>
 			</Menu.Target>
 
 			<Menu.Dropdown>

@@ -1,7 +1,7 @@
+import { HeaderIconButton } from "@/shared/components/HeaderIconButton/HeaderIconButton";
 import { CopyButton } from "@mantine/core";
 import { IconLink } from "@tabler/icons-react";
 import { useFormUrl } from "~/pages/form/hooks/useFormUrl";
-import { HeaderIconButton } from "../HeaderIconButton/HeaderIconButton";
 
 export const CopyLinkButton = () => {
 	const url = useFormUrl();

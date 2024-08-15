@@ -1,9 +1,9 @@
+import { HeaderIconButton } from "@/shared/components/HeaderIconButton/HeaderIconButton";
 import { SearchParams } from "@/shared/constants/location";
 import { useFormDraftFields } from "@/shared/models/field/read";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
 import { setSearchParams } from "~/utils/searchParams";
-import { HeaderIconButton } from "../HeaderIconButton/HeaderIconButton";
 import { PreviewModal } from "./PreviewModal/PreviewModal";
 
 export const PreviewButton = () => {

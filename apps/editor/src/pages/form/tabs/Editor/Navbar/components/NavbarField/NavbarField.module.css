@@ -4,19 +4,6 @@
 	display: flex;
 	border: unset;
 
-	color: var(--color);
-
-	&:hover {
-		color: var(--color-active);
-	}
-
-	&[data-active="true"],
-	&.isDragged,
-	&.isGhost {
-		color: var(--color-active);
-		background-color: var(--bg-color-active);
-	}
-
 	&[data-active="true"] {
 		--border-left-width: 2px;
 
@@ -26,24 +13,6 @@
 		&:not(&.isGhost) {
 			border-left-color: var(--mantine-color-blue-5);
 		}
-	}
-}
-
-[data-mantine-color-scheme="light"] {
-	.button {
-		--color: var(--mantine-color-gray-7);
-		--color-active: var(--mantine-color-gray-9);
-
-		--bg-color-active: var(--mantine-color-blue-0);
-	}
-}
-
-[data-mantine-color-scheme="dark"] {
-	.button {
-		--color: var(--mantine-color-dark-1);
-		--color-active: hsl(0deg 0% 95%);
-
-		--bg-color-active: hsla(209, 75%, 20%);
 	}
 }
 

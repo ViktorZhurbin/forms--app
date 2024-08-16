@@ -5,6 +5,7 @@ export const theme: MantineThemeOverride = createTheme({
 	// autoContrast: true,
 	// defaultRadius: 6,
 	cursorType: "pointer",
+	// primaryColor: "violet",
 	colors: {
 		dark: darkPresets.mantineDefaultAdjusted,
 	},

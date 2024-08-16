@@ -11,7 +11,7 @@
 		padding-left: calc(var(--sidebar-padding-x) - var(--border-left-width));
 
 		&:not(&.isGhost) {
-			border-left-color: var(--mantine-color-blue-5);
+			border-left-color: var(--mantine-primary-color-filled);
 		}
 	}
 }
@@ -39,6 +39,7 @@
 .labelTitle {
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: var(--mantine-color-text);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -54,6 +55,13 @@
 	align-items: center;
 	gap: 2px;
 	/* margin-right: -4px; */
+
+	> * {
+		&:hover {
+			color: var(--mantine-color-text);
+			background-color: var(--mantine-primary-color-light-hover);
+		}
+	}
 }
 
 .dragHandle {

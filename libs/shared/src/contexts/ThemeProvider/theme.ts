@@ -5,8 +5,9 @@ export const theme: MantineThemeOverride = createTheme({
 	// autoContrast: true,
 	// defaultRadius: 6,
 	cursorType: "pointer",
-	// primaryColor: "violet",
+	// primaryColor: "pink",
 	colors: {
+		// https://park-ui.com/react/docs/theme/colors#gray-colors
 		dark: darkPresets.mantineDefaultAdjusted,
 	},
 });

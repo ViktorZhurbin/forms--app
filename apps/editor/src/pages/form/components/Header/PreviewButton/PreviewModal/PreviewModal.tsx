@@ -20,11 +20,7 @@ export const PreviewModal = ({ opened, onClose }: ModalProps) => {
 			<Form
 				isPreview
 				exitButton={
-					<Button
-						color="rgb(31, 41, 55)"
-						leftSection={<IconX />}
-						onClick={onClose}
-					>
+					<Button color="dark.5" leftSection={<IconX />} onClick={onClose}>
 						Exit preview
 					</Button>
 				}

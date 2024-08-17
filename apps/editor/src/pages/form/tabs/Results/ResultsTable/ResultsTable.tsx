@@ -17,10 +17,12 @@ export const ResultsTable = (props: ResultsTableProps) => {
 
 	const { fields, filter, responses } = props;
 
-	const { preparedFields, preparedResponses } = getPreparedResponses({
+	const { preparedFields, preparedResponses, csv } = getPreparedResponses({
 		fields,
+		filter,
 		responses,
 	});
+
 	const showPartial = filter === FilterTab.Partial;
 	const dateField = {
 		value: showPartial ? "updated" : "submitted",
@@ -101,7 +103,11 @@ export const ResultsTable = (props: ResultsTableProps) => {
 
 	return (
 		<div>
-			<TableActions selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
+			<TableActions
+				csv={csv}
+				selectedIds={selectedIds}
+				setSelectedIds={setSelectedIds}
+			/>
 
 			<Table.ScrollContainer minWidth="900px">
 				<Table

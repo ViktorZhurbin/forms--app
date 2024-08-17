@@ -1,16 +1,18 @@
 import type { TResponse } from "@/shared/models/response/schema";
 import { deleteResponses } from "@/shared/models/response/write";
 import { pluralize } from "@/shared/utils/grammar";
-import { ActionIcon, Button, Group, Tooltip } from "@mantine/core";
+import { Button, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconDownload, IconTrash } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 import { ConfirmationModal } from "~/components/modals/ConfirmationModal/ConfirmationModal";
+import { DownloadCsvButton } from "./DownloadCsvButton/DownloadCsvButton";
 
 export const TableActions = (props: {
 	selectedIds: TResponse["id"][];
 	setSelectedIds: (ids: TResponse["id"][]) => void;
+	csv: string;
 }) => {
-	const { selectedIds, setSelectedIds } = props;
+	const { selectedIds, setSelectedIds, csv } = props;
 
 	const [opened, modalActions] = useDisclosure();
 
@@ -49,11 +51,7 @@ export const TableActions = (props: {
 				</>
 			)}
 			<div />
-			<Tooltip withArrow disabled label={"Download all responses"}>
-				<ActionIcon disabled color="gray">
-					<IconDownload />
-				</ActionIcon>
-			</Tooltip>
+			<DownloadCsvButton csv={csv} />
 		</Group>
 	);
 };

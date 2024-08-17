@@ -2,12 +2,56 @@ import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
 import { formatISODate, getTimeFromISOString } from "@/shared/utils/date";
 import { uniqBy } from "es-toolkit";
+import Papa from "papaparse";
+import { FilterTab } from "../constants/filter";
+
+const getCsv = (params: {
+	preparedFields: { title: string; id: string }[];
+	filter: FilterTab;
+	preparedResponses: (TResponse & {
+		updated: ReturnType<typeof formatISODate>;
+		submitted: ReturnType<typeof formatISODate>;
+	})[];
+}) => {
+	const { preparedFields, preparedResponses, filter } = params;
+
+	const showPartial = filter === FilterTab.Partial;
+	const dateField = {
+		value: showPartial ? "updated" : "submitted",
+		label: showPartial ? "Updated at" : "Submitted at",
+	} as const;
+
+	const headers = [
+		dateField.label,
+		...preparedFields.map(({ title }) => title),
+	];
+
+	const rows = preparedResponses.map(({ answers, ...rest }) => {
+		const date = rest[dateField.value];
+		const dateValue = date ? `${date.date} ${date.time}` : "";
+
+		return [dateValue].concat(
+			preparedFields.map(({ id: fieldId }) => {
+				const { value } = answers[fieldId] ?? {};
+
+				const stringValue = Array.isArray(value)
+					? value.map((item) => item.text).join(", ")
+					: value;
+
+				return stringValue;
+			}),
+		);
+	});
+
+	return Papa.unparse([headers].concat(rows));
+};
 
 export const getPreparedResponses = (params: {
 	fields: TField[];
 	responses: TResponse[];
+	filter: FilterTab;
 }) => {
-	const { fields, responses } = params;
+	const { fields, responses, filter } = params;
 
 	const preparedResponses = responses
 		.map((response) => {
@@ -38,17 +82,25 @@ export const getPreparedResponses = (params: {
 	const preparedFields = uniqueAnswers
 		.map(({ field }) => {
 			const currentField = currentFieldsById[field.id];
+			const isDeleted = !currentField;
+			const title = `${field.title}${isDeleted ? " (deleted)" : ""}`;
 
 			return {
+				title,
 				id: field.id,
-				title: field.title,
 				index: currentField?.index,
-				isDeleted: !currentField,
 			};
 		})
 		.sort((a, b) => a.index - b.index);
 
+	const csv = getCsv({
+		filter,
+		preparedFields,
+		preparedResponses,
+	});
+
 	return {
+		csv,
 		preparedFields,
 		preparedResponses,
 	};

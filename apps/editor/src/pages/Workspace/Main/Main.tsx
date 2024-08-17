@@ -9,7 +9,7 @@ export const Main = () => {
 
 	return (
 		<Stack flex={1}>
-			<Group justify="space-between" align="center">
+			<Group justify="space-between" align="center" wrap="nowrap">
 				<ViewTypeControl view={view} setView={setView} />
 				<CreateFormButton />
 			</Group>

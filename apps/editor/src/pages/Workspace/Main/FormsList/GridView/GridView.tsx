@@ -1,32 +1,15 @@
-import { Button, Group, Stack, Text } from "@mantine/core";
-import { Link } from "wouter";
+import { Button, Stack, Text } from "@mantine/core";
 import type { FormViewProps } from "../types";
 
 export const GridView = ({
-	href,
-	name,
-	className,
+	formName,
+	buttonProps,
 	responsesText,
-	deleteButton,
 }: FormViewProps) => {
 	return (
-		<Button
-			size="md"
-			variant="default"
-			justify="start"
-			w={200}
-			h={100}
-			className={className}
-			component={Link}
-			href={href}
-		>
+		<Button {...buttonProps} justify="start" w={200} h={100}>
 			<Stack gap={4} align="start">
-				<Group justify="space-between">
-					<Text size="sm" fw={500}>
-						{name}
-					</Text>
-					{deleteButton}
-				</Group>
+				<Text fw={500}>{formName}</Text>
 				<Text size="sm">{responsesText}</Text>
 			</Stack>
 		</Button>

@@ -1,4 +1,4 @@
-import { ActionIcon, type ActionIconProps, Tooltip } from "@mantine/core";
+import { ActionIcon, type ActionIconProps, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconTrash } from "@tabler/icons-react";
 import { ConfirmationModal } from "~/components/modals/ConfirmationModal/ConfirmationModal";
@@ -30,10 +30,13 @@ export const DeleteResponsesButton = (
 				opened={opened}
 				onClose={modalActions.close}
 				title={`${tooltip}?`}
-				text="Are you sure you want to delete selected responses?"
 				onConfirm={handleDelete}
 				confirmButtontext="Delete"
-			/>
+			>
+				<Text size="sm">
+					Are you sure you want to delete selected responses?
+				</Text>
+			</ConfirmationModal>
 		</>
 	);
 };

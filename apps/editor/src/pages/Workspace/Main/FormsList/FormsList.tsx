@@ -2,7 +2,7 @@ import { FetchState } from "@/shared/components/FetchState/FetchState";
 import { useCurrentWorkspaceWithFormsQuery } from "@/shared/models/workspace/read";
 import { pluralize } from "@/shared/utils/grammar";
 import { Group, Stack } from "@mantine/core";
-import { Redirect } from "wouter";
+import { Link, Redirect } from "wouter";
 import { SkeletonWrapper } from "~/components/SkeletonWrapper/SkeletonWrapper";
 import { FormsLayout } from "~/constants/forms";
 import { Routes } from "~/constants/routes";
@@ -30,33 +30,44 @@ export const FormsList = ({ viewType }: FormsViewProps) => {
 		return <Redirect to={Routes.ROOT} />;
 	}
 
-	const ViewComponent = viewType === FormsLayout.List ? ListView : GridView;
+	const FormButton = viewType === FormsLayout.List ? ListView : GridView;
 
 	const Wrapper = viewType === FormsLayout.List ? Stack : Group;
 
 	return (
 		<Wrapper gap={8} data-view-type={viewType}>
-			{workspace.forms?.map((form) => (
-				<SkeletonWrapper key={form.id} visible={isLoading}>
-					<ViewComponent
-						name={form.name}
-						className={styles.formItem}
-						href={RouteUtils.getFormPath({
-							formNanoId: form.nanoId,
-						})}
-						deleteButton={
+			{workspace.forms?.map((form) => {
+				const formHref = RouteUtils.getFormPath({
+					formNanoId: form.nanoId,
+				});
+
+				const responsesText = pluralize({
+					singular: "response",
+					count: form.responses.length,
+				});
+
+				return (
+					<SkeletonWrapper key={form.id} visible={isLoading}>
+						<div className={styles.formItem}>
+							<FormButton
+								formName={form.name}
+								responsesText={responsesText}
+								buttonProps={{
+									size: "md",
+									variant: "default",
+									component: Link,
+									href: formHref,
+								}}
+							/>
 							<DeleteFormButton
 								className={styles.delete}
 								nanoId={form.nanoId}
+								formName={form.name}
 							/>
-						}
-						responsesText={pluralize({
-							singular: "response",
-							count: form.responses.length,
-						})}
-					/>
-				</SkeletonWrapper>
-			))}
+						</div>
+					</SkeletonWrapper>
+				);
+			})}
 		</Wrapper>
 	);
 };

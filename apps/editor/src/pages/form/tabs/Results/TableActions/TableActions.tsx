@@ -1,15 +1,16 @@
 import type { TResponse } from "@/shared/models/response/schema";
 import { pluralize } from "@/shared/utils/grammar";
-import { Group } from "@mantine/core";
+import { Group, Text } from "@mantine/core";
 import { DeleteResponsesButton } from "./DeleteResponsesButton/DeleteResponsesButton";
 import { DownloadCsvButton } from "./DownloadCsvButton/DownloadCsvButton";
 
 export const TableActions = (props: {
-	csv: string;
+	csvAll: string;
+	csvSelected: string;
 	selectedIds: TResponse["id"][];
 	onDelete: () => void;
 }) => {
-	const { selectedIds, csv, onDelete } = props;
+	const { selectedIds, csvAll, csvSelected, onDelete } = props;
 
 	const selectedRowsText = pluralize({
 		singular: "response",
@@ -19,15 +20,26 @@ export const TableActions = (props: {
 	return (
 		<Group justify="space-between" gap={8} my={8} h={36}>
 			{selectedIds.length > 0 ? (
-				<DeleteResponsesButton
-					buttonText={`Delete ${selectedRowsText}`}
-					onDelete={onDelete}
-				/>
+				<Group gap={8}>
+					<Text size="sm">Selected {selectedRowsText}</Text>
+					<DeleteResponsesButton
+						variant="light"
+						color="red"
+						tooltip={`Delete ${selectedRowsText}`}
+						onDelete={onDelete}
+					/>
+					<DownloadCsvButton
+						variant="light"
+						color="dark"
+						tooltip={`Download ${selectedRowsText}`}
+						csv={csvSelected}
+					/>
+				</Group>
 			) : null}
 
 			<div />
 
-			<DownloadCsvButton csv={csv} />
+			<DownloadCsvButton tooltip="Download all responses" csv={csvAll} />
 		</Group>
 	);
 };

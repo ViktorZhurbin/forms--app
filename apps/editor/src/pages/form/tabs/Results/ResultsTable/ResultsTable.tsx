@@ -5,6 +5,7 @@ import { Checkbox, Stack, Table } from "@mantine/core";
 import { useState } from "react";
 import { TableActions } from "../TableActions/TableActions";
 import { FilterTab } from "../constants/filter";
+import { getCsv } from "../helpers/getCsv";
 import { getPreparedResponses } from "../helpers/getPreparedResponses";
 
 export type ResultsTableProps = {
@@ -23,10 +24,16 @@ export const ResultsTable = (props: ResultsTableProps) => {
 		setSelectedIds([]);
 	};
 
-	const { preparedFields, preparedResponses, csv } = getPreparedResponses({
+	const { preparedFields, preparedResponses } = getPreparedResponses({
 		fields,
-		filter,
 		responses,
+	});
+
+	const csv = getCsv({
+		filter,
+		selectedIds,
+		preparedFields,
+		preparedResponses,
 	});
 
 	const showPartial = filter === FilterTab.Partial;
@@ -81,7 +88,6 @@ export const ResultsTable = (props: ResultsTableProps) => {
 				>
 					<Table.Td>
 						<Checkbox
-							aria-label="Select row"
 							checked={isSelected}
 							onChange={(event) =>
 								setSelectedIds(
@@ -109,7 +115,12 @@ export const ResultsTable = (props: ResultsTableProps) => {
 
 	return (
 		<div>
-			<TableActions csv={csv} onDelete={onDelete} selectedIds={selectedIds} />
+			<TableActions
+				csvAll={csv.all}
+				csvSelected={csv.selected}
+				onDelete={onDelete}
+				selectedIds={selectedIds}
+			/>
 
 			<Table.ScrollContainer minWidth="900px">
 				<Table

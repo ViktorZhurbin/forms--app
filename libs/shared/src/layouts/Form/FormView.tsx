@@ -10,9 +10,9 @@ import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField } from "~/models/field/schema";
 import type { TAnswer, TResponse } from "~/models/response/schema";
-import { FormNavButtons } from "../FormNavButtons/FormNavButtons";
-import { getFieldState } from "../helpers/getFieldState";
+import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
+import { getFieldState } from "./helpers/getFieldState";
 
 const swiperProps = {
 	speed: 400,
@@ -32,7 +32,7 @@ const swiperProps = {
 	direction: "vertical" as const,
 	modules: [Mousewheel, EffectFade, A11y],
 	mousewheel: {
-		thresholdDelta: 100,
+		thresholdDelta: 50,
 		forceToAxis: true,
 	},
 };

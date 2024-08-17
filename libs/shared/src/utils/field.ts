@@ -5,8 +5,8 @@ const getOrderedFields = (fields: TField[] = []) => {
 	return fields?.toSorted((a, b) => a.index - b.index);
 };
 
-const getFieldsAndEndings = (fields: TField[]) => {
-	return getOrderedFields(fields).reduce<{
+const getFieldsAndEndings = (allFields: TField[] = []) => {
+	const { fields, endings } = getOrderedFields(allFields).reduce<{
 		fields: TField[];
 		endings: TField[];
 	}>(
@@ -21,6 +21,12 @@ const getFieldsAndEndings = (fields: TField[]) => {
 		},
 		{ fields: [], endings: [] },
 	);
+
+	return {
+		fields,
+		endings,
+		fieldsAndEndings: fields.concat(endings),
+	};
 };
 
 export { getOrderedFields, getFieldsAndEndings };

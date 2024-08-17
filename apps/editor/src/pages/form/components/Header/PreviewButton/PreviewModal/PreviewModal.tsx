@@ -1,9 +1,18 @@
-import { Form } from "@/shared/layouts/Form/Form";
+import { FormView } from "@/shared/layouts/Form/FormView";
 import { Button, Modal, type ModalProps } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import styles from "./PreviewModal.module.css";
+import { useFormPreviewFields } from "./hooks/useFormPreviewFields";
 
 export const PreviewModal = ({ opened, onClose }: ModalProps) => {
+	const { fieldsAndEndings } = useFormPreviewFields();
+
+	const exitButton = (
+		<Button color="dark.5" leftSection={<IconX />} onClick={onClose}>
+			Exit preview
+		</Button>
+	);
+
 	return (
 		<Modal
 			fullScreen
@@ -17,14 +26,7 @@ export const PreviewModal = ({ opened, onClose }: ModalProps) => {
 				content: styles.modalContent,
 			}}
 		>
-			<Form
-				isPreview
-				exitButton={
-					<Button color="dark.5" leftSection={<IconX />} onClick={onClose}>
-						Exit preview
-					</Button>
-				}
-			/>
+			<FormView isPreview fields={fieldsAndEndings} exitButton={exitButton} />
 		</Modal>
 	);
 };

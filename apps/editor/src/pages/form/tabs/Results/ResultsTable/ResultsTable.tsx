@@ -1,5 +1,6 @@
 import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
+import { deleteResponses } from "@/shared/models/response/write";
 import { Checkbox, Stack, Table } from "@mantine/core";
 import { useState } from "react";
 import { TableActions } from "../TableActions/TableActions";
@@ -16,6 +17,11 @@ export const ResultsTable = (props: ResultsTableProps) => {
 	const [selectedIds, setSelectedIds] = useState<TResponse["id"][]>([]);
 
 	const { fields, filter, responses } = props;
+
+	const onDelete = async () => {
+		await deleteResponses({ ids: selectedIds });
+		setSelectedIds([]);
+	};
 
 	const { preparedFields, preparedResponses, csv } = getPreparedResponses({
 		fields,
@@ -103,11 +109,7 @@ export const ResultsTable = (props: ResultsTableProps) => {
 
 	return (
 		<div>
-			<TableActions
-				csv={csv}
-				selectedIds={selectedIds}
-				setSelectedIds={setSelectedIds}
-			/>
+			<TableActions csv={csv} onDelete={onDelete} selectedIds={selectedIds} />
 
 			<Table.ScrollContainer minWidth="900px">
 				<Table

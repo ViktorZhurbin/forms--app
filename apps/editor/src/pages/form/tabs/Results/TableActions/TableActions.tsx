@@ -1,5 +1,4 @@
 import type { TResponse } from "@/shared/models/response/schema";
-import { deleteResponses } from "@/shared/models/response/write";
 import { pluralize } from "@/shared/utils/grammar";
 import { Button, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -8,17 +7,16 @@ import { ConfirmationModal } from "~/components/modals/ConfirmationModal/Confirm
 import { DownloadCsvButton } from "./DownloadCsvButton/DownloadCsvButton";
 
 export const TableActions = (props: {
-	selectedIds: TResponse["id"][];
-	setSelectedIds: (ids: TResponse["id"][]) => void;
 	csv: string;
+	selectedIds: TResponse["id"][];
+	onDelete: () => void;
 }) => {
-	const { selectedIds, setSelectedIds, csv } = props;
+	const { selectedIds, csv, onDelete } = props;
 
 	const [opened, modalActions] = useDisclosure();
 
-	const handleDelete = async () => {
-		await deleteResponses({ ids: selectedIds });
-		setSelectedIds([]);
+	const handleDelete = () => {
+		onDelete();
 		modalActions.close();
 	};
 

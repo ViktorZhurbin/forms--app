@@ -1,7 +1,7 @@
 import { Group, Stack, Text } from "@mantine/core";
 import { useLocalFormsLayout } from "../hooks/useLocalFormsLayout";
 import { CreateFormButton } from "./CreateFormButton/CreateFormButton";
-import { FormsList } from "./FormView/FormsList";
+import { FormsList } from "./FormsList/FormsList";
 import { ViewTypeControl } from "./ViewTypeControl/ViewTypeControl";
 
 export const Main = () => {

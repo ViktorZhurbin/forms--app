@@ -2,7 +2,7 @@ import type { TField } from "@/shared/models/field/schema";
 import type { TResponse } from "@/shared/models/response/schema";
 import { formatISODate, getTimeFromISOString } from "@/shared/utils/date";
 import { uniqBy } from "es-toolkit";
-import Papa from "papaparse";
+import { json2csv } from "json-2-csv";
 import { FilterTab } from "../constants/filter";
 
 const getCsv = (params: {
@@ -43,7 +43,8 @@ const getCsv = (params: {
 		);
 	});
 
-	return Papa.unparse([headers].concat(rows));
+	const data = [headers].concat(rows);
+	return json2csv(data, { emptyFieldValue: "" });
 };
 
 export const getPreparedResponses = (params: {

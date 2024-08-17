@@ -6,10 +6,9 @@ import styles from "./ListView.module.css";
 export const ListView = ({
 	name,
 	href,
-	nanoId,
 	className,
 	responsesText,
-	getDeleteButton,
+	deleteButton,
 }: FormViewProps) => {
 	return (
 		<Button
@@ -27,7 +26,7 @@ export const ListView = ({
 				<Text ta="end" size="sm">
 					{responsesText}
 				</Text>
-				{getDeleteButton({ nanoId })}
+				{deleteButton}
 			</Group>
 		</Button>
 	);

@@ -10,8 +10,6 @@ export const usePublishForm = () => {
 
 	const [isLoading, setLoading] = useState(false);
 
-	console.log({ fields, draftFields });
-
 	const isPublished = isEqual(fields, draftFields);
 
 	const publishForm = useCallback(async () => {

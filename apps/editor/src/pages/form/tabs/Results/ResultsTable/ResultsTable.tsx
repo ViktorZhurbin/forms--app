@@ -21,27 +21,34 @@ export const ResultsTable = (props: ResultsTableProps) => {
 		fields,
 		responses,
 	});
+	const showPartial = filter === FilterTab.Partial;
+	const dateField = {
+		value: showPartial ? "updated" : "submitted",
+		label: showPartial ? "Updated at" : "Submitted at",
+	} as const;
+
+	const isAllSelected = selectedIds.length === preparedResponses.length;
+	const isSomeSelected = selectedIds.length > 0 && !isAllSelected;
 
 	const getHeaders = () => (
 		<Table.Tr>
 			<Table.Th>
 				<Checkbox
-					aria-label="Select row"
-					checked={selectedIds.length === preparedResponses.length}
-					onChange={(event) =>
-						setSelectedIds(
-							event.currentTarget.checked
-								? preparedResponses.map(({ id }) => id)
-								: [],
-						)
-					}
+					checked={isAllSelected}
+					indeterminate={isSomeSelected}
+					onChange={() => {
+						const newIds =
+							isSomeSelected || isAllSelected
+								? []
+								: preparedResponses.map(({ id }) => id);
+
+						setSelectedIds(newIds);
+					}}
 				/>
 			</Table.Th>
 			<Table.Th>{dateField.label}</Table.Th>
-			{preparedFields.map(({ id, title, isDeleted }) => {
-				const header = `${title}${isDeleted ? " (deleted)" : ""}`;
-
-				return <Table.Th key={id}>{header}</Table.Th>;
+			{preparedFields.map(({ id, title }) => {
+				return <Table.Th key={id}>{title}</Table.Th>;
 			})}
 		</Table.Tr>
 	);
@@ -91,12 +98,6 @@ export const ResultsTable = (props: ResultsTableProps) => {
 			);
 		});
 	};
-
-	const showPartial = filter === FilterTab.Partial;
-	const dateField = {
-		value: showPartial ? "updated" : "submitted",
-		label: showPartial ? "Updated at" : "Submitted at",
-	} as const;
 
 	return (
 		<div>

@@ -1,10 +1,15 @@
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/a11y";
-import { A11y, EffectFade, Mousewheel } from "swiper/modules";
+import { A11y, Mousewheel } from "swiper/modules";
 
 import { useCallback, useState } from "react";
-import { Swiper, type SwiperClass, SwiperSlide } from "swiper/react";
+import {
+	Swiper,
+	type SwiperClass,
+	type SwiperProps,
+	SwiperSlide,
+} from "swiper/react";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { useAnswer } from "~/hooks/useAnswer";
@@ -14,12 +19,8 @@ import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
 import { getFieldState } from "./helpers/getFieldState";
 
-const swiperProps = {
-	speed: 400,
-	effect: "fade",
-	fadeEffect: {
-		crossFade: true,
-	},
+const swiperProps: SwiperProps = {
+	speed: 450,
 	a11y: {
 		firstSlideMessage: "This is the start of the form",
 		lastSlideMessage: "This is the end of the form",
@@ -30,9 +31,10 @@ const swiperProps = {
 	slidesPerView: 1,
 	className: styles.swiper,
 	direction: "vertical" as const,
-	modules: [Mousewheel, EffectFade, A11y],
+	modules: [Mousewheel, A11y],
 	mousewheel: {
-		thresholdDelta: 50,
+		// sensitivity: 1,
+		// thresholdDelta: 50,
 		forceToAxis: true,
 	},
 };

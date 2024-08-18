@@ -27,6 +27,12 @@
 	gap: var(--mantine-spacing-lg);
 }
 
+@media (max-width: 375px) {
+	.wrapper {
+		min-width: unset;
+	}
+}
+
 .titleWrapper {
 	position: relative;
 

@@ -62,9 +62,8 @@ export const FormView = ({
 		if (!swiper) return;
 
 		const fieldState = getFieldState({
-			fields,
 			response,
-			index: activeIndex,
+			field: fields[activeIndex],
 		});
 
 		setAllowSlideNext(!fieldState.isRequiredAndHasNoAnswer);
@@ -117,9 +116,8 @@ export const FormView = ({
 					const answer = response?.answers[field.id];
 
 					const prevFieldState = getFieldState({
-						index: index - 1,
-						fields: list,
 						response,
+						field: list[index - 1],
 					});
 
 					return (

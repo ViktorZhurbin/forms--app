@@ -22,13 +22,11 @@ const getHasFieldAnswer = (params: {
 };
 
 const getFieldState = (params: {
-	fields: TField[];
-	index: number;
+	field: TField;
 	response?: TResponse;
 }) => {
-	const { fields, index, response } = params;
+	const { field, response } = params;
 
-	const field = fields[index];
 	const isRequired = getIsFieldRequired(field);
 	const hasAnswer = getHasFieldAnswer({ fieldId: field?.id, response });
 

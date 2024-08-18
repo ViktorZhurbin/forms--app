@@ -6,8 +6,7 @@ import {
 	IconChevronUp,
 } from "@tabler/icons-react";
 import clsx from "clsx";
-import { useSwiper } from "swiper/react";
-import { useSwiperDetails } from "~/components/fields/hooks/useSwiperDetails";
+import { useSlider } from "~/components/slider/context/SliderContext";
 import { Media } from "~/constants/mediaQueries";
 import styles from "./FormNavButtons.module.css";
 
@@ -15,16 +14,12 @@ export const FormNavButtons = (props: {
 	buttonText: string;
 	className?: string;
 	onGoNext: () => void;
+	onGoBack: () => void;
 	onSubmit: () => void;
 }) => {
-	const swiper = useSwiper();
-	const { isBeginning, isEnd } = useSwiperDetails();
+	const { isBeginning, isEnd } = useSlider();
 
 	const isSmallScreen = useMediaQuery(Media.FormViewSmall);
-
-	const handleGoBack = () => {
-		swiper.slidePrev();
-	};
 
 	if (isSmallScreen) {
 		return (
@@ -33,7 +28,7 @@ export const FormNavButtons = (props: {
 					<ActionIcon
 						className={styles.previous}
 						disabled={isBeginning}
-						onClick={handleGoBack}
+						onClick={props.onGoBack}
 					>
 						<IconChevronLeft />
 					</ActionIcon>
@@ -52,7 +47,7 @@ export const FormNavButtons = (props: {
 				size="lg"
 				aria-label="Previous step"
 				disabled={isBeginning}
-				onClick={handleGoBack}
+				onClick={props.onGoBack}
 			>
 				<IconChevronUp />
 			</ActionIcon>

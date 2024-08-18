@@ -2,7 +2,7 @@ import { Alert, Button, Text, Title } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconAlertTriangle } from "@tabler/icons-react";
 import { useCallback, useEffect, useRef } from "react";
-import { useSwiperSlide } from "swiper/react";
+import { useSlideItem } from "~/components/slider/context/SlideItemContext";
 import { FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
 import { Media } from "~/constants/mediaQueries";
 import type { TField } from "~/models/field/schema";
@@ -15,12 +15,12 @@ import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
-import { useSwiperDetails } from "../hooks/useSwiperDetails";
 import styles from "./FieldView.module.css";
 
 interface FieldViewProps {
 	field: TField;
 	order: number;
+	isLast: boolean;
 	isNextHidden: boolean;
 	answer?: TAnswer;
 	className?: string;
@@ -37,6 +37,7 @@ export type HandleFieldAnswer<T extends TAnswer = TAnswer> = ({
 export const FieldView = ({
 	order,
 	field,
+	isLast,
 	answer,
 	onGoNext,
 	className,
@@ -47,8 +48,7 @@ export const FieldView = ({
 }: FieldViewProps) => {
 	const isSmallScreen = useMediaQuery(Media.FormViewSmall);
 
-	const { isEnd } = useSwiperDetails();
-	const { button, title } = getFieldProps({ field, isLast: isEnd });
+	const { button, title } = getFieldProps({ field, isLast });
 
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -58,7 +58,7 @@ export const FieldView = ({
 		}
 	}, [field.type]);
 
-	const { isActive, isPrev, isNext } = useSwiperSlide();
+	const { isActive, isPrev, isNext } = useSlideItem();
 	const isDefaultHidden = !isActive && !isPrev && !isNext;
 
 	if (isDefaultHidden || (isNext && isNextHidden)) return null;

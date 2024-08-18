@@ -1,45 +1,9 @@
-import "swiper/css";
-import "swiper/css/a11y";
-import { A11y } from "swiper/modules";
-
-import { useCallback, useEffect, useState } from "react";
-import {
-	Swiper,
-	type SwiperClass,
-	type SwiperProps,
-	SwiperSlide,
-} from "swiper/react";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
-import { getFieldProps } from "~/components/fields/FieldBase/getFieldProps";
-import { FieldView } from "~/components/fields/FieldView/FieldView";
-import { useAnswer } from "~/hooks/useAnswer";
+import { Slider } from "~/components/slider/Slider/Slider";
 import type { TField } from "~/models/field/schema";
-import type { TAnswer, TResponse } from "~/models/response/schema";
-import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
+import type { TResponse } from "~/models/response/schema";
 import styles from "./FormView.module.css";
-import { getFieldState } from "./helpers/getFieldState";
-import { useGoNext } from "./hooks/useGoNext";
-import { useWheel } from "./hooks/useWheel";
-
-const swiperProps: SwiperProps = {
-	speed: 450,
-	a11y: {
-		firstSlideMessage: "This is the start of the form",
-		lastSlideMessage: "This is the end of the form",
-		nextSlideMessage: "Next question",
-		prevSlideMessage: "Previous question",
-	},
-	spaceBetween: 0,
-	slidesPerView: 1,
-	className: styles.swiper,
-	direction: "vertical" as const,
-	modules: [A11y],
-	mousewheel: {
-		// sensitivity: 1,
-		// thresholdDelta: 50,
-		forceToAxis: true,
-	},
-};
+import { FormViewContent } from "./FormViewContent";
 
 type FormViewProps = {
 	fields: TField[];
@@ -54,102 +18,15 @@ export const FormView = ({
 	exitButton,
 	isPreview,
 }: FormViewProps) => {
-	const [swiper, setSwiper] = useState<SwiperClass>();
-	const [activeIndex, setActiveIndex] = useState(0);
-	const [allowSlideNext, setAllowSlideNext] = useState(true);
-	const [showRequiredError, setShowRequiredError] = useState(false);
-
-	useEffect(() => {
-		if (!swiper) return;
-
-		const fieldState = getFieldState({
-			response,
-			field: fields[activeIndex],
-		});
-
-		setAllowSlideNext(!fieldState.isRequiredAndHasNoAnswer);
-	}, [activeIndex, fields, response, swiper]);
-
-	const handleGoNext = useGoNext({
-		swiper,
-		allowSlideNext,
-		setShowRequiredError,
-	});
-
-	const { createOrUpdateAnswer, submitAnswer } = useAnswer();
-
-	const handleAnswer = useCallback(
-		async (answer: TAnswer) => {
-			await createOrUpdateAnswer(answer);
-			setShowRequiredError(false);
-		},
-		[createOrUpdateAnswer],
-	);
-
-	const handleSubmit = useCallback(async () => {
-		if (swiper?.isEnd) {
-			await submitAnswer();
-		} else {
-			handleGoNext();
-		}
-	}, [submitAnswer, handleGoNext, swiper?.isEnd]);
-
-	const onWheel = useWheel({ swiper, goNext: handleGoNext });
-
-	const buttonText = getFieldProps({
-		isLast: swiper?.isEnd,
-		field: fields[activeIndex],
-	}).button.text;
-
 	return (
-		<div className={styles.container} onWheel={onWheel}>
+		<div className={styles.container}>
 			<div className={styles.topFixed}>
 				{isPreview && exitButton ? exitButton : <DarkModeToggle />}
 			</div>
-			<Swiper
-				{...swiperProps}
-				onSwiper={(swiper) => {
-					swiper.slideNext = (...swiperParams) =>
-						handleGoNext({ swiperParams });
 
-					setSwiper(swiper);
-				}}
-				onSlideChange={(swiper) => {
-					setActiveIndex(swiper.activeIndex);
-				}}
-			>
-				{fields.map((field, index, list) => {
-					const answer = response?.answers[field.id];
-
-					const prevFieldState = getFieldState({
-						response,
-						field: list[index - 1],
-					});
-
-					return (
-						<SwiperSlide key={field.id} className={styles.swiperSlide}>
-							<FieldView
-								order={index + 1}
-								field={field}
-								answer={answer}
-								onGoNext={() => {
-									handleGoNext({ skipCheck: true });
-								}}
-								onAnswer={handleAnswer}
-								onSubmit={handleSubmit}
-								showRequiredError={showRequiredError}
-								isNextHidden={prevFieldState.isRequiredAndHasNoAnswer}
-							/>
-						</SwiperSlide>
-					);
-				})}
-				<FormNavButtons
-					className={styles.navButtons}
-					buttonText={buttonText}
-					onGoNext={handleGoNext}
-					onSubmit={handleSubmit}
-				/>
-			</Swiper>
+			<Slider>
+				<FormViewContent fields={fields} response={response} />
+			</Slider>
 		</div>
 	);
 };

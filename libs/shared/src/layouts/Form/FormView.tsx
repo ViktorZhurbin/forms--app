@@ -2,7 +2,7 @@ import "swiper/css";
 import "swiper/css/a11y";
 import { A11y } from "swiper/modules";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	Swiper,
 	type SwiperClass,
@@ -17,7 +17,8 @@ import type { TAnswer, TResponse } from "~/models/response/schema";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
 import { getFieldState } from "./helpers/getFieldState";
-import { useWheel } from "./useWheel";
+import { useGoNext } from "./hooks/useGoNext";
+import { useWheel } from "./hooks/useWheel";
 
 const swiperProps: SwiperProps = {
 	speed: 450,
@@ -53,33 +54,27 @@ export const FormView = ({
 	isPreview,
 }: FormViewProps) => {
 	const [swiper, setSwiper] = useState<SwiperClass>();
+	const [activeIndex, setActiveIndex] = useState(0);
+	const [allowSlideNext, setAllowSlideNext] = useState(true);
 	const [showRequiredError, setShowRequiredError] = useState(false);
 
-	const handleGoNext = useCallback(
-		async (params = { skipCheck: false }) => {
-			if (!swiper) return;
+	useEffect(() => {
+		if (!swiper) return;
 
-			if (params.skipCheck) {
-				swiper.slideNext();
+		const fieldState = getFieldState({
+			fields,
+			response,
+			index: activeIndex,
+		});
 
-				return;
-			}
+		setAllowSlideNext(!fieldState.isRequiredAndHasNoAnswer);
+	}, [activeIndex, fields, response, swiper]);
 
-			const fieldState = getFieldState({
-				index: swiper.activeIndex,
-				fields,
-				response,
-			});
-
-			if (fieldState.isRequiredAndHasNoAnswer) {
-				setShowRequiredError(true);
-				return;
-			}
-
-			swiper.slideNext();
-		},
-		[fields, response, swiper, response?.updatedAt],
-	);
+	const handleGoNext = useGoNext({
+		swiper,
+		allowSlideNext,
+		setShowRequiredError,
+	});
 
 	const { createOrUpdateAnswer, submitAnswer } = useAnswer();
 
@@ -106,7 +101,18 @@ export const FormView = ({
 			<div className={styles.topFixed}>
 				{isPreview && exitButton ? exitButton : <DarkModeToggle />}
 			</div>
-			<Swiper {...swiperProps} onSwiper={setSwiper}>
+			<Swiper
+				{...swiperProps}
+				onSwiper={(swiper) => {
+					swiper.slideNext = (...swiperParams) =>
+						handleGoNext({ swiperParams });
+
+					setSwiper(swiper);
+				}}
+				onSlideChange={(swiper) => {
+					setActiveIndex(swiper.activeIndex);
+				}}
+			>
 				{fields.map((field, index, list) => {
 					const answer = response?.answers[field.id];
 

@@ -1,4 +1,4 @@
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import clsx from "clsx";
 import { useSwiper } from "swiper/react";
@@ -11,7 +11,7 @@ export const FormNavButtons = (props: {
 }) => {
 	const swiper = useSwiper();
 
-	const { isBeginning, isEnd, allowSlideNext } = useSwiperDetails();
+	const { isBeginning, isEnd } = useSwiperDetails();
 
 	return (
 		<div className={clsx(styles.root, props.className)}>
@@ -26,20 +26,14 @@ export const FormNavButtons = (props: {
 				<IconChevronUp />
 			</ActionIcon>
 
-			<Tooltip
-				withArrow
-				disabled={allowSlideNext && !isEnd}
-				label="This step is required"
+			<ActionIcon
+				aria-label="Next step"
+				size="lg"
+				disabled={isEnd}
+				onClick={props.onGoNext}
 			>
-				<ActionIcon
-					aria-label="Next step"
-					size="lg"
-					disabled={isEnd || !allowSlideNext}
-					onClick={props.onGoNext}
-				>
-					<IconChevronDown />
-				</ActionIcon>
-			</Tooltip>
+				<IconChevronDown />
+			</ActionIcon>
 		</div>
 	);
 };

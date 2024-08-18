@@ -1,7 +1,6 @@
 import "swiper/css";
-import "swiper/css/effect-fade";
 import "swiper/css/a11y";
-import { A11y, Mousewheel } from "swiper/modules";
+import { A11y } from "swiper/modules";
 
 import { useCallback, useState } from "react";
 import {
@@ -18,6 +17,7 @@ import type { TAnswer, TResponse } from "~/models/response/schema";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
 import { getFieldState } from "./helpers/getFieldState";
+import { useWheel } from "./useWheel";
 
 const swiperProps: SwiperProps = {
 	speed: 450,
@@ -31,7 +31,7 @@ const swiperProps: SwiperProps = {
 	slidesPerView: 1,
 	className: styles.swiper,
 	direction: "vertical" as const,
-	modules: [Mousewheel, A11y],
+	modules: [A11y],
 	mousewheel: {
 		// sensitivity: 1,
 		// thresholdDelta: 50,
@@ -99,8 +99,10 @@ export const FormView = ({
 		}
 	}, [submitAnswer, handleGoNext, swiper?.isEnd]);
 
+	const onWheel = useWheel({ swiper, goNext: handleGoNext });
+
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} onWheel={onWheel}>
 			<div className={styles.topFixed}>
 				{isPreview && exitButton ? exitButton : <DarkModeToggle />}
 			</div>

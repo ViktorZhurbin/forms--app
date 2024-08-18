@@ -1,8 +1,10 @@
 import { Alert, Button, Text, Title } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { IconAlertTriangle } from "@tabler/icons-react";
 import { useCallback, useEffect, useRef } from "react";
 import { useSwiperSlide } from "swiper/react";
 import { FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
+import { Media } from "~/constants/mediaQueries";
 import type { TField } from "~/models/field/schema";
 import type {
 	TAnswer,
@@ -43,6 +45,8 @@ export const FieldView = ({
 	isNextHidden,
 	showRequiredError,
 }: FieldViewProps) => {
+	const isSmallScreen = useMediaQuery(Media.FormViewSmall);
+
 	const { isEnd } = useSwiperDetails();
 	const { button, title } = getFieldProps({ field, isLast: isEnd });
 
@@ -58,6 +62,17 @@ export const FieldView = ({
 	const isDefaultHidden = !isActive && !isPrev && !isNext;
 
 	if (isDefaultHidden || (isNext && isNextHidden)) return null;
+
+	const buttonSubmit = isSmallScreen ? null : (
+		<Button
+			ref={buttonRef}
+			type="submit"
+			onClick={onSubmit}
+			className={button.className}
+		>
+			{button.text}
+		</Button>
+	);
 
 	return (
 		<FieldBase
@@ -87,14 +102,7 @@ export const FieldView = ({
 						<b>Oops!</b> Please answer the question
 					</Alert>
 				) : (
-					<Button
-						ref={buttonRef}
-						type="submit"
-						onClick={onSubmit}
-						className={button.className}
-					>
-						{button.text}
-					</Button>
+					buttonSubmit
 				)
 			}
 		/>

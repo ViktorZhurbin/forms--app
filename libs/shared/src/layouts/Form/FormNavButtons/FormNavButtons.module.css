@@ -1,5 +1,27 @@
 .root {
 	width: 100%;
 	display: flex;
-	gap: 5px;
+	gap: var(--mantine-spacing-xs);
+}
+
+.rootSmall {
+	width: 100%;
+	display: flex;
+	gap: var(--mantine-spacing-sm);
+
+	--size: 2.75rem;
+
+	.previous,
+	.next {
+		height: var(--size);
+	}
+
+	.previous {
+		min-width: var(--size);
+
+		svg {
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+	}
 }

@@ -10,6 +10,7 @@ import {
 	SwiperSlide,
 } from "swiper/react";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
+import { getFieldProps } from "~/components/fields/FieldBase/getFieldProps";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField } from "~/models/field/schema";
@@ -95,6 +96,11 @@ export const FormView = ({
 
 	const onWheel = useWheel({ swiper, goNext: handleGoNext });
 
+	const buttonText = getFieldProps({
+		isLast: swiper?.isEnd,
+		field: fields[activeIndex],
+	}).button.text;
+
 	return (
 		<div className={styles.container} onWheel={onWheel}>
 			<div className={styles.topFixed}>
@@ -137,7 +143,12 @@ export const FormView = ({
 						</SwiperSlide>
 					);
 				})}
-				<FormNavButtons className={styles.navButtons} onGoNext={handleGoNext} />
+				<FormNavButtons
+					className={styles.navButtons}
+					buttonText={buttonText}
+					onGoNext={handleGoNext}
+					onSubmit={handleSubmit}
+				/>
 			</Swiper>
 		</div>
 	);

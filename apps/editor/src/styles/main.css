@@ -12,6 +12,8 @@ body {
 	--spacing-sm: calc(var(--spacing) / 2);
 	--spacing-lg: calc(var(--spacing) * 2);
 
+	--sidebar-padding-x: var(--spacing);
+
 	--border: 1px solid var(--mantine-color-default-border);
 }
 

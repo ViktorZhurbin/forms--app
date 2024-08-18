@@ -1,46 +1,40 @@
-import { useDragSortable } from "@/shared/components/SortableDndList/hooks/useDragSortable";
+import { DragHandle } from "@/shared/components/DragHandle/DragHandle";
 import type { TField } from "@/shared/models/field/schema";
 import { Button, CloseButton, Text } from "@mantine/core";
 import clsx from "clsx";
+import type { IItemProps } from "react-movable";
 import { FieldTag } from "~/components/FieldTag/FieldTag";
 import { navigateToFieldId } from "~/pages/form/utils/navigateToFieldId";
 import styles from "./NavbarField.module.css";
 
-interface NavbarFieldProps
-	extends Pick<TField, "id" | "nanoId" | "type" | "title"> {
+interface NavbarFieldProps {
 	order?: number;
+	field: TField;
+	dragProps: IItemProps;
 	isSelected?: boolean;
 	isDragged?: boolean;
-	isGhost?: boolean;
 	onDelete?: () => void;
 }
 
 export const NavbarField = ({
-	id,
-	type,
-	title,
+	dragProps,
+	field,
 	order,
-	nanoId,
-	isGhost,
 	isDragged,
 	isSelected,
 	onDelete,
 }: NavbarFieldProps) => {
-	const { DragHandle, wrapperProps } = useDragSortable(id);
+	const { nanoId, type, title } = field;
 
 	return (
 		<Button
 			fullWidth
-			{...wrapperProps}
+			{...dragProps}
 			variant={isSelected ? "light" : "subtle"}
 			justify="start"
 			size="md"
 			classNames={{
-				root: clsx(
-					styles.button,
-					isGhost && styles.isGhost,
-					isDragged && styles.isDragged,
-				),
+				root: clsx(styles.button, isDragged && styles.isDragged),
 				inner: styles.buttonInner,
 				label: styles.buttonLabel,
 			}}
@@ -49,30 +43,26 @@ export const NavbarField = ({
 				navigateToFieldId({ nanoId });
 			}}
 		>
-			{isGhost ? null : (
-				<>
-					<div className={styles.labelGroup}>
-						<FieldTag type={type} text={order} />
-						<Text size="sm" className={styles.labelTitle}>
-							{title || "..."}
-						</Text>
-					</div>
-					<div className={styles.actions}>
-						<DragHandle className={styles.dragHandle} />
+			<div className={styles.labelGroup}>
+				<FieldTag type={type} text={order} />
+				<Text size="sm" className={styles.labelTitle}>
+					{title || "..."}
+				</Text>
+			</div>
 
-						<CloseButton
-							size="sm"
-							component="div"
-							onClick={async (event) => {
-								event.preventDefault();
-								event.stopPropagation();
+			<div className={styles.actions}>
+				<DragHandle isDragged={isDragged} />
+				<CloseButton
+					size="sm"
+					component="div"
+					onClick={async (event) => {
+						event.preventDefault();
+						event.stopPropagation();
 
-								onDelete?.();
-							}}
-						/>
-					</div>
-				</>
-			)}
+						onDelete?.();
+					}}
+				/>
+			</div>
 		</Button>
 	);
 };

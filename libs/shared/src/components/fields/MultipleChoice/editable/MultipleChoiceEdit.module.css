@@ -3,3 +3,23 @@
 	align-items: start;
 	gap: 8px;
 }
+
+.optionWrapper {
+	--hover-bg: var(--mantine-color-default-hover);
+
+	position: relative;
+	width: max-content;
+}
+
+.dragHandle {
+	--size: 24px;
+
+	width: var(--size);
+	height: var(--size);
+
+	position: absolute;
+	top: 8px;
+	left: calc(var(--size) * -1);
+
+	touch-action: none;
+}

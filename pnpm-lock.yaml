@@ -23,18 +23,6 @@ importers:
 
   apps/editor:
     dependencies:
-      '@dnd-kit/core':
-        specifier: ^6.1.0
-        version: 6.1.0(react-dom@18.3.1)(react@18.3.1)
-      '@dnd-kit/modifiers':
-        specifier: ^7.0.0
-        version: 7.0.0(@dnd-kit/core@6.1.0)(react@18.3.1)
-      '@dnd-kit/sortable':
-        specifier: ^8.0.0
-        version: 8.0.0(@dnd-kit/core@6.1.0)(react@18.3.1)
-      '@dnd-kit/utilities':
-        specifier: ^3.2.2
-        version: 3.2.2(react@18.3.1)
       '@forms/shared':
         specifier: workspace:*
         version: link:../../libs/shared
@@ -68,6 +56,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-movable:
+        specifier: ^3.3.1
+        version: 3.3.1(react-dom@18.3.1)(react@18.3.1)
       swiper:
         specifier: ^11.1.9
         version: 11.1.9
@@ -144,6 +135,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-movable:
+        specifier: ^3.3.1
+        version: 3.3.1(react-dom@18.3.1)(react@18.3.1)
       swiper:
         specifier: ^11.1.9
         version: 11.1.9
@@ -215,18 +209,6 @@ importers:
 
   libs/shared:
     dependencies:
-      '@dnd-kit/core':
-        specifier: ^6.1.0
-        version: 6.1.0(react-dom@18.3.1)(react@18.3.1)
-      '@dnd-kit/modifiers':
-        specifier: ^7.0.0
-        version: 7.0.0(@dnd-kit/core@6.1.0)(react@18.3.1)
-      '@dnd-kit/sortable':
-        specifier: ^8.0.0
-        version: 8.0.0(@dnd-kit/core@6.1.0)(react@18.3.1)
-      '@dnd-kit/utilities':
-        specifier: ^3.2.2
-        version: 3.2.2(react@18.3.1)
       '@instantdb/core':
         specifier: ^0.11.01
         version: 0.11.1
@@ -251,6 +233,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-movable:
+        specifier: ^3.3.1
+        version: 3.3.1(react-dom@18.3.1)(react@18.3.1)
       swiper:
         specifier: ^11.1.9
         version: 11.1.9
@@ -781,61 +766,6 @@ packages:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
     dev: true
-
-  /@dnd-kit/accessibility@3.1.0(react@18.3.1):
-    resolution: {integrity: sha512-ea7IkhKvlJUv9iSHJOnxinBcoOI3ppGnnL+VDJ75O45Nss6HtZd8IdN8touXPDtASfeI2T2LImb8VOZcL47wjQ==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      react: 18.3.1
-      tslib: 2.6.3
-    dev: false
-
-  /@dnd-kit/core@6.1.0(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-J3cQBClB4TVxwGo3KEjssGEXNJqGVWx17aRTZ1ob0FliR5IjYgTxl5YJbKTzA6IzrtelotH19v6y7uoIRUZPSg==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    dependencies:
-      '@dnd-kit/accessibility': 3.1.0(react@18.3.1)
-      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      tslib: 2.6.3
-    dev: false
-
-  /@dnd-kit/modifiers@7.0.0(@dnd-kit/core@6.1.0)(react@18.3.1):
-    resolution: {integrity: sha512-BG/ETy3eBjFap7+zIti53f0PCLGDzNXyTmn6fSdrudORf+OH04MxrW4p5+mPu4mgMk9kM41iYONjc3DOUWTcfg==}
-    peerDependencies:
-      '@dnd-kit/core': ^6.1.0
-      react: '>=16.8.0'
-    dependencies:
-      '@dnd-kit/core': 6.1.0(react-dom@18.3.1)(react@18.3.1)
-      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
-      react: 18.3.1
-      tslib: 2.6.3
-    dev: false
-
-  /@dnd-kit/sortable@8.0.0(@dnd-kit/core@6.1.0)(react@18.3.1):
-    resolution: {integrity: sha512-U3jk5ebVXe1Lr7c2wU7SBZjcWdQP+j7peHJfCspnA81enlu88Mgd7CC8Q+pub9ubP7eKVETzJW+IBAhsqbSu/g==}
-    peerDependencies:
-      '@dnd-kit/core': ^6.1.0
-      react: '>=16.8.0'
-    dependencies:
-      '@dnd-kit/core': 6.1.0(react-dom@18.3.1)(react@18.3.1)
-      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
-      react: 18.3.1
-      tslib: 2.6.3
-    dev: false
-
-  /@dnd-kit/utilities@3.2.2(react@18.3.1):
-    resolution: {integrity: sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      react: 18.3.1
-      tslib: 2.6.3
-    dev: false
 
   /@emmetio/abbreviation@2.3.3:
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -5144,6 +5074,16 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: false
+
+  /react-movable@3.3.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-dfX15ZlyoefoFs1kqVeLrJoso4eaTEBwP2pyUanDUyNg1Uy+lzxOv0GyNcmHJTZUtLSaNbim8DdekpKALSLKkA==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /react-number-format@5.4.0(react-dom@18.3.1)(react@18.3.1):

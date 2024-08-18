@@ -32,6 +32,7 @@
 		"es-toolkit": "^1.13.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
+		"react-movable": "^3.3.1",
 		"swiper": "^11.1.9",
 		"wouter": "^3.3.1"
 	},
@@ -45,7 +46,7 @@
 		"@types/react-dom": "^18.3.0",
 		"autoprefixer": "^10.4.19",
 		"clsx": "^2.1.1",
-    "dependency-cruiser": "^16.3.10",
+		"dependency-cruiser": "^16.3.10",
 		"postcss": "^8.4.40",
 		"postcss-preset-mantine": "^1.17.0",
 		"postcss-simple-vars": "^7.0.1"

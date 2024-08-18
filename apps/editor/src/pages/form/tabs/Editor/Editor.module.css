@@ -1,5 +1,4 @@
 .root {
-	--sidebar-padding-x: var(--mantine-spacing-sm);
 	--sidebar-width: minmax(min(100px, 240px), 1fr);
 
 	display: grid;

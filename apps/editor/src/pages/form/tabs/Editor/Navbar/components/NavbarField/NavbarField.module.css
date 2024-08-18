@@ -7,12 +7,14 @@
 	&[data-active="true"] {
 		--border-left-width: 2px;
 
-		border-left: var(--border-left-width) solid transparent;
+		border-left: var(--border-left-width) solid
+			var(--mantine-primary-color-filled);
 		padding-left: calc(var(--sidebar-padding-x) - var(--border-left-width));
+	}
 
-		&:not(&.isGhost) {
-			border-left-color: var(--mantine-primary-color-filled);
-		}
+	&.isDragged {
+		cursor: grabbing;
+		background-color: var(--mantine-primary-color-light-hover);
 	}
 }
 
@@ -61,14 +63,5 @@
 			color: var(--mantine-color-text);
 			background-color: var(--mantine-primary-color-light-hover);
 		}
-	}
-}
-
-.dragHandle {
-	cursor: grab;
-	touch-action: none;
-
-	&:active {
-		cursor: grabbing;
 	}
 }

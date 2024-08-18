@@ -1,6 +1,8 @@
 .dragHandle {
 	cursor: grab;
+	touch-action: none;
 
+	&.isDragged,
 	&:active {
 		cursor: grabbing;
 	}

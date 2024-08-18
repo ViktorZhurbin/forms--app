@@ -1,11 +1,12 @@
 import { Anchor, Checkbox, Radio } from "@mantine/core";
-import { useCallback, useState } from "react";
-import { SortableDndList } from "~/components/SortableDndList/SortableDndList";
+import { useState } from "react";
+import { List, arrayMove } from "react-movable";
+import { DragHandle } from "~/components/DragHandle/DragHandle";
 import { FieldTypes } from "~/constants/field";
 import type { TField, TFieldChoice } from "~/models/field/schema";
 import { createChoiceFieldOption, updateField } from "~/models/field/write";
+import { OptionButton } from "../OptionButton/OptionButton";
 import styles from "./MultipleChoiceEdit.module.css";
-import { OptionButtonSortable } from "./OptionButtonSortable/OptionButtonSortable";
 
 export type MultipleChoiceEditProps = {
 	fieldId: TField["id"];
@@ -48,71 +49,76 @@ export const MultipleChoiceEdit = ({
 		});
 	};
 
-	const Options = () => {
-		return options.map(({ id, text }, index, options) => {
-			const handleEdit = (text: string) => {
-				const newOptions = options.map((option) =>
-					option.id === id ? { ...option, text } : option,
-				);
-
-				updateField({
-					id: fieldId,
-					payload: { options: newOptions },
-				});
-			};
-
-			const handleBlur = (value: string) => {
-				if (text !== value) {
-					handleEdit?.(value);
-				}
-
-				if (tempNewOptionId === id) {
-					clearTempNewOptionId?.();
-				}
-			};
-
-			return (
-				<OptionButtonSortable
-					key={id}
-					id={id}
-					text={text}
-					Indicator={Indicator}
-					isTempNewOptionId={tempNewOptionId === id}
-					placeholder={`Option ${index + 1}`}
-					onBlur={handleBlur}
-					onDelete={deleteOption}
-				/>
-			);
-		});
-	};
-
-	const onDragEnd = useCallback(
-		(newOptions: Option[]): void => {
-			updateField({
-				id: fieldId,
-				payload: { options: newOptions },
-			});
-		},
-		[fieldId],
-	);
-
-	const DragOverlayItem = ({ activeItem }: { activeItem: Option }) => (
-		<OptionButtonSortable
-			isDragged
-			id={activeItem.id}
-			Indicator={Indicator}
-			text={activeItem.text}
-		/>
-	);
-
 	return (
 		<div className={styles.wrapper}>
-			<SortableDndList
-				list={options}
-				onDragEnd={onDragEnd}
-				Options={Options}
-				DragOverlayItem={DragOverlayItem}
+			<List
+				values={options}
+				onChange={({ oldIndex, newIndex }) => {
+					const newItems = arrayMove(options, oldIndex, newIndex);
+
+					updateField({
+						id: fieldId,
+						payload: { options: newItems },
+					});
+				}}
+				renderList={({ children, props }) => (
+					<div {...props} className={styles.wrapper}>
+						{children}
+					</div>
+				)}
+				renderItem={({
+					value: option,
+					index = 0,
+					isDragged,
+					isSelected,
+					props,
+				}) => {
+					const handleEdit = (text: string) => {
+						const newOptions = options.map((item) =>
+							item.id === option.id ? { ...item, text } : item,
+						);
+
+						updateField({
+							id: fieldId,
+							payload: { options: newOptions },
+						});
+					};
+
+					const handleBlur = (value: string) => {
+						if (option.text !== value) {
+							handleEdit?.(value);
+						}
+
+						if (tempNewOptionId === option.id) {
+							clearTempNewOptionId?.();
+						}
+					};
+
+					return (
+						<div {...props} key={option.id} className={styles.optionWrapper}>
+							<DragHandle
+								key={`handle-${option.id}`}
+								isDragged={isDragged}
+								className={styles.dragHandle}
+							/>
+
+							<OptionButton
+								isEditable
+								key={`option-${option.id}`}
+								id={option.id}
+								text={option.text}
+								isDragged={isDragged || isSelected}
+								Indicator={Indicator}
+								isTempNewOptionId={tempNewOptionId === option.id}
+								placeholder={`Option ${index + 1}`}
+								onBlur={handleBlur}
+								onDelete={deleteOption}
+							/>
+						</div>
+					);
+				}}
 			/>
+
 			{!isFixedOptions && (
 				<Anchor
 					fz="sm"

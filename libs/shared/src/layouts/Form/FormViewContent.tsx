@@ -88,7 +88,9 @@ export const FormViewContent = (props: {
 			setShowRequiredError(false);
 
 			if (isSingleChoiceField(answer.field.type) && answer.value.length) {
-				setTimeout(handleGoNext, 700);
+				setTimeout(() => {
+					handleGoNext({ checkIsAnswerRequired: false });
+				}, 700);
 			}
 		},
 		[createOrUpdateAnswer, handleGoNext],

@@ -11,12 +11,16 @@ export const useSwipe = (params: {
 	const [startY, setStartY] = useState<number>();
 
 	const onTouchStart: TouchHandler = useCallback((event) => {
-		setStartY(event.touches[0]?.clientY);
+		if (event.touches.length !== 1) return;
+
+		setStartY(event.touches[0].clientY);
 	}, []);
 
 	const onTouchEnd: TouchHandler = useCallback(
 		(event) => {
-			const endY = event.changedTouches[0]?.clientY;
+			if (event.changedTouches.length !== 1) return;
+
+			const endY = event.changedTouches[0].clientY;
 
 			if (!startY || !endY) return;
 
@@ -30,7 +34,7 @@ export const useSwipe = (params: {
 	);
 
 	return {
-		onTouchStart,
 		onTouchEnd,
+		onTouchStart,
 	};
 };

@@ -1,11 +1,13 @@
 import {
 	type PropsWithChildren,
 	createContext,
+	useCallback,
 	useContext,
 	useEffect,
 	useState,
 } from "react";
 import { SliderIds } from "../constants";
+import { getIsWithinRange } from "./helpers/getIsInRange";
 
 type SliderContextValue = {
 	isEnd: boolean;
@@ -25,6 +27,8 @@ const SliderContext = createContext<SliderContextValue | undefined>(undefined);
 const SliderProvider = (props: PropsWithChildren) => {
 	const [slides, setSlides] = useState<HTMLElement[]>([]);
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [isBeginning, setIsBeginning] = useState(true);
+	const [isEnd, setIsEnd] = useState(false);
 	const [isAnswerRequired, setAnswerRequired] = useState(false);
 
 	useEffect(() => {
@@ -37,30 +41,39 @@ const SliderProvider = (props: PropsWithChildren) => {
 		setSlides(Array.from(slides));
 	}, []);
 
-	const isBeginning = activeIndex === 0;
-	const isEnd = activeIndex === slides.length - 1;
+	useEffect(() => {
+		setIsBeginning(activeIndex === 0);
+		setIsEnd(activeIndex === slides.length - 1);
+	}, [activeIndex, slides.length]);
 
-	const slideNext = () => {
-		if (isEnd) return;
+	const setIfWithinRange = useCallback(
+		(index: number) => {
+			if (getIsWithinRange(index, slides.length)) {
+				setActiveIndex(index);
+			}
+		},
+		[slides.length],
+	);
 
-		setActiveIndex(activeIndex + 1);
-	};
+	const slideNext = useCallback(() => {
+		setIfWithinRange(activeIndex + 1);
+	}, [setIfWithinRange, activeIndex]);
 
-	const slidePrev = () => {
-		if (isBeginning) return;
+	const slidePrev = useCallback(() => {
+		setIfWithinRange(activeIndex - 1);
+	}, [setIfWithinRange, activeIndex]);
 
-		setActiveIndex(activeIndex - 1);
-	};
+	const slideTo = useCallback(
+		(index: number) => {
+			const isActiveIndex = index === activeIndex;
+			const isSlideBlocked = index > activeIndex && isAnswerRequired;
 
-	const slideTo = (index: number) => {
-		const isActiveIndex = index === activeIndex;
-		const isOutOfRange = index < 0 || index >= slides.length;
-		const isSlideBlocked = index > activeIndex && isAnswerRequired;
+			if (isActiveIndex || isSlideBlocked) return;
 
-		if (isActiveIndex || isOutOfRange || isSlideBlocked) return;
-
-		setActiveIndex(index);
-	};
+			setIfWithinRange(index);
+		},
+		[setIfWithinRange, activeIndex, isAnswerRequired],
+	);
 
 	const value: SliderContextValue = {
 		isEnd,

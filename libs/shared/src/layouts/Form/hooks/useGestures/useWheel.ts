@@ -6,30 +6,30 @@ export const useWheel = (params: {
 }) => {
 	const { goNext, goBack } = params;
 
-	const [isScrolling, setIsScrolling] = useState(false);
+	const [isWheeling, setIsWheeling] = useState(false);
 	const timeoutId = useRef<ReturnType<typeof setTimeout>>();
 
 	const onWheel: WheelEventHandler<HTMLDivElement> = useCallback(
 		(event) => {
-			if (isScrolling) return;
+			if (isWheeling) return;
 
-			setIsScrolling(true);
+			setIsWheeling(true);
 
 			if (event.deltaY > 0) {
 				goNext();
 			} else if (event.deltaY < 0) {
 				goBack();
 			} else {
-				setIsScrolling(false);
+				setIsWheeling(false);
 				return;
 			}
 
 			clearTimeout(timeoutId.current);
 			timeoutId.current = setTimeout(() => {
-				setIsScrolling(false);
+				setIsWheeling(false);
 			}, 2000);
 		},
-		[goBack, goNext, isScrolling],
+		[goBack, goNext, isWheeling],
 	);
 
 	return { onWheel };

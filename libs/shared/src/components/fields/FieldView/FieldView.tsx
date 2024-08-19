@@ -142,7 +142,7 @@ function FieldComponent(
 					options={field.options}
 					answer={answer as TAnswerChoice | undefined}
 					onAnswer={handleAnswer}
-					goToNextStep={onGoNext}
+					onGoNext={onGoNext}
 				/>
 			);
 		}

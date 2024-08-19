@@ -15,8 +15,17 @@ const isChoiceField = (type: FieldTypes) => {
 	);
 };
 
+const isSingleChoiceField = (type: FieldTypes) => {
+	return type === FieldTypes.MultipleChoice || type === FieldTypes.YesNo;
+};
+
 const isWelcomeOrEndingField = (type: FieldTypes) => {
 	return type === FieldTypes.Welcome || type === FieldTypes.Ending;
 };
 
-export { FieldTypes, isChoiceField, isWelcomeOrEndingField };
+export {
+	FieldTypes,
+	isChoiceField,
+	isSingleChoiceField,
+	isWelcomeOrEndingField,
+};

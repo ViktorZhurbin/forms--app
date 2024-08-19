@@ -1,6 +1,6 @@
 import { Checkbox, Radio } from "@mantine/core";
 import { useState } from "react";
-import { FieldTypes } from "~/constants/field";
+import { FieldTypes, isSingleChoiceField } from "~/constants/field";
 import type { TField, TFieldChoice } from "~/models/field/schema";
 import type { TAnswerChoice } from "~/models/response/schema";
 import type { HandleFieldAnswer } from "../FieldView/FieldView";
@@ -10,8 +10,8 @@ import { OptionButton } from "./OptionButton/OptionButton";
 export type MultipleChoiceProps = {
 	field: TField;
 	options: TFieldChoice["options"];
-	goToNextStep: () => void;
 	answer?: TAnswerChoice;
+	onGoNext: () => void;
 	onAnswer: HandleFieldAnswer<TAnswerChoice>;
 };
 
@@ -20,7 +20,7 @@ export const MultipleChoice = ({
 	options,
 	answer,
 	onAnswer,
-	goToNextStep,
+	onGoNext,
 }: MultipleChoiceProps) => {
 	const [selectedChoices, setSelectedChoices] = useState<
 		TFieldChoice["options"]
@@ -33,12 +33,8 @@ export const MultipleChoice = ({
 		setSelectedChoices(value);
 		await onAnswer({ value });
 
-		if (
-			value.length &&
-			(field.type === FieldTypes.YesNo ||
-				field.type === FieldTypes.MultipleChoice)
-		) {
-			setTimeout(goToNextStep, 200);
+		if (isSingleChoiceField(field.type) && value.length) {
+			setTimeout(onGoNext, 200);
 		}
 	};
 

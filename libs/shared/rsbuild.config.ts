@@ -35,7 +35,7 @@ export default defineConfig(({ env, command, envMode }) => {
 				forceSplitting: {
 					"lib-ui": /node_modules[\\/](@mantine|@floating-ui|@tabler)\/*/,
 					"lib-instant": /node_modules\/(@instantdb|object-hash|immer)\/*/,
-					"lib-ui-extras": /node_modules\/(react-movable|swiper)\/*/,
+					"lib-ui-extras": /node_modules\/(react-movable)\/*/,
 				},
 			},
 		},

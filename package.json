@@ -10,6 +10,7 @@
     "prepare": "husky",
     "format": "biome check --write",
     "add:shared": "pnpm --filter ...@forms/shared add",
+    "remove:shared": "pnpm --filter ...@forms/shared remove",
     "dev:form": "pnpm --filter @forms/form dev",
     "dev:editor": "pnpm --filter @forms/editor dev",
     "dev:shared": "pnpm --filter ...@forms/shared dev",

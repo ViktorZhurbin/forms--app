@@ -1,19 +1,13 @@
-import type { SlideItemContextValue } from "../../context/SlideItemContext";
-
-export const getSlidePosition = (
-	sideItemContextValue: SlideItemContextValue,
-) => {
-	const { isPrev, isNext, isActive } = sideItemContextValue;
-
-	if (isActive) {
+export const getSlidePosition = (index: number, activeIndex: number) => {
+	if (index === activeIndex) {
 		return "active";
 	}
 
-	if (isPrev) {
+	if (index === activeIndex - 1) {
 		return "previous";
 	}
 
-	if (isNext) {
+	if (index === activeIndex + 1) {
 		return "next";
 	}
 };

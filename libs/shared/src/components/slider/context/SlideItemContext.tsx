@@ -1,5 +1,5 @@
 import { type PropsWithChildren, createContext, useContext } from "react";
-import { useSlider } from "./SliderContext";
+import type { getSlidePosition } from "../SlideItem/helpers/getSlidePosition";
 
 type SlideItemContextValue = {
 	isActive: boolean;
@@ -10,14 +10,17 @@ type SlideItemContextValue = {
 
 const SlideItem = createContext<SlideItemContextValue | undefined>(undefined);
 
-const SlideItemProvider = (props: PropsWithChildren<{ index: number }>) => {
-	const { index, children } = props;
+const SlideItemProvider = (
+	props: PropsWithChildren<{
+		index: number;
+		position: ReturnType<typeof getSlidePosition>;
+	}>,
+) => {
+	const { index, position, children } = props;
 
-	const { activeIndex } = useSlider();
-
-	const isActive = activeIndex === index;
-	const isPrev = activeIndex - 1 === index;
-	const isNext = activeIndex + 1 === index;
+	const isActive = position === "active";
+	const isPrev = position === "previous";
+	const isNext = position === "next";
 
 	const value = {
 		isActive,

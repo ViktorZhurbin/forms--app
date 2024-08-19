@@ -3,30 +3,22 @@ import { SliderProvider } from "../context/SliderContext";
 import styles from "./Slider.module.css";
 /**
  * Cover these cases:
- * - wheel
- * - swipe
+ * ✅ wheel
+ * ✅ nav buttons
  * - tab & kb
- * - nav buttons
+ * - swipe
  */
 
 type Props = React.PropsWithChildren;
-
-const SliderContent = (props: Props) => {
-	const { children } = props;
-
-	return (
-		<div id={SliderIds.root} className={styles.root}>
-			{children}
-		</div>
-	);
-};
 
 export const Slider = (props: Props) => {
 	const { children } = props;
 
 	return (
 		<SliderProvider>
-			<SliderContent>{children}</SliderContent>
+			<div id={SliderIds.root} className={styles.root}>
+				{children}
+			</div>
 		</SliderProvider>
 	);
 };

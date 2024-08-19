@@ -14,6 +14,7 @@ type SliderContextValue = {
 
 	slidePrev: () => void;
 	slideNext: () => void;
+	slideTo: (index: number) => void;
 
 	isAnswerRequired: boolean;
 	setAnswerRequired: (value: boolean) => void;
@@ -51,13 +52,24 @@ const SliderProvider = (props: PropsWithChildren) => {
 		setActiveIndex(activeIndex - 1);
 	};
 
-	const value = {
+	const slideTo = (index: number) => {
+		const isActiveIndex = index === activeIndex;
+		const isOutOfRange = index < 0 || index >= slides.length;
+		const isSlideBlocked = index > activeIndex && isAnswerRequired;
+
+		if (isActiveIndex || isOutOfRange || isSlideBlocked) return;
+
+		setActiveIndex(index);
+	};
+
+	const value: SliderContextValue = {
 		isEnd,
 		isBeginning,
 		activeIndex,
 
 		slideNext,
 		slidePrev,
+		slideTo,
 
 		isAnswerRequired,
 		setAnswerRequired,

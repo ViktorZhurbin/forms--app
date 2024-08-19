@@ -9,7 +9,7 @@ export const SlideItem = (
 ) => {
 	const { children, index } = props;
 
-	const { activeIndex } = useSlider();
+	const { activeIndex, slideTo } = useSlider();
 	const position = getSlidePosition(index, activeIndex);
 
 	return (
@@ -19,6 +19,11 @@ export const SlideItem = (
 				className={styles.root}
 				data-slide-index={index}
 				data-slide-position={position}
+				onFocus={() => {
+					if (index === activeIndex) return;
+
+					slideTo(index);
+				}}
 			>
 				{children}
 			</div>

@@ -12,7 +12,7 @@ import type { TAnswer, TResponse } from "~/models/response/schema";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
 import { getFieldState } from "./helpers/getFieldState";
-import { useWheel } from "./hooks/useWheel";
+import { useGestures } from "./hooks/useGestures";
 
 export const FormViewContent = (props: {
 	fields: TField[];
@@ -96,13 +96,13 @@ export const FormViewContent = (props: {
 		[createOrUpdateAnswer, handleGoNext],
 	);
 
-	const onWheel = useWheel({
+	const gestureEvents = useGestures({
 		goNext: handleGoNext,
 		goBack: handleGoBack,
 	});
 
 	return (
-		<div onWheel={onWheel}>
+		<div {...gestureEvents}>
 			{fields.map((field, index, list) => {
 				const answer = response?.answers[field.id];
 

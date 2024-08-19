@@ -5,8 +5,8 @@ import styles from "./Slider.module.css";
  * Cover these cases:
  * ✅ wheel
  * ✅ nav buttons
- * - tab & kb
- * - swipe
+ * ✅ tab & kb
+ * ✅ swipe
  */
 
 type Props = React.PropsWithChildren;

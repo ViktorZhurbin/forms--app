@@ -32,5 +32,5 @@ export const useWheel = (params: {
 		[goBack, goNext, isScrolling],
 	);
 
-	return onWheel;
+	return { onWheel };
 };

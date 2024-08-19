@@ -1,3 +1,4 @@
+import { type KeyboardEventHandler, useState } from "react";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { Slider } from "~/components/slider/Slider/Slider";
 import { useIsPreview } from "~/hooks/useIsPreview";
@@ -14,11 +15,22 @@ type FormViewProps = {
 
 export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
 	const isPreview = useIsPreview();
+	const [themeTabIndex, setThemeTabIndex] = useState(-1);
+
+	const handleFirstTab: KeyboardEventHandler<HTMLDivElement> = (e) => {
+		if (themeTabIndex !== 0 && e.key === "Tab") {
+			setThemeTabIndex(0);
+		}
+	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} onKeyDown={handleFirstTab}>
 			<div className={styles.topFixed}>
-				{isPreview && exitButton ? exitButton : <DarkModeToggle />}
+				{isPreview && exitButton ? (
+					exitButton
+				) : (
+					<DarkModeToggle tabIndex={themeTabIndex} />
+				)}
 			</div>
 
 			<Slider>

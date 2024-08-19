@@ -3,6 +3,7 @@ import type { HTMLButtonProps } from "~/types/dom";
 
 interface HeaderIconButtonProps extends HTMLButtonProps, ActionIconProps {
 	tooltip?: string;
+	tabIndex?: number;
 	icon: React.ReactElement;
 }
 

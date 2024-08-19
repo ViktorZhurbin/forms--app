@@ -13,7 +13,7 @@ type SliderContextValue = {
 	isBeginning: boolean;
 
 	slidePrev: () => void;
-	slideNext: (params?: { checkAllowSlideNext?: boolean }) => void;
+	slideNext: () => void;
 
 	isAnswerRequired: boolean;
 	setAnswerRequired: (value: boolean) => void;
@@ -39,10 +39,8 @@ const SliderProvider = (props: PropsWithChildren) => {
 	const isBeginning = activeIndex === 0;
 	const isEnd = activeIndex === slides.length - 1;
 
-	const slideNext = ({
-		checkAllowSlideNext = true,
-	}: { checkAllowSlideNext?: boolean } = {}) => {
-		if (isEnd || (checkAllowSlideNext && isAnswerRequired)) return;
+	const slideNext = () => {
+		if (isEnd) return;
 
 		setActiveIndex(activeIndex + 1);
 	};

@@ -55,31 +55,49 @@ export const FormViewContent = (props: {
 		field: fields[activeIndex],
 	}).button.text;
 
+	const handleGoNext = useCallback(
+		async (params: { checkIsAnswerRequired?: boolean } = {}) => {
+			if (isEnd) return;
+
+			const { checkIsAnswerRequired = true } = params;
+
+			if (checkIsAnswerRequired && isAnswerRequired) {
+				setShowRequiredError(true);
+				return;
+			}
+
+			slideNext();
+		},
+		[slideNext, isAnswerRequired, isEnd],
+	);
+
+	const handleSubmit = useCallback(async () => {
+		if (!isEnd) return;
+
+		if (isAnswerRequired) {
+			setShowRequiredError(true);
+			return;
+		}
+
+		await submitAnswer();
+	}, [submitAnswer, isEnd, isAnswerRequired]);
+
 	const handleAnswer = useCallback(
 		async (answer: TAnswer) => {
 			await createOrUpdateAnswer(answer);
 			setShowRequiredError(false);
 
 			if (isSingleChoiceField(answer.field.type) && answer.value.length) {
-				setTimeout(() => {
-					slideNext({ checkAllowSlideNext: false });
-				}, 700);
+				setTimeout(handleGoNext, 700);
 			}
 		},
-		[createOrUpdateAnswer, slideNext],
+		[createOrUpdateAnswer, handleGoNext],
 	);
 
-	const handleSubmit = useCallback(async () => {
-		if (isAnswerRequired) {
-			setShowRequiredError(true);
-		} else if (isEnd) {
-			await submitAnswer();
-		} else {
-			slideNext();
-		}
-	}, [submitAnswer, slideNext, isEnd, isAnswerRequired]);
-
-	const onWheel = useWheel({ goNext: handleSubmit, goBack: handleGoBack });
+	const onWheel = useWheel({
+		goNext: handleGoNext,
+		goBack: handleGoBack,
+	});
 
 	return (
 		<div onWheel={onWheel}>
@@ -101,7 +119,7 @@ export const FormViewContent = (props: {
 							field={field}
 							answer={answer}
 							onAnswer={handleAnswer}
-							onSubmit={handleSubmit}
+							onSubmit={isEnd ? handleSubmit : handleGoNext}
 							showRequiredError={showRequiredError}
 							isNextHidden={prevFieldState.isRequiredAndHasNoAnswer}
 						/>
@@ -112,13 +130,13 @@ export const FormViewContent = (props: {
 				className={styles.navButtons}
 				buttonText={buttonText}
 				onGoBack={handleGoBack}
-				onSubmit={handleSubmit}
+				onSubmit={handleGoNext}
 			/>
 			{isPreview && isEnd && !!response?.submittedAt && (
 				<Notification
-					color="green"
 					withBorder
 					withCloseButton={false}
+					color="green"
 					title="Congrats!"
 					className={styles.notification}
 				>

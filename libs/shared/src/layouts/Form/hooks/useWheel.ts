@@ -17,8 +17,11 @@ export const useWheel = (params: {
 
 			if (event.deltaY > 0) {
 				goNext();
-			} else {
+			} else if (event.deltaY < 0) {
 				goBack();
+			} else {
+				setIsScrolling(false);
+				return;
 			}
 
 			clearTimeout(timeoutId.current);

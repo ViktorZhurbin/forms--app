@@ -1,9 +1,12 @@
+import { Notification } from "@mantine/core";
 import { useCallback, useEffect, useState } from "react";
 import { getFieldProps } from "~/components/fields/FieldBase/getFieldProps";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { SlideItem } from "~/components/slider/SlideItem/SlideItem";
 import { useSlider } from "~/components/slider/context/SliderContext";
+import { isSingleChoiceField } from "~/constants/field";
 import { useAnswer } from "~/hooks/useAnswer";
+import { useIsPreview } from "~/hooks/useIsPreview";
 import type { TField } from "~/models/field/schema";
 import type { TAnswer, TResponse } from "~/models/response/schema";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
@@ -15,17 +18,22 @@ export const FormViewContent = (props: {
 	fields: TField[];
 	response?: TResponse;
 }) => {
-	const { fields, response } = props;
+	const { fields } = props;
+
+	const isPreview = useIsPreview();
 
 	const [showRequiredError, setShowRequiredError] = useState(false);
+	const { createOrUpdateAnswer, submitAnswer, previewResponse } = useAnswer();
+
+	const response = isPreview ? previewResponse : props.response;
 
 	const {
 		isEnd,
 		activeIndex,
-		allowSlideNext,
 		slideNext,
 		slidePrev,
-		setAllowSlideNext,
+		isAnswerRequired,
+		setAnswerRequired,
 	} = useSlider();
 
 	useEffect(() => {
@@ -34,23 +42,8 @@ export const FormViewContent = (props: {
 			field: fields[activeIndex],
 		});
 
-		setAllowSlideNext(!fieldState.isRequiredAndHasNoAnswer);
-	}, [activeIndex, setAllowSlideNext, fields, response]);
-
-	const handleGoNext = useCallback(
-		(
-			params: {
-				skipCheck?: boolean;
-			} = {},
-		) => {
-			if (!allowSlideNext && !params.skipCheck) {
-				setShowRequiredError(true);
-			} else {
-				slideNext();
-			}
-		},
-		[slideNext, allowSlideNext],
-	);
+		setAnswerRequired(fieldState.isRequiredAndHasNoAnswer);
+	}, [activeIndex, setAnswerRequired, fields, response]);
 
 	const handleGoBack = useCallback(() => {
 		setShowRequiredError(false);
@@ -62,25 +55,31 @@ export const FormViewContent = (props: {
 		field: fields[activeIndex],
 	}).button.text;
 
-	const { createOrUpdateAnswer, submitAnswer } = useAnswer();
-
 	const handleAnswer = useCallback(
 		async (answer: TAnswer) => {
 			await createOrUpdateAnswer(answer);
 			setShowRequiredError(false);
+
+			if (isSingleChoiceField(answer.field.type) && answer.value.length) {
+				setTimeout(() => {
+					slideNext({ checkAllowSlideNext: false });
+				}, 700);
+			}
 		},
-		[createOrUpdateAnswer],
+		[createOrUpdateAnswer, slideNext],
 	);
 
 	const handleSubmit = useCallback(async () => {
-		if (isEnd) {
+		if (isAnswerRequired) {
+			setShowRequiredError(true);
+		} else if (isEnd) {
 			await submitAnswer();
 		} else {
-			handleGoNext();
+			slideNext();
 		}
-	}, [submitAnswer, handleGoNext, isEnd]);
+	}, [submitAnswer, slideNext, isEnd, isAnswerRequired]);
 
-	const onWheel = useWheel({ goNext: handleGoNext, goBack: handleGoBack });
+	const onWheel = useWheel({ goNext: handleSubmit, goBack: handleGoBack });
 
 	return (
 		<div onWheel={onWheel}>
@@ -92,16 +91,15 @@ export const FormViewContent = (props: {
 					field: list[index - 1],
 				});
 
+				const isLast = index === list.length - 1;
+
 				return (
 					<SlideItem key={field.id} index={index}>
 						<FieldView
-							isLast={index === list.length - 1}
+							isLast={isLast}
 							order={index + 1}
 							field={field}
 							answer={answer}
-							onGoNext={() => {
-								handleGoNext({ skipCheck: true });
-							}}
 							onAnswer={handleAnswer}
 							onSubmit={handleSubmit}
 							showRequiredError={showRequiredError}
@@ -113,10 +111,20 @@ export const FormViewContent = (props: {
 			<FormNavButtons
 				className={styles.navButtons}
 				buttonText={buttonText}
-				onGoNext={handleGoNext}
 				onGoBack={handleGoBack}
 				onSubmit={handleSubmit}
 			/>
+			{isPreview && isEnd && !!response?.submittedAt && (
+				<Notification
+					color="green"
+					withBorder
+					withCloseButton={false}
+					title="Congrats!"
+					className={styles.notification}
+				>
+					Test successful!
+				</Notification>
+			)}
 		</div>
 	);
 };

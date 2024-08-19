@@ -26,7 +26,6 @@ interface FieldViewProps {
 	className?: string;
 	showRequiredError: boolean;
 	onSubmit: () => void;
-	onGoNext: () => void;
 	onAnswer: (answer: TAnswer) => Promise<void>;
 }
 
@@ -39,7 +38,6 @@ export const FieldView = ({
 	field,
 	isLast,
 	answer,
-	onGoNext,
 	className,
 	onAnswer,
 	onSubmit,
@@ -84,12 +82,7 @@ export const FieldView = ({
 				field?.description && <Text size="xl">{field?.description}</Text>
 			}
 			field={
-				<FieldComponent
-					field={field}
-					answer={answer}
-					onAnswer={onAnswer}
-					onGoNext={onGoNext}
-				/>
+				<FieldComponent field={field} answer={answer} onAnswer={onAnswer} />
 			}
 			buttonSubmit={
 				showRequiredError ? (
@@ -111,11 +104,10 @@ export const FieldView = ({
 
 function FieldComponent(
 	props: Pick<FieldViewProps, "field" | "answer"> & {
-		onGoNext: () => void;
 		onAnswer: (answer: TAnswer) => Promise<void>;
 	},
 ) {
-	const { field, answer, onAnswer, onGoNext } = props;
+	const { field, answer, onAnswer } = props;
 
 	const handleAnswer: HandleFieldAnswer = useCallback(
 		async ({ value }) => {
@@ -142,7 +134,6 @@ function FieldComponent(
 					options={field.options}
 					answer={answer as TAnswerChoice | undefined}
 					onAnswer={handleAnswer}
-					onGoNext={onGoNext}
 				/>
 			);
 		}

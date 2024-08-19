@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useFormNanoId } from "~/hooks/useFormNanoId";
 import { useLocalFormResponseId } from "~/hooks/useLocalFormResponseId";
-import type { TAnswer } from "~/models/response/schema";
+import type { TAnswer, TResponse } from "~/models/response/schema";
 import {
 	createResponse,
 	updateAnswer,
@@ -10,14 +10,32 @@ import {
 import { getNowISOString } from "~/utils/date";
 import { useIsPreview } from "./useIsPreview";
 
+const initialPreviewResponse: TResponse = {
+	id: "test",
+	updatedAt: "",
+	answers: {},
+};
+
 export const useAnswer = () => {
 	const formNanoId = useFormNanoId();
 	const isPreview = useIsPreview();
+	const [previewResponse, setPreviewResponse] = useState<TResponse>(
+		initialPreviewResponse,
+	);
 	const [responseId, setLocalResponseId] = useLocalFormResponseId();
 
 	const createOrUpdateAnswer = useCallback(
 		async (answer: TAnswer) => {
-			if (isPreview) return;
+			if (isPreview) {
+				setPreviewResponse((prevResponse) => {
+					const newResponse = { ...prevResponse };
+					newResponse.answers[answer.field.id] = answer;
+
+					return newResponse;
+				});
+
+				return;
+			}
 
 			if (!responseId) {
 				const responseId = await createResponse({
@@ -35,13 +53,22 @@ export const useAnswer = () => {
 	);
 
 	const submitAnswer = useCallback(async () => {
-		if (isPreview) return;
+		const submittedAt = getNowISOString();
+
+		if (isPreview) {
+			setPreviewResponse((prevResponse) => ({
+				...prevResponse,
+				submittedAt,
+			}));
+
+			return;
+		}
 
 		await updateResponse({
 			responseId,
-			payload: { submittedAt: getNowISOString() },
+			payload: { submittedAt },
 		});
 	}, [responseId, isPreview]);
 
-	return { createOrUpdateAnswer, submitAnswer };
+	return { createOrUpdateAnswer, submitAnswer, previewResponse };
 };

@@ -26,7 +26,7 @@ export const PreviewModal = ({ opened, onClose }: ModalProps) => {
 				content: styles.modalContent,
 			}}
 		>
-			<FormView isPreview fields={fieldsAndEndings} exitButton={exitButton} />
+			<FormView fields={fieldsAndEndings} exitButton={exitButton} />
 		</Modal>
 	);
 };

@@ -1,4 +1,7 @@
 .container {
+	--spacing-y: var(--mantine-spacing-xs);
+	--spacing-x: var(--mantine-spacing-md);
+
 	position: relative;
 
 	display: flex;
@@ -34,6 +37,7 @@
 }
 
 .topFixed {
+	position: fixed;
 	top: 0;
 	right: 0;
 	z-index: 2;
@@ -41,31 +45,26 @@
 
 .topFixed,
 .navButtons {
-	position: fixed;
-
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 
-	padding-block: var(--mantine-spacing-xs);
-	padding-inline: var(--mantine-spacing-md);
+	padding-block: var(--spacing-y);
+	padding-inline: var(--spacing-x);
+
 	background-color: var(--mantine-color-body);
 }
 
 .navButtons {
+	position: fixed;
 	bottom: 0;
 	right: 0;
 	z-index: 1;
 }
 
-.swiper {
-	width: 100%;
-	height: 100%;
-}
-
-.swiperSlide {
-	/* Center slide text vertically */
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.notification {
+	position: fixed;
+	bottom: var(--spacing-y);
+	left: var(--spacing-x);
+	z-index: 1;
 }

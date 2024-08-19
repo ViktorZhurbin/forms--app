@@ -11,11 +11,12 @@ type SliderContextValue = {
 	isEnd: boolean;
 	activeIndex: number;
 	isBeginning: boolean;
-	allowSlideNext: boolean;
 
-	slideNext: () => void;
 	slidePrev: () => void;
-	setAllowSlideNext: (value: boolean) => void;
+	slideNext: (params?: { checkAllowSlideNext?: boolean }) => void;
+
+	isAnswerRequired: boolean;
+	setAnswerRequired: (value: boolean) => void;
 };
 
 const SliderContext = createContext<SliderContextValue | undefined>(undefined);
@@ -23,7 +24,7 @@ const SliderContext = createContext<SliderContextValue | undefined>(undefined);
 const SliderProvider = (props: PropsWithChildren) => {
 	const [slides, setSlides] = useState<HTMLElement[]>([]);
 	const [activeIndex, setActiveIndex] = useState(0);
-	const [allowSlideNext, setAllowSlideNext] = useState(true);
+	const [isAnswerRequired, setAnswerRequired] = useState(false);
 
 	useEffect(() => {
 		const sliderEl = document.getElementById(SliderIds.root);
@@ -38,8 +39,10 @@ const SliderProvider = (props: PropsWithChildren) => {
 	const isBeginning = activeIndex === 0;
 	const isEnd = activeIndex === slides.length - 1;
 
-	const slideNext = () => {
-		if (isEnd || !allowSlideNext) return;
+	const slideNext = ({
+		checkAllowSlideNext = true,
+	}: { checkAllowSlideNext?: boolean } = {}) => {
+		if (isEnd || (checkAllowSlideNext && isAnswerRequired)) return;
 
 		setActiveIndex(activeIndex + 1);
 	};
@@ -54,11 +57,12 @@ const SliderProvider = (props: PropsWithChildren) => {
 		isEnd,
 		isBeginning,
 		activeIndex,
-		allowSlideNext,
 
 		slideNext,
 		slidePrev,
-		setAllowSlideNext,
+
+		isAnswerRequired,
+		setAnswerRequired,
 	};
 
 	return (

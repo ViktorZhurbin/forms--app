@@ -13,7 +13,6 @@ import styles from "./FormNavButtons.module.css";
 export const FormNavButtons = (props: {
 	buttonText: string;
 	className?: string;
-	onGoNext: () => void;
 	onGoBack: () => void;
 	onSubmit: () => void;
 }) => {
@@ -56,7 +55,7 @@ export const FormNavButtons = (props: {
 				aria-label="Next step"
 				size="lg"
 				disabled={isEnd}
-				onClick={props.onGoNext}
+				onClick={props.onSubmit}
 			>
 				<IconChevronDown />
 			</ActionIcon>

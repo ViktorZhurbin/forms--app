@@ -28,23 +28,27 @@ export const SlideItem = (
 			return;
 		}
 
-		initialFocusRef.current?.focus();
+		setTimeout(() => {
+			initialFocusRef.current?.focus();
+		}, 100);
 	}, [position]);
 
 	return (
 		<SlideItemProvider index={index} position={position}>
-			<VisuallyHidden ref={initialFocusRef} tabIndex={-1} />
-			<div
-				id={SliderIds.item}
-				ref={slideItemRootRef}
-				className={styles.root}
-				data-slide-index={index}
-				data-slide-position={position}
-				onFocus={() => {
-					slideTo(index);
-				}}
-			>
-				{children}
+			<div>
+				<VisuallyHidden ref={initialFocusRef} tabIndex={-1} />
+				<div
+					id={SliderIds.item}
+					ref={slideItemRootRef}
+					className={styles.root}
+					data-slide-index={index}
+					data-slide-position={position}
+					onFocus={() => {
+						slideTo(index);
+					}}
+				>
+					{children}
+				</div>
 			</div>
 		</SlideItemProvider>
 	);

@@ -29,6 +29,7 @@ export const FormViewContent = (props: {
 
 	const {
 		isEnd,
+		isBeginning,
 		activeIndex,
 		slideNext,
 		slidePrev,
@@ -46,9 +47,11 @@ export const FormViewContent = (props: {
 	}, [activeIndex, setAnswerRequired, fields, response]);
 
 	const handleGoBack = useCallback(() => {
+		if (isBeginning) return;
+
 		setShowRequiredError(false);
 		slidePrev();
-	}, [slidePrev]);
+	}, [slidePrev, isBeginning]);
 
 	const buttonText = getFieldProps({
 		isLast: isEnd,

@@ -1,3 +1,5 @@
+import { VisuallyHidden } from "@mantine/core";
+import { useEffect, useRef, useState } from "react";
 import { SliderIds } from "../constants";
 import { SlideItemProvider } from "../context/SlideItemContext";
 import { useSlider } from "../context/SliderContext";
@@ -8,20 +10,37 @@ export const SlideItem = (
 	props: React.PropsWithChildren<{ index: number }>,
 ) => {
 	const { children, index } = props;
+	const [position, setPosition] =
+		useState<ReturnType<typeof getSlidePosition>>();
 
 	const { activeIndex, slideTo } = useSlider();
-	const position = getSlidePosition(index, activeIndex);
+	useEffect(() => {
+		setPosition(getSlidePosition(index, activeIndex));
+	}, [index, activeIndex]);
+
+	const initialFocusRef = useRef<HTMLDivElement>(null);
+	const slideItemRootRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const rootEl = slideItemRootRef.current;
+
+		if (position !== "active" || rootEl?.contains(document.activeElement)) {
+			return;
+		}
+
+		initialFocusRef.current?.focus();
+	}, [position]);
 
 	return (
 		<SlideItemProvider index={index} position={position}>
+			<VisuallyHidden ref={initialFocusRef} tabIndex={-1} />
 			<div
 				id={SliderIds.item}
+				ref={slideItemRootRef}
 				className={styles.root}
 				data-slide-index={index}
 				data-slide-position={position}
 				onFocus={() => {
-					if (index === activeIndex) return;
-
 					slideTo(index);
 				}}
 			>

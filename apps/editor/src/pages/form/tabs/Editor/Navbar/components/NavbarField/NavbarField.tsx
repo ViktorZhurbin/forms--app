@@ -46,7 +46,7 @@ export const NavbarField = ({
 			<div className={styles.labelGroup}>
 				<FieldTag type={type} text={order} />
 				<Text size="sm" className={styles.labelTitle}>
-					{title || "..."}
+					{title}
 				</Text>
 			</div>
 

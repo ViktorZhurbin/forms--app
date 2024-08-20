@@ -10,23 +10,23 @@ export const getFieldProps = (params: { field: TField; isLast?: boolean }) => {
 
 	switch (field.type) {
 		case FieldTypes.Welcome:
-			titlePlaceholder = "Your title here...";
+			titlePlaceholder = "Say hi...";
 			buttonTextFallback = "Start";
 			break;
 
 		case FieldTypes.Ending:
-			titlePlaceholder = "Your title here...";
+			titlePlaceholder = "Say bye...";
 			buttonTextFallback = "Create a form";
 			break;
 
 		default:
-			titlePlaceholder = "...";
+			titlePlaceholder = "Your question here...";
 			buttonTextFallback = isLast ? "Submit" : "OK";
 	}
 
 	return {
 		title: {
-			text: field?.title || "...",
+			text: field?.title,
 			placeholder: titlePlaceholder,
 		},
 		button: {

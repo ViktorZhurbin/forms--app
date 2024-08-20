@@ -47,7 +47,7 @@ export const FieldEdit = ({ order, field, isLast }: FieldEditProps) => {
 			title={
 				<EditableTextarea
 					variant="h1"
-					placeholder="Your question here..."
+					placeholder={title.placeholder}
 					initialValue={title.text}
 					onEdit={onEditTitle}
 				/>

@@ -14,12 +14,13 @@ export const PublishButton = ({ onClick }: { onClick?: () => void }) => {
 			label={"Make your changes visible to the world"}
 		>
 			<Button
+				// variant="default"
+				// color="dark.5"
 				onClick={onClick ?? publishForm}
 				loading={isLoading}
 				className={clsx({ [styles.hidden]: isPublished })}
 				loaderProps={{ type: "dots" }}
 				leftSection={<IconSend2 />}
-				variant="default"
 			>
 				Publish
 			</Button>

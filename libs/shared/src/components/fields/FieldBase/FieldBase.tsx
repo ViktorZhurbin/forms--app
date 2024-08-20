@@ -5,7 +5,7 @@ import { type FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
 import styles from "./FieldBase.module.css";
 
 interface FieldBaseProps {
-	order: number;
+	order: number | null;
 	title: React.ReactNode;
 	description?: React.ReactNode;
 	field: React.ReactNode;

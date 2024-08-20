@@ -20,8 +20,8 @@ import styles from "./FieldView.module.css";
 interface FieldViewProps {
 	field: TField;
 	order: number;
-	isLast: boolean;
 	isNextHidden: boolean;
+	isLastQuestion: boolean;
 	answer?: TAnswer;
 	className?: string;
 	showRequiredError: boolean;
@@ -36,17 +36,17 @@ export type HandleFieldAnswer<T extends TAnswer = TAnswer> = ({
 export const FieldView = ({
 	order,
 	field,
-	isLast,
 	answer,
 	className,
 	onAnswer,
 	onSubmit,
 	isNextHidden,
+	isLastQuestion,
 	showRequiredError,
 }: FieldViewProps) => {
 	const isSmallScreen = useMediaQuery(Media.FormViewSmall);
 
-	const { button, title } = getFieldProps({ field, isLast });
+	const { button, title } = getFieldProps({ field, isLastQuestion });
 
 	const buttonRef = useRef<HTMLButtonElement>(null);
 

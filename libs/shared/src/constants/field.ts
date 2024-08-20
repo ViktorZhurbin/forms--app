@@ -23,8 +23,13 @@ const isWelcomeOrEndingField = (type: FieldTypes) => {
 	return type === FieldTypes.Welcome || type === FieldTypes.Ending;
 };
 
+const isQuestionField = (type: FieldTypes) => {
+	return !isWelcomeOrEndingField(type);
+};
+
 export {
 	FieldTypes,
+	isQuestionField,
 	isChoiceField,
 	isSingleChoiceField,
 	isWelcomeOrEndingField,

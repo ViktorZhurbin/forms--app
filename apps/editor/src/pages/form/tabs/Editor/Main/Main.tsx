@@ -4,15 +4,20 @@ import { AddBlockButton } from "../../components/AddBlockButton/AddBlockButton";
 import styles from "./Main.module.css";
 
 export const Main = () => {
-	const { field, order, isLast } = useSelectedOrderedField();
+	const { field, order, isLastQuestion } = useSelectedOrderedField();
 
-	if (!field || order === null) return null;
+	if (!field) return null;
 
 	return (
 		<div className={styles.root}>
 			<AddBlockButton insertBefore tooltip="Add block above" />
 			<div className={styles.fieldWrapper}>
-				<FieldEdit key={field.id} field={field} order={order} isLast={isLast} />
+				<FieldEdit
+					key={field.id}
+					field={field}
+					order={order}
+					isLastQuestion={isLastQuestion}
+				/>
 			</div>
 			<AddBlockButton tooltip="Add block below" />
 		</div>

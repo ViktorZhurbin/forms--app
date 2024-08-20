@@ -1,19 +1,32 @@
+import { isQuestionField } from "@/shared/constants/field";
 import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
 import { useOrderedFormDraftFields } from "@/shared/models/field/read";
 
 export const useSelectedOrderedField = () => {
-	const orderedFields = useOrderedFormDraftFields();
+	const allFieldsOrdered = useOrderedFormDraftFields();
+	const questionFields = allFieldsOrdered?.filter((field) =>
+		isQuestionField(field.type),
+	);
+
 	const selectedBlockId = useSelectedBlockId();
 
-	const currentFieldIndex = orderedFields?.findIndex(
+	const field = allFieldsOrdered?.find(
 		(field) => field.nanoId === selectedBlockId,
 	);
 
-	const index = currentFieldIndex ?? null;
+	const getOrder = () => {
+		if (!field || !isQuestionField(field.type)) return null;
 
-	const field = index !== null && orderedFields?.[index];
-	const order = index === null ? 1 : index + 1;
-	const isLast = order === orderedFields?.length;
+		const questionIndex = questionFields.findIndex(
+			(field) => field.nanoId === selectedBlockId,
+		);
 
-	return { field, order, isLast };
+		return questionIndex + 1;
+	};
+
+	const order = getOrder();
+
+	const isLastQuestion = order === questionFields?.length;
+
+	return { field, order, isLastQuestion };
 };

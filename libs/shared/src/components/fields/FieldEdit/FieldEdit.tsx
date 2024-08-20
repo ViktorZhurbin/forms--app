@@ -10,12 +10,12 @@ import { ShortTextEdit } from "../ShortText/editable/ShortTextEdit";
 import styles from "./FieldEdit.module.css";
 
 interface FieldEditProps {
-	order: number;
-	isLast: boolean;
+	order: number | null;
+	isLastQuestion: boolean;
 	field: TField;
 }
 
-export const FieldEdit = ({ order, field, isLast }: FieldEditProps) => {
+export const FieldEdit = ({ order, field, isLastQuestion }: FieldEditProps) => {
 	const onEditTitle = (title: string) => {
 		updateField({
 			id: field.id,
@@ -37,7 +37,7 @@ export const FieldEdit = ({ order, field, isLast }: FieldEditProps) => {
 		});
 	};
 
-	const { button, title } = getFieldProps({ field, isLast });
+	const { button, title } = getFieldProps({ field, isLastQuestion });
 
 	return (
 		<FieldBase

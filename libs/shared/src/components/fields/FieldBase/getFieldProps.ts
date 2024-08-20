@@ -2,8 +2,11 @@ import { FieldTypes } from "~/constants/field";
 import type { TField } from "~/models/field/schema";
 import styles from "./FieldBase.module.css";
 
-export const getFieldProps = (params: { field: TField; isLast?: boolean }) => {
-	const { field, isLast } = params;
+export const getFieldProps = (params: {
+	field: TField;
+	isLastQuestion?: boolean;
+}) => {
+	const { field, isLastQuestion } = params;
 
 	let titlePlaceholder = "";
 	let buttonTextFallback = "";
@@ -21,7 +24,7 @@ export const getFieldProps = (params: { field: TField; isLast?: boolean }) => {
 
 		default:
 			titlePlaceholder = "Your question here...";
-			buttonTextFallback = isLast ? "Submit" : "OK";
+			buttonTextFallback = isLastQuestion ? "Submit" : "OK";
 	}
 
 	return {

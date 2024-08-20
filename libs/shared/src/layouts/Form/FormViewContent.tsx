@@ -54,7 +54,7 @@ export const FormViewContent = (props: {
 	}, [slidePrev, isBeginning]);
 
 	const buttonText = getFieldProps({
-		isLast: isEnd,
+		isLastQuestion: isEnd,
 		field: fields[activeIndex],
 	}).button.text;
 
@@ -119,7 +119,7 @@ export const FormViewContent = (props: {
 				return (
 					<SlideItem key={field.id} index={index}>
 						<FieldView
-							isLast={isLast}
+							isLastQuestion={isLast}
 							order={index + 1}
 							field={field}
 							answer={answer}

@@ -5,15 +5,15 @@ import styles from "./SidebarSection.module.css";
 export const SidebarSection = (props: {
 	title: string;
 	children: React.ReactNode;
-	icon?: React.ReactNode;
+	button?: React.ReactNode;
 }) => {
-	const { title, icon, children } = props;
+	const { title, button, children } = props;
 
 	return (
 		<div className={styles.root}>
 			<div className={styles.header}>
 				<SidebarTitle>{title}</SidebarTitle>
-				{icon}
+				{button}
 			</div>
 
 			<ScrollArea

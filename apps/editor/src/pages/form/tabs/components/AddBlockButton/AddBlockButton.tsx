@@ -1,6 +1,6 @@
+import { IconButton } from "@/shared/components/IconButton/IconButton";
 import type { FieldTypes } from "@/shared/constants/field";
 import { useAddField } from "@/shared/models/field/hooks/useAddField";
-import { ActionIcon, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { useCallback } from "react";
@@ -26,11 +26,9 @@ export const AddBlockButton = ({
 
 	return (
 		<>
-			<Tooltip withArrow label={tooltip}>
-				<ActionIcon variant="default" onClick={modalActions.open}>
-					<IconPlus />
-				</ActionIcon>
-			</Tooltip>
+			<IconButton size="sm" tooltip={tooltip} onClick={modalActions.open}>
+				<IconPlus />
+			</IconButton>
 
 			<AddBlockModal
 				onClose={modalActions.close}

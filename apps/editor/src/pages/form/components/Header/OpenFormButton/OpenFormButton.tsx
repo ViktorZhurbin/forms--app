@@ -1,4 +1,4 @@
-import { HeaderIconButton } from "@/shared/components/HeaderIconButton/HeaderIconButton";
+import { IconButton } from "@/shared/components/IconButton/IconButton";
 import { useFormPublishedFields } from "@/shared/models/field/read";
 import { IconExternalLink } from "@tabler/icons-react";
 import { useFormUrl } from "~/pages/form/hooks/useFormUrl";
@@ -11,14 +11,15 @@ export const OpenFormButton = () => {
 
 	return (
 		url && (
-			<HeaderIconButton
+			<IconButton
 				disabled={isDisabled}
 				tooltip="Open form"
-				icon={<IconExternalLink />}
 				onClick={() => {
 					window.open(url, "_blank");
 				}}
-			/>
+			>
+				<IconExternalLink />
+			</IconButton>
 		)
 	);
 };

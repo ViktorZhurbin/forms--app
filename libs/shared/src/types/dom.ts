@@ -1,5 +1,10 @@
-import type { DOMAttributes } from "react";
+import type { ActionIconProps } from "@mantine/core";
+import type { HTMLAttributes } from "react";
 
-type HTMLButtonProps = DOMAttributes<HTMLButtonElement>;
+type HTMLButtonProps = HTMLAttributes<HTMLButtonElement>;
 
-export type { HTMLButtonProps };
+interface ActionButtonProps
+	extends Omit<HTMLButtonProps, "color" | "style">,
+		ActionIconProps {}
+
+export type { ActionButtonProps, HTMLButtonProps };

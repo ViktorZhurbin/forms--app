@@ -1,6 +1,6 @@
 import { useComputedColorScheme, useMantineColorScheme } from "@mantine/core";
 import { IconMoon, IconSun } from "@tabler/icons-react";
-import { HeaderIconButton } from "../HeaderIconButton/HeaderIconButton";
+import { IconButton } from "../IconButton/IconButton";
 
 export const DarkModeToggle = (props: { tabIndex?: number }) => {
 	const { tabIndex } = props;
@@ -14,10 +14,8 @@ export const DarkModeToggle = (props: { tabIndex?: number }) => {
 	};
 
 	return (
-		<HeaderIconButton
-			tabIndex={tabIndex}
-			onClick={toggleColorScheme}
-			icon={computedColorScheme === "dark" ? <IconSun /> : <IconMoon />}
-		/>
+		<IconButton tabIndex={tabIndex} onClick={toggleColorScheme}>
+			{computedColorScheme === "dark" ? <IconSun /> : <IconMoon />}
+		</IconButton>
 	);
 };

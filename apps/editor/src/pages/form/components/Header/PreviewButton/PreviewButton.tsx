@@ -1,4 +1,4 @@
-import { HeaderIconButton } from "@/shared/components/HeaderIconButton/HeaderIconButton";
+import { IconButton } from "@/shared/components/IconButton/IconButton";
 import { SearchParams } from "@/shared/constants/location";
 import { useFormDraftFields } from "@/shared/models/field/read";
 import { useDisclosure } from "@mantine/hooks";
@@ -23,12 +23,13 @@ export const PreviewButton = () => {
 
 	return (
 		<>
-			<HeaderIconButton
+			<IconButton
 				disabled={!fields?.length}
 				tooltip="Preview"
-				icon={<IconEye />}
 				onClick={handleModalOpen}
-			/>
+			>
+				<IconEye />
+			</IconButton>
 
 			<PreviewModal opened={isModalOpen} onClose={handleModalClose} />
 		</>

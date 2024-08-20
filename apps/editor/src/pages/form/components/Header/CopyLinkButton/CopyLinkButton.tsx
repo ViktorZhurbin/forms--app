@@ -1,4 +1,4 @@
-import { HeaderIconButton } from "@/shared/components/HeaderIconButton/HeaderIconButton";
+import { IconButton } from "@/shared/components/IconButton/IconButton";
 import { CopyButton } from "@mantine/core";
 import { IconLink } from "@tabler/icons-react";
 import { useFormUrl } from "~/pages/form/hooks/useFormUrl";
@@ -10,12 +10,13 @@ export const CopyLinkButton = () => {
 		url && (
 			<CopyButton value={url} timeout={2000}>
 				{({ copied, copy }) => (
-					<HeaderIconButton
+					<IconButton
 						disabled={!url}
 						tooltip={copied ? "Copied!" : "Copy form link"}
-						icon={<IconLink />}
 						onClick={copy}
-					/>
+					>
+						<IconLink />
+					</IconButton>
 				)}
 			</CopyButton>
 		)

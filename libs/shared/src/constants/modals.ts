@@ -1,6 +1,6 @@
-const ModalIds = {
-	PREVIEW: "preview",
-	ADD_FIELD: "addField",
-};
+enum ModalIds {
+	PREVIEW = "preview",
+	ADD_FIELD = "addField",
+}
 
 export { ModalIds };

@@ -1,6 +1,6 @@
 import { SearchParams } from "@/shared/constants/location";
 import type { TField } from "@/shared/models/field/schema";
-import { navigateWithSearch } from "~/utils/searchParams";
+import { navigateWithSearch } from "@/shared/utils/searchParams";
 
 const navigateToFieldId = (prams: { nanoId: TField["nanoId"] | null }) => {
 	const { nanoId } = prams;

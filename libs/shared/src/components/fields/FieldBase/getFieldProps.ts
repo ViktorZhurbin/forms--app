@@ -18,7 +18,7 @@ export const getFieldProps = (params: {
 		className: styles.submitButton,
 	};
 
-	switch (field.type) {
+	switch (field?.type) {
 		case FieldTypes.Welcome:
 		case FieldTypes.Statement:
 			title.placeholder = "Your question here...";

@@ -30,6 +30,7 @@ export const SlideItem = (
 
 		setTimeout(() => {
 			initialFocusRef.current?.focus();
+			initialFocusRef.current?.blur();
 		}, 100);
 	}, [position]);
 

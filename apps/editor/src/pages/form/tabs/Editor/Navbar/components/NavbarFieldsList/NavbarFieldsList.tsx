@@ -1,4 +1,4 @@
-import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
+import { useSelectedBlockId } from "@/shared/hooks/searchParams/useSelectedBlockId";
 import type { TField } from "@/shared/models/field/schema";
 import { deleteField, updateFieldsIndex } from "@/shared/models/field/write";
 import { List, arrayMove } from "react-movable";

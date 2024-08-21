@@ -1,6 +1,6 @@
 import { Button, Notification, Text, Title } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
-import { useIsPreview } from "~/hooks/useIsPreview";
+import { useIsPreview } from "~/hooks/searchParams/useIsPreview";
 import type { TFieldEnding } from "~/models/field/schema";
 import styles from "./Ending.module.css";
 

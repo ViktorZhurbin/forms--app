@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSearch } from "wouter";
 import { navigate } from "wouter/use-browser-location";
 import { SearchParams } from "~/constants/location";
+import { useSearchParam } from "./useSearchParam";
 
 export const useSelectedBlockId = (defaultBlockId?: string) => {
-	const queryString = useSearch();
+	const blockId = useSearchParam(SearchParams.BLOCK_ID);
 
 	const [selectedBlockId, setSelectedBlockId] = useState<string>();
 
 	useEffect(() => {
-		const searchParams = new URLSearchParams(queryString);
-		const blockId = searchParams.get(SearchParams.BLOCK_ID);
-
 		if (blockId) {
 			setSelectedBlockId(blockId);
 			return;
@@ -25,7 +22,7 @@ export const useSelectedBlockId = (defaultBlockId?: string) => {
 
 			setSelectedBlockId(defaultBlockId);
 		}
-	}, [queryString, defaultBlockId]);
+	}, [blockId, defaultBlockId]);
 
 	return selectedBlockId;
 };

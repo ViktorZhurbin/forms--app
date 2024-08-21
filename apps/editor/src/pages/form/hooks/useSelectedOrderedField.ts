@@ -1,5 +1,5 @@
 import { isQuestionField } from "@/shared/constants/field";
-import { useSelectedBlockId } from "@/shared/hooks/useSelectedBlockId";
+import { useSelectedBlockId } from "@/shared/hooks/searchParams/useSelectedBlockId";
 import { useOrderedFormDraftFields } from "@/shared/models/field/read";
 
 export const useSelectedOrderedField = () => {

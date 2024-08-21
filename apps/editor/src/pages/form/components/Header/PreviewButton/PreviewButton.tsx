@@ -1,24 +1,22 @@
 import { IconButton } from "@/shared/components/IconButton/IconButton";
 import { SearchParams } from "@/shared/constants/location";
+import { ModalIds } from "@/shared/constants/modals";
+import { useIsPreview } from "@/shared/hooks/searchParams/useIsPreview";
 import { useFormDraftFields } from "@/shared/models/field/read";
-import { useDisclosure } from "@mantine/hooks";
 import { IconEye } from "@tabler/icons-react";
-import { setSearchParams } from "~/utils/searchParams";
+import { navigateWithSearch } from "~/utils/searchParams";
 import { PreviewModal } from "./PreviewModal/PreviewModal";
 
 export const PreviewButton = () => {
 	const fields = useFormDraftFields();
-
-	const [isModalOpen, modalActions] = useDisclosure(false);
+	const isModalOpen = useIsPreview();
 
 	const handleModalOpen = () => {
-		modalActions.open();
-		setSearchParams({ [SearchParams.PREVIEW]: "true" });
+		navigateWithSearch({ [SearchParams.MODAL]: ModalIds.PREVIEW });
 	};
 
 	const handleModalClose = () => {
-		modalActions.close();
-		setSearchParams({ [SearchParams.PREVIEW]: null });
+		navigateWithSearch({ [SearchParams.MODAL]: null });
 	};
 
 	return (

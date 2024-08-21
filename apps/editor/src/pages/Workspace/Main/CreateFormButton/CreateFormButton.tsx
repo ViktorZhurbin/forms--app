@@ -1,9 +1,11 @@
+import { SearchParams } from "@/shared/constants/location";
+import { ModalIds } from "@/shared/constants/modals";
 import { useWorkspaceNanoId } from "@/shared/hooks/useWorkspaceNanoId";
 import { createForm } from "@/shared/models/form/write/write";
 import { Button } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
-import { navigate } from "wouter/use-browser-location";
 import { RouteUtils } from "~/utils/routes";
+import { navigateWithSearch } from "~/utils/searchParams";
 
 export const CreateFormButton = () => {
 	const wsNanoId = useWorkspaceNanoId();
@@ -12,7 +14,7 @@ export const CreateFormButton = () => {
 		const formNanoId = await createForm({ wsNanoId });
 		const formPath = RouteUtils.getFormPath({ formNanoId });
 
-		navigate(formPath);
+		navigateWithSearch({ [SearchParams.MODAL]: ModalIds.ADD_FIELD }, formPath);
 	};
 
 	return (

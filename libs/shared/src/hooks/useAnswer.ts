@@ -8,7 +8,7 @@ import {
 	updateResponse,
 } from "~/models/response/write";
 import { getNowISOString } from "~/utils/date";
-import { useIsPreview } from "./useIsPreview";
+import { useIsPreview } from "./searchParams/useIsPreview";
 
 const initialPreviewResponse: TResponse = {
 	id: "test",

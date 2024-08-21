@@ -1,7 +1,7 @@
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import clsx from "clsx";
-import { type FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
+import { type FieldTypes, isNonQuestionField } from "~/constants/field";
 import styles from "./FieldBase.module.css";
 
 interface FieldBaseProps {
@@ -26,13 +26,13 @@ export const FieldBase = ({
 	classNames,
 	buttonSubmit,
 }: FieldBaseProps) => {
-	const isWelcomeOrEnding = isWelcomeOrEndingField(fieldType);
-	const order = isWelcomeOrEnding ? null : orderProp;
+	const isNonQuestion = isNonQuestionField(fieldType);
+	const order = isNonQuestion ? null : orderProp;
 
 	return (
 		<div
 			className={clsx(styles.root, classNames?.root, {
-				[styles.centered]: isWelcomeOrEnding,
+				[styles.centered]: isNonQuestion,
 			})}
 		>
 			<div className={styles.wrapper}>

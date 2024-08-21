@@ -5,6 +5,7 @@ import {
 	IconCheckbox,
 	IconCircleDot,
 	IconHeartHandshake,
+	IconQuote,
 } from "@tabler/icons-react";
 import { FieldTypes } from "./field";
 
@@ -34,6 +35,11 @@ const FieldTypesMap = {
 		Icon: IconBalloon,
 		type: FieldTypes.Welcome,
 	},
+	[FieldTypes.Statement]: {
+		name: "Statement",
+		Icon: IconQuote,
+		type: FieldTypes.Statement,
+	},
 	[FieldTypes.Ending]: {
 		name: "Ending",
 		Icon: IconHeartHandshake,
@@ -52,10 +58,10 @@ const FieldGroupsInfo = {
 		bgColor: "var(--mantine-color-blue-2)",
 		types: [FieldTypes.ShortText],
 	},
-	Info: {
+	Other: {
 		name: "Other",
 		bgColor: "var(--mantine-color-gray-2)",
-		types: [FieldTypes.Welcome],
+		types: [FieldTypes.Statement],
 	},
 };
 
@@ -70,8 +76,9 @@ const getGroupInfoByFieldType = (type: FieldTypes) => {
 			return FieldGroupsInfo.Text;
 
 		case FieldTypes.Welcome:
+		case FieldTypes.Statement:
 		case FieldTypes.Ending:
-			return FieldGroupsInfo.Info;
+			return FieldGroupsInfo.Other;
 	}
 };
 

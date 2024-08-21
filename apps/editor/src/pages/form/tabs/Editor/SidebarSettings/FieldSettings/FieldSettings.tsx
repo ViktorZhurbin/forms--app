@@ -21,6 +21,7 @@ export const FieldSettings = () => {
 		}
 
 		case FieldTypes.Welcome:
+		case FieldTypes.Statement:
 			return null;
 
 		case FieldTypes.Ending:

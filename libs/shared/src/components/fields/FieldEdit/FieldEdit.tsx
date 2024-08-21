@@ -100,6 +100,7 @@ function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
 			);
 
 		case FieldTypes.Welcome:
+		case FieldTypes.Statement:
 		case FieldTypes.Ending:
 			return null;
 

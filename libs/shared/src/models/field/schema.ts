@@ -32,6 +32,14 @@ interface TFieldText extends TFieldBase {
 	settings: TSharedQuestonSettings;
 }
 
+interface TFieldStatement extends TFieldBase {
+	type: FieldTypes.Statement;
+	settings: {
+		showResponseCount: boolean;
+	};
+}
+
+/** @deprecated May be restored later */
 interface TFieldWelcome extends TFieldBase {
 	type: FieldTypes.Welcome;
 	settings: {
@@ -46,6 +54,11 @@ interface TFieldEnding extends TFieldBase {
 	};
 }
 
-type TField = TFieldChoice | TFieldText | TFieldWelcome | TFieldEnding;
+type TField =
+	| TFieldChoice
+	| TFieldText
+	| TFieldWelcome
+	| TFieldStatement
+	| TFieldEnding;
 
 export type { TField, TFieldChoice, TFieldText, TFieldEnding };

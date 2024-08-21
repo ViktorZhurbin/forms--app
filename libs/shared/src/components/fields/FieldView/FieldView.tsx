@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { IconAlertTriangle } from "@tabler/icons-react";
 import { useCallback, useEffect, useRef } from "react";
 import { useSlideItem } from "~/components/slider/context/SlideItemContext";
-import { FieldTypes, isWelcomeOrEndingField } from "~/constants/field";
+import { FieldTypes, isNonQuestionField } from "~/constants/field";
 import { Media } from "~/constants/mediaQueries";
 import type { TField } from "~/models/field/schema";
 import type {
@@ -51,7 +51,7 @@ export const FieldView = ({
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
-		if (isWelcomeOrEndingField(field.type)) {
+		if (isNonQuestionField(field.type)) {
 			buttonRef.current?.focus();
 		}
 	}, [field.type]);
@@ -149,6 +149,7 @@ function FieldComponent(
 		}
 
 		case FieldTypes.Welcome:
+		case FieldTypes.Statement:
 		case FieldTypes.Ending:
 			return null;
 

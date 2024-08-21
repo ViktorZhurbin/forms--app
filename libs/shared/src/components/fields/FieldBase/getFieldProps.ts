@@ -20,8 +20,9 @@ export const getFieldProps = (params: {
 
 	switch (field.type) {
 		case FieldTypes.Welcome:
-			title.placeholder = "Say hi...";
-			button.text ||= "Start";
+		case FieldTypes.Statement:
+			title.placeholder = "Your question here...";
+			button.text ||= "Continue";
 			break;
 
 		case FieldTypes.Ending:

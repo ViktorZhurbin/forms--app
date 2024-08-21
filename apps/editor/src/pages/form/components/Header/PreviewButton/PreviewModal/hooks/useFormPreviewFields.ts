@@ -15,11 +15,12 @@ export const useFormPreviewFields = () => {
 	});
 
 	const form = data?.forms?.[0];
-	const { fieldsAndEndings } = getFieldsAndEndings(form?.draftFields);
+	const { fields, endings } = getFieldsAndEndings(form?.draftFields);
 
 	return {
 		isLoading,
 		error,
-		fieldsAndEndings,
+		fields,
+		endings,
 	};
 };

@@ -42,10 +42,10 @@ interface TFieldWelcome extends TFieldBase {
 interface TFieldEnding extends TFieldBase {
 	type: FieldTypes.Ending;
 	settings: {
-		showButton: boolean;
+		buttonUrl: string;
 	};
 }
 
 type TField = TFieldChoice | TFieldText | TFieldWelcome | TFieldEnding;
 
-export type { TField, TFieldChoice, TFieldText };
+export type { TField, TFieldChoice, TFieldText, TFieldEnding };

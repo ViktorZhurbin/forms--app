@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { FieldTypes } from "~/constants/field";
 import type { TField } from "~/models/field/schema";
 import { updateField } from "~/models/field/write";
@@ -38,6 +39,7 @@ export const FieldEdit = ({ order, field, isLastQuestion }: FieldEditProps) => {
 	};
 
 	const { button, title } = getFieldProps({ field, isLastQuestion });
+	const isButtonEditable = field.type !== FieldTypes.Ending;
 
 	return (
 		<FieldBase
@@ -54,7 +56,8 @@ export const FieldEdit = ({ order, field, isLastQuestion }: FieldEditProps) => {
 			}
 			description={
 				<EditableTextarea
-					size="lg"
+					dimmed
+					className={styles.description}
 					initialValue={field.description}
 					placeholder="Description (optional)"
 					onEdit={onEditDescription}
@@ -63,11 +66,14 @@ export const FieldEdit = ({ order, field, isLastQuestion }: FieldEditProps) => {
 			field={getFieldComponent({ field })}
 			buttonSubmit={
 				<EditableButton
-					isEditable
-					onEdit={onEditButtonText}
 					value={button.text}
+					onEdit={onEditButtonText}
+					isEditable={isButtonEditable}
 					classNames={{
-						button: button.className,
+						button: clsx(
+							button.className,
+							!isButtonEditable && styles.nonEditableButton,
+						),
 					}}
 				/>
 			}

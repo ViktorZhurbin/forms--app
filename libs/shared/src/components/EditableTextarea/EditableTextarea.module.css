@@ -24,3 +24,7 @@
 	line-height: var(--mantine-h1-line-height);
 	font-weight: var(--mantine-h1-font-weight);
 }
+
+.dimmed {
+	color: var(--mantine-color-dimmed);
+}

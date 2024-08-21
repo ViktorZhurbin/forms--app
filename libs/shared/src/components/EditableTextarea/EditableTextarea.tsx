@@ -8,6 +8,8 @@ type EditableTextareaProps = {
 	tooltip?: string;
 	placeholder?: string;
 	variant?: "h1";
+	className?: string;
+	dimmed?: boolean;
 	size?: MantineSize;
 	readOnly?: boolean;
 	onFocus?: () => void;
@@ -19,9 +21,11 @@ export const EditableTextarea = ({
 	readOnly = false,
 	initialValue = "",
 	size,
+	dimmed,
 	tooltip,
 	onFocus,
 	onEdit,
+	className,
 	placeholder,
 }: EditableTextareaProps) => {
 	const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -44,8 +48,10 @@ export const EditableTextarea = ({
 				defaultValue={initialValue}
 				placeholder={placeholder}
 				classNames={{
+					root: className,
 					input: clsx(styles.input, {
 						[styles.h1]: variant === "h1",
+						[styles.dimmed]: dimmed,
 						[styles.readOnly]: readOnly,
 					}),
 				}}

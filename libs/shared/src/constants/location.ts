@@ -1,4 +1,4 @@
-const WEB_SITE_URL = "https://forms-website.pages.dev/";
+const WEB_SITE_URL = "https://forms-website.pages.dev";
 
 const SearchParams = {
 	BLOCK_ID: "blockId",

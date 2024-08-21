@@ -1,5 +1,5 @@
 import { FieldTypes } from "~/constants/field";
-import type { TField } from "~/models/field/schema";
+import type { TField, TFieldEnding } from "~/models/field/schema";
 
 const getOrderedFields = (fields: TField[] = []) => {
 	return fields?.toSorted((a, b) => a.index - b.index);
@@ -8,7 +8,7 @@ const getOrderedFields = (fields: TField[] = []) => {
 const getFieldsAndEndings = (allFields: TField[] = []) => {
 	const { fields, endings } = getOrderedFields(allFields).reduce<{
 		fields: TField[];
-		endings: TField[];
+		endings: TFieldEnding[];
 	}>(
 		(acc, field) => {
 			if (field.type === FieldTypes.Ending) {

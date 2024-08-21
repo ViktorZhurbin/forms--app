@@ -15,11 +15,12 @@ export const useFormPageFields = () => {
 	});
 
 	const form = data?.forms?.[0];
-	const { fieldsAndEndings } = getFieldsAndEndings(form?.fields);
+	const { fields, endings } = getFieldsAndEndings(form?.fields);
 
 	return {
 		isLoading,
 		error,
-		fieldsAndEndings,
+		fields,
+		endings,
 	};
 };

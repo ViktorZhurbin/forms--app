@@ -5,7 +5,7 @@ import styles from "./PreviewModal.module.css";
 import { useFormPreviewFields } from "./hooks/useFormPreviewFields";
 
 export const PreviewModal = ({ opened, onClose }: ModalProps) => {
-	const { fieldsAndEndings } = useFormPreviewFields();
+	const { fields, endings } = useFormPreviewFields();
 
 	const exitButton = (
 		<Button color="dark.5" leftSection={<IconX />} onClick={onClose}>
@@ -26,7 +26,7 @@ export const PreviewModal = ({ opened, onClose }: ModalProps) => {
 				content: styles.modalContent,
 			}}
 		>
-			<FormView fields={fieldsAndEndings} exitButton={exitButton} />
+			<FormView fields={fields} endings={endings} exitButton={exitButton} />
 		</Modal>
 	);
 };

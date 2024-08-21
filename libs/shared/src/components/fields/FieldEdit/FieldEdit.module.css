@@ -1,3 +1,11 @@
 .order {
 	transform: translate(-110%, 52%);
 }
+
+.description {
+	width: 100%;
+}
+
+.nonEditableButton {
+	cursor: default;
+}

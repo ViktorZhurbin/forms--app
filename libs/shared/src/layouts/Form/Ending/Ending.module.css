@@ -1,0 +1,46 @@
+.root {
+	position: relative;
+	height: 100dvh;
+
+	padding: 0 40px;
+	margin: 0 auto;
+	max-width: 720px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--mantine-spacing-lg);
+
+	@mixin smaller-than 320px {
+		padding-inline: 20px;
+	}
+}
+
+.topIcon {
+	--size: 3rem;
+	--icon-size: calc(var(--size) / 2);
+
+	background-color: var(--mantine-primary-color-0);
+	color: var(--mantine-primary-color-7);
+	width: var(--size);
+	height: var(--size);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+
+	svg {
+		width: var(--icon-size);
+		height: var(--icon-size);
+	}
+}
+
+.hgroup {
+	text-align: center;
+}
+
+.notification {
+	position: fixed;
+	bottom: var(--spacing-y);
+}

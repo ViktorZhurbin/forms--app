@@ -2,18 +2,24 @@ import { type KeyboardEventHandler, useState } from "react";
 import { DarkModeToggle } from "~/components/DarkModeToggle/DarkModeToggle";
 import { Slider } from "~/components/slider/Slider/Slider";
 import { useIsPreview } from "~/hooks/useIsPreview";
-import type { TField } from "~/models/field/schema";
+import type { TField, TFieldEnding } from "~/models/field/schema";
 import type { TResponse } from "~/models/response/schema";
 import styles from "./FormView.module.css";
 import { FormViewContent } from "./FormViewContent";
 
 type FormViewProps = {
 	fields: TField[];
+	endings: TFieldEnding[];
 	response?: TResponse;
 	exitButton?: React.ReactElement;
 };
 
-export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
+export const FormView = ({
+	fields,
+	endings,
+	response,
+	exitButton,
+}: FormViewProps) => {
 	const isPreview = useIsPreview();
 	const [themeTabIndex, setThemeTabIndex] = useState(-1);
 
@@ -34,7 +40,11 @@ export const FormView = ({ fields, response, exitButton }: FormViewProps) => {
 			</div>
 
 			<Slider>
-				<FormViewContent fields={fields} response={response} />
+				<FormViewContent
+					fields={fields}
+					endings={endings}
+					response={response}
+				/>
 			</Slider>
 		</div>
 	);

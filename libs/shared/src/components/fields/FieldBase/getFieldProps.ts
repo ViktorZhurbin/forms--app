@@ -8,33 +8,34 @@ export const getFieldProps = (params: {
 }) => {
 	const { field, isLastQuestion } = params;
 
-	let titlePlaceholder = "";
-	let buttonTextFallback = "";
+	const title = {
+		text: field?.title,
+		placeholder: "",
+	};
+
+	const button = {
+		text: isLastQuestion ? "Submit" : field?.buttonText,
+		className: styles.submitButton,
+	};
 
 	switch (field.type) {
 		case FieldTypes.Welcome:
-			titlePlaceholder = "Say hi...";
-			buttonTextFallback = "Start";
+			title.placeholder = "Say hi...";
+			button.text ||= "Start";
 			break;
 
 		case FieldTypes.Ending:
-			titlePlaceholder = "Say bye...";
-			buttonTextFallback = "Create a form";
+			title.placeholder = "Say bye...";
+			button.text ||= "Make your own form";
 			break;
 
 		default:
-			titlePlaceholder = "Your question here...";
-			buttonTextFallback = isLastQuestion ? "Submit" : "OK";
+			title.placeholder = "Your question here...";
+			button.text ||= "OK";
 	}
 
 	return {
-		title: {
-			text: field?.title,
-			placeholder: titlePlaceholder,
-		},
-		button: {
-			text: field?.buttonText || buttonTextFallback,
-			className: styles.submitButton,
-		},
+		title,
+		button,
 	};
 };

@@ -52,21 +52,23 @@ export const NavbarField = ({
 				</Text>
 			</div>
 
-			{withActions && (
-				<div className={styles.actions}>
-					<DragHandle isDragged={isDragged} />
-					<CloseButton
-						size="sm"
-						component="div"
-						onClick={async (event) => {
-							event.preventDefault();
-							event.stopPropagation();
+			<div
+				className={clsx(styles.actions, {
+					[styles.actionsHidden]: !withActions,
+				})}
+			>
+				<DragHandle isDragged={isDragged} />
+				<CloseButton
+					size="sm"
+					component="div"
+					onClick={async (event) => {
+						event.preventDefault();
+						event.stopPropagation();
 
-							onDelete?.();
-						}}
-					/>
-				</div>
-			)}
+						onDelete?.();
+					}}
+				/>
+			</div>
 		</Button>
 	);
 };

@@ -58,6 +58,10 @@
 	gap: 2px;
 	/* margin-right: -4px; */
 
+	&.actionsHidden {
+		display: none;
+	}
+
 	> * {
 		&:hover {
 			color: var(--mantine-color-text);

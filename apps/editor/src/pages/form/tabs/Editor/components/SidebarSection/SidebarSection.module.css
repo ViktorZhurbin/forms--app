@@ -16,3 +16,9 @@
 .content {
 	padding-inline: var(--spacing);
 }
+
+@media (max-width: 840px) {
+	.content {
+		padding-inline: calc(var(--spacing) / 2) 0;
+	}
+}

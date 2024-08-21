@@ -4,6 +4,8 @@
 	display: flex;
 	border: unset;
 
+	container-type: size;
+
 	&[data-active="true"] {
 		--border-left-width: 2px;
 
@@ -36,6 +38,12 @@
 	flex-wrap: nowrap;
 
 	overflow: hidden;
+}
+
+@container (max-width: 80px) {
+	.buttonLabel {
+		gap: 0;
+	}
 }
 
 .labelTitle {

@@ -1,3 +1,6 @@
 .title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+
 	padding-inline: var(--sidebar-padding-x);
 }

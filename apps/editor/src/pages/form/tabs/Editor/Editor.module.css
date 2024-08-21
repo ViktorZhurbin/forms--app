@@ -1,9 +1,16 @@
 .root {
-	--sidebar-width: minmax(min(100px, 240px), 1fr);
+	--sidebar-max-width: 240px;
+
+	--sidebar-left-width: minmax(min(115px, var(--sidebar-max-width)), 1fr);
+	--sidebar-right-width: minmax(min(170px, var(--sidebar-max-width)), 1fr);
 
 	display: grid;
-	grid-template-columns: var(--sidebar-width) 2fr var(--sidebar-width);
 	grid-template-areas: "left main right";
+	grid-template-columns: var(--sidebar-left-width) 4fr var(
+			--sidebar-right-width
+		);
+
+	overflow-x: auto;
 }
 
 .sidebar,

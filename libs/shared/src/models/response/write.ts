@@ -5,14 +5,14 @@ import type { TForm } from "../form/schema/form";
 import type { TAnswer, TResponse } from "./schema";
 
 const createResponse = async (params: {
-	answer: TAnswer;
+	answer?: TAnswer;
 	formNanoId: TForm["nanoId"];
 }) => {
 	const { answer, formNanoId } = params;
-	const fieldId = answer.field.id;
+	const fieldId = answer?.field.id;
 
 	const response: Omit<TResponse, "id"> = {
-		answers: { [fieldId]: answer },
+		answers: fieldId ? { [fieldId]: answer } : {},
 		updatedAt: getNowISOString(),
 	};
 

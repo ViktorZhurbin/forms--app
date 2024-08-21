@@ -22,7 +22,7 @@ export const useAnswer = () => {
 	const [previewResponse, setPreviewResponse] = useState<TResponse>(
 		initialPreviewResponse,
 	);
-	const [responseId, setLocalResponseId] = useLocalFormResponseId();
+	const [localResponseId, setLocalResponseId] = useLocalFormResponseId();
 
 	const createOrUpdateAnswer = useCallback(
 		async (answer: TAnswer) => {
@@ -37,7 +37,7 @@ export const useAnswer = () => {
 				return;
 			}
 
-			if (!responseId) {
+			if (!localResponseId) {
 				const responseId = await createResponse({
 					answer,
 					formNanoId,
@@ -47,9 +47,9 @@ export const useAnswer = () => {
 				return;
 			}
 
-			await updateAnswer({ responseId, answer });
+			await updateAnswer({ responseId: localResponseId, answer });
 		},
-		[responseId, formNanoId, setLocalResponseId, isPreview],
+		[localResponseId, formNanoId, setLocalResponseId, isPreview],
 	);
 
 	const submitAnswer = useCallback(async () => {
@@ -64,11 +64,20 @@ export const useAnswer = () => {
 			return;
 		}
 
+		let responseId = localResponseId;
+		if (!responseId) {
+			responseId = await createResponse({
+				formNanoId,
+			});
+
+			setLocalResponseId(responseId);
+		}
+
 		await updateResponse({
 			responseId,
 			payload: { submittedAt },
 		});
-	}, [responseId, isPreview]);
+	}, [localResponseId, isPreview, formNanoId, setLocalResponseId]);
 
 	return { createOrUpdateAnswer, submitAnswer, previewResponse };
 };

@@ -14,6 +14,7 @@ export const FormNavButtons = (props: {
 	buttonText: string;
 	className?: string;
 	onGoBack: () => void;
+	onGoNext: () => void;
 	onSubmit: () => void;
 }) => {
 	const { isBeginning, isEnd } = useSlider();
@@ -23,7 +24,7 @@ export const FormNavButtons = (props: {
 	if (isSmallScreen) {
 		return (
 			<div className={clsx(styles.rootSmall, props.className)}>
-				{isBeginning ? null : (
+				{isBeginning || isEnd ? null : (
 					<ActionIcon
 						className={styles.previous}
 						disabled={isBeginning}
@@ -33,7 +34,11 @@ export const FormNavButtons = (props: {
 					</ActionIcon>
 				)}
 
-				<Button fullWidth className={styles.next} onClick={props.onSubmit}>
+				<Button
+					fullWidth
+					className={styles.next}
+					onClick={isEnd ? props.onSubmit : props.onGoNext}
+				>
 					{props.buttonText}
 				</Button>
 			</div>

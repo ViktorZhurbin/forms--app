@@ -94,13 +94,17 @@ export const FormViewContent = (props: {
 			await createOrUpdateAnswer(answer);
 			setShowRequiredError(false);
 
-			if (isSingleChoiceFieldType(answer.field.type) && answer.value.length) {
+			if (
+				!isEnd &&
+				isSingleChoiceFieldType(answer.field.type) &&
+				answer.value.length
+			) {
 				setTimeout(() => {
 					handleGoNext({ checkIsAnswerRequired: false });
 				}, 700);
 			}
 		},
-		[createOrUpdateAnswer, handleGoNext],
+		[createOrUpdateAnswer, handleGoNext, isEnd],
 	);
 
 	const gestureEvents = useGestures({
@@ -141,7 +145,8 @@ export const FormViewContent = (props: {
 				className={styles.navButtons}
 				buttonText={activeFieldButtonText}
 				onGoBack={handleGoBack}
-				onSubmit={handleGoNext}
+				onGoNext={handleGoNext}
+				onSubmit={handleSubmit}
 			/>
 		</div>
 	);

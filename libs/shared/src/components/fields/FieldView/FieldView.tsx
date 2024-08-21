@@ -1,6 +1,7 @@
 import { Alert, Button, Text, Title } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconAlertTriangle } from "@tabler/icons-react";
+import clsx from "clsx";
 import { useCallback, useEffect, useRef } from "react";
 import { useSlideItem } from "~/components/slider/context/SlideItemContext";
 import { FieldTypes } from "~/constants/field";
@@ -11,7 +12,10 @@ import type {
 	TAnswerChoice,
 	TAnswerText,
 } from "~/models/response/schema";
-import { isNonQuestionFieldType } from "~/utils/fieldPredicates";
+import {
+	isFieldRequired,
+	isNonQuestionFieldType,
+} from "~/utils/fieldPredicates";
 import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -73,12 +77,23 @@ export const FieldView = ({
 		</Button>
 	);
 
+	const isRequired = isFieldRequired(field);
+
 	return (
 		<FieldBase
 			order={order}
 			field={field}
 			classNames={{ root: className, order: styles.order }}
-			title={<Title order={1}>{title.text || "..."}</Title>}
+			title={
+				<Title
+					order={1}
+					className={clsx(styles.title, {
+						[styles.isRequired]: isRequired,
+					})}
+				>
+					{title.text || "..."}
+				</Title>
+			}
 			description={
 				field?.description && <Text size="xl">{field?.description}</Text>
 			}

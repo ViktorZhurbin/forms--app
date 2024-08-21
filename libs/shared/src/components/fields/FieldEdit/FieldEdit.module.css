@@ -2,6 +2,16 @@
 	transform: translate(-110%, 52%);
 }
 
+.isRequired {
+	&::after {
+		content: "*";
+		position: absolute;
+		right: 0;
+		top: 0;
+		font-size: var(--mantine-h1-font-size);
+	}
+}
+
 .description {
 	width: 100%;
 }

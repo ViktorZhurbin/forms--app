@@ -2,6 +2,12 @@
 	transform: translate(-130%, 30%);
 }
 
+.title {
+	&.isRequired::after {
+		content: "*";
+	}
+}
+
 .alertRoot {
 	padding-block: 6px;
 }

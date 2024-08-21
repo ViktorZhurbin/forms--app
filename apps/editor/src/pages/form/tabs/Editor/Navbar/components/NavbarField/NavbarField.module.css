@@ -1,4 +1,6 @@
 .button {
+	--border-left-width: 2px;
+
 	padding-inline: var(--sidebar-padding-x) calc(var(--sidebar-padding-x) * 0.75);
 	position: relative;
 	display: flex;
@@ -6,12 +8,23 @@
 
 	container-type: size;
 
-	&[data-active="true"] {
-		--border-left-width: 2px;
+	&.isRequired::after {
+		content: "*";
+		position: absolute;
+		top: 0;
+		left: calc(var(--border-left-width) * 2);
+		font-size: var(--mantine-font-size-xl);
+		color: var(--mantine-color-default-color);
+	}
 
+	&[data-active="true"] {
 		border-left: var(--border-left-width) solid
 			var(--mantine-primary-color-filled);
 		padding-left: calc(var(--sidebar-padding-x) - var(--border-left-width));
+
+		&.isRequired::after {
+			left: var(--border-left-width);
+		}
 	}
 
 	&.isDragged {

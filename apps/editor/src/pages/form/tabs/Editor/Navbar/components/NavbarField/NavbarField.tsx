@@ -1,5 +1,6 @@
 import { DragHandle } from "@/shared/components/DragHandle/DragHandle";
 import type { TField } from "@/shared/models/field/schema";
+import { isFieldRequired } from "@/shared/utils/fieldPredicates";
 import { Button, CloseButton, Text } from "@mantine/core";
 import clsx from "clsx";
 import type { IItemProps } from "react-movable";
@@ -27,6 +28,7 @@ export const NavbarField = ({
 	onDelete,
 }: NavbarFieldProps) => {
 	const { nanoId, type, title } = field;
+	const isRequired = isFieldRequired(field);
 
 	return (
 		<Button
@@ -36,7 +38,10 @@ export const NavbarField = ({
 			justify="start"
 			size="md"
 			classNames={{
-				root: clsx(styles.button, isDragged && styles.isDragged),
+				root: clsx(styles.button, {
+					[styles.isDragged]: isDragged,
+					[styles.isRequired]: isRequired,
+				}),
 				inner: styles.buttonInner,
 				label: styles.buttonLabel,
 			}}

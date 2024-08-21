@@ -1,6 +1,7 @@
 import { useCurrentFormQuery } from "@/shared/models/form/read";
 import clsx from "clsx";
 import { NotFound } from "~/pages/NotFound/NotFound";
+import { AddBlockModal } from "../components/AddBlockModal/AddBlockModal";
 import styles from "./Editor.module.css";
 import { Main } from "./Main/Main";
 import { Navbar } from "./Navbar/Navbar";
@@ -30,6 +31,8 @@ export const Editor = () => {
 			<div className={clsx(sidebarClass, styles.right)}>
 				<SidebarSettings />
 			</div>
+
+			<AddBlockModal />
 		</div>
 	);
 };

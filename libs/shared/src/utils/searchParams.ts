@@ -1,10 +1,10 @@
 import { navigate } from "wouter/use-browser-location";
 
 const navigateWithSearch = (
-	params: Record<string, string | number | null>,
-	urlParam = window.location.href,
+	params: Record<string, string | number | boolean | null>,
+	path = "",
 ) => {
-	const url = new URL(urlParam);
+	const url = new URL(path, window.location.href);
 
 	for (const [key, value] of Object.entries(params)) {
 		if (value === null) {

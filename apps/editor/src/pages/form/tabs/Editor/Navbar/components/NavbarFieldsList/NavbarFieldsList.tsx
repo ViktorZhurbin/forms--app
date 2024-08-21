@@ -6,8 +6,11 @@ import { navigateToFieldId } from "~/pages/form/utils/navigateToFieldId";
 import { NavbarField } from "../NavbarField/NavbarField";
 import styles from "./NavbarFieldsList.module.css";
 
-export const NavbarFieldsList = (props: { fields: TField[] }) => {
-	const { fields } = props;
+export const NavbarFieldsList = (props: {
+	fields: TField[];
+	withActions?: boolean;
+}) => {
+	const { fields, withActions } = props;
 
 	const firstField = fields[0];
 	const selectedNanoId = useSelectedBlockId(firstField?.nanoId);
@@ -63,6 +66,7 @@ export const NavbarFieldsList = (props: { fields: TField[] }) => {
 						field={field}
 						isDragged={isDragged || isSelected}
 						order={index + 1}
+						withActions={withActions}
 						onDelete={handleDelete}
 						isSelected={isSelectedField}
 					/>

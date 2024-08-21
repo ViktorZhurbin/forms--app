@@ -10,6 +10,7 @@ import styles from "./NavbarField.module.css";
 interface NavbarFieldProps {
 	order?: number;
 	field: TField;
+	withActions?: boolean;
 	dragProps: IItemProps;
 	isSelected?: boolean;
 	isDragged?: boolean;
@@ -20,6 +21,7 @@ export const NavbarField = ({
 	dragProps,
 	field,
 	order,
+	withActions = true,
 	isDragged,
 	isSelected,
 	onDelete,
@@ -50,19 +52,21 @@ export const NavbarField = ({
 				</Text>
 			</div>
 
-			<div className={styles.actions}>
-				<DragHandle isDragged={isDragged} />
-				<CloseButton
-					size="sm"
-					component="div"
-					onClick={async (event) => {
-						event.preventDefault();
-						event.stopPropagation();
+			{withActions && (
+				<div className={styles.actions}>
+					<DragHandle isDragged={isDragged} />
+					<CloseButton
+						size="sm"
+						component="div"
+						onClick={async (event) => {
+							event.preventDefault();
+							event.stopPropagation();
 
-						onDelete?.();
-					}}
-				/>
-			</div>
+							onDelete?.();
+						}}
+					/>
+				</div>
+			)}
 		</Button>
 	);
 };

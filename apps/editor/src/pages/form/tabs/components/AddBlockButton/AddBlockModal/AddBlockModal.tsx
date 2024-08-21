@@ -8,7 +8,13 @@ export const AddBlockModal = (
 	const { opened, onClose, onAddBlock } = props;
 
 	return (
-		<Modal title="Select block" opened={opened} onClose={onClose}>
+		<Modal
+			size="auto"
+			padding="lg"
+			title="Select block"
+			opened={opened}
+			onClose={onClose}
+		>
 			<AddBlockModalContent onAddBlock={onAddBlock} />
 		</Modal>
 	);

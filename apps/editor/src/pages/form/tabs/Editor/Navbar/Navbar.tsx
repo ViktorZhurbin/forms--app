@@ -28,7 +28,7 @@ export const Navbar = () => {
 			<div className={styles.spacer} />
 
 			<SidebarSection title="Endings" /* button={<AddEndingButton />} */>
-				<NavbarFieldsList fields={endings} withActions={false} />
+				<NavbarFieldsList fields={endings} isEnding />
 			</SidebarSection>
 		</div>
 	);

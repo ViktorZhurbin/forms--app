@@ -8,9 +8,9 @@ import styles from "./NavbarFieldsList.module.css";
 
 export const NavbarFieldsList = (props: {
 	fields: TField[];
-	withActions?: boolean;
+	isEnding?: boolean;
 }) => {
-	const { fields, withActions } = props;
+	const { fields, isEnding } = props;
 
 	const firstField = fields[0];
 	const selectedNanoId = useSelectedBlockId(firstField?.nanoId);
@@ -65,8 +65,8 @@ export const NavbarFieldsList = (props: {
 						dragProps={props}
 						field={field}
 						isDragged={isDragged || isSelected}
-						order={index + 1}
-						withActions={withActions}
+						order={isEnding ? undefined : index + 1}
+						withActions={!isEnding}
 						onDelete={handleDelete}
 						isSelected={isSelectedField}
 					/>

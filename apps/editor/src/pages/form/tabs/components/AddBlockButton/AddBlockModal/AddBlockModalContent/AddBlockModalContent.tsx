@@ -22,7 +22,7 @@ export const AddBlockModalContent = ({
 			{groupsInfoValues.map(({ name, types }) => {
 				return (
 					<div key={name} className={styles.group}>
-						<Title order={6} className={styles.groupTitle}>
+						<Title order={6} fw={500} className={styles.groupTitle}>
 							{name}
 						</Title>
 						<div className={styles.typesList}>

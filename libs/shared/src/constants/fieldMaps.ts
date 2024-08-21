@@ -53,9 +53,9 @@ const FieldGroupsInfo = {
 		types: [FieldTypes.ShortText],
 	},
 	Info: {
-		name: "Info",
+		name: "Other",
 		bgColor: "var(--mantine-color-gray-2)",
-		types: [FieldTypes.Welcome, FieldTypes.Ending],
+		types: [FieldTypes.Welcome],
 	},
 };
 

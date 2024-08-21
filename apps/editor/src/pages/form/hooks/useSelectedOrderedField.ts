@@ -1,11 +1,11 @@
-import { isQuestionField } from "@/shared/constants/field";
 import { useSelectedBlockId } from "@/shared/hooks/searchParams/useSelectedBlockId";
 import { useOrderedFormDraftFields } from "@/shared/models/field/read";
+import { isQuestionFieldType } from "@/shared/utils/fieldPredicates";
 
 export const useSelectedOrderedField = () => {
 	const allFieldsOrdered = useOrderedFormDraftFields();
 	const questionFields = allFieldsOrdered?.filter((field) =>
-		isQuestionField(field.type),
+		isQuestionFieldType(field.type),
 	);
 
 	const selectedBlockId = useSelectedBlockId();
@@ -15,7 +15,7 @@ export const useSelectedOrderedField = () => {
 	);
 
 	const getOrder = () => {
-		if (!field || !isQuestionField(field.type)) return null;
+		if (!field || !isQuestionFieldType(field.type)) return null;
 
 		const questionIndex = questionFields.findIndex(
 			(field) => field.nanoId === selectedBlockId,

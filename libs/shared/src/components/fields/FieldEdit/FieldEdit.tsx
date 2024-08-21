@@ -44,7 +44,7 @@ export const FieldEdit = ({ order, field, isLastQuestion }: FieldEditProps) => {
 	return (
 		<FieldBase
 			order={order}
-			fieldType={field.type}
+			field={field}
 			classNames={{ order: styles.order }}
 			title={
 				<EditableTextarea
@@ -63,7 +63,7 @@ export const FieldEdit = ({ order, field, isLastQuestion }: FieldEditProps) => {
 					onEdit={onEditDescription}
 				/>
 			}
-			field={getFieldComponent({ field })}
+			fieldComponent={getFieldComponent({ field })}
 			buttonSubmit={
 				<EditableButton
 					value={button.text}

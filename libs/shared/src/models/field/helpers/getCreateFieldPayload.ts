@@ -16,6 +16,7 @@ const getCreateFieldPayload = ({
 		buttonText: "",
 		id: id(),
 		nanoId: makeSubId(),
+		settings: {},
 	};
 
 	let update = {};

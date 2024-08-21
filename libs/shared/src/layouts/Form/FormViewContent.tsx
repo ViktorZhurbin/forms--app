@@ -3,11 +3,11 @@ import { getFieldProps } from "~/components/fields/FieldBase/getFieldProps";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { SlideItem } from "~/components/slider/SlideItem/SlideItem";
 import { useSlider } from "~/components/slider/context/SliderContext";
-import { isSingleChoiceField } from "~/constants/field";
 import { useIsPreview } from "~/hooks/searchParams/useIsPreview";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField, TFieldEnding } from "~/models/field/schema";
 import type { TAnswer, TResponse } from "~/models/response/schema";
+import { isSingleChoiceFieldType } from "~/utils/fieldPredicates";
 import { Ending } from "./Ending/Ending";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
@@ -94,7 +94,7 @@ export const FormViewContent = (props: {
 			await createOrUpdateAnswer(answer);
 			setShowRequiredError(false);
 
-			if (isSingleChoiceField(answer.field.type) && answer.value.length) {
+			if (isSingleChoiceFieldType(answer.field.type) && answer.value.length) {
 				setTimeout(() => {
 					handleGoNext({ checkIsAnswerRequired: false });
 				}, 700);

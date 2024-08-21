@@ -1,16 +1,17 @@
 import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import clsx from "clsx";
-import { type FieldTypes, isNonQuestionField } from "~/constants/field";
+import type { TField } from "~/models/field/schema";
+import { isFieldRequired, isQestionField } from "~/utils/fieldPredicates";
 import styles from "./FieldBase.module.css";
 
 interface FieldBaseProps {
 	order: number | null;
 	title: React.ReactNode;
 	description?: React.ReactNode;
-	field: React.ReactNode;
+	fieldComponent: React.ReactNode;
 	buttonSubmit: React.ReactNode;
-	fieldType: FieldTypes;
+	field: TField;
 	classNames?: {
 		root?: string;
 		order?: string;
@@ -21,23 +22,29 @@ export const FieldBase = ({
 	order: orderProp,
 	title,
 	description,
+	fieldComponent,
 	field,
-	fieldType,
 	classNames,
 	buttonSubmit,
 }: FieldBaseProps) => {
-	const isNonQuestion = isNonQuestionField(fieldType);
-	const order = isNonQuestion ? null : orderProp;
+	const isQuestion = isQestionField(field);
+	const order = isQuestion ? orderProp : null;
+
+	const isRequired = isFieldRequired(field);
 
 	return (
 		<div
 			className={clsx(styles.root, classNames?.root, {
-				[styles.centered]: isNonQuestion,
+				[styles.centered]: !isQuestion,
 			})}
 		>
 			<div className={styles.wrapper}>
 				<div className={styles.headerGroup}>
-					<div className={styles.titleWrapper}>
+					<div
+						className={clsx(styles.titleWrapper, {
+							[styles.isRequired]: isRequired,
+						})}
+					>
 						{order && (
 							<div className={clsx(styles.order, classNames?.order)}>
 								<Text>{order}</Text> <IconArrowRight />
@@ -48,9 +55,9 @@ export const FieldBase = ({
 					{description}
 				</div>
 				<div className={styles.bottomWrapper}>
-					{field && (
+					{fieldComponent && (
 						<Stack gap={8} w="100%">
-							{field}
+							{fieldComponent}
 						</Stack>
 					)}
 

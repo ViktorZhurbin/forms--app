@@ -32,6 +32,8 @@ interface TFieldText extends TFieldBase {
 	settings: TSharedQuestonSettings;
 }
 
+type TFieldQuestion = TFieldChoice | TFieldText;
+
 interface TFieldStatement extends TFieldBase {
 	type: FieldTypes.Statement;
 	settings: {
@@ -61,4 +63,4 @@ type TField =
 	| TFieldStatement
 	| TFieldEnding;
 
-export type { TField, TFieldChoice, TFieldText, TFieldEnding };
+export type { TField, TFieldQuestion, TFieldChoice, TFieldText, TFieldEnding };

@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { IconAlertTriangle } from "@tabler/icons-react";
 import { useCallback, useEffect, useRef } from "react";
 import { useSlideItem } from "~/components/slider/context/SlideItemContext";
-import { FieldTypes, isNonQuestionField } from "~/constants/field";
+import { FieldTypes } from "~/constants/field";
 import { Media } from "~/constants/mediaQueries";
 import type { TField } from "~/models/field/schema";
 import type {
@@ -11,6 +11,7 @@ import type {
 	TAnswerChoice,
 	TAnswerText,
 } from "~/models/response/schema";
+import { isNonQuestionFieldType } from "~/utils/fieldPredicates";
 import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -51,7 +52,7 @@ export const FieldView = ({
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
-		if (isNonQuestionField(field.type)) {
+		if (isNonQuestionFieldType(field.type)) {
 			buttonRef.current?.focus();
 		}
 	}, [field.type]);
@@ -75,13 +76,13 @@ export const FieldView = ({
 	return (
 		<FieldBase
 			order={order}
-			fieldType={field.type}
+			field={field}
 			classNames={{ root: className, order: styles.order }}
-			title={<Title order={1}>{title.text}</Title>}
+			title={<Title order={1}>{title.text || "..."}</Title>}
 			description={
 				field?.description && <Text size="xl">{field?.description}</Text>
 			}
-			field={
+			fieldComponent={
 				<FieldComponent field={field} answer={answer} onAnswer={onAnswer} />
 			}
 			buttonSubmit={

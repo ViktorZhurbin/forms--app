@@ -10,7 +10,7 @@ export const Main = () => {
 
 	return (
 		<div className={styles.root}>
-			<AddBlockButton insertBefore tooltip="Add block above" />
+			<AddBlockButton insertBefore tooltip="Add content before" />
 			<div className={styles.fieldWrapper}>
 				<FieldEdit
 					key={field.id}
@@ -19,7 +19,7 @@ export const Main = () => {
 					isLastQuestion={isLastQuestion}
 				/>
 			</div>
-			<AddBlockButton tooltip="Add block below" />
+			<AddBlockButton tooltip="Add content after" />
 		</div>
 	);
 };

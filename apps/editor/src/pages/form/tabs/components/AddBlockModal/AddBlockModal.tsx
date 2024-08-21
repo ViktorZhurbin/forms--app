@@ -28,7 +28,7 @@ export const AddBlockModal = () => {
 		<Modal
 			size="auto"
 			padding="lg"
-			title="Select block"
+			title="Add content"
 			opened={isOpen}
 			onClose={modalActions.close}
 		>

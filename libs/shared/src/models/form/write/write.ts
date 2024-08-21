@@ -1,4 +1,7 @@
 import { id, lookup, tx } from "@instantdb/react";
+import { FieldTypes } from "~/constants/field";
+import { getCreateFieldPayload } from "~/models/field/helpers/getCreateFieldPayload";
+import { createField } from "~/models/field/write";
 import type { TWorkspace } from "~/models/workspace/schema/workspace";
 import { makeId } from "~/utils/makeId";
 import { db } from "../../db";
@@ -26,6 +29,17 @@ const createForm = async ({
 			tx.forms[formId].link({ workspaces: lookup("nanoId", wsNanoId) }),
 		);
 	}
+
+	const defaultEnding = getCreateFieldPayload({
+		index: 0,
+		type: FieldTypes.Ending,
+	});
+
+	createField({
+		formNanoId: nanoId,
+		newField: defaultEnding,
+		updateFieldIndecies: [],
+	});
 
 	return nanoId;
 };

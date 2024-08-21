@@ -1,15 +1,22 @@
 import { Button, Notification, Text, Title } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
+import { FieldTypes } from "~/constants/field";
 import { useIsPreview } from "~/hooks/searchParams/useIsPreview";
+import { getCreateFieldPayload } from "~/models/field/helpers/getCreateFieldPayload";
 import type { TFieldEnding } from "~/models/field/schema";
 import styles from "./Ending.module.css";
 
-export const Ending = (props: { ending: TFieldEnding }) => {
+const fallbackEnding = getCreateFieldPayload({
+	index: 0,
+	type: FieldTypes.Ending,
+}) as TFieldEnding;
+
+export const Ending = (props: { ending?: TFieldEnding }) => {
 	const isPreview = useIsPreview();
 
-	const {
-		ending: { title, description, buttonText, settings },
-	} = props;
+	const ending = props.ending ?? fallbackEnding;
+
+	const { title, description, buttonText, settings } = ending;
 
 	const buttonProps = isPreview
 		? {}

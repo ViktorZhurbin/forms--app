@@ -1,18 +1,24 @@
-import type { TField, TFieldChoice } from "../field/schema";
+import type { TField, TFieldChoice, TFieldText } from "../field/schema";
 
-type TAnswerBase = {
-	field: Pick<TField, "id" | "type" | "title">;
+type TAnswerBase<T extends TField = TField> = {
+	field: Pick<T, "id" | "type" | "title">;
 };
 
-interface TAnswerChoice extends TAnswerBase {
+interface TAnswerChoice<T extends TFieldChoice = TFieldChoice>
+	extends TAnswerBase<T> {
 	value: TFieldChoice["options"];
 }
 
-interface TAnswerText extends TAnswerBase {
+interface TAnswerText<T extends TFieldText = TFieldText>
+	extends TAnswerBase<T> {
 	value: string;
 }
 
-type TAnswer = TAnswerChoice | TAnswerText;
+type TAnswer<T extends TField = TField> = T extends TFieldChoice
+	? TAnswerChoice<T>
+	: T extends TFieldText
+		? TAnswerText<T>
+		: never;
 
 type TResponse = {
 	id: string;

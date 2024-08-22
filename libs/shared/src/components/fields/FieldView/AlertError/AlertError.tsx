@@ -6,13 +6,13 @@ import styles from "./AlertError.module.css";
 const errorByType = {
 	[ErrorType.Required]: {
 		message: (
-			<span>
+			<>
 				<b>Oops!</b> Please answer the question
-			</span>
+			</>
 		),
 	},
 	[ErrorType.EmailInvalid]: {
-		message: <span>Hmm... That email doesn't look right</span>,
+		message: "Hmm... That email doesn't look right",
 	},
 };
 

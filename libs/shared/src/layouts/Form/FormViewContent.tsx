@@ -1,60 +1,76 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { getFieldProps } from "~/components/fields/FieldBase/getFieldProps";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { SlideItem } from "~/components/slider/SlideItem/SlideItem";
 import { useSlider } from "~/components/slider/context/SliderContext";
-import { ErrorType } from "~/constants/fieldError";
 import { useIsPreview } from "~/hooks/searchParams/useIsPreview";
 import { useAnswer } from "~/hooks/useAnswer";
-import type { TField, TFieldEnding } from "~/models/field/schema";
+import type { TField } from "~/models/field/schema";
 import type { TAnswer, TResponse } from "~/models/response/schema";
 import { isSingleChoiceField } from "~/utils/fieldPredicates";
-import { Ending } from "./Ending/Ending";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
-import { getFieldState } from "./helpers/getFieldState";
+import { validateAnswer } from "./helpers/validateAnswer";
 import { useGestures } from "./hooks/useGestures";
 
 export const FormViewContent = (props: {
 	fields: TField[];
-	endings: TFieldEnding[];
 	response?: TResponse;
 }) => {
-	const { fields, endings } = props;
+	const { fields } = props;
 
 	const isPreview = useIsPreview();
 
-	const [errorType, setErrorType] = useState<ErrorType | null>(null);
 	const { createOrUpdateAnswer, submitAnswer, previewResponse } = useAnswer();
 
 	const response = isPreview ? previewResponse : props.response;
-	const isSubmitted = !!response?.submittedAt;
 
 	const {
 		isEnd,
-		isBeginning,
 		activeIndex,
 		slideNext,
-		slidePrev,
-		isAnswerRequired,
-		setAnswerRequired,
+		errorType,
+		setErrorType,
+		setShowError,
 	} = useSlider();
 
 	useEffect(() => {
-		const fieldState = getFieldState({
+		const { errorType } = validateAnswer({
 			response,
 			field: fields[activeIndex],
 		});
 
-		setAnswerRequired(fieldState.isRequiredAndHasNoAnswer);
-	}, [activeIndex, setAnswerRequired, fields, response]);
+		setErrorType(errorType);
+	}, [activeIndex, fields, response, setErrorType]);
 
-	const handleGoBack = useCallback(() => {
-		if (isBeginning) return;
+	const handleSubmit = useCallback(async () => {
+		if (!isEnd) return;
 
-		setErrorType(null);
-		slidePrev();
-	}, [slidePrev, isBeginning]);
+		if (errorType) {
+			setShowError(true);
+			return;
+		}
+
+		await submitAnswer();
+	}, [submitAnswer, setShowError, isEnd, errorType]);
+
+	const handleAnswer = useCallback(
+		async (answer: TAnswer) => {
+			setShowError(false);
+			setErrorType(null);
+
+			await createOrUpdateAnswer(answer);
+
+			if (!isEnd && isSingleChoiceField(answer.field) && answer.value.length) {
+				setTimeout(() => {
+					slideNext(true);
+				}, 700);
+			}
+		},
+		[createOrUpdateAnswer, isEnd, slideNext, setShowError, setErrorType],
+	);
+
+	const gestureEvents = useGestures();
 
 	const lastFieldIndex = fields.length - 1;
 
@@ -63,62 +79,20 @@ export const FormViewContent = (props: {
 		isLastQuestion: lastFieldIndex === activeIndex,
 	}).button.text;
 
-	const handleGoNext = useCallback(
-		async (params: { checkIsAnswerRequired?: boolean } = {}) => {
-			if (isEnd) return;
-
-			const { checkIsAnswerRequired = true } = params;
-
-			if (checkIsAnswerRequired && isAnswerRequired) {
-				setErrorType(ErrorType.Required);
-				return;
-			}
-
+	const onSubmit = useCallback(() => {
+		if (isEnd) {
+			handleSubmit();
+		} else {
 			slideNext();
-		},
-		[slideNext, isAnswerRequired, isEnd],
-	);
-
-	const handleSubmit = useCallback(async () => {
-		if (!isEnd) return;
-
-		if (isAnswerRequired) {
-			setErrorType(ErrorType.Required);
-			return;
 		}
-
-		await submitAnswer();
-	}, [submitAnswer, isEnd, isAnswerRequired]);
-
-	const handleAnswer = useCallback(
-		async (answer: TAnswer) => {
-			await createOrUpdateAnswer(answer);
-			setErrorType(null);
-
-			if (!isEnd && isSingleChoiceField(answer.field) && answer.value.length) {
-				setTimeout(() => {
-					handleGoNext({ checkIsAnswerRequired: false });
-				}, 700);
-			}
-		},
-		[createOrUpdateAnswer, handleGoNext, isEnd],
-	);
-
-	const gestureEvents = useGestures({
-		goNext: handleGoNext,
-		goBack: handleGoBack,
-	});
-
-	if (isSubmitted) {
-		return <Ending ending={endings[0]} />;
-	}
+	}, [isEnd, handleSubmit, slideNext]);
 
 	return (
 		<div {...gestureEvents}>
 			{fields.map((field, index, list) => {
 				const answer = response?.answers[field.id];
 
-				const prevFieldState = getFieldState({
+				const prevField = validateAnswer({
 					response,
 					field: list[index - 1],
 				});
@@ -126,14 +100,12 @@ export const FormViewContent = (props: {
 				return (
 					<SlideItem key={field.id} index={index}>
 						<FieldView
-							order={index + 1}
 							field={field}
+							index={index}
 							answer={answer}
-							errorType={errorType}
 							onAnswer={handleAnswer}
-							isLastQuestion={lastFieldIndex === index}
-							onSubmit={isEnd ? handleSubmit : handleGoNext}
-							isNextHidden={prevFieldState.isRequiredAndHasNoAnswer}
+							isNextHidden={!!prevField.errorType}
+							onSubmit={onSubmit}
 						/>
 					</SlideItem>
 				);
@@ -141,9 +113,7 @@ export const FormViewContent = (props: {
 			<FormNavButtons
 				className={styles.navButtons}
 				buttonText={activeFieldButtonText}
-				onGoBack={handleGoBack}
-				onGoNext={handleGoNext}
-				onSubmit={handleSubmit}
+				onSubmit={onSubmit}
 			/>
 		</div>
 	);

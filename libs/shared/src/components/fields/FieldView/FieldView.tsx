@@ -3,10 +3,10 @@ import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { useCallback, useEffect, useRef } from "react";
 import { useSlideItem } from "~/components/slider/context/SlideItemContext";
+import { useSlider } from "~/components/slider/context/SliderContext";
 import { FieldTypes } from "~/constants/field";
-import type { ErrorType } from "~/constants/fieldError";
 import { Media } from "~/constants/mediaQueries";
-import type { TField } from "~/models/field/schema";
+import type { TField, TFieldQuestion } from "~/models/field/schema";
 import type {
 	TAnswer,
 	TAnswerChoice,
@@ -21,13 +21,11 @@ import { AlertError } from "./AlertError/AlertError";
 import styles from "./FieldView.module.css";
 
 interface FieldViewProps {
+	index: number;
 	field: TField;
-	order: number;
-	errorType: ErrorType | null;
-	isNextHidden: boolean;
-	isLastQuestion: boolean;
 	answer?: TAnswer;
 	className?: string;
+	isNextHidden: boolean;
 	onSubmit: () => void;
 	onAnswer: (answer: TAnswer) => Promise<void>;
 }
@@ -37,19 +35,22 @@ export type HandleFieldAnswer<T extends TAnswer = TAnswer> = ({
 }: { value: T["value"] }) => Promise<void>;
 
 export const FieldView = ({
-	order,
 	field,
+	index,
 	answer,
-	errorType,
 	className,
 	onAnswer,
 	onSubmit,
 	isNextHidden,
-	isLastQuestion,
 }: FieldViewProps) => {
 	const isSmallScreen = useMediaQuery(Media.FormViewSmall);
 
-	const { button, title } = getFieldProps({ field, isLastQuestion });
+	const { lastIndex, showError, errorType } = useSlider();
+
+	const { button, title } = getFieldProps({
+		field,
+		isLastQuestion: lastIndex === index,
+	});
 
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -77,39 +78,47 @@ export const FieldView = ({
 
 	const isRequired = isFieldRequired(field);
 
+	const fieldComponent = isQestionField(field) ? (
+		<FieldComponent field={field} answer={answer} onAnswer={onAnswer} />
+	) : null;
+
+	const titleComponent = (
+		<Title
+			order={1}
+			className={clsx(styles.title, {
+				[styles.isRequired]: isRequired,
+			})}
+		>
+			{title.text || "..."}
+		</Title>
+	);
+
 	return (
 		<FieldBase
-			order={order}
+			order={index + 1}
 			field={field}
 			classNames={{ root: className, order: styles.order }}
-			title={
-				<Title
-					order={1}
-					className={clsx(styles.title, {
-						[styles.isRequired]: isRequired,
-					})}
-				>
-					{title.text || "..."}
-				</Title>
-			}
+			title={titleComponent}
 			description={
 				field?.description && <Text size="xl">{field?.description}</Text>
 			}
-			fieldComponent={
-				<FieldComponent field={field} answer={answer} onAnswer={onAnswer} />
-			}
+			fieldComponent={fieldComponent}
 			buttonSubmit={
-				errorType ? <AlertError errorType={errorType} /> : buttonSubmit
+				showError && errorType ? (
+					<AlertError errorType={errorType} />
+				) : (
+					buttonSubmit
+				)
 			}
 		/>
 	);
 };
 
-function FieldComponent(
-	props: Pick<FieldViewProps, "field" | "answer"> & {
-		onAnswer: (answer: TAnswer) => Promise<void>;
-	},
-) {
+function FieldComponent(props: {
+	field: TFieldQuestion;
+	answer?: TAnswer;
+	onAnswer: (answer: TAnswer) => Promise<void>;
+}): JSX.Element | null {
 	const { field, answer, onAnswer } = props;
 
 	const handleAnswer: HandleFieldAnswer = useCallback(
@@ -130,7 +139,7 @@ function FieldComponent(
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:
-		case FieldTypes.MultipleChoice: {
+		case FieldTypes.MultipleChoice:
 			return (
 				<MultipleChoice
 					field={field}
@@ -139,9 +148,9 @@ function FieldComponent(
 					onAnswer={handleAnswer}
 				/>
 			);
-		}
 
-		case FieldTypes.ShortText: {
+		case FieldTypes.Email:
+		case FieldTypes.ShortText:
 			return (
 				<ShortText
 					onAnswer={handleAnswer}
@@ -149,14 +158,5 @@ function FieldComponent(
 					initialValue={(answer?.value ?? "") as TAnswerText["value"]}
 				/>
 			);
-		}
-
-		case FieldTypes.Welcome:
-		case FieldTypes.Statement:
-		case FieldTypes.Ending:
-			return null;
-
-		default:
-			return null;
 	}
 }

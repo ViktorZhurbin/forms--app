@@ -13,11 +13,9 @@ import styles from "./FormNavButtons.module.css";
 export const FormNavButtons = (props: {
 	buttonText: string;
 	className?: string;
-	onGoBack: () => void;
-	onGoNext: () => void;
 	onSubmit: () => void;
 }) => {
-	const { isBeginning, isEnd } = useSlider();
+	const { isBeginning, isEnd, slidePrev } = useSlider();
 
 	const isSmallScreen = useMediaQuery(Media.FormViewSmall);
 
@@ -28,17 +26,13 @@ export const FormNavButtons = (props: {
 					<ActionIcon
 						className={styles.previous}
 						disabled={isBeginning}
-						onClick={props.onGoBack}
+						onClick={slidePrev}
 					>
 						<IconChevronLeft />
 					</ActionIcon>
 				)}
 
-				<Button
-					fullWidth
-					className={styles.next}
-					onClick={isEnd ? props.onSubmit : props.onGoNext}
-				>
+				<Button fullWidth className={styles.next} onClick={props.onSubmit}>
 					{props.buttonText}
 				</Button>
 			</div>
@@ -51,7 +45,7 @@ export const FormNavButtons = (props: {
 				size="lg"
 				aria-label="Previous step"
 				disabled={isBeginning}
-				onClick={props.onGoBack}
+				onClick={slidePrev}
 			>
 				<IconChevronUp />
 			</ActionIcon>

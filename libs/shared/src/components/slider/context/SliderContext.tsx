@@ -6,86 +6,96 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import type { ErrorType } from "~/constants/fieldError";
 import { SliderIds } from "../constants";
-import { getIsWithinRange } from "./helpers/getIsInRange";
 
 type SliderContextValue = {
 	isEnd: boolean;
-	activeIndex: number;
 	isBeginning: boolean;
+	activeIndex: number;
+	lastIndex: number;
 
 	slidePrev: () => void;
-	slideNext: () => void;
+	slideNext: (skipErrorCheck?: boolean) => void;
 	slideTo: (index: number) => void;
 
-	isAnswerRequired: boolean;
-	setAnswerRequired: (value: boolean) => void;
+	showError: boolean;
+	setShowError: (value: boolean) => void;
+
+	errorType: ErrorType | null;
+	setErrorType: (value: ErrorType | null) => void;
 };
 
 const SliderContext = createContext<SliderContextValue | undefined>(undefined);
 
 const SliderProvider = (props: PropsWithChildren) => {
-	const [slides, setSlides] = useState<HTMLElement[]>([]);
+	const [isEnd, setIsEnd] = useState(false);
 	const [activeIndex, setActiveIndex] = useState(0);
 	const [isBeginning, setIsBeginning] = useState(true);
-	const [isEnd, setIsEnd] = useState(false);
-	const [isAnswerRequired, setAnswerRequired] = useState(false);
+
+	const [lastIndex, setLastIndex] = useState<number>(0);
+
+	const [showError, setShowError] = useState(false);
+	const [errorType, setErrorType] = useState<ErrorType | null>(null);
 
 	useEffect(() => {
 		const sliderEl = document.getElementById(SliderIds.root);
 
 		if (!sliderEl) return;
 
-		const slides = sliderEl.querySelectorAll<HTMLElement>(`#${SliderIds.item}`);
+		const slidesCount = sliderEl.querySelectorAll(`#${SliderIds.item}`).length;
+		const lastIndex = slidesCount > 0 ? slidesCount - 1 : 0;
 
-		setSlides(Array.from(slides));
+		setLastIndex(lastIndex);
 	}, []);
 
 	useEffect(() => {
 		setIsBeginning(activeIndex === 0);
-		setIsEnd(activeIndex === slides.length - 1);
-	}, [activeIndex, slides.length]);
-
-	const setIfWithinRange = useCallback(
-		(index: number) => {
-			if (getIsWithinRange(index, slides.length)) {
-				setActiveIndex(index);
-			}
-		},
-		[slides.length],
-	);
-
-	const slideNext = useCallback(() => {
-		setIfWithinRange(activeIndex + 1);
-	}, [setIfWithinRange, activeIndex]);
-
-	const slidePrev = useCallback(() => {
-		setIfWithinRange(activeIndex - 1);
-	}, [setIfWithinRange, activeIndex]);
+		setIsEnd(activeIndex === lastIndex);
+	}, [activeIndex, lastIndex]);
 
 	const slideTo = useCallback(
-		(index: number) => {
-			const isActiveIndex = index === activeIndex;
-			const isSlideBlocked = index > activeIndex && isAnswerRequired;
+		(index: number, options: { skipErrorCheck?: boolean } = {}) => {
+			if (index === activeIndex || index < 0 || index > lastIndex) return;
 
-			if (isActiveIndex || isSlideBlocked) return;
+			if (index > activeIndex && errorType && !options.skipErrorCheck) {
+				setShowError(true);
+				return;
+			}
 
-			setIfWithinRange(index);
+			setShowError(false);
+			setErrorType(null);
+			setActiveIndex(index);
 		},
-		[setIfWithinRange, activeIndex, isAnswerRequired],
+		[activeIndex, lastIndex, errorType],
 	);
+
+	const slideNext = useCallback(
+		(skipErrorCheck = false) => {
+			slideTo(activeIndex + 1, { skipErrorCheck });
+		},
+		[slideTo, activeIndex],
+	);
+
+	const slidePrev = useCallback(() => {
+		slideTo(activeIndex - 1);
+	}, [slideTo, activeIndex]);
 
 	const value: SliderContextValue = {
 		isEnd,
 		isBeginning,
 		activeIndex,
+		lastIndex,
 
 		slideNext,
 		slidePrev,
 		slideTo,
 
-		isAnswerRequired,
-		setAnswerRequired,
+		errorType,
+		setErrorType,
+
+		showError,
+		setShowError,
 	};
 
 	return (

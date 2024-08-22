@@ -5,6 +5,7 @@ import {
 	IconCheckbox,
 	IconCircleDot,
 	IconHeartHandshake,
+	IconMail,
 	IconQuote,
 } from "@tabler/icons-react";
 import { FieldTypes } from "./field";
@@ -30,6 +31,11 @@ const FieldTypesMap = {
 		Icon: IconAlignLeft,
 		type: FieldTypes.ShortText,
 	},
+	[FieldTypes.Email]: {
+		name: "Email",
+		Icon: IconMail,
+		type: FieldTypes.Email,
+	},
 	[FieldTypes.Welcome]: {
 		name: "Welcome",
 		Icon: IconBalloon,
@@ -48,6 +54,11 @@ const FieldTypesMap = {
 };
 
 const FieldGroupsInfo = {
+	Contact: {
+		name: "Contact Info",
+		bgColor: "var(--mantine-color-orange-2)",
+		types: [FieldTypes.Email],
+	},
 	Choice: {
 		name: "Choice",
 		bgColor: "var(--mantine-color-grape-2)",
@@ -74,6 +85,9 @@ const getGroupInfoByFieldType = (type: FieldTypes) => {
 
 		case FieldTypes.ShortText:
 			return FieldGroupsInfo.Text;
+
+		case FieldTypes.Email:
+			return FieldGroupsInfo.Contact;
 
 		case FieldTypes.Welcome:
 		case FieldTypes.Statement:

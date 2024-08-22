@@ -12,22 +12,18 @@ export const FieldSettings = () => {
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:
-		case FieldTypes.MultipleChoice: {
+		case FieldTypes.MultipleChoice:
 			return <RequiredSwitch field={field} />;
-		}
 
-		case FieldTypes.ShortText: {
+		case FieldTypes.ShortText:
+		case FieldTypes.Email:
 			return <RequiredSwitch field={field} />;
-		}
 
 		case FieldTypes.Welcome:
 		case FieldTypes.Statement:
 			return null;
 
 		case FieldTypes.Ending:
-			return null;
-
-		default:
 			return null;
 	}
 };

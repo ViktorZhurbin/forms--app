@@ -4,6 +4,7 @@ import { Slider } from "~/components/slider/Slider/Slider";
 import { useIsPreview } from "~/hooks/searchParams/useIsPreview";
 import type { TField, TFieldEnding } from "~/models/field/schema";
 import type { TResponse } from "~/models/response/schema";
+import { Ending } from "./Ending/Ending";
 import styles from "./FormView.module.css";
 import { FormViewContent } from "./FormViewContent";
 
@@ -29,6 +30,8 @@ export const FormView = ({
 		}
 	};
 
+	const isSubmitted = !!response?.submittedAt;
+
 	return (
 		<div className={styles.container} onKeyDown={handleFirstTab}>
 			<div className={styles.topFixed}>
@@ -39,13 +42,13 @@ export const FormView = ({
 				)}
 			</div>
 
-			<Slider>
-				<FormViewContent
-					fields={fields}
-					endings={endings}
-					response={response}
-				/>
-			</Slider>
+			{isSubmitted ? (
+				<Ending ending={endings[0]} />
+			) : (
+				<Slider>
+					<FormViewContent fields={fields} response={response} />
+				</Slider>
+			)}
 		</div>
 	);
 };

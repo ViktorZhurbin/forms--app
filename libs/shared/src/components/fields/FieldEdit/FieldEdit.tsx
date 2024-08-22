@@ -88,7 +88,9 @@ export const FieldEdit = ({ order, field, isLastQuestion }: FieldEditProps) => {
 	);
 };
 
-function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
+function getFieldComponent({
+	field,
+}: Pick<FieldEditProps, "field">): JSX.Element | null {
 	switch (field.type) {
 		case FieldTypes.YesNo:
 		case FieldTypes.Checkboxes:
@@ -101,6 +103,7 @@ function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
 				/>
 			);
 
+		case FieldTypes.Email:
 		case FieldTypes.ShortText:
 			return (
 				<ShortTextEdit fieldId={field.id} placeholder={field.placeholder} />
@@ -109,9 +112,6 @@ function getFieldComponent({ field }: Pick<FieldEditProps, "field">) {
 		case FieldTypes.Welcome:
 		case FieldTypes.Statement:
 		case FieldTypes.Ending:
-			return null;
-
-		default:
 			return null;
 	}
 }

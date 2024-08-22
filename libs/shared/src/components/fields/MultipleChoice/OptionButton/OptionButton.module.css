@@ -16,18 +16,26 @@
 	}
 
 	&:hover,
-	&:focus-within,
+	&:focus-visible,
 	&.isDragged {
-		background-color: var(--mantine-color-default-hover);
-
-		@mixin dark {
-			background-color: var(--mantine-color-dark-6);
-		}
+		background-color: light-dark(
+			var(--mantine-color-default-hover),
+			var(--mantine-color-dark-6)
+		);
 	}
 
-	&[data-checked="true"],
-	&:focus-within:not(:focus-visible) {
+	&:focus-within {
 		border-color: var(--mantine-primary-color-filled);
+	}
+
+	&[data-checked="true"] {
+		border-color: var(--mantine-primary-color-filled);
+		background-color: var(--mantine-primary-color-light);
+
+		&:hover {
+			border-color: var(--mantine-primary-color-filled-hover);
+			background-color: var(--mantine-primary-color-light-hover);
+		}
 	}
 }
 

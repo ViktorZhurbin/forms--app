@@ -3,6 +3,7 @@ import { getFieldProps } from "~/components/fields/FieldBase/getFieldProps";
 import { FieldView } from "~/components/fields/FieldView/FieldView";
 import { SlideItem } from "~/components/slider/SlideItem/SlideItem";
 import { useSlider } from "~/components/slider/context/SliderContext";
+import { ErrorType } from "~/constants/fieldError";
 import { useIsPreview } from "~/hooks/searchParams/useIsPreview";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField, TFieldEnding } from "~/models/field/schema";
@@ -23,7 +24,7 @@ export const FormViewContent = (props: {
 
 	const isPreview = useIsPreview();
 
-	const [showRequiredError, setShowRequiredError] = useState(false);
+	const [errorType, setErrorType] = useState<ErrorType | null>(null);
 	const { createOrUpdateAnswer, submitAnswer, previewResponse } = useAnswer();
 
 	const response = isPreview ? previewResponse : props.response;
@@ -51,7 +52,7 @@ export const FormViewContent = (props: {
 	const handleGoBack = useCallback(() => {
 		if (isBeginning) return;
 
-		setShowRequiredError(false);
+		setErrorType(null);
 		slidePrev();
 	}, [slidePrev, isBeginning]);
 
@@ -69,7 +70,7 @@ export const FormViewContent = (props: {
 			const { checkIsAnswerRequired = true } = params;
 
 			if (checkIsAnswerRequired && isAnswerRequired) {
-				setShowRequiredError(true);
+				setErrorType(ErrorType.Required);
 				return;
 			}
 
@@ -82,7 +83,7 @@ export const FormViewContent = (props: {
 		if (!isEnd) return;
 
 		if (isAnswerRequired) {
-			setShowRequiredError(true);
+			setErrorType(ErrorType.Required);
 			return;
 		}
 
@@ -92,7 +93,7 @@ export const FormViewContent = (props: {
 	const handleAnswer = useCallback(
 		async (answer: TAnswer) => {
 			await createOrUpdateAnswer(answer);
-			setShowRequiredError(false);
+			setErrorType(null);
 
 			if (
 				!isEnd &&
@@ -132,10 +133,10 @@ export const FormViewContent = (props: {
 							order={index + 1}
 							field={field}
 							answer={answer}
+							errorType={errorType}
 							onAnswer={handleAnswer}
 							isLastQuestion={lastFieldIndex === index}
 							onSubmit={isEnd ? handleSubmit : handleGoNext}
-							showRequiredError={showRequiredError}
 							isNextHidden={prevFieldState.isRequiredAndHasNoAnswer}
 						/>
 					</SlideItem>

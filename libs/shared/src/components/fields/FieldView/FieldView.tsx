@@ -1,10 +1,10 @@
-import { Alert, Button, Text, Title } from "@mantine/core";
+import { Button, Text, Title } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { IconAlertTriangle } from "@tabler/icons-react";
 import clsx from "clsx";
 import { useCallback, useEffect, useRef } from "react";
 import { useSlideItem } from "~/components/slider/context/SlideItemContext";
 import { FieldTypes } from "~/constants/field";
+import type { ErrorType } from "~/constants/fieldError";
 import { Media } from "~/constants/mediaQueries";
 import type { TField } from "~/models/field/schema";
 import type {
@@ -20,16 +20,17 @@ import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
 import { ShortText } from "../ShortText/ShortText";
+import { AlertError } from "./AlertError/AlertError";
 import styles from "./FieldView.module.css";
 
 interface FieldViewProps {
 	field: TField;
 	order: number;
+	errorType: ErrorType | null;
 	isNextHidden: boolean;
 	isLastQuestion: boolean;
 	answer?: TAnswer;
 	className?: string;
-	showRequiredError: boolean;
 	onSubmit: () => void;
 	onAnswer: (answer: TAnswer) => Promise<void>;
 }
@@ -42,12 +43,12 @@ export const FieldView = ({
 	order,
 	field,
 	answer,
+	errorType,
 	className,
 	onAnswer,
 	onSubmit,
 	isNextHidden,
 	isLastQuestion,
-	showRequiredError,
 }: FieldViewProps) => {
 	const isSmallScreen = useMediaQuery(Media.FormViewSmall);
 
@@ -101,18 +102,7 @@ export const FieldView = ({
 				<FieldComponent field={field} answer={answer} onAnswer={onAnswer} />
 			}
 			buttonSubmit={
-				showRequiredError ? (
-					<Alert
-						color="red"
-						variant="light"
-						classNames={{ root: styles.alertRoot, icon: styles.alertIcon }}
-						icon={<IconAlertTriangle />}
-					>
-						<b>Oops!</b> Please answer the question
-					</Alert>
-				) : (
-					buttonSubmit
-				)
+				errorType ? <AlertError errorType={errorType} /> : buttonSubmit
 			}
 		/>
 	);

@@ -7,6 +7,7 @@ enum FieldTypes {
 	Welcome = "Welcome",
 	Statement = "Statement",
 	Ending = "Ending",
+	Email = "Email",
 }
 
 export { FieldTypes };

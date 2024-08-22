@@ -8,7 +8,7 @@ import { useIsPreview } from "~/hooks/searchParams/useIsPreview";
 import { useAnswer } from "~/hooks/useAnswer";
 import type { TField, TFieldEnding } from "~/models/field/schema";
 import type { TAnswer, TResponse } from "~/models/response/schema";
-import { isSingleChoiceFieldType } from "~/utils/fieldPredicates";
+import { isSingleChoiceField } from "~/utils/fieldPredicates";
 import { Ending } from "./Ending/Ending";
 import { FormNavButtons } from "./FormNavButtons/FormNavButtons";
 import styles from "./FormView.module.css";
@@ -95,11 +95,7 @@ export const FormViewContent = (props: {
 			await createOrUpdateAnswer(answer);
 			setErrorType(null);
 
-			if (
-				!isEnd &&
-				isSingleChoiceFieldType(answer.field.type) &&
-				answer.value.length
-			) {
+			if (!isEnd && isSingleChoiceField(answer.field) && answer.value.length) {
 				setTimeout(() => {
 					handleGoNext({ checkIsAnswerRequired: false });
 				}, 700);

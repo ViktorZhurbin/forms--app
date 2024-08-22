@@ -27,7 +27,7 @@ interface TFieldChoice extends TFieldBase {
 }
 
 interface TFieldText extends TFieldBase {
-	type: FieldTypes.ShortText;
+	type: FieldTypes.ShortText | FieldTypes.Email;
 	placeholder: string;
 	settings: TSharedQuestonSettings;
 }

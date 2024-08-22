@@ -50,6 +50,13 @@ const getCreateFieldPayload = ({
 
 			break;
 
+		case FieldTypes.Email:
+			update = {
+				placeholder: "name@example.com",
+			} as Pick<TFieldText, "placeholder">;
+
+			break;
+
 		case FieldTypes.Ending:
 			update = {
 				title: "Thank you",

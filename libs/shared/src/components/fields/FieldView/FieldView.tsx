@@ -12,10 +12,7 @@ import type {
 	TAnswerChoice,
 	TAnswerText,
 } from "~/models/response/schema";
-import {
-	isFieldRequired,
-	isNonQuestionFieldType,
-} from "~/utils/fieldPredicates";
+import { isFieldRequired, isQestionField } from "~/utils/fieldPredicates";
 import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -57,10 +54,10 @@ export const FieldView = ({
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
-		if (isNonQuestionFieldType(field.type)) {
+		if (!isQestionField(field)) {
 			buttonRef.current?.focus();
 		}
-	}, [field.type]);
+	}, [field]);
 
 	const { isActive, isPrev, isNext } = useSlideItem();
 	const isDefaultHidden = !isActive && !isPrev && !isNext;

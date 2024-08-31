@@ -27,11 +27,11 @@ importers:
         specifier: workspace:*
         version: link:../../libs/shared
       '@instantdb/core':
-        specifier: ^0.11.01
-        version: 0.11.1
+        specifier: ^0.12.14
+        version: 0.12.14
       '@instantdb/react':
-        specifier: ^0.11.01
-        version: 0.11.1(react@18.3.1)
+        specifier: ^0.12.14
+        version: 0.12.14(react@18.3.1)
       '@mantine/core':
         specifier: ^7.11.2
         version: 7.11.2(@mantine/hooks@7.11.2)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -109,11 +109,11 @@ importers:
         specifier: workspace:*
         version: link:../../libs/shared
       '@instantdb/core':
-        specifier: ^0.11.01
-        version: 0.11.1
+        specifier: ^0.12.14
+        version: 0.12.14
       '@instantdb/react':
-        specifier: ^0.11.01
-        version: 0.11.1(react@18.3.1)
+        specifier: ^0.12.14
+        version: 0.12.14(react@18.3.1)
       '@mantine/core':
         specifier: ^7.11.2
         version: 7.11.2(@mantine/hooks@7.11.2)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -204,11 +204,11 @@ importers:
   libs/shared:
     dependencies:
       '@instantdb/core':
-        specifier: ^0.11.01
-        version: 0.11.1
+        specifier: ^0.12.14
+        version: 0.12.14
       '@instantdb/react':
-        specifier: ^0.11.01
-        version: 0.11.1(react@18.3.1)
+        specifier: ^0.12.14
+        version: 0.12.14(react@18.3.1)
       '@mantine/core':
         specifier: ^7.11.2
         version: 7.11.2(@mantine/hooks@7.11.2)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1239,20 +1239,20 @@ packages:
     dev: false
     optional: true
 
-  /@instantdb/core@0.11.1:
-    resolution: {integrity: sha512-3kAuz2q6OMmAmwehSUzyqTWWFyUhHhZPDZlD8SeZD+VTTeAWsVhpCea3JM5y5wXxQu7a8jVdMMZ44/z8yiPTEQ==}
+  /@instantdb/core@0.12.14:
+    resolution: {integrity: sha512-gEt0x0UHcWlBA4bQ6MRRMVnvCS5L9k+mSRh9E14kTi72EGnoHX74bZzWMIRF7X2HQv6+Q6+o0PQjPkF5EM1LSw==}
     dependencies:
       immer: 9.0.14
       object-hash: 3.0.0
       uuid: 9.0.1
     dev: false
 
-  /@instantdb/react@0.11.1(react@18.3.1):
-    resolution: {integrity: sha512-T0VHrpNXiXYvzgVAYT71d+SNb0Q2KJE6HQkhbepsIZdTMTXntfjriWPAqOIN9Jv6oJQ58BHOKh7ABKYX43aHEA==}
+  /@instantdb/react@0.12.14(react@18.3.1):
+    resolution: {integrity: sha512-bMOqi1/Vs/vzY6pOIiYeReZZ8fOtBtw2Zwf/dHsGmV46BBYWiW+Fj/gLss1hS4m/Eix8lvdB/F9G3g1ad8jf7w==}
     peerDependencies:
       react: '>=16'
     dependencies:
-      '@instantdb/core': 0.11.1
+      '@instantdb/core': 0.12.14
       react: 18.3.1
     dev: false
 

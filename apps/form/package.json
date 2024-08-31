@@ -24,8 +24,8 @@
 	},
 	"dependencies": {
 		"@forms/shared": "workspace:*",
-		"@instantdb/core": "^0.11.01",
-		"@instantdb/react": "^0.11.01",
+		"@instantdb/core": "^0.12.14",
+		"@instantdb/react": "^0.12.14",
 		"@mantine/core": "^7.11.2",
 		"@mantine/hooks": "^7.11.2",
 		"@tabler/icons-react": "^3.11.0",

@@ -4,8 +4,8 @@
 	"dependencies": {
 		"@instantdb/core": "^0.12.14",
 		"@instantdb/react": "^0.12.14",
-		"@mantine/core": "^7.11.2",
-		"@mantine/hooks": "^7.11.2",
+		"@mantine/core": "^7.12.2",
+		"@mantine/hooks": "^7.12.2",
 		"@tabler/icons-react": "^3.11.0",
 		"es-toolkit": "^1.13.1",
 		"react": "^18.3.1",
@@ -14,12 +14,12 @@
 		"wouter": "^3.3.1"
 	},
 	"devDependencies": {
-		"@rsbuild/core": "1.0.1-rc.0",
-		"@rsbuild/plugin-react": "1.0.1-rc.0",
+		"@rsbuild/core": "1.0.1",
+		"@rsbuild/plugin-react": "1.0.1",
 		"@rsbuild/plugin-source-build": "1.0.1",
-		"@rsbuild/plugin-type-check": "1.0.1-rc.0",
+		"@rsbuild/plugin-type-check": "1.0.1-rc.5",
 		"@rsdoctor/rspack-plugin": "^0.4.0",
-		"@types/react": "^18.3.3",
+		"@types/react": "^18.3.5",
 		"@types/react-dom": "^18.3.0",
 		"autoprefixer": "^10.4.19",
 		"clsx": "^2.1.1",

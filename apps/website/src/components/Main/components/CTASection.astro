@@ -5,10 +5,11 @@ import CreateFormButton from "./CreateFormButton.astro";
 interface Props {
 	imgSrc: string;
 	isOdd?: boolean;
+	noCTA?: boolean;
 	wrapperClass?: string;
 }
 
-const { imgSrc, isOdd, wrapperClass, ...rest } = Astro.props;
+const { imgSrc, isOdd, wrapperClass, noCTA, ...rest } = Astro.props;
 ---
 
 <Grid>
@@ -19,7 +20,7 @@ const { imgSrc, isOdd, wrapperClass, ...rest } = Astro.props;
 
 		<slot name="description" />
 
-		<CreateFormButton class="button" />
+		{noCTA ? null : <CreateFormButton class="button" />}
 	</section>
 </Grid>
 

@@ -1,0 +1,25 @@
+---
+import { Routes } from "~/constants/routes";
+import Home from "./icons/Home.astro";
+---
+
+<a id="homeLink" href={Routes.Home}>
+	<Home />
+</a>
+
+<script is:inline>
+	const toggleHomeLink = () => {
+		const homeLink = document.querySelector("#homeLink");
+
+		const isHome = window.location.pathname === "/";
+		const visibility = isHome ? "hidden" : "visible";
+
+		homeLink?.style.setProperty("visibility", visibility);
+	};
+
+	// on direct page access
+	toggleHomeLink();
+
+	// on view transition
+	document.addEventListener("astro:after-swap", toggleHomeLink);
+</script>

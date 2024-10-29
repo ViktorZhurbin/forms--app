@@ -1,5 +1,5 @@
 ---
-import Logo from "./components/Logo.astro";
+import HomeLink from "./components/HomeLink.astro";
 import NavMenu from "./components/NavMenu.astro";
 
 interface Props {
@@ -10,7 +10,7 @@ const { class: className, ...rest } = Astro.props;
 ---
 
 <nav {...rest} class:list={[className, "menu"]}>
-	<Logo />
+	<HomeLink />
 	<NavMenu />
 </nav>
 

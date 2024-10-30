@@ -2,11 +2,11 @@
 interface Props {
 	href: string;
 	id?: string;
+	target?: string;
 	class?: string;
 }
 
-// what's rest props for:
-// https://docs.astro.build/en/guides/styling/#passing-a-class-to-a-child-component
+// what rest props are for: https://docs.astro.build/en/guides/styling/#passing-a-class-to-a-child-component
 const { class: className, ...rest } = Astro.props;
 ---
 
@@ -27,10 +27,6 @@ const { class: className, ...rest } = Astro.props;
 		border: unset;
 		padding: 0.2rem 0.4rem;
 		border: 1px solid transparent;
-
-		text-overflow: ellipsis;
-		text-wrap: nowrap;
-		overflow: hidden;
 
 		&:hover {
 			color: var(--pico-h2-color);

@@ -2,6 +2,8 @@
 import { Links } from "~/constants/links";
 import ButtonLink from "~/components/ui/ButtonLink.astro";
 import { ThemeToggle } from "~/components/ThemeToggle";
+import NavLink from "~/components/ui/NavLink.astro";
+import GithubIcon from "~/components/icons/GithubIcon.astro";
 import NavMenu from "./NavMenu.astro";
 
 interface Props {
@@ -19,6 +21,17 @@ const { class: className, ...rest } = Astro.props;
 			Open app
 		</ButtonLink>
 
+		<NavLink
+			href={Links.Github}
+			target="_blank"
+			data-tooltip="Source"
+			data-placement="left"
+		>
+			<GithubIcon />
+		</NavLink>
+
+		<div class="divider"></div>
+
 		<ThemeToggle />
 	</div>
 </header>
@@ -27,6 +40,8 @@ const { class: className, ...rest } = Astro.props;
 	@import "~/styles/media.css";
 
 	.header {
+		--border: 1px solid var(--pico-muted-border-color);
+
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -34,7 +49,7 @@ const { class: className, ...rest } = Astro.props;
 		gap: 0.5rem;
 
 		padding: 0.5rem 1.25rem;
-		border-bottom: 1px solid var(--pico-muted-border-color);
+		border-bottom: var(--border);
 		background-color: var(--pico-background-color);
 	}
 
@@ -46,6 +61,12 @@ const { class: className, ...rest } = Astro.props;
 
 	.openAppButton {
 		padding: 0.4rem 0.8rem;
+	}
+
+	.divider {
+		width: 1px;
+		height: 2rem;
+		border-right: var(--border);
 	}
 
 	@media (--sm-down) {

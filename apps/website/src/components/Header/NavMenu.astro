@@ -11,18 +11,14 @@ import NavLink from "~/components/ui/NavLink.astro";
 <script is:inline>
 	const hideCurrentPathLink = () => {
 		const { pathname } = window.location;
-		const path =
-			pathname.endsWith("/") && pathname !== "/"
-				? pathname.slice(0, -1) // trim trailing slash
-				: pathname;
 
-		const selector = `nav [href='${path}']`;
-		const currentPageLink = document.querySelector(selector);
+		const selector = `nav [href='${pathname}']`;
+		const currentPathLink = document.querySelector(selector);
 
-		currentPageLink?.style.setProperty("display", "none");
+		currentPathLink?.style.setProperty("display", "none");
 	};
 
-	// on direct page access
+	// on load
 	hideCurrentPathLink();
 
 	// on view transition

@@ -1,0 +1,4 @@
+:root {
+	--color-accent: hsl(320deg 85% 55%);
+	--mantine-radius-default: calc(1rem / 2.5);
+}

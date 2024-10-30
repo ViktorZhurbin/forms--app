@@ -1,0 +1,4 @@
+.main {
+	padding: calc(var(--mantine-spacing-md) * 4)
+		calc(var(--mantine-spacing-md) * 1.5);
+}

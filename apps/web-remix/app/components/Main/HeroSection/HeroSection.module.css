@@ -1,0 +1,9 @@
+.title {
+	font-size: 2.5rem;
+	line-height: 1.125;
+	color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+}
+
+.accent {
+	color: var(--color-accent);
+}

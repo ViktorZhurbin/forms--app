@@ -1,6 +1,7 @@
 import "@mantine/core/styles.css";
 
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { ThemeProvider } from "@/shared/contexts/ThemeProvider/ThemeProvider";
+import { ColorSchemeScript } from "@mantine/core";
 import {
 	Links,
 	Meta,
@@ -20,7 +21,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<ColorSchemeScript />
 			</head>
 			<body>
-				<MantineProvider>{children}</MantineProvider>
+				<ThemeProvider>{children}</ThemeProvider>
 				<ScrollRestoration />
 				<Scripts />
 			</body>

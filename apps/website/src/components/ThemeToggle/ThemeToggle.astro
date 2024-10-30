@@ -1,6 +1,6 @@
 ---
 import { ToggleButtonId } from "./helpers/constants";
-import Icon from "./icon/ToggleIcon.astro";
+import ToggleIcon from "./ToggleIcon.astro";
 ---
 
 <button
@@ -11,12 +11,10 @@ import Icon from "./icon/ToggleIcon.astro";
 	data-tooltip="Switch to Light mode"
 	data-placement="left"
 >
-	<Icon />
+	<ToggleIcon />
 </button>
 
 <style>
-	@import "~/styles/media.css";
-
 	.themeToggleButton.themeToggleButton {
 		--padding: 0.3rem;
 
@@ -49,14 +47,7 @@ import Icon from "./icon/ToggleIcon.astro";
 
 	watchSystemTheme();
 
-	const handleClick = (e: MouseEvent) => {
-		const target = e.currentTarget as HTMLElement | null;
+	const toggleButton = document.getElementById(ToggleButtonId);
 
-		toggleTheme();
-		target?.blur();
-	};
-
-	document
-		.getElementById(ToggleButtonId)
-		?.addEventListener("click", handleClick);
+	toggleButton?.addEventListener("click", toggleTheme);
 </script>

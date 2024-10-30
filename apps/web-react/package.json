@@ -1,0 +1,47 @@
+{
+	"name": "@forms/web-react",
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "rsbuild dev --port 5175",
+		"build": "rsbuild build",
+		"preview": "rsbuild preview --open --port 5175",
+		"bundle-analyzer": "BUNDLE_ANALYZE=true pnpm run build",
+		"rsdoctor": "RSDOCTOR=true pnpm run build"
+	},
+	"browserslist": {
+		"production": [
+			"last 2 versions",
+			"> 1%",
+			"not dead"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"dependencies": {
+		"@forms/shared": "workspace:*",
+		"@mantine/core": "^7.12.2",
+		"@mantine/hooks": "^7.12.2",
+		"@tabler/icons-react": "^3.11.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"wouter": "^3.3.1"
+	},
+	"devDependencies": {
+		"@rsbuild/core": "1.0.1",
+		"@rsbuild/plugin-react": "1.0.1",
+		"@rsbuild/plugin-source-build": "1.0.1",
+		"@rsbuild/plugin-type-check": "1.0.1-rc.5",
+		"@rsdoctor/rspack-plugin": "^0.4.0",
+		"@types/react": "^18.3.5",
+		"@types/react-dom": "^18.3.0",
+		"autoprefixer": "^10.4.19",
+		"clsx": "^2.1.1",
+		"postcss": "8.4.40",
+		"postcss-preset-mantine": "^1.17.0",
+		"postcss-simple-vars": "^7.0.1"
+	}
+}

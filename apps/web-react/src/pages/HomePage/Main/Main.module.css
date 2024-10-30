@@ -1,0 +1,9 @@
+.main {
+	padding: calc(var(--mantine-spacing-md) * 4)
+		calc(var(--mantine-spacing-md) * 1.5);
+
+	@media (max-width: $mantine-breakpoint-sm) {
+		padding: calc(var(--mantine-spacing-md) * 3)
+			calc(var(--mantine-spacing-md) * 0.75);
+	}
+}

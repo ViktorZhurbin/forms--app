@@ -1,0 +1,17 @@
+{
+	"extends": "../tsconfig.app.json",
+	"compilerOptions": {
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["src/*"],
+			"@/shared/*": ["../../libs/shared/src/*"]
+		}
+	},
+
+	// Enable finding symbol references in VS Code.
+	"include": ["src", "../../libs/shared/src"],
+	"references": [{ "path": "../../libs/shared/tsconfig.json" }]
+}

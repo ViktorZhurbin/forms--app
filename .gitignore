@@ -13,6 +13,8 @@ dist-ssr
 *.local
 .next
 build
+.cache
+apps/web-gatsby/public
 # generated types
 .astro/
 

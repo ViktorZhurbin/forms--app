@@ -5,8 +5,10 @@
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
-    "**/.client/**/*.tsx"
+    "**/.client/**/*.tsx",
+    "../../libs/shared/src",
   ],
+  "references": [{ "path": "../../libs/shared/tsconfig.json" }],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@remix-run/node", "vite/client"],
@@ -23,7 +25,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "@/shared/*": ["../../libs/shared/src/*"]
     },
 
     // Vite takes care of building everything, not tsc.

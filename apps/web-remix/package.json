@@ -8,6 +8,7 @@
     "start": "remix-serve ./build/server/index.js"
   },
   "dependencies": {
+    "@forms/shared": "workspace:*",
     "@mantine/core": "7.12.2",
     "@mantine/hooks": "7.12.2",
     "@remix-run/node": "^2.13.1",

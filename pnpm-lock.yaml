@@ -221,6 +221,9 @@ importers:
 
   apps/web-remix:
     dependencies:
+      '@forms/shared':
+        specifier: workspace:*
+        version: link:../../libs/shared
       '@mantine/core':
         specifier: 7.12.2
         version: 7.12.2(@mantine/hooks@7.12.2)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)

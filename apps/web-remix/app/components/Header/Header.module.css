@@ -1,0 +1,10 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+
+	gap: var(--mantine-spacing-sm);
+	padding: calc(var(--mantine-spacing-md) / 2) var(--mantine-spacing-md);
+
+	border-bottom: 1px solid var(--mantine-color-default-border);
+}

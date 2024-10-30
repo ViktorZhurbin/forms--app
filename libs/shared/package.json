@@ -24,7 +24,7 @@
 		"autoprefixer": "^10.4.19",
 		"clsx": "^2.1.1",
 		"nanoid": "^5.0.7",
-		"postcss": "^8.4.40",
+		"postcss": "8.4.40",
 		"postcss-preset-mantine": "^1.17.0",
 		"postcss-simple-vars": "^7.0.1"
 	}

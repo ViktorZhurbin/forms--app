@@ -94,7 +94,7 @@ importers:
         specifier: ^16.3.10
         version: 16.3.10
       postcss:
-        specifier: ^8.4.40
+        specifier: 8.4.40
         version: 8.4.40
       postcss-preset-mantine:
         specifier: ^1.17.0
@@ -170,7 +170,7 @@ importers:
         specifier: ^16.3.10
         version: 16.3.10
       postcss:
-        specifier: ^8.4.40
+        specifier: 8.4.40
         version: 8.4.40
       postcss-preset-mantine:
         specifier: ^1.17.0
@@ -207,7 +207,7 @@ importers:
         specifier: 18.3.0
         version: 18.3.0
       postcss:
-        specifier: ^8.4.40
+        specifier: 8.4.40
         version: 8.4.40
       postcss-preset-mantine:
         specifier: 1.17.0
@@ -236,6 +236,9 @@ importers:
       '@remix-run/serve':
         specifier: ^2.13.1
         version: 2.13.1(typescript@5.5.3)
+      '@tabler/icons-react':
+        specifier: ^3.11.0
+        version: 3.11.0(react@18.3.1)
       isbot:
         specifier: ^5.1.17
         version: 5.1.17
@@ -256,7 +259,7 @@ importers:
         specifier: ^18.3.0
         version: 18.3.0
       postcss:
-        specifier: ^8.4.40
+        specifier: 8.4.40
         version: 8.4.40
       postcss-preset-mantine:
         specifier: 1.17.0
@@ -360,7 +363,7 @@ importers:
         specifier: ^5.0.7
         version: 5.0.7
       postcss:
-        specifier: ^8.4.40
+        specifier: 8.4.40
         version: 8.4.40
       postcss-preset-mantine:
         specifier: ^1.17.0
@@ -487,7 +490,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/highlight': 7.24.7
-      picocolors: 1.0.1
+      picocolors: 1.1.1
     dev: true
 
   /@babel/code-frame@7.26.0:
@@ -496,7 +499,7 @@ packages:
     dependencies:
       '@babel/helper-validator-identifier': 7.25.9
       js-tokens: 4.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   /@babel/compat-data@7.24.9:
     resolution: {integrity: sha512-e701mcfApCJqMMueQI0Fb68Amflj83+dvAvHawoBpAz+GDjCIyGHzNwnefjsWJ3xiYAqqiQFoWbspGYBdb2/ng==}
@@ -743,7 +746,7 @@ packages:
       '@babel/helper-validator-identifier': 7.25.9
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.1
     dev: true
 
   /@babel/parser@7.24.8:
@@ -2884,7 +2887,7 @@ packages:
       lru-cache: 10.4.3
       media-query-parser: 2.0.2
       modern-ahocorasick: 1.0.1
-      picocolors: 1.0.1
+      picocolors: 1.1.1
     transitivePeerDependencies:
       - babel-plugin-macros
     dev: true
@@ -7067,6 +7070,7 @@ packages:
 
   /picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
+    dev: true
 
   /picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -7275,8 +7279,8 @@ packages:
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.1
-      source-map-js: 1.2.0
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
     dev: false
 
   /postcss@8.4.40:
@@ -7284,8 +7288,8 @@ packages:
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.1
-      source-map-js: 1.2.0
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
     dev: true
 
   /postcss@8.4.47:
@@ -8750,7 +8754,7 @@ packages:
     dependencies:
       browserslist: 4.23.2
       escalade: 3.1.2
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   /uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
@@ -8927,7 +8931,7 @@ packages:
       cac: 6.7.14
       debug: 4.3.5
       pathe: 1.1.2
-      picocolors: 1.0.1
+      picocolors: 1.1.1
       vite: 5.4.10(@types/node@20.14.11)(sass@1.76.0)
     transitivePeerDependencies:
       - '@types/node'
@@ -9201,7 +9205,7 @@ packages:
       gzip-size: 6.0.0
       html-escaper: 2.0.2
       opener: 1.5.2
-      picocolors: 1.0.1
+      picocolors: 1.1.1
       sirv: 2.0.4
       ws: 7.5.10
     transitivePeerDependencies:

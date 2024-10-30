@@ -3,11 +3,10 @@ import { ActionIcon, Button, Container, Divider } from "@mantine/core";
 import { IconBrandGithub } from "@tabler/icons-react";
 import { Links } from "~/constants/links";
 import styles from "./Header.module.css";
-import { CONTAINER } from "~/constants/layout";
 
 export const Header = () => {
 	return (
-		<Container className={styles.header} size={CONTAINER.MaxSize}>
+		<Container className={styles.header}>
 			<Button component="a" href={Links.SignIn} target="_blank">
 				Open app
 			</Button>

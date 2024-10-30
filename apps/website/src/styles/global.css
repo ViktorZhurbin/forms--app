@@ -19,12 +19,24 @@
 		text-wrap: nowrap;
 	}
 
-	[data-tooltip]:hover::before,
-	[data-tooltip]:hover::after {
-		opacity: 0;
+	[data-tooltip] {
+		&:focus::before,
+		&:focus::after {
+			display: none;
+		}
 
-		@media (hover: hover) and (pointer: fine) {
-			opacity: 1;
+		&:focus-visible::before,
+		&:focus-visible::after {
+			display: block;
+		}
+
+		&:hover::before,
+		&:hover::after {
+			opacity: 0;
+
+			@media (hover: hover) and (pointer: fine) {
+				opacity: 1;
+			}
 		}
 	}
 

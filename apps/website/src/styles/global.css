@@ -4,6 +4,8 @@
 
 	/* Pico overrides */
 	--pico-border-radius: calc(1rem / 2);
+	--pico-form-element-spacing-vertical: 0.5rem;
+	--pico-form-element-spacing-horizontal: 1rem;
 
 	&[data-theme="dark"] {
 		--pico-muted-color: hsl(219 11% 78%);

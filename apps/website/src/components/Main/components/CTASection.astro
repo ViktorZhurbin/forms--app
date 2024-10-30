@@ -41,7 +41,6 @@ const { imgSrc, isOdd, wrapperClass, noCTA, ...rest } = Astro.props;
 
 		h2 {
 			grid-area: title;
-			margin-bottom: calc(var(--pico-spacing) * 2);
 		}
 
 		img {
@@ -50,12 +49,10 @@ const { imgSrc, isOdd, wrapperClass, noCTA, ...rest } = Astro.props;
 
 		p {
 			grid-area: description;
-			margin-block: calc(var(--pico-spacing) * 2);
 		}
 
 		.button {
 			grid-area: button;
-			padding: 0;
 		}
 
 		@media (--lg-up) {
@@ -78,15 +75,6 @@ const { imgSrc, isOdd, wrapperClass, noCTA, ...rest } = Astro.props;
 					"description 	image"
 					"button 			image"
 					". 						image";
-			}
-
-			p {
-				margin-top: var(--pico-spacing);
-				margin-bottom: calc(var(--pico-spacing) * 1.5);
-			}
-
-			.button {
-				align-items: start;
 			}
 		}
 	}

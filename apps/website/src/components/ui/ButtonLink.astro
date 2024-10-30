@@ -1,21 +1,15 @@
 ---
 interface Props {
 	href: string;
+	id?: string;
 	class?: string;
 	target?: string;
 }
 
-const { href, target = "_blank", class: className, ...rest } = Astro.props;
+const { class: className, ...rest } = Astro.props;
 ---
 
-<a
-	type="button"
-	role="button"
-	{...rest}
-	href={href}
-	target="_blank"
-	class:list={[className]}
->
+<a type="button" role="button" {...rest} class:list={[className]}>
 	<slot />
 </a>
 

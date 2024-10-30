@@ -1,6 +1,8 @@
 ---
-import HomeLink from "./components/HomeLink.astro";
-import NavMenu from "./components/NavMenu.astro";
+import { Links } from "~/constants/links";
+import ButtonLink from "../ui/ButtonLink.astro";
+import NavMenu from "./NavMenu.astro";
+import ThemeToggle from "./ThemeToggle/ThemeToggle.astro";
 
 interface Props {
 	class?: string;
@@ -9,21 +11,46 @@ interface Props {
 const { class: className, ...rest } = Astro.props;
 ---
 
-<nav {...rest} class:list={[className, "menu"]}>
-	<HomeLink />
+<header {...rest} class:list={[className, "header"]}>
 	<NavMenu />
-</nav>
+
+	<div class="right">
+		<ButtonLink class="openAppButton" href={Links.SignIn} target="_blank">
+			Open app
+		</ButtonLink>
+
+		<ThemeToggle />
+	</div>
+</header>
 
 <style>
-	.menu {
+	@import "~/styles/media.css";
+
+	.header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
 		gap: 0.5rem;
 
-		padding: 0.75rem 1.5rem;
+		padding: 0.5rem 1.25rem;
 		border-bottom: 1px solid var(--pico-muted-border-color);
 		background-color: var(--pico-background-color);
+	}
+
+	.right {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.openAppButton {
+		padding: 0.4rem 0.8rem;
+	}
+
+	@media (--sm-down) {
+		.openAppButton {
+			display: none;
+		}
 	}
 </style>

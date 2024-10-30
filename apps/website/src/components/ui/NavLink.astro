@@ -1,18 +1,18 @@
 ---
 interface Props {
 	href: string;
+	id?: string;
 	class?: string;
 }
 
 // what's rest props for:
 // https://docs.astro.build/en/guides/styling/#passing-a-class-to-a-child-component
-const { href, class: className, ...rest } = Astro.props;
+const { class: className, ...rest } = Astro.props;
 ---
 
 <a
 	{...rest}
 	role="button"
-	href={href}
 	class:list={[className, "button"]}
 	data-astro-prefetch="viewport"
 >

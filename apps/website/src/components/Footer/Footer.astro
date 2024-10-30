@@ -1,5 +1,7 @@
 ---
-import FooterBottom from "./components/FooterBottom/FooterBottom.astro";
+import { Routes } from "~/constants/routes";
+import LinkDimmed from "../ui/LinkDimmed.astro";
+import TwitterIcon from "../icons/TwitterIcon.astro";
 
 interface Props {
 	companyName: string;
@@ -10,13 +12,37 @@ const { companyName } = Astro.props;
 
 <footer>
 	<hr />
-	<FooterBottom companyName={companyName} />
+	<div class="content">
+		<LinkDimmed href={Routes.Home} size="small">{companyName}</LinkDimmed>
+
+		<div class="social">
+			<LinkDimmed href="#">
+				<TwitterIcon />
+			</LinkDimmed>
+		</div>
+	</div>
 </footer>
 
 <style>
 	footer {
 		--pico-color: var(--pico-muted-color);
+	}
+
+	hr {
+		margin-bottom: 0;
+	}
+
+	.content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 
 		padding: var(--pico-spacing);
+	}
+
+	.social {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--pico-spacing) / 2);
 	}
 </style>

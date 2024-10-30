@@ -5,7 +5,7 @@ import styles from "./Main.module.css";
 export const Main = () => {
 	return (
 		<Grid justify="center" className={styles.main}>
-			<Grid.Col span={10}>
+			<Grid.Col span={12}>
 				<HeroSection />
 			</Grid.Col>
 		</Grid>

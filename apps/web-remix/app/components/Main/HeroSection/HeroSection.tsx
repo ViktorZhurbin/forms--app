@@ -1,32 +1,35 @@
-import { Stack, Text, Title } from "@mantine/core";
+import { Button, Container, Text, Title } from "@mantine/core";
+import { CONTAINER } from "~/constants/layout";
 import { Links } from "~/constants/links";
-import { CTAButton } from "../../CTAButton/CTAButton";
 import styles from "./HeroSection.module.css";
 
 export const HeroSection = () => {
 	return (
-		<Stack align="center">
-			<Title className={styles.title} ta="center">
+		<Container className={styles.wrapper} size={CONTAINER.MaxSize}>
+			<Title className={styles.title}>
 				A fully-functional{" "}
-				<Text inherit component="span" className={styles.accent}>
+				<Text component="span" className={styles.highlight} inherit>
 					Typeform
 				</Text>{" "}
 				clone
 			</Title>
 
-			<Text lh={1.45} ta="center" size="lg" mx="auto" mt="md">
-				Start <b>building</b> without authorization.
-				<br />
-				Create account to <b>share and manage</b> your forms and{" "}
-				<b>review responses</b>.
-			</Text>
+			<Container p={0} size={600}>
+				<Text size="lg" c="dimmed" className={styles.description}>
+					Start building without authorization. Create account to share and
+					manage your forms and review responses.
+				</Text>
+			</Container>
 
-			<Stack gap={6} align="center">
-				<CTAButton component="a" href={Links.DemoBuilder} target="_blank">
-					Create a form
-				</CTAButton>
-				<small>No sign up required</small>
-			</Stack>
-		</Stack>
+			<Button
+				size="lg"
+				component="a"
+				target="_blank"
+				href={Links.DemoBuilder}
+				className={styles.button}
+			>
+				Create a form
+			</Button>
+		</Container>
 	);
 };

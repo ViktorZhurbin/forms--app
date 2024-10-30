@@ -1,8 +1,4 @@
 :root {
 	--color-accent: hsl(320deg 85% 55%);
-	--color-border: light-dark(
-		var(--mantine-color-gray-2),
-		var(--mantine-color-dark-5)
-	);
 	--mantine-radius-default: calc(1rem / 2.5);
 }

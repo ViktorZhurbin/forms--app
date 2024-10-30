@@ -6,24 +6,26 @@ import styles from "./Header.module.css";
 
 export const Header = () => {
 	return (
-		<Container className={styles.header}>
-			<Button component="a" href={Links.SignIn} target="_blank">
-				Open app
-			</Button>
+		<header className={styles.header}>
+			<Container className={styles.inner}>
+				<Button component="a" href={Links.SignIn} target="_blank">
+					Open app
+				</Button>
 
-			<ActionIcon
-				size="lg"
-				variant="default"
-				component="a"
-				target="_blank"
-				href={Links.Github}
-			>
-				<IconBrandGithub />
-			</ActionIcon>
+				<ActionIcon
+					size="lg"
+					variant="default"
+					component="a"
+					target="_blank"
+					href={Links.Github}
+				>
+					<IconBrandGithub />
+				</ActionIcon>
 
-			<Divider orientation="vertical" />
+				<Divider orientation="vertical" />
 
-			<DarkModeToggle />
-		</Container>
+				<DarkModeToggle />
+			</Container>
+		</header>
 	);
 };

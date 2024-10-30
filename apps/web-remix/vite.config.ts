@@ -6,5 +6,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 installGlobals();
 
 export default defineConfig({
-  plugins: [remix(), tsconfigPaths()],
+	plugins: [remix(), tsconfigPaths()],
+	server: {
+		port: 5175,
+	},
 });

@@ -4,8 +4,8 @@
 		"enabled": true
 	},
 	"files": {
-		"include": ["apps/**/src/**/*", "libs/**/src/**/*"],
-		"ignore": ["*.astro"],
+		"include": ["apps/**/src/**/*", "apps/**/app/**/*", "libs/**/src/**/*"],
+		"ignore": ["*.astro", ".next/**/*", "entry.*.tsx"],
 		"ignoreUnknown": true
 	},
 	"linter": {

@@ -1,8 +1,8 @@
 import { ThemeProvider } from "@/shared/contexts/ThemeProvider/ThemeProvider";
+import { Page404 } from "@/shared/layouts/Page404/Page404";
 import { Route, Switch } from "wouter";
 import { AuthRoute } from "~/components/AuthRoute/AuthRoute";
 import { Routes } from "~/constants/routes";
-import { NotFound } from "./pages/NotFound/NotFound";
 import { Root } from "./pages/Root/Root";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { Workspace } from "./pages/Workspace/Workspace";
@@ -21,7 +21,7 @@ export const App = () => {
 				<AuthRoute path={Routes.FORM} component={Form} />
 				{/* Default route in a switch */}
 				<Route>
-					<NotFound />
+					<Page404 redirectTo={Routes.ROOT} />
 				</Route>
 			</Switch>
 		</ThemeProvider>

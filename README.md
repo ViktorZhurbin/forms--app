@@ -1,4 +1,9 @@
-Exploring new techs by building a [Typeform](https://www.typeform.com/) clone - an online form builder.
+## Goals
+- Explore what it takes to build a SaaS product from scratch.
+- Investigate new technologies that could help build things faster.
+
+## Means
+Build an online form builder, eg. [Typeform](https://www.typeform.com/), [Fillout](https://www.fillout.com), [Tally](https://tally.so).
 
 ## Project structure
 This is a monorepo with applications located in `apps/` directory, and shared code in `libs/`.
@@ -32,14 +37,11 @@ From the project root:
   - `npm run dev:editor` to run only the Editor app (or `cd apps/editor && npm run dev`)
 
 ## Functionality
-You can create a form by visiting https://forms-editor.pages.dev/create.
+Create a form at https://forms-editor.pages.dev/create. Click _Preview_ button to see the result as you go.
 
-You can preview the form as you build it.
+Note that you need to click _Publish_ button to make the latest changes visible to the world.
 
-Note that you need to click Publish button to make the latest changes visible to the world.
-
-You'd need to log in with a Google account to share the form. After logging in, you can copy the form's link for sharing.
-
+You'd need to log in with a Google account for the full functionality. After logging in, you can copy the form's link to share it and collect responses.
 
 
 ## Tech Stack

@@ -1,23 +1,24 @@
-"use client";
-
-import { useComputedColorScheme, useMantineColorScheme } from "@mantine/core";
-import { IconMoon, IconSun } from "@tabler/icons-react";
+import { useMantineColorScheme } from "@mantine/core";
 import { IconButton } from "../IconButton/IconButton";
+import { useNextMode } from "./useNextMode";
 
 export const DarkModeToggle = (props: { tabIndex?: number }) => {
 	const { tabIndex } = props;
 
 	const { setColorScheme } = useMantineColorScheme();
-
-	const computedColorScheme = useComputedColorScheme("light");
+	const { colorScheme, Icon, tooltip } = useNextMode();
 
 	const toggleColorScheme = () => {
-		setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
+		setColorScheme(colorScheme);
 	};
 
 	return (
-		<IconButton tabIndex={tabIndex} onClick={toggleColorScheme}>
-			{computedColorScheme === "dark" ? <IconSun /> : <IconMoon />}
+		<IconButton
+			tooltip={tooltip}
+			tabIndex={tabIndex}
+			onClick={toggleColorScheme}
+		>
+			<Icon />
 		</IconButton>
 	);
 };

@@ -31,18 +31,18 @@ const isEmailField = (field?: TField): field is TFieldText => {
 	return field?.type === FieldTypes.Email;
 };
 
-const isQestionField = (field?: TField): field is TFieldQuestion => {
+const isQuestionField = (field?: TField): field is TFieldQuestion => {
 	return isChoiceField(field) || isTextField(field);
 };
 
 const isFieldRequired = (field?: TField): field is TFieldQuestion => {
-	return isQestionField(field) && field.settings?.isRequired;
+	return isQuestionField(field) && field.settings?.isRequired;
 };
 
 export {
 	isSingleChoiceField,
 	isChoiceField,
 	isEmailField,
-	isQestionField,
+	isQuestionField,
 	isFieldRequired,
 };

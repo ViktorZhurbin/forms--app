@@ -12,7 +12,7 @@ import type {
 	TAnswerChoice,
 	TAnswerText,
 } from "~/models/response/schema";
-import { isFieldRequired, isQestionField } from "~/utils/fieldPredicates";
+import { isFieldRequired, isQuestionField } from "~/utils/fieldPredicates";
 import { FieldBase } from "../FieldBase/FieldBase";
 import { getFieldProps } from "../FieldBase/getFieldProps";
 import { MultipleChoice } from "../MultipleChoice/MultipleChoice";
@@ -55,7 +55,7 @@ export const FieldView = ({
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
-		if (!isQestionField(field)) {
+		if (!isQuestionField(field)) {
 			buttonRef.current?.focus();
 		}
 	}, [field]);
@@ -78,7 +78,7 @@ export const FieldView = ({
 
 	const isRequired = isFieldRequired(field);
 
-	const fieldComponent = isQestionField(field) ? (
+	const fieldComponent = isQuestionField(field) ? (
 		<FieldComponent field={field} answer={answer} onAnswer={onAnswer} />
 	) : null;
 

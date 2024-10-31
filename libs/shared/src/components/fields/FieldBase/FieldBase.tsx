@@ -2,7 +2,7 @@ import { Stack, Text } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import clsx from "clsx";
 import type { TField } from "~/models/field/schema";
-import { isFieldRequired, isQestionField } from "~/utils/fieldPredicates";
+import { isFieldRequired, isQuestionField } from "~/utils/fieldPredicates";
 import styles from "./FieldBase.module.css";
 
 interface FieldBaseProps {
@@ -27,7 +27,7 @@ export const FieldBase = ({
 	classNames,
 	buttonSubmit,
 }: FieldBaseProps) => {
-	const isQuestion = isQestionField(field);
+	const isQuestion = isQuestionField(field);
 	const order = isQuestion ? orderProp : null;
 
 	const isRequired = isFieldRequired(field);

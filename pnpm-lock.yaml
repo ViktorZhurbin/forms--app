@@ -73,8 +73,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(@rsbuild/core@1.0.1)
       '@rsbuild/plugin-type-check':
-        specifier: 1.0.1-rc.5
-        version: 1.0.1-rc.5(@rsbuild/core@1.0.1)(typescript@5.5.3)
+        specifier: 1.0.1
+        version: 1.0.1(@rsbuild/core@1.0.1)(typescript@5.5.3)
       '@rsdoctor/rspack-plugin':
         specifier: ^0.4.0
         version: 0.4.0(@rspack/core@1.0.3)
@@ -149,8 +149,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(@rsbuild/core@1.0.1)
       '@rsbuild/plugin-type-check':
-        specifier: 1.0.1-rc.5
-        version: 1.0.1-rc.5(@rsbuild/core@1.0.1)(typescript@5.5.3)
+        specifier: 1.0.1
+        version: 1.0.1(@rsbuild/core@1.0.1)(typescript@5.5.3)
       '@rsdoctor/rspack-plugin':
         specifier: ^0.4.0
         version: 0.4.0(@rspack/core@1.0.3)
@@ -213,8 +213,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(@rsbuild/core@1.0.1)
       '@rsbuild/plugin-type-check':
-        specifier: 1.0.1-rc.5
-        version: 1.0.1-rc.5(@rsbuild/core@1.0.1)(typescript@5.5.3)
+        specifier: 1.0.1
+        version: 1.0.1(@rsbuild/core@1.0.1)(typescript@5.5.3)
       '@rsdoctor/rspack-plugin':
         specifier: ^0.4.0
         version: 0.4.0(@rspack/core@1.0.3)
@@ -305,8 +305,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(@rsbuild/core@1.0.1)
       '@rsbuild/plugin-type-check':
-        specifier: 1.0.1-rc.5
-        version: 1.0.1-rc.5(@rsbuild/core@1.0.1)(typescript@5.5.3)
+        specifier: 1.0.1
+        version: 1.0.1(@rsbuild/core@1.0.1)(typescript@5.5.3)
       '@rsdoctor/rspack-plugin':
         specifier: ^0.4.0
         version: 0.4.0(@rspack/core@1.0.3)
@@ -1578,10 +1578,13 @@ packages:
       yaml: 2.5.0
     dev: true
 
-  /@rsbuild/plugin-type-check@1.0.1-rc.5(@rsbuild/core@1.0.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-PRij9+9qMJIi8axsnB0MkIHI15ho4GGJeq8iKr2yQq2mKihy2OgBNMagEgkxt40BbYlFcdewYvoMG3b4czePCA==}
+  /@rsbuild/plugin-type-check@1.0.1(@rsbuild/core@1.0.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-BahXAJNq4kWtL2dINUlrOL9UCN1t8c/qf5RW8JXx2HSSasfKPJGJ1BVfieMcIaFa/t8/QdafcwoxY1WKPTlSMg==}
     peerDependencies:
-      '@rsbuild/core': ^1.0.1-rc.4
+      '@rsbuild/core': 1.x || ^1.0.1-beta.0
+    peerDependenciesMeta:
+      '@rsbuild/core':
+        optional: true
     dependencies:
       '@rsbuild/core': 1.0.1
       deepmerge: 4.3.1
@@ -3346,7 +3349,7 @@ packages:
       typescript: '>3.6.0'
       webpack: ^5.11.0
     dependencies:
-      '@babel/code-frame': 7.24.7
+      '@babel/code-frame': 7.26.0
       chalk: 4.1.2
       chokidar: 3.6.0
       cosmiconfig: 8.3.6(typescript@5.5.3)
@@ -3866,7 +3869,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.14.10
+      '@types/node': 20.14.11
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true

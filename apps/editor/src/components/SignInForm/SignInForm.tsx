@@ -1,5 +1,5 @@
 import { useAuth } from "@/shared/models/db";
-import { Text, Title } from "@mantine/core";
+import { Button, Stack, Text, Title } from "@mantine/core";
 import clsx from "clsx";
 import { Redirect } from "wouter";
 import { GoogleSignInButtonCustom } from "~/components/GoogleSignInButtonCustom/GoogleSignInButtonCustom";
@@ -29,9 +29,15 @@ export const SignInForm = ({
 				<Title order={3}>Log in or create a new account</Title>
 				{subtitle && <Text c="dimmed">{subtitle}</Text>}
 			</div>
-			<GoogleSignInButtonCustom redirectTo={redirectTo}>
-				Sign in with Google
-			</GoogleSignInButtonCustom>
+			<Stack gap={8}>
+				<GoogleSignInButtonCustom redirectTo={redirectTo}>
+					Sign in with Google
+				</GoogleSignInButtonCustom>
+				<Text>or</Text>
+				<Button variant="outline" component="a" href={Routes.CREATE}>
+					Create demo form
+				</Button>
+			</Stack>
 		</div>
 	);
 };

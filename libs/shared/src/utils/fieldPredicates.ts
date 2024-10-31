@@ -2,6 +2,7 @@ import { FieldTypes } from "~/constants/field";
 import type {
 	TField,
 	TFieldChoice,
+	TFieldEnding,
 	TFieldQuestion,
 	TFieldText,
 } from "~/models/field/schema";
@@ -31,6 +32,10 @@ const isEmailField = (field?: TField): field is TFieldText => {
 	return field?.type === FieldTypes.Email;
 };
 
+const isEndingField = (field?: TField): field is TFieldEnding => {
+	return field?.type === FieldTypes.Ending;
+};
+
 const isQuestionField = (field?: TField): field is TFieldQuestion => {
 	return isChoiceField(field) || isTextField(field);
 };
@@ -43,6 +48,7 @@ export {
 	isSingleChoiceField,
 	isChoiceField,
 	isEmailField,
+	isEndingField,
 	isQuestionField,
 	isFieldRequired,
 };

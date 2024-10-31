@@ -5,6 +5,16 @@
 ## Means
 Build an online form builder, eg. [Typeform](https://www.typeform.com/), [Fillout](https://www.fillout.com), [Tally](https://tally.so).
 
+## Results
+- A fully-functional MVP:
+  - Editor to create, manage and share online forms, view responses.
+  - Actual forms app that works nicely on desktop and mobile, and work even on bad internet (without any spinners).
+- Discovered some great tools that I'll consider using again in future:
+  - With InstantDB I didn't need any state management AND backend. It's like React Query with direct access to a real-time DB.
+  - Mantine sped up development of UI and logic
+  - Rsbuild allowed a monorepo setup that is simple to maintain and reason about. It is also very fast and provides consistent experience in dev and prod.
+  - Tried Astro to build a landing page skeleton (didn't finish it, though).
+
 ## Project structure
 This is a monorepo with applications located in `apps/` directory, and shared code in `libs/`.
 

@@ -1,4 +1,3 @@
-import { WEB_SITE_URL } from "@/shared/constants/location";
 import { useAuth } from "@/shared/models/db";
 import { Button, TextInput } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons-react";
@@ -33,9 +32,7 @@ export const ButtonLinks = () => {
 			<Button fullWidth component={Link} href={`~${Routes.SIGN_IN}`}>
 				Create an account
 			</Button>
-			<Button fullWidth component="a" href={WEB_SITE_URL}>
-				Go to website
-			</Button>
+
 			<CopyLinkInput url={window.location.href} />
 		</div>
 	);

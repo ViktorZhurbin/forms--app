@@ -1,7 +1,6 @@
 import { DarkModeToggle } from "@/shared/components/DarkModeToggle/DarkModeToggle";
-import { SearchParams, WEB_SITE_URL } from "@/shared/constants/location";
-import { ActionIcon, Card } from "@mantine/core";
-import { IconHome } from "@tabler/icons-react";
+import { SearchParams } from "@/shared/constants/location";
+import { Card } from "@mantine/core";
 import { SignInForm } from "~/components/SignInForm/SignInForm";
 import styles from "./SignIn.module.css";
 
@@ -14,14 +13,6 @@ export const SignIn = () => {
 	return (
 		<div className={styles.wrapper}>
 			<nav className={styles.nav}>
-				<ActionIcon
-					variant="default"
-					size="lg"
-					component="a"
-					href={WEB_SITE_URL}
-				>
-					<IconHome />
-				</ActionIcon>
 				<DarkModeToggle />
 			</nav>
 			<div className={styles.content}>

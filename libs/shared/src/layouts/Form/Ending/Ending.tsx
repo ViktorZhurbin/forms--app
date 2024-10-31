@@ -16,11 +16,14 @@ export const Ending = (props: { ending?: TFieldEnding }) => {
 
 	const ending = props.ending ?? fallbackEnding;
 
-	const { title, description, buttonText, settings } = ending;
+	const { title, description, buttonText } = ending;
 
 	const buttonProps = isPreview
 		? {}
-		: ({ component: "a", href: settings.buttonUrl } as const);
+		: ({
+				component: "a",
+				href: "https://forms-editor.pages.dev/create",
+			} as const);
 
 	return (
 		<div className={styles.root}>

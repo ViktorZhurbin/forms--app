@@ -1,6 +1,5 @@
 import { id } from "@instantdb/react";
 import { FieldTypes } from "~/constants/field";
-import { WEB_SITE_URL } from "~/constants/location";
 import { makeSubId } from "~/utils/makeId";
 import type { TField, TFieldChoice, TFieldEnding, TFieldText } from "../schema";
 import { getChoiceFieldOptionPayload } from "./getChoiceFieldOptionPayload";
@@ -62,9 +61,6 @@ const getCreateFieldPayload = ({
 				title: "Thank you",
 				description: "Made with Forms, the easy way to make forms.",
 				buttonText: "Make your own form",
-				settings: {
-					buttonUrl: `${WEB_SITE_URL}/utm_source=form-ending`,
-				},
 			} as Partial<TFieldEnding>;
 
 			break;

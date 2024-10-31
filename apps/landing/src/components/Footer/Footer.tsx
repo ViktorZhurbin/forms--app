@@ -12,9 +12,9 @@ export const Footer = () => {
 	return (
 		<footer className={styles.footer}>
 			<Container className={styles.inner}>
-				<Text size="sm">Made by Viktor Zhurbin</Text>
+				<Text size="sm">Made by Viktor Zhurbin:</Text>
 
-				<Group gap={0} wrap="nowrap" justify="flex-end">
+				<Group gap={0} wrap="nowrap">
 					{LINKS.map(({ Icon, href }) => (
 						<ActionIcon
 							key={href}
@@ -25,7 +25,7 @@ export const Footer = () => {
 							href={href}
 							target="_blank"
 						>
-							<Icon stroke={1.5} />
+							<Icon stroke={2} />
 						</ActionIcon>
 					))}
 				</Group>

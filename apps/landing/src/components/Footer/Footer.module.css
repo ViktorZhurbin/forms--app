@@ -5,7 +5,8 @@
 	.inner {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: start;
+		gap: 4px;
 		color: var(--mantine-color-gray-light-color);
 
 		padding-top: var(--mantine-spacing-xl);

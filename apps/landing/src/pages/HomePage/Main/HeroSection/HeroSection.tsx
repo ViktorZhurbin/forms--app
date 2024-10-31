@@ -15,8 +15,8 @@ export const HeroSection = () => {
 
 			<Container p={0} size={600}>
 				<Text size="lg" c="dimmed" className={styles.description}>
-					Start building without authorization. Create account to share and
-					manage your forms and review responses.
+					It's two connected apps: <b>form editor</b> to build and manage your
+					forms, and actual <b>forms</b> to fill in.
 				</Text>
 			</Container>
 
@@ -27,7 +27,7 @@ export const HeroSection = () => {
 				href={Links.DemoBuilder}
 				className={styles.button}
 			>
-				Create a form
+				Live demo
 			</Button>
 		</Container>
 	);

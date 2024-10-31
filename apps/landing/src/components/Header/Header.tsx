@@ -20,7 +20,7 @@ export const Header = () => {
 								variant="default"
 								component="a"
 								target="_blank"
-								href={Links.Github}
+								href={Links.GithubApp}
 							>
 								<IconBrandGithub />
 							</ActionIcon>

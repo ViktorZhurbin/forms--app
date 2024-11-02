@@ -8,6 +8,7 @@
 - Build an online form builder, inspired by tools like [Typeform](https://www.typeform.com/), [Fillout](https://www.fillout.com), [Tally](https://tally.so).
 - Conduct basic market research, define MVP.
 - Use [Linear](https://linear.app/) for project management and task prioritization.
+  - Here's the [board](https://lindie.app/share/a04be96d0f7141265a3270e3016258e9df237578) (shared through lindie.app since Linear does not allow public boards)
 
 ## Results
 - A fully-functional MVP. [Details below](#functionality)

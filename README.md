@@ -33,6 +33,8 @@ libs/
 ```
 
 ### Running locally
+You'd need to provide required environment variables defined in `.env` file (for Google auth, InstantDB, etc).
+
 Tested with Node v18 and v20.
 
 From the project root:
